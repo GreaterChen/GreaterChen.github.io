@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>排序算法 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="快排、归并排序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="排序算法">
+<meta property="og:url" content="http://example.com/2023/01/14/%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="快排、归并排序">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-01-14T04:25:45.000Z">
+<meta property="article:modified_time" content="2023-02-03T09:33:50.180Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-排序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/14/%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-01-14T04:25:45.000Z" itemprop="datePublished">2023-01-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      排序算法
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>快排、归并排序</p>
+<span id="more"></span>
+
+<h3 id="快排"><a href="#快排" class="headerlink" title="快排"></a>快排</h3><p>维护左右两个指针，左边指针向右走直到遇到大于x的值停下，右边指针向左走直到遇到小于x的值停下，随后两个指针指向的值进行交换。</p>
+<p>快排是不稳定的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">quick_sort</span><span class="params">(<span class="type">int</span> q[], <span class="type">int</span> l, <span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(l&gt;=r) <span class="keyword">return</span>;</span><br><span class="line">	<span class="type">int</span> x=q[l],i=l<span class="number">-1</span>,j=r+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(i&lt;j)&#123;</span><br><span class="line">		<span class="keyword">do</span> i++; <span class="keyword">while</span>(q[i]&lt;x);</span><br><span class="line">		<span class="keyword">do</span> j--; <span class="keyword">while</span>(q[j]&gt;x);</span><br><span class="line">		<span class="keyword">if</span>(i&lt;j) <span class="built_in">swap</span>(q[i],q[j]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">quick_sort</span>(q,l,j);</span><br><span class="line">	<span class="built_in">quick_sort</span>(q,j+<span class="number">1</span>,r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><p>先对两侧的子序列排序，再对两个有序子序列进行合并，合并思路为双指针。</p>
+<p>归并排序是稳定的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">merge_sort</span><span class="params">(<span class="type">int</span> q[],<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(l&gt;=r) <span class="keyword">return</span>;</span><br><span class="line">	<span class="type">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">	<span class="built_in">merge_sort</span>(q,l,mid);</span><br><span class="line">	<span class="built_in">merge_sort</span>(q,mid+<span class="number">1</span>,r);</span><br><span class="line">	<span class="type">int</span> k=<span class="number">0</span>,i=l,j=mid+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(i&lt;=mid &amp;&amp; j&lt;=r)&#123;</span><br><span class="line">		<span class="keyword">if</span>(q[i]&lt;q[j]) temp[k++] = q[i++];</span><br><span class="line">		<span class="keyword">else</span> temp[k++] = q[j++];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(i&lt;=mid) temp[k++] = q[i++];</span><br><span class="line">	<span class="keyword">while</span>(j&lt;=r) temp[k++] = q[j++];</span><br><span class="line">	<span class="keyword">for</span>(i=l,j=<span class="number">0</span>;i&lt;=r;i++,j++)&#123;</span><br><span class="line">		q[i] = temp[j];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/14/%E6%8E%92%E5%BA%8F/" data-id="cle113tkl000l38v2c65x5oac" data-title="排序算法" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/01/15/%E4%BA%8C%E5%88%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          二分算法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/01/11/%E5%9F%BA%E4%BA%8E%E8%84%91%E5%8A%9F%E8%83%BD%E8%BF%9E%E6%8E%A5%E7%9F%A9%E9%98%B5%E7%9A%84Kendall%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E5%AE%9E%E7%8E%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">基于脑功能连接矩阵的Kendall特征提取实现</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/">实用工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%8F%E7%9F%A5%E8%AF%86/">小知识</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/02/12/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/12/%E5%8D%95%E8%B0%83%E6%A0%88%E3%80%81%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">单调栈、滑动窗口</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0/">数据结构实现</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/04/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE%E9%A2%98%E9%9B%86/">算法基础课题集</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/03/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/">前缀和与差分</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

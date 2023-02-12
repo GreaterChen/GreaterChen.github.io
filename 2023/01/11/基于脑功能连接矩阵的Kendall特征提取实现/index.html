@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>基于脑功能连接矩阵的Kendall特征提取实现 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="基于脑功能连接矩阵的Kendall特征提取实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于脑功能连接矩阵的Kendall特征提取实现">
+<meta property="og:url" content="http://example.com/2023/01/11/%E5%9F%BA%E4%BA%8E%E8%84%91%E5%8A%9F%E8%83%BD%E8%BF%9E%E6%8E%A5%E7%9F%A9%E9%98%B5%E7%9A%84Kendall%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="基于脑功能连接矩阵的Kendall特征提取实现">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230111170705.png">
+<meta property="article:published_time" content="2023-01-11T09:06:01.000Z">
+<meta property="article:modified_time" content="2023-01-19T02:00:22.086Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230111170705.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-基于脑功能连接矩阵的Kendall特征提取实现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/11/%E5%9F%BA%E4%BA%8E%E8%84%91%E5%8A%9F%E8%83%BD%E8%BF%9E%E6%8E%A5%E7%9F%A9%E9%98%B5%E7%9A%84Kendall%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E5%AE%9E%E7%8E%B0/" class="article-date">
+  <time class="dt-published" datetime="2023-01-11T09:06:01.000Z" itemprop="datePublished">2023-01-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      基于脑功能连接矩阵的Kendall特征提取实现
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>基于脑功能连接矩阵的Kendall特征提取实现</p>
+<span id="more"></span>
+<p>原论文如下图所示</p>
+<div align=center><img src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230111170705.png" width="  "></div>
+
+<p>基本思路为将样本分为患病组和未患病组，对于患病组的每一个样本的每一个特征，将其和未患病组的每一个样本的对应特征进行相减运算，若结果为正则记为一组concordant，若结果为负则记为一组discordant,对于每一个特征，总的concordant数记为nc,总的discordant数记为nd，随后使用abs((nc-nd)&#x2F;(m*n))代表每一个特征的Kendall系数，用该系数进行排序即可。</p>
+<p>程序最基础的代码结构如下，我们使用上Pearson矩阵上三角展开后（1，6670）的数据当作每个样本的输入。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> fc <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">6670</span>):</span><br><span class="line">	nc = <span class="number">0</span></span><br><span class="line">	nd = <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> file_asd <span class="keyword">in</span> files_asd:</span><br><span class="line">		ref = pd.read_csv(file_asd,header=<span class="literal">False</span>)[fc]</span><br><span class="line">        <span class="keyword">for</span> file_hc <span class="keyword">in</span> files_hc:</span><br><span class="line">        	comp = pd.read_csv(file_hc,header=<span class="literal">False</span>)[fc]</span><br><span class="line">        	<span class="keyword">if</span> ref - comp &gt; <span class="number">0</span>:</span><br><span class="line">        		nc += <span class="number">1</span></span><br><span class="line">        	<span class="keyword">else</span>:</span><br><span class="line">        		nd += <span class="number">1</span></span><br><span class="line">	tau[fc] = <span class="built_in">abs</span>(nc - nd)/(m*n)</span><br></pre></td></tr></table></figure>
+
+<p>上述代码是对原论文思路的直接实现，逻辑清晰，但是由于大量的IO以及运算，效率十分低下。因此做如下改进：</p>
+<p>为了避免大量重复IO，将所有数据提前读入内存中,后续根据索引直接取数即可,同时为了提高这一步的读取效率，将csv文件改为pkl文件在这一步带来了上千倍的速度提升。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">all_asd_data = []</span><br><span class="line">all_hc_data = []</span><br><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> files_asd:</span><br><span class="line">    all_asd_data.append(pd.read_pickle(file))</span><br><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> files_hc:</span><br><span class="line">    all_hc_data.append(pd.read_pickle(file))</span><br><span class="line">all_asd_data = pd.DataFrame(np.array(all_asd_data).reshape(<span class="built_in">len</span>(all_asd_data), -<span class="number">1</span>))</span><br><span class="line">all_hc_data = pd.DataFrame(np.array(all_hc_data).reshape(<span class="built_in">len</span>(all_hc_data), -<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<p>即使如此，由于原运算架构采用三层for循环，三层的循环次数分别为6670、306、368，时间复杂度太高，并行度太差，该程序需要<strong>五个多小时</strong>才能完全跑完。后续在并行度上继续改进：</p>
+<p>首先想到对于未患病组可以不逐个计算，取出所有未患病样本的第fc列，将该array直接减去ref的值，随后统计其中大于0的个数加到nc上，小于0的个数加到nd上即可。这样的改进可以让程序在<strong>10分钟</strong>内完成全部运算。</p>
+<p>更进一步的，我们可以不区分fc，对于全部未患病样本all_hc_data，直接减去每一个患病样本（即利用广播机制将（368，6670）减去（1，6670）），随后以列进行统计大于0的数量，得到（1，6670）的数组，直接加到nc数组上即可，nd数组同理操作。这样程序只有一层for循环，在<strong>5秒</strong>内即可完成全部运算，代码如下。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> tqdm(<span class="built_in">range</span>(<span class="built_in">len</span>(all_asd_data)),desc=<span class="string">&quot;running&quot;</span>,file=sys.stdout):</span><br><span class="line">    ref = <span class="built_in">list</span>(all_asd_data.iloc[i, :])</span><br><span class="line">    bool_res = all_hc_data - ref &gt; <span class="number">0</span></span><br><span class="line">    total_true = np.array(np.<span class="built_in">sum</span>(bool_res, axis=<span class="number">0</span>))</span><br><span class="line">    nc += total_true</span><br><span class="line">    nd += <span class="built_in">len</span>(all_hc_data) - total_true</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">6670</span>):</span><br><span class="line">    tau_t = (nc[i] - nd[i])/(m*n)</span><br><span class="line">    tau = pd.DataFrame(np.insert(tau.values, <span class="built_in">len</span>(tau.index), values=[<span class="built_in">int</span>(i), <span class="built_in">abs</span>(tau_t)], axis=<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+
+<p>完整代码如下所示</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">root_path = <span class="string">&quot;../../raw_data/rois_aal_pkl_pearson_static_expand/&quot;</span></span><br><span class="line">files = os.listdir(root_path)</span><br><span class="line">files.sort()</span><br><span class="line"></span><br><span class="line">label_temp = pd.read_csv(<span class="string">&quot;label_674.csv&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> CheckOrder(files, label_temp):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;error&quot;</span>)</span><br><span class="line">    exit()</span><br><span class="line">label_temp = label_temp.group_1.values</span><br><span class="line"></span><br><span class="line">m = <span class="built_in">sum</span>(label_temp)  <span class="comment"># 患病人数</span></span><br><span class="line">n = <span class="built_in">len</span>(label_temp) - m  <span class="comment"># 未患病人数</span></span><br><span class="line"></span><br><span class="line">files_asd = []</span><br><span class="line">files_hc = []</span><br><span class="line"><span class="keyword">for</span> i, item <span class="keyword">in</span> <span class="built_in">enumerate</span>(label_temp):</span><br><span class="line">    <span class="keyword">if</span> item == <span class="number">1</span>:</span><br><span class="line">        files_asd.append(root_path + files[i])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        files_hc.append(root_path + files[i])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 预加载所有数据，避免频繁IO</span></span><br><span class="line">all_asd_data = []</span><br><span class="line">all_hc_data = []</span><br><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> files_asd:</span><br><span class="line">    all_asd_data.append(pd.read_pickle(file))</span><br><span class="line"><span class="keyword">for</span> file <span class="keyword">in</span> files_hc:</span><br><span class="line">    all_hc_data.append(pd.read_pickle(file))</span><br><span class="line">all_asd_data = pd.DataFrame(np.array(all_asd_data).reshape(<span class="built_in">len</span>(all_asd_data), -<span class="number">1</span>))</span><br><span class="line">all_hc_data = pd.DataFrame(np.array(all_hc_data).reshape(<span class="built_in">len</span>(all_hc_data), -<span class="number">1</span>))</span><br><span class="line"><span class="built_in">print</span>(all_asd_data.shape, all_hc_data.shape)</span><br><span class="line"></span><br><span class="line">tau = pd.DataFrame(columns=[<span class="string">&#x27;ROI&#x27;</span>, <span class="string">&#x27;tau&#x27;</span>])</span><br><span class="line">nc = np.zeros((<span class="number">6670</span>,), dtype=<span class="built_in">int</span>)</span><br><span class="line">nd = np.zeros((<span class="number">6670</span>,), dtype=<span class="built_in">int</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 利用广播机制批量运算</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> tqdm(<span class="built_in">range</span>(<span class="built_in">len</span>(all_asd_data)),desc=<span class="string">&quot;running&quot;</span>,file=sys.stdout):</span><br><span class="line">    ref = <span class="built_in">list</span>(all_asd_data.iloc[i, :])</span><br><span class="line">    bool_res = all_hc_data - ref &gt; <span class="number">0</span></span><br><span class="line">    total_true = np.array(np.<span class="built_in">sum</span>(bool_res, axis=<span class="number">0</span>))</span><br><span class="line">    nc += total_true</span><br><span class="line">    nd += <span class="built_in">len</span>(all_hc_data) - total_true</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">6670</span>):</span><br><span class="line">    tau_t = (nc[i] - nd[i])/(m*n)</span><br><span class="line">    tau = pd.DataFrame(np.insert(tau.values, <span class="built_in">len</span>(tau.index), values=[<span class="built_in">int</span>(i), <span class="built_in">abs</span>(tau_t)], axis=<span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">tau.columns = [<span class="string">&#x27;ROI&#x27;</span>, <span class="string">&#x27;tau&#x27;</span>]</span><br><span class="line">tau = tau.sort_values(by=<span class="string">&#x27;tau&#x27;</span>, ascending=<span class="literal">False</span>)</span><br><span class="line">tau = tau.reset_index(drop=<span class="literal">True</span>)</span><br><span class="line">tau.to_csv(<span class="string">&quot;sort.csv&quot;</span>,index=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/11/%E5%9F%BA%E4%BA%8E%E8%84%91%E5%8A%9F%E8%83%BD%E8%BF%9E%E6%8E%A5%E7%9F%A9%E9%98%B5%E7%9A%84Kendall%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E5%AE%9E%E7%8E%B0/" data-id="cle113tki000h38v2a1duh87p" data-title="基于脑功能连接矩阵的Kendall特征提取实现" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/01/14/%E6%8E%92%E5%BA%8F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          排序算法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/01/11/zlibrary%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">zlibrary下载软件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/">实用工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%8F%E7%9F%A5%E8%AF%86/">小知识</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/02/12/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/12/%E5%8D%95%E8%B0%83%E6%A0%88%E3%80%81%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">单调栈、滑动窗口</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0/">数据结构实现</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/04/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE%E9%A2%98%E9%9B%86/">算法基础课题集</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/03/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/">前缀和与差分</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

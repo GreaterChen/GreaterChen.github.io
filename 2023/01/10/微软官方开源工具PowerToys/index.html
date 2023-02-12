@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>微软官方开源工具PowerToys | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="具有窗口置顶、查看文件被什么进程占用、批量重命名文件、alt+space全盘检索、OCR等实用功能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微软官方开源工具PowerToys">
+<meta property="og:url" content="http://example.com/2023/01/10/%E5%BE%AE%E8%BD%AF%E5%AE%98%E6%96%B9%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7PowerToys/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="具有窗口置顶、查看文件被什么进程占用、批量重命名文件、alt+space全盘检索、OCR等实用功能">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBed/20230110190258.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBed/20230110191047.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBed/20230110191344.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBed/20230110184744.png">
+<meta property="article:published_time" content="2023-01-10T10:44:27.000Z">
+<meta property="article:modified_time" content="2023-01-11T10:00:02.814Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBed/20230110190258.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-微软官方开源工具PowerToys" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/10/%E5%BE%AE%E8%BD%AF%E5%AE%98%E6%96%B9%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7PowerToys/" class="article-date">
+  <time class="dt-published" datetime="2023-01-10T10:44:27.000Z" itemprop="datePublished">2023-01-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/">实用工具</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      微软官方开源工具PowerToys
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>具有窗口置顶、查看文件被什么进程占用、批量重命名文件、alt+space全盘检索、OCR等实用功能</p>
+<span id="more"></span>
+
+<p>Github地址：<a target="_blank" rel="noopener" href="https://github.com/microsoft/PowerToys">microsoft&#x2F;PowerToys: Windows system utilities to maximize productivity (github.com)</a></p>
+<p>所有功能见文末。下面记录一些感兴趣工具的使用方法</p>
+<h4 id="始终置顶"><a href="#始终置顶" class="headerlink" title="始终置顶"></a>始终置顶</h4><p>​		快捷键：win+ctrl+T,固定所选的窗口，使其始终位于所有窗口的顶部</p>
+<h4 id="文件Locksmith"><a href="#文件Locksmith" class="headerlink" title="文件Locksmith"></a>文件Locksmith</h4><p>​		在文件资源管理器中选择一个或多个文件，右键选择<strong>使用此文件的进程</strong>即可展示出所有使用中的进程并提供了结束进程的选项。十分实用！再也不用担心因为进程占用删不掉文件夹。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBed/20230110190258.png" alt="Locksmith"></p>
+<h4 id="文件资源管理器加载项"><a href="#文件资源管理器加载项" class="headerlink" title="文件资源管理器加载项"></a>文件资源管理器加载项</h4><p>在文件资源管理器中选择视图中的<strong>预览窗格</strong>，可以在文件资源管理器右侧预览md、pdf、svg等文件格式。</p>
+<p>感觉不如quicklook好，但内嵌在资源管理器中看起来还不错。</p>
+<h4 id="PowerRename"><a href="#PowerRename" class="headerlink" title="PowerRename"></a>PowerRename</h4><p>选定多个文件右键选择PowerRename，会弹出独立窗口，可以使用正则表达式来搜索文件进行批量重命名。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBed/20230110191047.png" alt="PowerRename"></p>
+<h4 id="PowerToys-Run"><a href="#PowerToys-Run" class="headerlink" title="PowerToys Run"></a>PowerToys Run</h4><p>按下alt+space进行搜索，似乎有wox团队参加，和wox功能十分类似但看起来更简洁、美观。</p>
+<p>在设置-&gt;隐私和安全性-&gt;搜索Windows中可以选择建立索引的目录范围以及索引存放的位置。</p>
+<p>图中提示警告是因为还没编制完索引，编制完之后便可正常实用。</p>
+<p>但wox支持拼音首字母检索，PowerToys Run似乎并不支持。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBed/20230110191344.png"></p>
+<h4 id="OCR文本提取器"><a href="#OCR文本提取器" class="headerlink" title="OCR文本提取器"></a>OCR文本提取器</h4><p>快捷键：win+shift+T</p>
+<p>自动复制到剪切板，很方便。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBed/20230110184744.png" alt="PowerToys"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/10/%E5%BE%AE%E8%BD%AF%E5%AE%98%E6%96%B9%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7PowerToys/" data-id="cle113tkj000i38v26r1hd1ro" data-title="微软官方开源工具PowerToys" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/01/11/zlibrary%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          zlibrary下载软件
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/01/07/%E8%A7%A3%E5%86%B3%E6%89%B9%E5%A4%84%E7%90%86%E7%A8%8B%E5%BA%8F%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">解决批处理程序中文乱码问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/">实用工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%8F%E7%9F%A5%E8%AF%86/">小知识</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/02/12/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/12/%E5%8D%95%E8%B0%83%E6%A0%88%E3%80%81%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">单调栈、滑动窗口</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0/">数据结构实现</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/04/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE%E9%A2%98%E9%9B%86/">算法基础课题集</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/03/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/">前缀和与差分</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

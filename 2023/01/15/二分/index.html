@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>二分算法 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="整数二分、浮点数二分及例题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二分算法">
+<meta property="og:url" content="http://example.com/2023/01/15/%E4%BA%8C%E5%88%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="整数二分、浮点数二分及例题">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-01-15T11:05:45.000Z">
+<meta property="article:modified_time" content="2023-02-03T09:33:49.766Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-二分" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/01/15/%E4%BA%8C%E5%88%86/" class="article-date">
+  <time class="dt-published" datetime="2023-01-15T11:05:45.000Z" itemprop="datePublished">2023-01-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      二分算法
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>整数二分、浮点数二分及例题</p>
+<span id="more"></span>
+
+<h3 id="整数二分"><a href="#整数二分" class="headerlink" title="整数二分"></a>整数二分</h3><p>整数二分有两种情况，取决于check()函数的逻辑。</p>
+<p>第一种情况，假设check()函数判断的是“右侧是否满足”，则如果满足，说明mid处于右侧区间，则边界点应处于[l,mid]，因此更新r &#x3D; mid；如果不满足，说明mid处于左侧区间且mid点本身并不是边界点，则边界点应处于(mid+1,r],因此更新l &#x3D; mid + 1.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">bsearch</span><span class="params">(<span class="type">int</span> l, <span class="type">int</span> r)</span></span>&#123;	<span class="comment">// 以整个数列为例</span></span><br><span class="line">    <span class="type">int</span> l=<span class="number">0</span>,r=n<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">while</span>(l&lt;r)&#123;</span><br><span class="line">    	mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    	<span class="keyword">if</span>(<span class="built_in">check</span>(mid)) r = mid;</span><br><span class="line">    	<span class="keyword">else</span> l = mid + <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二种情况，假设check()函数判断的是“左侧是否满足”，则如果满足，说明mid处于左侧区间，则边界点应处于[mid,r]，因此更新l &#x3D; mid；如果不满足，说明mid处于右侧区间且mid点本身并不是边界点，因此更新r &#x3D; mid - 1.</p>
+<p>但考虑如下情况：若l &#x3D; r - 1,此时mid &#x3D; (l + r) &gt;&gt; 1 &#x3D; (2l + 1) &gt;&gt; 1 &#x3D; l,若此时check()返回true，执行l&#x3D;mid，会导致l、r均未得到更新，程序陷入死循环，因此此时应赋值mid &#x3D; (l + r + 1) &gt;&gt; 1. </p>
+<p><strong>简便记法</strong>：出现mid - 1 的时候使用该情况。 </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">bsearch</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r)</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> l=<span class="number">0</span>,r=n<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(l&lt;r)&#123;</span><br><span class="line">        mid = l + r + <span class="number">1</span> &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">check</span>(mid)) l = mid;</span><br><span class="line">        <span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>例题</strong>：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/description/791/">789. 数的范围 - AcWing题库</a></p>
+<h3 id="浮点数二分"><a href="#浮点数二分" class="headerlink" title="浮点数二分"></a>浮点数二分</h3><p>和整数二分类似，但无需考虑mid的取整问题。其中的eps代表精度，经验来看若题目要求保留n位小数则eps精度为n+2即可。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">bsearch</span><span class="params">(<span class="type">double</span> l,<span class="type">double</span> r)</span></span>&#123;</span><br><span class="line">    <span class="type">const</span> <span class="type">double</span> eps = <span class="number">1e-6</span>;</span><br><span class="line">    <span class="keyword">while</span>(r-l&gt;eps)&#123;</span><br><span class="line">        <span class="type">double</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">check</span>(mid)) r = mid;</span><br><span class="line">        <span class="keyword">else</span> l = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>例题</strong>：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/792/">790. 数的三次方根 - AcWing题库</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/01/15/%E4%BA%8C%E5%88%86/" data-id="cle113tk4000638v2cu5u5hrr" data-title="二分算法" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/02/03/%E9%AB%98%E7%B2%BE%E5%BA%A6%E8%AE%A1%E7%AE%97/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          高精度计算
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/01/14/%E6%8E%92%E5%BA%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">排序算法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/">实用工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%8F%E7%9F%A5%E8%AF%86/">小知识</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/02/12/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/12/%E5%8D%95%E8%B0%83%E6%A0%88%E3%80%81%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">单调栈、滑动窗口</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0/">数据结构实现</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/04/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE%E9%A2%98%E9%9B%86/">算法基础课题集</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/03/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/">前缀和与差分</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
