@@ -275,27 +275,23 @@
             
               <div class="markdown-body">
                 
-                <p>基于脑功能连接矩阵的Kendall特征提取实现</p>
-<span id="more"></span>
-<p>原论文如下图所示</p>
-<div align=center><img src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230111170705.png" srcset="/img/loading.gif" lazyload width="  "></div>
-
-<p>基本思路为将样本分为患病组和未患病组，对于患病组的每一个样本的每一个特征，将其和未患病组的每一个样本的对应特征进行相减运算，若结果为正则记为一组concordant，若结果为负则记为一组discordant,对于每一个特征，总的concordant数记为nc,总的discordant数记为nd，随后使用abs((nc-nd)&#x2F;(m*n))代表每一个特征的Kendall系数，用该系数进行排序即可。</p>
+                <p>基于脑功能连接矩阵的Kendall特征提取实现 <span id="more"></span>
+原论文如下图所示</p>
+<div data-align="center">
+<img src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230111170705.png" srcset="/img/loading.gif" lazyload width="  ">
+</div>
+<p>基本思路为将样本分为患病组和未患病组，对于患病组的每一个样本的每一个特征，将其和未患病组的每一个样本的对应特征进行相减运算，若结果为正则记为一组concordant，若结果为负则记为一组discordant,对于每一个特征，总的concordant数记为nc,总的discordant数记为nd，随后使用abs((nc-nd)/(m*n))代表每一个特征的Kendall系数，用该系数进行排序即可。</p>
 <p>程序最基础的代码结构如下，我们使用上Pearson矩阵上三角展开后（1，6670）的数据当作每个样本的输入。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> fc <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">6670</span>):<br>	nc = <span class="hljs-number">0</span><br>	nd = <span class="hljs-number">0</span><br>	<span class="hljs-keyword">for</span> file_asd <span class="hljs-keyword">in</span> files_asd:<br>		ref = pd.read_csv(file_asd,header=<span class="hljs-literal">False</span>)[fc]<br>        <span class="hljs-keyword">for</span> file_hc <span class="hljs-keyword">in</span> files_hc:<br>        	comp = pd.read_csv(file_hc,header=<span class="hljs-literal">False</span>)[fc]<br>        	<span class="hljs-keyword">if</span> ref - comp &gt; <span class="hljs-number">0</span>:<br>        		nc += <span class="hljs-number">1</span><br>        	<span class="hljs-keyword">else</span>:<br>        		nd += <span class="hljs-number">1</span><br>	tau[fc] = <span class="hljs-built_in">abs</span>(nc - nd)/(m*n)<br></code></pre></td></tr></table></figure>
-
 <p>上述代码是对原论文思路的直接实现，逻辑清晰，但是由于大量的IO以及运算，效率十分低下。因此做如下改进：</p>
 <p>为了避免大量重复IO，将所有数据提前读入内存中,后续根据索引直接取数即可,同时为了提高这一步的读取效率，将csv文件改为pkl文件在这一步带来了上千倍的速度提升。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python">all_asd_data = []<br>all_hc_data = []<br><span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> files_asd:<br>    all_asd_data.append(pd.read_pickle(file))<br><span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> files_hc:<br>    all_hc_data.append(pd.read_pickle(file))<br>all_asd_data = pd.DataFrame(np.array(all_asd_data).reshape(<span class="hljs-built_in">len</span>(all_asd_data), -<span class="hljs-number">1</span>))<br>all_hc_data = pd.DataFrame(np.array(all_hc_data).reshape(<span class="hljs-built_in">len</span>(all_hc_data), -<span class="hljs-number">1</span>))<br></code></pre></td></tr></table></figure>
-
 <p>即使如此，由于原运算架构采用三层for循环，三层的循环次数分别为6670、306、368，时间复杂度太高，并行度太差，该程序需要<strong>五个多小时</strong>才能完全跑完。后续在并行度上继续改进：</p>
 <p>首先想到对于未患病组可以不逐个计算，取出所有未患病样本的第fc列，将该array直接减去ref的值，随后统计其中大于0的个数加到nc上，小于0的个数加到nd上即可。这样的改进可以让程序在<strong>10分钟</strong>内完成全部运算。</p>
 <p>更进一步的，我们可以不区分fc，对于全部未患病样本all_hc_data，直接减去每一个患病样本（即利用广播机制将（368，6670）减去（1，6670）），随后以列进行统计大于0的数量，得到（1，6670）的数组，直接加到nc数组上即可，nd数组同理操作。这样程序只有一层for循环，在<strong>5秒</strong>内即可完成全部运算，代码如下。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> tqdm(<span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(all_asd_data)),desc=<span class="hljs-string">&quot;running&quot;</span>,file=sys.stdout):<br>    ref = <span class="hljs-built_in">list</span>(all_asd_data.iloc[i, :])<br>    bool_res = all_hc_data - ref &gt; <span class="hljs-number">0</span><br>    total_true = np.array(np.<span class="hljs-built_in">sum</span>(bool_res, axis=<span class="hljs-number">0</span>))<br>    nc += total_true<br>    nd += <span class="hljs-built_in">len</span>(all_hc_data) - total_true<br><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">6670</span>):<br>    tau_t = (nc[i] - nd[i])/(m*n)<br>    tau = pd.DataFrame(np.insert(tau.values, <span class="hljs-built_in">len</span>(tau.index), values=[<span class="hljs-built_in">int</span>(i), <span class="hljs-built_in">abs</span>(tau_t)], axis=<span class="hljs-number">0</span>))<br></code></pre></td></tr></table></figure>
-
 <p>完整代码如下所示</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs python">root_path = <span class="hljs-string">&quot;../../raw_data/rois_aal_pkl_pearson_static_expand/&quot;</span><br>files = os.listdir(root_path)<br>files.sort()<br><br>label_temp = pd.read_csv(<span class="hljs-string">&quot;label_674.csv&quot;</span>)<br><br><span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> CheckOrder(files, label_temp):<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;error&quot;</span>)<br>    exit()<br>label_temp = label_temp.group_1.values<br><br>m = <span class="hljs-built_in">sum</span>(label_temp)  <span class="hljs-comment"># 患病人数</span><br>n = <span class="hljs-built_in">len</span>(label_temp) - m  <span class="hljs-comment"># 未患病人数</span><br><br>files_asd = []<br>files_hc = []<br><span class="hljs-keyword">for</span> i, item <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(label_temp):<br>    <span class="hljs-keyword">if</span> item == <span class="hljs-number">1</span>:<br>        files_asd.append(root_path + files[i])<br>    <span class="hljs-keyword">else</span>:<br>        files_hc.append(root_path + files[i])<br><br><span class="hljs-comment"># 预加载所有数据，避免频繁IO</span><br>all_asd_data = []<br>all_hc_data = []<br><span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> files_asd:<br>    all_asd_data.append(pd.read_pickle(file))<br><span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> files_hc:<br>    all_hc_data.append(pd.read_pickle(file))<br>all_asd_data = pd.DataFrame(np.array(all_asd_data).reshape(<span class="hljs-built_in">len</span>(all_asd_data), -<span class="hljs-number">1</span>))<br>all_hc_data = pd.DataFrame(np.array(all_hc_data).reshape(<span class="hljs-built_in">len</span>(all_hc_data), -<span class="hljs-number">1</span>))<br><span class="hljs-built_in">print</span>(all_asd_data.shape, all_hc_data.shape)<br><br>tau = pd.DataFrame(columns=[<span class="hljs-string">&#x27;ROI&#x27;</span>, <span class="hljs-string">&#x27;tau&#x27;</span>])<br>nc = np.zeros((<span class="hljs-number">6670</span>,), dtype=<span class="hljs-built_in">int</span>)<br>nd = np.zeros((<span class="hljs-number">6670</span>,), dtype=<span class="hljs-built_in">int</span>)<br><br><span class="hljs-comment"># 利用广播机制批量运算</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> tqdm(<span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(all_asd_data)),desc=<span class="hljs-string">&quot;running&quot;</span>,file=sys.stdout):<br>    ref = <span class="hljs-built_in">list</span>(all_asd_data.iloc[i, :])<br>    bool_res = all_hc_data - ref &gt; <span class="hljs-number">0</span><br>    total_true = np.array(np.<span class="hljs-built_in">sum</span>(bool_res, axis=<span class="hljs-number">0</span>))<br>    nc += total_true<br>    nd += <span class="hljs-built_in">len</span>(all_hc_data) - total_true<br><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">6670</span>):<br>    tau_t = (nc[i] - nd[i])/(m*n)<br>    tau = pd.DataFrame(np.insert(tau.values, <span class="hljs-built_in">len</span>(tau.index), values=[<span class="hljs-built_in">int</span>(i), <span class="hljs-built_in">abs</span>(tau_t)], axis=<span class="hljs-number">0</span>))<br><br>tau.columns = [<span class="hljs-string">&#x27;ROI&#x27;</span>, <span class="hljs-string">&#x27;tau&#x27;</span>]<br>tau = tau.sort_values(by=<span class="hljs-string">&#x27;tau&#x27;</span>, ascending=<span class="hljs-literal">False</span>)<br>tau = tau.reset_index(drop=<span class="hljs-literal">True</span>)<br>tau.to_csv(<span class="hljs-string">&quot;sort.csv&quot;</span>,index=<span class="hljs-literal">False</span>)<br></code></pre></td></tr></table></figure>
-
 
                 
               </div>
@@ -447,6 +443,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -640,6 +642,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

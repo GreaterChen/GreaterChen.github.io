@@ -273,17 +273,18 @@
             
               <div class="markdown-body">
                 
-                <p>Acwing算法基础课中不熟练题目</p>
-<span id="more"></span>
-
-<h3 id="两个数组的目标和"><a href="#两个数组的目标和" class="headerlink" title="两个数组的目标和"></a>两个数组的目标和</h3><p>原题链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/802/">800. 数组元素的目标和 - AcWing题库</a></p>
+                <p>Acwing算法基础课中不熟练题目 <span id="more"></span></p>
+<h3 id="两个数组的目标和">两个数组的目标和</h3>
+<p>原题链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/802/">800.
+数组元素的目标和 - AcWing题库</a></p>
 <p>思路：对于双指针要找到两个指针单调的方向。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N=<span class="hljs-number">1e5</span>+<span class="hljs-number">10</span>;<br><span class="hljs-type">int</span> a[N],b[N];<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> n,m,x;<br>    cin&gt;&gt;n&gt;&gt;m&gt;&gt;x;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++) cin&gt;&gt;a[i];<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;m;i++) cin&gt;&gt;b[i];<br>    <span class="hljs-type">int</span> i=<span class="hljs-number">0</span>,j=m<span class="hljs-number">-1</span>;<br>    <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>        <span class="hljs-keyword">if</span>(a[i]+b[j]==x)&#123;<br>            cout&lt;&lt;i&lt;&lt;<span class="hljs-string">&quot; &quot;</span>&lt;&lt;j;<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(a[i]+b[j]&gt;x) j--;<br>        <span class="hljs-keyword">else</span> i++;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h3 id="离散化"><a href="#离散化" class="headerlink" title="离散化"></a>离散化</h3><p>原题链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/description/804/">802. 区间和 - AcWing题库</a></p>
+<h3 id="离散化">离散化</h3>
+<p>原题链接：<a
+target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/description/804/">802.
+区间和 - AcWing题库</a></p>
 <p>思路：将大范围(-1e9~1e9)但是稀疏(只有1e5的数字非0)的向量进行压缩.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">3e5</span>+<span class="hljs-number">10</span>;<br><br><span class="hljs-type">int</span> a[N],s[N];<br>vector&lt;pair&lt;<span class="hljs-type">int</span>,<span class="hljs-type">int</span>&gt;&gt; add;<br>vector&lt;pair&lt;<span class="hljs-type">int</span>,<span class="hljs-type">int</span>&gt;&gt; query;<br>vector&lt;<span class="hljs-type">int</span>&gt; all_index;	<span class="hljs-comment">// 存储所有需要占据索引的操作（某位置加、两点之间的和），注意需要排序+去重</span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span></span>&#123;	<span class="hljs-comment">// 二分查找离散化前的值x在离散化后的索引</span><br>    <span class="hljs-type">int</span> l=<span class="hljs-number">0</span>,r=all_index.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;<br>    <span class="hljs-keyword">while</span>(l&lt;r)&#123;<br>        <span class="hljs-type">int</span> mid = l+r&gt;&gt;<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span>(all_index[mid]&gt;=x) r=mid;<br>        <span class="hljs-keyword">else</span> l=mid+<span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> r+<span class="hljs-number">1</span>;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> n,m;<br>    cin&gt;&gt;n&gt;&gt;m;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>        <span class="hljs-type">int</span> x,c;<br>        cin&gt;&gt;x&gt;&gt;c;<br>        add.<span class="hljs-built_in">push_back</span>(&#123;x,c&#125;);<br>        all_index.<span class="hljs-built_in">push_back</span>(x);<br>    &#125;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;m;i++)&#123;<br>        <span class="hljs-type">int</span> l,r;<br>        cin&gt;&gt;l&gt;&gt;r;<br>        query.<span class="hljs-built_in">push_back</span>(&#123;l,r&#125;);<br>        all_index.<span class="hljs-built_in">push_back</span>(l);<br>        all_index.<span class="hljs-built_in">push_back</span>(r);<br>    &#125;<br><br>    <span class="hljs-built_in">sort</span>(all_index.<span class="hljs-built_in">begin</span>(), all_index.<span class="hljs-built_in">end</span>());<br>    all_index.<span class="hljs-built_in">erase</span>(<span class="hljs-built_in">unique</span>(all_index.<span class="hljs-built_in">begin</span>(), all_index.<span class="hljs-built_in">end</span>()), all_index.<span class="hljs-built_in">end</span>());<br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> i : add)&#123;<br>        <span class="hljs-type">int</span> x = <span class="hljs-built_in">find</span>(i.first);<br>        a[x] += i.second;<br>    &#125;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=all_index.<span class="hljs-built_in">size</span>();i++) s[i] = s[i<span class="hljs-number">-1</span>] + a[i];<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> i : query)&#123;<br>        <span class="hljs-type">int</span> l = <span class="hljs-built_in">find</span>(i.first);<br>        <span class="hljs-type">int</span> r = <span class="hljs-built_in">find</span>(i.second);<br>        cout&lt;&lt;s[r] - s[l<span class="hljs-number">-1</span>]&lt;&lt;endl;<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
-
 
                 
               </div>
@@ -435,6 +436,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -628,6 +635,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

@@ -273,22 +273,19 @@
             
               <div class="markdown-body">
                 
-                <p>Windows一键完成新建博客、提交next更新、启动本地service</p>
-<span id="more"></span>
-
-<h4 id="新建博客"><a href="#新建博客" class="headerlink" title="新建博客"></a>新建博客</h4><p>创建.bat文件，cd后路径改为blog根目录</p>
-<p>@echo off会 取消后续命令的显示</p>
+                <p>Windows一键完成新建博客、提交next更新、启动本地service
+<span id="more"></span></p>
+<h4 id="新建博客">新建博客</h4>
+<p>创建.bat文件，cd后路径改为blog根目录</p>
+<p><span class="citation" data-cites="echo">@echo</span> off会
+取消后续命令的显示</p>
 <p>pause会使命令执行完之后不关闭脚本界面，以便查看是否成功</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">@<span class="hljs-built_in">echo</span> off<br> <span class="hljs-built_in">cd</span> /d D:\Blog\GreaterChen.github.io\myblog<br> call hexo new <span class="hljs-string">&quot;new post&quot;</span><br> pause<br></code></pre></td></tr></table></figure>
-
-<h4 id="自动提交"><a href="#自动提交" class="headerlink" title="自动提交"></a>自动提交</h4><p>思路同上</p>
+<h4 id="自动提交">自动提交</h4>
+<p>思路同上</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">@<span class="hljs-built_in">echo</span> off<br><span class="hljs-built_in">cd</span> /d  D:\Blog\GreaterChen.github.io\myblog<br>call hexo clean<br>call hexo g<br>call hexo d<br>pause<br></code></pre></td></tr></table></figure>
-
-<h4 id="启动本地service"><a href="#启动本地service" class="headerlink" title="启动本地service"></a>启动本地service</h4><p>思路同上</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">@<span class="hljs-built_in">echo</span> off<br><span class="hljs-built_in">cd</span> /d  D:\Blog\GreaterChen.github.io\myblog<br>call hexo s<br></code></pre></td></tr></table></figure>
-
-
-
+<h4 id="启动本地service">启动本地service</h4>
+<p>思路同上 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">@<span class="hljs-built_in">echo</span> off<br><span class="hljs-built_in">cd</span> /d  D:\Blog\GreaterChen.github.io\myblog<br>call hexo s<br></code></pre></td></tr></table></figure></p>
 
                 
               </div>
@@ -440,6 +437,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -633,6 +636,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

@@ -273,10 +273,10 @@
             
               <div class="markdown-body">
                 
-                <p>通过修改cmd编码格式解决批处理程序中文乱码问题</p>
-<span id="more"></span>
-
-<p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43553082/article/details/125902114?spm=1001.2014.3001.5501">如何修改cmd的编码格式即当前活动代码页编号（比如修改为utf-8、GBK2312）_Interfrog的博客-CSDN博客_cmd 编码</a></p>
+                <p>通过修改cmd编码格式解决批处理程序中文乱码问题 <span id="more"></span></p>
+<p>参考链接：<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43553082/article/details/125902114?spm=1001.2014.3001.5501">如何修改cmd的编码格式即当前活动代码页编号（比如修改为utf-8、GBK2312）_Interfrog的博客-CSDN博客_cmd
+编码</a></p>
 
                 
               </div>
@@ -428,6 +428,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -621,6 +627,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

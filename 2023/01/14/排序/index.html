@@ -273,17 +273,15 @@
             
               <div class="markdown-body">
                 
-                <p>快排、归并排序</p>
-<span id="more"></span>
-
-<h3 id="快排"><a href="#快排" class="headerlink" title="快排"></a>快排</h3><p>维护左右两个指针，左边指针向右走直到遇到大于x的值停下，右边指针向左走直到遇到小于x的值停下，随后两个指针指向的值进行交换。</p>
+                <p>快排、归并排序 <span id="more"></span></p>
+<h3 id="快排">快排</h3>
+<p>维护左右两个指针，左边指针向右走直到遇到大于x的值停下，右边指针向左走直到遇到小于x的值停下，随后两个指针指向的值进行交换。</p>
 <p>快排是不稳定的。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">quick_sort</span><span class="hljs-params">(<span class="hljs-type">int</span> q[], <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span></span>&#123;<br>	<span class="hljs-keyword">if</span>(l&gt;=r) <span class="hljs-keyword">return</span>;<br>	<span class="hljs-type">int</span> x=q[l],i=l<span class="hljs-number">-1</span>,j=r+<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">while</span>(i&lt;j)&#123;<br>		<span class="hljs-keyword">do</span> i++; <span class="hljs-keyword">while</span>(q[i]&lt;x);<br>		<span class="hljs-keyword">do</span> j--; <span class="hljs-keyword">while</span>(q[j]&gt;x);<br>		<span class="hljs-keyword">if</span>(i&lt;j) <span class="hljs-built_in">swap</span>(q[i],q[j]);<br>	&#125;<br>	<span class="hljs-built_in">quick_sort</span>(q,l,j);<br>	<span class="hljs-built_in">quick_sort</span>(q,j+<span class="hljs-number">1</span>,r);<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><p>先对两侧的子序列排序，再对两个有序子序列进行合并，合并思路为双指针。</p>
+<h3 id="归并排序">归并排序</h3>
+<p>先对两侧的子序列排序，再对两个有序子序列进行合并，合并思路为双指针。</p>
 <p>归并排序是稳定的。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">merge_sort</span><span class="hljs-params">(<span class="hljs-type">int</span> q[],<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r)</span></span>&#123;<br>	<span class="hljs-keyword">if</span>(l&gt;=r) <span class="hljs-keyword">return</span>;<br>	<span class="hljs-type">int</span> mid = l + r &gt;&gt; <span class="hljs-number">1</span>;<br>	<span class="hljs-built_in">merge_sort</span>(q,l,mid);<br>	<span class="hljs-built_in">merge_sort</span>(q,mid+<span class="hljs-number">1</span>,r);<br>	<span class="hljs-type">int</span> k=<span class="hljs-number">0</span>,i=l,j=mid+<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">while</span>(i&lt;=mid &amp;&amp; j&lt;=r)&#123;<br>		<span class="hljs-keyword">if</span>(q[i]&lt;q[j]) temp[k++] = q[i++];<br>		<span class="hljs-keyword">else</span> temp[k++] = q[j++];<br>	&#125;<br>	<span class="hljs-keyword">while</span>(i&lt;=mid) temp[k++] = q[i++];<br>	<span class="hljs-keyword">while</span>(j&lt;=r) temp[k++] = q[j++];<br>	<span class="hljs-keyword">for</span>(i=l,j=<span class="hljs-number">0</span>;i&lt;=r;i++,j++)&#123;<br>		q[i] = temp[j];<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
 
                 
               </div>
@@ -435,6 +433,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -628,6 +632,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

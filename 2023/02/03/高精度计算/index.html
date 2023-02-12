@@ -273,21 +273,25 @@
             
               <div class="markdown-body">
                 
-                <p>高精度加法、减法、乘法、除法</p>
-<span id="more"></span>
-
-<h3 id="高精度加法"><a href="#高精度加法" class="headerlink" title="高精度加法"></a>高精度加法</h3><p>基本思路和列竖式相同，对于两个大数，使用string读入，在vector中倒排。对于两个vector的加法有c[i] &#x3D; a[i] + b[i] + t.其中t是上一位的进位。计算完毕后，若t为1说明最高位有进位，再补上一个1即可。在输出时要记得反相输出。</p>
+                <p>高精度加法、减法、乘法、除法 <span id="more"></span></p>
+<h3 id="高精度加法">高精度加法</h3>
+<p>基本思路和列竖式相同，对于两个大数，使用string读入，在vector中倒排。对于两个vector的加法有c[i]
+= a[i] + b[i] +
+t.其中t是上一位的进位。计算完毕后，若t为1说明最高位有进位，再补上一个1即可。在输出时要记得反相输出。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">add</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt; &amp;a, vector&lt;<span class="hljs-type">int</span>&gt; &amp;b)</span></span>&#123;<br>    vector&lt;<span class="hljs-type">int</span>&gt; result;<br>    <span class="hljs-type">int</span> t = <span class="hljs-number">0</span>;<br>	<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>;<br>   	<span class="hljs-keyword">while</span>(i &lt; a.<span class="hljs-built_in">size</span>() || i &lt; b.<span class="hljs-built_in">size</span>())&#123;<br>        <span class="hljs-keyword">if</span>(i&lt;a.<span class="hljs-built_in">size</span>()) t += a[i];<br>        <span class="hljs-keyword">if</span>(i&lt;b.<span class="hljs-built_in">size</span>()) t += b[i];<br>        result.<span class="hljs-built_in">push_back</span>(t%<span class="hljs-number">10</span>);<br>        t/=<span class="hljs-number">10</span>;<br>    &#125;<br>    <span class="hljs-keyword">if</span>(t) result.<span class="hljs-built_in">push_back</span>(<span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">return</span> result;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    string a,b;<br>    cin&gt;&gt;a&gt;&gt;b;<br>    vector&lt;<span class="hljs-type">int</span>&gt;aa,bb;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=a.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;i&gt;=<span class="hljs-number">0</span>;i--) aa.<span class="hljs-built_in">push_back</span>(a[i] - <span class="hljs-string">&#x27;0&#x27;</span>); <span class="hljs-comment">//记得字符转化为对应数字要-&#x27;0&#x27;</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=b.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;i&gt;=<span class="hljs-number">0</span>;i--) bb.<span class="hljs-built_in">push_back</span>(b[i] - <span class="hljs-string">&#x27;0&#x27;</span>);<br>    <span class="hljs-keyword">auto</span> c = <span class="hljs-built_in">add</span>(a,b);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=c.<span class="hljs-built_in">size</span>();i&gt;=<span class="hljs-number">0</span>;i--)&#123;<br>        cout&lt;&lt;c[i];<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h3 id="高精度减法"><a href="#高精度减法" class="headerlink" title="高精度减法"></a>高精度减法</h3><p>思路和高精度加法类似，以string读入，用vector倒排。对于减法，有c[i] &#x3D; (a[i] - b[i] - t + 10) % 10.在读数据时要注意判断a和b的大小。如果b大于a则需要先print出’-‘然后再输b-a的结果。</p>
+<h3 id="高精度减法">高精度减法</h3>
+<p>思路和高精度加法类似，以string读入，用vector倒排。对于减法，有c[i] =
+(a[i] - b[i] - t + 10) %
+10.在读数据时要注意判断a和b的大小。如果b大于a则需要先print出'-'然后再输b-a的结果。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">compare</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt; &amp;a, vector&lt;<span class="hljs-type">int</span>&gt; &amp;b)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(a.<span class="hljs-built_in">size</span>()!=b.<span class="hljs-built_in">size</span>()) <span class="hljs-keyword">return</span> a.<span class="hljs-built_in">size</span>() &gt; b.<span class="hljs-built_in">size</span>();<br>    <span class="hljs-keyword">while</span>(<span class="hljs-type">int</span> i=a,<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;i&gt;=<span class="hljs-number">0</span>;i--)&#123;<br>        <span class="hljs-keyword">if</span>(a[i]!=b[i])&#123;<br>            <span class="hljs-keyword">return</span> a[i] &gt; b[i];<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">sub</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt; &amp;a, vector&lt;<span class="hljs-type">int</span>&gt; &amp;b)</span></span>&#123;<br>    vector&lt;<span class="hljs-type">int</span>&gt;result;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>,k=<span class="hljs-number">0</span>;i&lt;a.<span class="hljs-built_in">size</span>();i++)&#123;<br>        t = a[i] - t;<br>        <span class="hljs-keyword">if</span>(i&lt;b.<span class="hljs-built_in">size</span>()) t = t - b[i];<br>        result.<span class="hljs-built_in">push_back</span>((t+<span class="hljs-number">10</span>)%<span class="hljs-number">10</span>);<br>        <span class="hljs-keyword">if</span>(t&lt;<span class="hljs-number">0</span>) t = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">else</span> t = <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-keyword">while</span>(result.<span class="hljs-built_in">size</span>()&gt;<span class="hljs-number">1</span> &amp;&amp; result.back == <span class="hljs-number">0</span>) result.<span class="hljs-built_in">pop_back</span>();<br>   	<span class="hljs-keyword">return</span> result;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    string a,b;<br>    vector&lt;<span class="hljs-type">int</span>&gt;aa,bb;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=a.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;i&gt;=<span class="hljs-number">0</span>;i--) aa.<span class="hljs-built_in">push_back</span>(a[i] - <span class="hljs-string">&#x27;0&#x27;</span>); <span class="hljs-comment">//记得字符转化为对应数字要-&#x27;0&#x27;</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=b.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;i&gt;=<span class="hljs-number">0</span>;i--) bb.<span class="hljs-built_in">push_back</span>(b[i] - <span class="hljs-string">&#x27;0&#x27;</span>);<br>    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">compare</span>(a,b))&#123;<br>        <span class="hljs-keyword">auto</span> c = <span class="hljs-built_in">sub</span>(a,b);<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=c.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;i&gt;=<span class="hljs-number">0</span>;i--)&#123;<br>            <span class="hljs-built_in">print</span>(c[i]);<br>        &#125;<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;-&quot;</span>);<br>        <span class="hljs-keyword">auto</span> c = <span class="hljs-built_in">sub</span>(b,a);<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=c.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;i&gt;=<span class="hljs-number">0</span>;i--)&#123;<br>            <span class="hljs-built_in">print</span>(c[i]);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-
-<h3 id="高精度乘法"><a href="#高精度乘法" class="headerlink" title="高精度乘法"></a>高精度乘法</h3><p>对于大数A和小数b，结果的第i位可表示为c[i] &#x3D; (a[i]*b+t)&#x2F;10,其中t为第i-1位的进位。对第i+1位的进位t&#x3D;(a[i]*b+t)%10.</p>
+<h3 id="高精度乘法">高精度乘法</h3>
+<p>对于大数A和小数b，结果的第i位可表示为c[i] =
+(a[i]<em>b+t)/10,其中t为第i-1位的进位。对第i+1位的进位t=(a[i]</em>b+t)%10.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">mul</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt; &amp;a,<span class="hljs-type">int</span> b)</span></span>&#123;<br>    vector&lt;<span class="hljs-type">int</span>&gt; result;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>,t=<span class="hljs-number">0</span>;i&lt;a.<span class="hljs-built_in">size</span>() || t;i++)&#123;<br>        <span class="hljs-keyword">if</span>(i&lt;a.<span class="hljs-built_in">size</span>()) t = t + a[i]*b;<br>        result.<span class="hljs-built_in">push_back</span>(t%<span class="hljs-number">10</span>);<br>        t/=<span class="hljs-number">10</span>;<br>    &#125;<br>    <span class="hljs-keyword">while</span>(result.<span class="hljs-built_in">size</span>()&gt;<span class="hljs-number">1</span> &amp;&amp; result.<span class="hljs-built_in">back</span>()==<span class="hljs-number">0</span>) result.<span class="hljs-built_in">pop_back</span>();<br>    	<span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h3 id="高精度除法"><a href="#高精度除法" class="headerlink" title="高精度除法"></a>高精度除法</h3><p>思路可以正着做，记余数为r，则c[i] &#x3D; (r*10+a[i])&#x2F;b,r&#x3D;r%b. 为了在输入输出方面和加减乘保持一致，除法在形式上也采用倒排。</p>
+<h3 id="高精度除法">高精度除法</h3>
+<p>思路可以正着做，记余数为r，则c[i] = (r*10+a[i])/b,r=r%b.
+为了在输入输出方面和加减乘保持一致，除法在形式上也采用倒排。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">div</span><span class="hljs-params">(vector&lt;<span class="hljs-type">int</span>&gt; &amp;a,<span class="hljs-type">int</span> b,<span class="hljs-type">int</span> &amp;r)</span></span>&#123;<br>    r = <span class="hljs-number">0</span>;<br>    vector&lt;<span class="hljs-type">int</span>&gt;result;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=a.<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;i&gt;=<span class="hljs-number">0</span>;i--)&#123;<br>        r = r*<span class="hljs-number">10</span>+a[i];<br>        result.<span class="hljs-built_in">push_back</span>(r/b)<br>    &#125;<br>    <span class="hljs-built_in">reverse</span>(result.<span class="hljs-built_in">begin</span>(),result.<span class="hljs-built_in">end</span>());<br>   	<span class="hljs-keyword">while</span>(result.<span class="hljs-built_in">size</span>()&gt;<span class="hljs-number">1</span> &amp;&amp; result.<span class="hljs-built_in">back</span>()==<span class="hljs-number">0</span>) result.<span class="hljs-built_in">pop_back</span>();<br>    <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></td></tr></table></figure>
-
 
                 
               </div>
@@ -439,6 +443,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -632,6 +642,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 

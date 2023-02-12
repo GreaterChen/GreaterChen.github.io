@@ -273,19 +273,20 @@
             
               <div class="markdown-body">
                 
-                <p>单调栈、单调队列问题</p>
-<span id="more"></span>
-
-<h3 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h3><p>给定长度为N的整数数列，输出每个数左边第一个比他小的数，若不存在则输出-1</p>
-<p>原题链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/832/">830. 单调栈 - AcWing题库</a></p>
+                <p>单调栈、单调队列问题 <span id="more"></span></p>
+<h3 id="单调栈">单调栈</h3>
+<p>给定长度为N的整数数列，输出每个数左边第一个比他小的数，若不存在则输出-1</p>
+<p>原题链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/832/">830.
+单调栈 - AcWing题库</a></p>
 <p>思路：常规思路为从第i个数向前遍历找到第一个更小的数。但对于a[i]与a[i-1],若a[i-1]&gt;a[i],则a[i-1]永远不可能作为i及以后数的答案，因此可以维护一个栈，若将进栈元素小于栈顶元素，则将栈顶元素出栈。最后得到的栈为值单调上升栈，第i个数的答案即为当前栈的栈顶元素。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">1e5</span>+<span class="hljs-number">10</span>;<br><span class="hljs-type">int</span> a[N];<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> n,x;<br>    cin&gt;&gt;n;<br>    stack&lt;<span class="hljs-type">int</span>&gt;st;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>        cin&gt;&gt;x;<br>        <span class="hljs-keyword">if</span>(st.<span class="hljs-built_in">empty</span>()) st.<span class="hljs-built_in">push</span>(x),cout&lt;&lt;<span class="hljs-string">&quot;-1 &quot;</span>;<br>        <span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-keyword">while</span>(!st.<span class="hljs-built_in">empty</span>() &amp;&amp; st.<span class="hljs-built_in">top</span>() &gt;= x) st.<span class="hljs-built_in">pop</span>();<br>            <span class="hljs-keyword">if</span>(st.<span class="hljs-built_in">empty</span>()) cout&lt;&lt;<span class="hljs-string">&quot;-1 &quot;</span>;<br>            <span class="hljs-keyword">else</span> cout&lt;&lt;st.<span class="hljs-built_in">top</span>()&lt;&lt;<span class="hljs-string">&quot; &quot;</span>;<br>            st.<span class="hljs-built_in">push</span>(x);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h3 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h3><p>给定长度为n的数组和窗口长度k，步长为1，求每个窗口的最大值与最小值。</p>
-<p>原题链接：<a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/description/156/">154. 滑动窗口 - AcWing题库</a></p>
+<h3 id="滑动窗口">滑动窗口</h3>
+<p>给定长度为n的数组和窗口长度k，步长为1，求每个窗口的最大值与最小值。</p>
+<p>原题链接：<a
+target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/description/156/">154.
+滑动窗口 - AcWing题库</a></p>
 <p>思路：常规思路为遍历窗口内所有数找出最大最小值。以最小值为例，滑动窗口思路为若a[i]&lt;a[i-1]，则a[i-1]不可能作为答案输出，因此维护一个双端均可出队的队列，若即将入队元素小于队尾元素，则将队尾元素舍去，即在队列中保证单调递增。同时为了去除离开窗口的元素，令上述队列存储元素下标，若队尾元素下标小于i-k+1则对应元素已离开窗口，舍弃即可。每个窗口的答案即为队尾元素。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">1e6</span>+<span class="hljs-number">10</span>;<br><span class="hljs-type">int</span> a[N];<br><span class="hljs-type">int</span> q[N];<br><span class="hljs-type">int</span> head = <span class="hljs-number">0</span>,tail = <span class="hljs-number">-1</span>;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> n,k,x;<br>    cin&gt;&gt;n&gt;&gt;k;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++) cin&gt;&gt;a[i];<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>        <span class="hljs-keyword">if</span>(q[head]&lt;i-k+<span class="hljs-number">1</span>) head++;<br>        <span class="hljs-keyword">while</span>(head&lt;=tail &amp;&amp; a[q[tail]] &gt;= a[i]) tail--;<br>        q[++tail] = i;<br>        <span class="hljs-keyword">if</span>(i&gt;=k<span class="hljs-number">-1</span>) cout&lt;&lt;a[q[head]]&lt;&lt;<span class="hljs-string">&quot; &quot;</span>;<br>    &#125;<br>    cout&lt;&lt;endl;<br>    head = <span class="hljs-number">0</span>;tail = <span class="hljs-number">-1</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>        <span class="hljs-keyword">if</span>(q[head]&lt;i-k+<span class="hljs-number">1</span>) head++;<br>        <span class="hljs-keyword">while</span>(head&lt;=tail &amp;&amp; a[q[tail]] &lt;= a[i]) tail--;<br>        q[++tail] = i;<br>        <span class="hljs-keyword">if</span>(i&gt;=k<span class="hljs-number">-1</span>) cout&lt;&lt;a[q[head]]&lt;&lt;<span class="hljs-string">&quot; &quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
 
                 
               </div>
@@ -437,6 +438,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -630,6 +637,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
