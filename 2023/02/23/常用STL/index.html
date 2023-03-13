@@ -24,7 +24,7 @@
 <meta property="og:description" content="介绍常用的STL">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-23T05:24:00.000Z">
-<meta property="article:modified_time" content="2023-02-23T09:48:58.339Z">
+<meta property="article:modified_time" content="2023-03-08T13:27:23.949Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1.7k 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          12 分钟
+          14 分钟
         
       </span>
     
@@ -266,7 +266,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年2月23日 下午
+                    本文最后更新于：2023年3月8日 晚上
                   
                 
               </p>
@@ -283,7 +283,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++">pair&lt;<span class="hljs-type">int</span>,string&gt; a;<br>a.first; a.second;<br>a = (<span class="hljs-number">20</span>, <span class="hljs-string">&quot;abc&quot;</span>);<br>pair&lt;<span class="hljs-type">int</span>,pair&lt;<span class="hljs-type">int</span>,<span class="hljs-type">int</span>&gt;&gt; b;	<span class="hljs-comment">// 三元组</span><br></code></pre></td></tr></table></figure>
 <h3 id="string">string</h3>
 <p>字符串</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">string a = <span class="hljs-string">&quot;abcdef&quot;</span>;<br>cout&lt;&lt; a.<span class="hljs-built_in">substr</span>(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>);<span class="hljs-comment">// &quot;bc&quot; 代表起始下标为1，长度为2的子串</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++">string a = <span class="hljs-string">&quot;abcdef&quot;</span>;<br>cout&lt;&lt; a.<span class="hljs-built_in">substr</span>(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>);<span class="hljs-comment">// &quot;bc&quot; 代表起始下标为1，长度为2的子串</span><br>a.<span class="hljs-built_in">find</span>(<span class="hljs-string">&quot;cd&quot;</span>) 	<span class="hljs-comment">// O(n^2)复杂度</span><br><span class="hljs-built_in">stoi</span>(<span class="hljs-string">&quot;123&quot;</span>)		<span class="hljs-comment">// string转int</span><br><span class="hljs-built_in">stof</span>(<span class="hljs-string">&quot;1.23&quot;</span>)	<span class="hljs-comment">// string转float</span><br><span class="hljs-type">char</span> *s = <span class="hljs-string">&quot;abcdef&quot;</span>;<br><span class="hljs-type">char</span> *ptr = <span class="hljs-built_in">strstr</span>(s,<span class="hljs-string">&quot;cd&quot;</span>);<br>cout&lt;&lt; ptr - s;<span class="hljs-comment">// O(n)复杂度查找子串返回起始位置，需要用#include&lt;cstring&gt;</span><br><span class="hljs-built_in">to_string</span>(<span class="hljs-type">int</span>)	<span class="hljs-comment">// int转string</span><br></code></pre></td></tr></table></figure>
 <h3 id="queue">queue</h3>
 <p>队列</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++">queue&lt;<span class="hljs-type">int</span>&gt; q;<br>q.<span class="hljs-built_in">push</span>();	<span class="hljs-comment">// 向队尾插入</span><br>q.<span class="hljs-built_in">front</span>();	<span class="hljs-comment">// 返回队头元素</span><br>q.<span class="hljs-built_in">back</span>();	<span class="hljs-comment">// 返回队尾元素</span><br>q.<span class="hljs-built_in">pop</span>();	<span class="hljs-comment">// 弹出对头元素，无返回值</span><br></code></pre></td></tr></table></figure>
@@ -361,7 +361,7 @@ id="unordered_setunordered_mapunordermap_multisetunordered_multimap">unordered_s
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年2月23日</div>
+          <div>2023年3月8日</div>
         </div>
       
       

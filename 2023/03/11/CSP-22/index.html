@@ -16,21 +16,22 @@
   <meta name="author" content="Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="介绍DFS、BFS">
+    <meta name="description" content="CCF CSP 第22届">
 <meta property="og:type" content="article">
-<meta property="og:title" content="搜索与图论(上)">
-<meta property="og:url" content="http://example.com/2023/02/23/%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%9B%BE%E8%AE%BA-%E4%B8%8A/index.html">
+<meta property="og:title" content="CSP 22">
+<meta property="og:url" content="http://example.com/2023/03/11/CSP-22/index.html">
 <meta property="og:site_name" content="Chen&#39;s Blog">
-<meta property="og:description" content="介绍DFS、BFS">
+<meta property="og:description" content="CCF CSP 第22届">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-23T09:31:48.000Z">
-<meta property="article:modified_time" content="2023-02-23T09:34:43.485Z">
+<meta property="article:published_time" content="2023-03-11T08:09:32.000Z">
+<meta property="article:modified_time" content="2023-03-11T08:11:59.923Z">
 <meta property="article:author" content="Chen">
+<meta property="article:tag" content="二维前缀和">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>搜索与图论(上) - Chen&#39;s Blog</title>
+  <title>CSP 22 - Chen&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -184,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="搜索与图论(上)"></span>
+            <span id="subtitle" data-typed-text="CSP 22"></span>
           
         </div>
 
@@ -200,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-23 17:31" pubdate>
-          2023年2月23日 下午
+        <time datetime="2023-03-11 16:09" pubdate>
+          2023年3月11日 下午
         </time>
       </span>
     
@@ -212,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          186 字
+          1.2k 字
         
       </span>
     
@@ -223,7 +224,7 @@
         
         
         
-          2 分钟
+          10 分钟
         
       </span>
     
@@ -261,12 +262,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">搜索与图论(上)</h1>
+            <h1 style="display: none">CSP 22</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年2月23日 下午
+                    本文最后更新于：2023年3月11日 下午
                   
                 
               </p>
@@ -274,10 +275,13 @@
             
               <div class="markdown-body">
                 
-                <p>介绍DFS、BFS <span id="more"></span></p>
-<h3 id="dfs回溯">DFS(回溯)</h3>
-<p>深度优先搜索，和回溯同模板</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">DFS</span><span class="hljs-params">(<span class="hljs-type">int</span> a[],<span class="hljs-type">int</span> select[])</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(满足某条件)&#123;<br>        result.<span class="hljs-built_in">push_back</span>(a);<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> i:select[])&#123;<br>        做出选择;<br>        <span class="hljs-built_in">DFS</span>(a,select);<br>        撤销选择;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <p>CCF CSP 第22届 <span id="more"></span></p>
+<h3 id="灰度直方图"><a
+target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/3414/">1.灰度直方图</a></h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">256</span>;<br><br><span class="hljs-type">int</span> h[N];<br><span class="hljs-type">int</span> n,m,l;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    cin&gt;&gt;n&gt;&gt;m&gt;&gt;l;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;m;j++)&#123;<br>            <span class="hljs-type">int</span> x;<br>            cin&gt;&gt;x;<br>            h[x] ++ ;<br>        &#125;<br>    &#125;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;l;i++)&#123;<br>        cout&lt;&lt;h[i]&lt;&lt;<span class="hljs-string">&quot; &quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="邻域均值"><a
+target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/3415/">2.邻域均值</a></h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">610</span>;<br><span class="hljs-type">int</span> n,l,r,t;<br><span class="hljs-type">int</span> res;<br><span class="hljs-type">int</span> a[N][N];<br><span class="hljs-type">int</span> sum[N][N];<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d%d%d&quot;</span>,&amp;n,&amp;l,&amp;r,&amp;t);<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">1</span>;j&lt;=n;j++)&#123;<br>            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;a[i][j]);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">1</span>;j&lt;=n;j++)&#123;<br>            sum[i][j] = sum[i<span class="hljs-number">-1</span>][j] + sum[i][j<span class="hljs-number">-1</span>] - sum[i<span class="hljs-number">-1</span>][j<span class="hljs-number">-1</span>] + a[i][j];<br>        &#125;<br>    &#125;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">1</span>;j&lt;=n;j++)&#123;<br>            <span class="hljs-type">int</span> left,right,top,bottom;<br>            left = <span class="hljs-built_in">max</span>(<span class="hljs-number">1</span>,i-r);<br>            right = <span class="hljs-built_in">min</span>(n,i+r);<br>            top = <span class="hljs-built_in">max</span>(<span class="hljs-number">1</span>,j-r);<br>            bottom = <span class="hljs-built_in">min</span>(n,j+r);<br>            <span class="hljs-type">int</span> nums = (right-left+<span class="hljs-number">1</span>)*(bottom-top+<span class="hljs-number">1</span>);<br>            <span class="hljs-type">float</span> avg = sum[bottom][right] - sum[top<span class="hljs-number">-1</span>][right] - sum[bottom][left<span class="hljs-number">-1</span>] + sum[top<span class="hljs-number">-1</span>][left<span class="hljs-number">-1</span>];<br>            avg /= nums;<br>            <span class="hljs-keyword">if</span>(avg &lt;= t) res++;<br>        &#125;<br>    &#125;<br>    cout&lt;&lt;res;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -296,7 +300,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  <a href="/categories/CCF-CSP/" class="category-chain-item">CCF CSP</a>
   
   
 
@@ -308,6 +312,13 @@
     </div>
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C/">#二维前缀和</a>
+      
+    </div>
+  
 </div>
 
 
@@ -316,8 +327,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>搜索与图论(上)</div>
-      <div>http://example.com/2023/02/23/搜索与图论-上/</div>
+      <div>CSP 22</div>
+      <div>http://example.com/2023/03/11/CSP-22/</div>
     </div>
     <div class="license-meta">
       
@@ -329,13 +340,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年2月23日</div>
+          <div>2023年3月11日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年2月23日</div>
+          <div>2023年3月11日</div>
         </div>
       
       
@@ -366,18 +377,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/24/CSP-28/" title="CSP 202212">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CSP 202212</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/23/%E5%B8%B8%E7%94%A8STL/" title="常用STL">
-                        <span class="hidden-mobile">常用STL</span>
+                      <a href="/2023/03/11/CSP-23/" title="CSP 202109">
+                        <span class="hidden-mobile">CSP 202109</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
