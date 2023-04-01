@@ -24,7 +24,7 @@
 <meta property="og:description" content="Linux课程笔记 第二章.进程管理">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-30T05:59:07.000Z">
-<meta property="article:modified_time" content="2023-04-01T07:32:25.615Z">
+<meta property="article:modified_time" content="2023-04-01T07:33:08.581Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -285,13 +285,13 @@
 <li><p>TASK_ZOMBIE:正在终止（已经释放内存、文件等资源，但是父进程还未收到通知，描述符未释放）</p></li>
 <li><p>TASK_DEAD:已退出且不需要父进程回收的进程的状态</p></li>
 </ol>
-<p><img src=https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/image-20230330143205241.png width="55%"></p>
+<p><img src=https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/image-20230330143205241.png width="80%"></p>
 <h4 id="进程的系统堆栈">进程的系统堆栈</h4>
 <ol type="1">
 <li><p>Linux2.4的PCB于所属进程的内核堆栈放在一起，为每个进程分配8KB大小的内存区域。</p></li>
 <li><p>进程描述符task_struct位于8k低端，内核堆栈位于8k高端</p></li>
 </ol>
-<p><img src=https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/image-20230331205455782.png width="55%"></p>
+<p><img src=https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/image-20230331205455782.png width="80%"></p>
 <ol start="3" type="1">
 <li>操作系统可以使用current宏通过esp指针获得PCB的指针，具体方式为将低13位清零得到起始空间地址</li>
 </ol>
