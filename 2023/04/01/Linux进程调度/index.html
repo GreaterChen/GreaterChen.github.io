@@ -16,21 +16,21 @@
   <meta name="author" content="Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="调查科学性保证流程 为了保证调查的科学性，本研究采用如下两个阶段的抽样方式： PPS概率抽样 总体中的每个单位都有一个事先已知的非零概率被抽中，遵循随机抽样原则，可以排除抽样过程中的主观随意性或目的性。 二相抽样  先在各区中抽取一个含有多个单元的大样本。 收集该大样本的辅助信息。 在此基础上分层抽取一个较小的样本，可以很好的解决北京市常住人口抽样框中缺乏辅助信息的问题，保证最终抽">
+    <meta name="description" content="Linux课程笔记 第二章.进程调度">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Chen&#39;s Blog">
-<meta property="og:url" content="http://example.com/2023/03/13/test/index.html">
+<meta property="og:title" content="Linux进程调度">
+<meta property="og:url" content="http://example.com/2023/04/01/Linux%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6/index.html">
 <meta property="og:site_name" content="Chen&#39;s Blog">
-<meta property="og:description" content="调查科学性保证流程 为了保证调查的科学性，本研究采用如下两个阶段的抽样方式： PPS概率抽样 总体中的每个单位都有一个事先已知的非零概率被抽中，遵循随机抽样原则，可以排除抽样过程中的主观随意性或目的性。 二相抽样  先在各区中抽取一个含有多个单元的大样本。 收集该大样本的辅助信息。 在此基础上分层抽取一个较小的样本，可以很好的解决北京市常住人口抽样框中缺乏辅助信息的问题，保证最终抽">
+<meta property="og:description" content="Linux课程笔记 第二章.进程调度">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-13T11:03:18.292Z">
-<meta property="article:modified_time" content="2023-03-27T14:25:44.744Z">
+<meta property="article:published_time" content="2023-04-01T07:42:03.000Z">
+<meta property="article:modified_time" content="2023-04-01T07:50:11.358Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Chen&#39;s Blog</title>
+  <title>Linux进程调度 - Chen&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -184,7 +184,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="Linux进程调度"></span>
           
         </div>
 
@@ -200,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-13 19:03" pubdate>
-          2023年3月13日 晚上
+        <time datetime="2023-04-01 15:42" pubdate>
+          2023年4月1日 下午
         </time>
       </span>
     
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          143 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          13 分钟
+          2 分钟
         
       </span>
     
@@ -261,12 +261,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none"></h1>
+            <h1 style="display: none">Linux进程调度</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年3月27日 晚上
+                    本文最后更新于：2023年4月1日 下午
                   
                 
               </p>
@@ -274,93 +274,13 @@
             
               <div class="markdown-body">
                 
-                <h1 id="调查科学性保证流程">调查科学性保证流程</h1>
-<p>为了保证调查的科学性，本研究采用如下两个阶段的抽样方式：</p>
-<h2 id="pps概率抽样">PPS概率抽样</h2>
-<p>总体中的每个单位都有一个事先已知的非零概率被抽中，遵循随机抽样原则，可以排除抽样过程中的主观随意性或目的性。</p>
-<h2 id="二相抽样">二相抽样</h2>
+                <p>Linux课程笔记 第二章.进程调度 <span id="more"></span></p>
+<h4 id="进程调度策略">进程调度策略</h4>
 <ol type="1">
-<li>先在各区中抽取一个含有多个单元的大样本。</li>
-<li>收集该大样本的辅助信息。</li>
-<li>在此基础上分层抽取一个较小的样本，可以很好的解决北京市常住人口抽样框中缺乏辅助信息的问题，保证最终抽样结果的科学性。</li>
+<li>分为普通进程和实时进程，普通进程的优先级动态变化，实时进程的优先级刚开始就设置好并固定。</li>
+<li>普通进程采用动态优先级策略，SCHED_OTHER;实时进程采用SCHED_FIFO或者SCHED_RR</li>
+<li>如果一个进程是实时进程，则其子孙进程也是实时进程</li>
 </ol>
-<h2 id="流程图">流程图</h2>
-<p>以下是本研究采用的抽样方式的流程图：</p>
-<pre><code class=" mermaid">graph TD;
-    A[总体]--&gt;B(PPS概率抽样);
-    B--&gt;C(遵循随机抽样原则);
-    C--&gt;D(排除主观随意性或目的性);
-    A--&gt;E(二相抽样);
-    E--&gt;F(抽取含多个单元的大样本);
-    F--&gt;G(收集辅助信息);
-    G--&gt;H(分层抽取较小样本);
-    H--&gt;I(解决缺乏辅助信息问题);
-    I--&gt;J(保证抽样结果科学性);
-</code></pre>
-<pre><code class=" mermaid">graph TD;
-    A[指标数据适用性检验] --&gt; B(KMO检验和Bartlett球形检验);
-    B --&gt; C&#123;是否适合因子分析&#125;;
-    C --&gt;|是| D[提取公共因子];
-    D --&gt; E[公共因子命名];
-    E --&gt; F[计算公共因子得分];
-    F --&gt; G[计算样本得分情况进行综合评价x_i ];
-    C --&gt;|否| H[数据不适合因子分析];
-</code></pre>
-<pre><code class=" mermaid">graph LR 
-
-subgraph 个体因素
-A(性别) --&gt;|0.7| A1((个体因素))
-B(年龄) --&gt;|0.4| A1
-C(学历) --&gt;|0.5| A1
-end
-
-subgraph 工作因素
-D(服务接收者权力) --&gt;|0.6| D1((工作因素))
-E(表达规则) --&gt;|0.8| D1
-F(服务时间) --&gt;|0.3| D1
-end
-
-subgraph 情绪因素
-G(情绪智力) --&gt;|0.9| G1((情绪因素))
-H(情感认知) --&gt;|0.7| G1
-end
-
-subgraph 离职
-I(离职倾向) --&gt;|0.6| I1((离职))
-J(躺平倾向) --&gt;|0.4| I1
-end
-
-A1 --&gt;|0.8| I1
-D1 --&gt;|0.7| I1
-G1 --&gt;|0.5| I1
-
-A(性别) --- A_err
-B(年龄) --- B_err
-C(学历) --- C_err
-D(服务接收者权力) --- D_err
-E(表达规则) --- E_err
-F(服务时间) --- F_err
-G(情绪智力) --- G_err
-H(情感认知) --- H_err
-I(离职倾向) --- I_err
-J(躺平倾向) --- J_err
-</code></pre>
-<pre><code class=" mermaid">graph TD;
-    A[随机选择一个数据点作为第一个质心] --&gt; B&#123;是否选择完所有质心&#125;;
-    B --&gt;|是| E[使用选定的质心&lt;br /&gt;进行k-means聚类];
-    B --&gt;|否| C[对于每个数据点,&lt;br /&gt;计算其与已选择质心的最短距离的平方和];
-    C --&gt; D[以概率选择一个新的质心];
-    D --&gt; B;
-</code></pre>
-<p>```mermaid graph TD; A[随机选择一个数据点作为第一个质心] --&gt;
-B[计算每个数据点与已选择质心的最短距离的平方和]; B --&gt;
-C["按概率D(x)选择新的质心"]; C --&gt;
-D["重复步骤(2)和(3)直到选择k个质心为止"]; D --&gt;
-E[使用选定的质心进行上述k-means聚类]; E --&gt;
-F[对于每个数据点x_i，将其分配给距离最近的质心c_j]; F --&gt;
-G[对于每个簇，计算其所有数据点的平均值作为新的质心]; G --&gt;
-H[重复步骤(2)(3)，直到质心不再发生变化或达到预定的迭代次数]; H --&gt;
-E;</p>
 
                 
               </div>
@@ -368,6 +288,27 @@ E;</p>
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Linux/" class="category-chain-item">Linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -378,8 +319,8 @@ E;</p>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>http://example.com/2023/03/13/test/</div>
+      <div>Linux进程调度</div>
+      <div>http://example.com/2023/04/01/Linux进程调度/</div>
     </div>
     <div class="license-meta">
       
@@ -391,13 +332,13 @@ E;</p>
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年3月13日</div>
+          <div>2023年4月1日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年3月27日</div>
+          <div>2023年4月1日</div>
         </div>
       
       
@@ -428,18 +369,12 @@ E;</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/14/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-Python/" title="算法竞赛-Python">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">算法竞赛-Python</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/13/CSP-20/" title="CSP 20">
-                        <span class="hidden-mobile">CSP 20</span>
+                      <a href="/2023/03/30/%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%9B%BE%E8%AE%BA/" title="搜索与图论">
+                        <span class="hidden-mobile">搜索与图论</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
