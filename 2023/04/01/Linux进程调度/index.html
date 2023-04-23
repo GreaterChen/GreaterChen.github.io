@@ -24,7 +24,7 @@
 <meta property="og:description" content="Linux课程笔记 第二章.进程调度">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-01T07:42:03.000Z">
-<meta property="article:modified_time" content="2023-04-01T07:50:11.358Z">
+<meta property="article:modified_time" content="2023-04-04T13:55:08.516Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          143 字
+          574 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          2 分钟
+          5 分钟
         
       </span>
     
@@ -266,7 +266,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年4月1日 下午
+                    本文最后更新于：2023年4月4日 晚上
                   
                 
               </p>
@@ -277,9 +277,40 @@
                 <p>Linux课程笔记 第二章.进程调度 <span id="more"></span></p>
 <h4 id="进程调度策略">进程调度策略</h4>
 <ol type="1">
-<li>分为普通进程和实时进程，普通进程的优先级动态变化，实时进程的优先级刚开始就设置好并固定。</li>
-<li>普通进程采用动态优先级策略，SCHED_OTHER;实时进程采用SCHED_FIFO或者SCHED_RR</li>
-<li>如果一个进程是实时进程，则其子孙进程也是实时进程</li>
+<li><p>分为普通进程和实时进程，普通进程的优先级动态变化，实时进程的优先级刚开始就设置好并固定。</p></li>
+<li><p>普通进程采用动态优先级策略，SCHED_OTHER;实时进程采用SCHED_FIFO或者SCHED_RR</p></li>
+<li><p>如果一个进程是实时进程，则其子孙进程也是实时进程</p></li>
+</ol>
+<h4 id="进程调度依据">进程调度依据</h4>
+<ol type="1">
+<li>依据weight值选择最大的运行
+<ol type="1">
+<li>对于普通进程，weight值首先赋值为剩余的时钟数，若上次也是在当前CPU上运行的则weight增加一个常量，若不需要切换内存则weight再加1，然后还受人为控制的nice的影响(weight+=20-nice)</li>
+<li>对于实时进程，weight=1000+rt_priority</li>
+</ol></li>
+<li>在一个单独时期里，每个进程有一个指定时间片，用完就会被抢占，没用完可以多次调度运行</li>
+<li>所有进程用完其时间片，一个时期才结束</li>
+<li>创建新进程时，子进程继承父进程的一半剩余时间片。子进程结束运行时，剩余时间片也将归还给父进程</li>
+</ol>
+<h3 id="进程调度时机">进程调度时机</h3>
+<p>分为被动调度和主动调度</p>
+<ol type="1">
+<li><p>被动调度：</p>
+<ol type="1">
+<li>适用情况
+<ol type="1">
+<li>当前进程用完CPU时间片</li>
+<li>一个进程被唤醒且优先级高于当前进程</li>
+</ol></li>
+<li>调度时机
+<ol type="1">
+<li>调用sched_setscheduler()或sched_yield()系统调用时</li>
+<li>进程用户态进程前</li>
+<li>系统调用执行结束，控制由核心态返回用户态前</li>
+</ol></li>
+</ol></li>
+<li><p>主动调度</p>
+<p>当进程所需资源无法满足而必须立即阻塞时，直接调度schedule()</p></li>
 </ol>
 
                 
@@ -338,7 +369,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年4月1日</div>
+          <div>2023年4月4日</div>
         </div>
       
       
@@ -368,6 +399,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/04/02/%E7%A1%AC%E4%BB%B6%E8%AF%BE%E8%AE%BE/" title="硬件课设">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">硬件课设</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
