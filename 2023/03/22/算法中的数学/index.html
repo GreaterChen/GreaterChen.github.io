@@ -24,7 +24,7 @@
 <meta property="og:description" content="算法竞赛中常用的数学知识">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-22T11:23:59.000Z">
-<meta property="article:modified_time" content="2023-04-07T07:18:48.719Z">
+<meta property="article:modified_time" content="2023-04-29T13:09:47.327Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.1k 字
+          4.2k 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          34 分钟
+          35 分钟
         
       </span>
     
@@ -266,7 +266,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年4月7日 下午
+                    本文最后更新于：2023年4月29日 晚上
                   
                 
               </p>
@@ -330,6 +330,8 @@ class="math inline">\(f(N)=N*\frac{p_1-1}{p1}*\frac{p_2-1}{p2}*...*\frac{p_m-1}{
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">LL <span class="hljs-title">qmi</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> k, <span class="hljs-type">int</span> p)</span></span>&#123;<br>    <span class="hljs-type">int</span> res = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">while</span>(k)&#123;<br>        <span class="hljs-keyword">if</span>(k&amp;<span class="hljs-number">1</span>)&#123;<br>            res = (LL) res*a%p;<br>        &#125;<br>        k&gt;&gt;=<span class="hljs-number">1</span>;<br>        a=(LL)a*a%p;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="求组合数">求组合数</h3>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i ++ )<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt;= i; j ++ )<br>            <span class="hljs-keyword">if</span> (!j) c[i][j] = <span class="hljs-number">1</span>;<br>            <span class="hljs-keyword">else</span> c[i][j] = (c[i - <span class="hljs-number">1</span>][j] + c[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>]) % mod;<br></code></pre></td></tr></table></figure>
+<h3 id="龟速乘">龟速乘</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">LL <span class="hljs-title">qadd</span><span class="hljs-params">(LL a, LL b, LL p)</span></span>&#123;<br>    LL res=<span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span>(b)&#123;<br>        <span class="hljs-keyword">if</span>(b&amp;<span class="hljs-number">1</span>) res = (res+a)%p;<br>        a = (a+a) % p;<br>        b&gt;&gt;=<span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -387,7 +389,7 @@ class="math inline">\(f(N)=N*\frac{p_1-1}{p1}*\frac{p_2-1}{p2}*...*\frac{p_m-1}{
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年4月7日</div>
+          <div>2023年4月29日</div>
         </div>
       
       

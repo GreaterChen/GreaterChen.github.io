@@ -16,21 +16,21 @@
   <meta name="author" content="Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="整数二分、浮点数二分及例题">
+    <meta name="description" content="操作系统基础知识复习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="二分算法">
-<meta property="og:url" content="http://example.com/2023/01/15/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E4%B8%8A-%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:title" content="操作系统复习">
+<meta property="og:url" content="http://example.com/2023/05/03/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%A4%8D%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Chen&#39;s Blog">
-<meta property="og:description" content="整数二分、浮点数二分及例题">
+<meta property="og:description" content="操作系统基础知识复习">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-01-15T11:05:45.000Z">
-<meta property="article:modified_time" content="2023-03-19T03:09:10.424Z">
+<meta property="article:published_time" content="2023-05-03T07:25:29.000Z">
+<meta property="article:modified_time" content="2023-05-04T13:32:36.801Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>二分算法 - Chen&#39;s Blog</title>
+  <title>操作系统复习 - Chen&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -184,7 +184,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="二分算法"></span>
+            <span id="subtitle" data-typed-text="操作系统复习"></span>
           
         </div>
 
@@ -200,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-01-15 19:05" pubdate>
-          2023年1月15日 晚上
+        <time datetime="2023-05-03 15:25" pubdate>
+          2023年5月3日 下午
         </time>
       </span>
     
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          935 字
+          1k 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          8 分钟
+          9 分钟
         
       </span>
     
@@ -261,12 +261,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">二分算法</h1>
+            <h1 style="display: none">操作系统复习</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年3月19日 上午
+                    本文最后更新于：2023年5月4日 晚上
                   
                 
               </p>
@@ -274,36 +274,85 @@
             
               <div class="markdown-body">
                 
-                <p>整数二分、浮点数二分及例题 <span id="more"></span></p>
-<h3 id="背包">0-1背包</h3>
-<p>整数二分有两种情况，取决于check()函数的逻辑。</p>
-<p>第一种情况，假设check()函数判断的是“右侧是否满足”，则如果满足，说明mid处于右侧区间，则边界点应处于[l,mid]，因此更新r
-=
-mid；如果不满足，说明mid处于左侧区间且mid点本身并不是边界点，则边界点应处于(mid+1,r],因此更新l
-= mid + 1.</p>
-<h5 id="c">c++</h5>
-<p>int bsearch(int l, int r){ // 以整个数列为例    int l=0,r=n-1;
-while(l&lt;r){   mid = l + r &gt;&gt; 1;   if(check(mid)) r = mid;  
-else l = mid + 1; }    return l; } #####</p>
-<p>第二种情况，假设check()函数判断的是“左侧是否满足”，则如果满足，说明mid处于左侧区间，则边界点应处于[mid,r]，因此更新l
-= mid；如果不满足，说明mid处于右侧区间且mid点本身并不是边界点，因此更新r
-= mid - 1.</p>
-<p>但考虑如下情况：若l = r - 1,此时mid = (l + r) &gt;&gt; 1 = (2l + 1)
-&gt;&gt; 1 =
-l,若此时check()返回true，执行l=mid，会导致l、r均未得到更新，程序陷入死循环，因此此时应赋值mid
-= (l + r + 1) &gt;&gt; 1.</p>
-<p><strong>简便记法</strong>：出现mid - 1 的时候使用该情况。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">bsearch</span><span class="hljs-params">(<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r)</span></span>&#123;<br>    <span class="hljs-type">int</span> l=<span class="hljs-number">0</span>,r=n<span class="hljs-number">-1</span>;<br>    <span class="hljs-keyword">while</span>(l&lt;r)&#123;<br>        mid = l + r + <span class="hljs-number">1</span> &gt;&gt; <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">check</span>(mid)) l = mid;<br>        <span class="hljs-keyword">else</span> r = mid - <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> l;<br>&#125;<br></code></pre></td></tr></table></figure>
-<p><strong>例题</strong>：<a
-target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/description/791/">789.
-数的范围 - AcWing题库</a></p>
-<p>```浮点数二分</p>
-<p>和整数二分类似，但无需考虑mid的取整问题。其中的eps代表精度，经验来看若题目要求保留n位小数则eps精度为n+2即可。</p>
-<h5 id="c-1">c++</h5>
-<p>double bsearch(double l,double r){    const double eps = 1e-6;  
- while(r-l&gt;eps){        double mid = l + r &gt;&gt; 1;      
- if(check(mid)) r = mid;        else l = mid;   }    return l; }
-#####</p>
+                <p>操作系统基础知识复习 <span id="more"></span></p>
+<h3 id="计算机系统概述">计算机系统概述</h3>
+<ol type="1">
+<li><p>计算机自下而上的四个部分：硬件、操作系统、应用程序、用户。</p></li>
+<li><p>操作系统定义：指控制和管理整个计算机系统的硬件与软件资源，合理地组织、调度计算机的工作与资源的分配，进而为用户和其他软件提供方便接口与环境的程序集合。</p></li>
+<li><p>操作系统的四个特征:<strong>并发</strong>、<strong>共享</strong>、虚拟、异步(P2)。前两者必须实现。</p></li>
+<li><p>操作系统为用户提供了两种接口：命令接口和程序接口。前者分为联机命令接口（交互式命令接口，在终端一问一答）和脱机命令接口（批处理系统，用户无法干预过程）。后者由一组系统调用组成。</p></li>
+<li><p>操作系统发展历程</p>
+<p><img
+src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230503155929.png" srcset="/img/loading.gif" lazyload /></p></li>
+<li><p>计算机通过硬件完成操作系统由用户态到核心态的转换。</p></li>
+<li><p>微内核构架，是指将内核中最基本的功能保留在内核，而将那些不需要在核心态执行的功能以一组服务（进程）的形式移动到用户态执行，从而降低内核的设计复杂度。鸿蒙OS便是微内核构架。</p></li>
+</ol>
+<h3 id="进程与线程">进程与线程</h3>
+<ol type="1">
+<li><p>进程的通信包含三种：共享存储、消息传递（直接通信、间接通信）、管道通信</p></li>
+<li><p>进程 = 程序+数据+PCB</p></li>
+<li><p>同步与互斥的区别和联系</p>
+<table>
+
+<thead>
+<tr class="header">
+<th>同步</th>
+<th
+style="text-align: left;">进程之间竞争使用临界资源，只能让他们逐个使用</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>互斥</td>
+<td
+style="text-align: left;">进程之间协同完成任务，在关键点上等待另一个进程发来的消息，以便协同一致</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>等待时间：等待CPU的时间；周转时间：作业完成时间-作业提交时间；响应比：<span
+class="math inline">\(\frac{等待时间+要求服务时间}{要求服务时间}\)</span></p></li>
+<li><p>同步与互斥</p>
+<ol type="1">
+<li><p>同步：同步是指多个进程或线程之间的协作，按照一定的顺序执行，保证数据的正确性和一致性。通常使用信号量、事件等机制实现。</p></li>
+<li><p>互斥：互斥是指多个进程或线程之间的竞争，保证同一时间只有一个进程或线程能够访问共享资源，避免数据的竞争和冲突。通常使用互斥锁、读写锁等机制实现。</p></li>
+<li><p>区别：同步和互斥都是为了保证多个进程或线程之间的正确性和一致性，但它们侧重点不同。同步主要关注不同进程或线程之间的协作和顺序执行，而互斥则主要关注共享资源的竞争和访问控制。同时，同步可以用于实现互斥，但互斥不能实现同步。</p></li>
+</ol></li>
+</ol>
+<h3 id="内存管理">内存管理</h3>
+<ol type="1">
+<li><p>系统为每个进程建立一个页表，记录页面在内存中对应的物理块号，页表一般存放在内存中</p></li>
+<li><p>交换与覆盖：<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40608137/article/details/104840730">(124条消息)
+操作系统（三十四）覆盖和交换_操作系统覆盖_叮！菜鸡的博客-CSDN博客</a></p></li>
+<li><table>
+
+<thead>
+<tr class="header">
+<th>时钟置换算法CLOCK（P200）</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>根据顺序找第一个访问位为0的页面
+当指针指向访问位为1的页面时，先把访问位置0，再继续寻找</td>
+</tr>
+<tr class="even">
+<td>FIFO和LRU的结合 改进型CLOCK算法需要使用位和修改位</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>段的共享是通过两个作业的段表中相应表项指向被共享的段的统一物理副本实现的</p></li>
+<li><p>段的地址转化：</p>
+<p><img
+src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230504213228.png" srcset="/img/loading.gif" lazyload /></p></li>
+<li><p>页的地址转化:</p></li>
+</ol>
+<p><img
+src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230504213029.png" srcset="/img/loading.gif" lazyload /></p>
+<ol start="6" type="1">
+<li>段页式 <img
+src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230504213200.png" srcset="/img/loading.gif" lazyload /></li>
+</ol>
 
                 
               </div>
@@ -322,7 +371,7 @@ target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/desc
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  <a href="/categories/%E5%A4%8D%E4%B9%A0/" class="category-chain-item">复习</a>
   
   
 
@@ -342,8 +391,8 @@ target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/desc
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>二分算法</div>
-      <div>http://example.com/2023/01/15/动态规划-上-背包问题/</div>
+      <div>操作系统复习</div>
+      <div>http://example.com/2023/05/03/操作系统复习/</div>
     </div>
     <div class="license-meta">
       
@@ -355,13 +404,13 @@ target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/desc
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年1月15日</div>
+          <div>2023年5月3日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年3月19日</div>
+          <div>2023年5月4日</div>
         </div>
       
       
@@ -392,9 +441,9 @@ target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/desc
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/01/15/%E4%BA%8C%E5%88%86/" title="二分算法">
+                      <a href="/2023/05/04/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E6%89%93%E5%8D%B0/" title="算法竞赛打印">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">二分算法</span>
+                        <span class="hidden-mobile">算法竞赛打印</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -402,8 +451,8 @@ target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/desc
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/14/%E6%8E%92%E5%BA%8F/" title="排序算法">
-                        <span class="hidden-mobile">排序算法</span>
+                      <a href="/2023/04/27/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%8F%90%E9%AB%98%E8%AF%BE/" title="算法提高课">
+                        <span class="hidden-mobile">算法提高课</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -16,21 +16,21 @@
   <meta name="author" content="Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="朋辈讲师企业微信答疑">
+    <meta name="description" content="编译原理易错知识点">
 <meta property="og:type" content="article">
-<meta property="og:title" content="排序算法">
-<meta property="og:url" content="http://example.com/2023/01/14/%E6%9C%8B%E8%BE%88%E7%AD%94%E7%96%91/index.html">
+<meta property="og:title" content="编译原理">
+<meta property="og:url" content="http://example.com/2023/04/24/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="Chen&#39;s Blog">
-<meta property="og:description" content="朋辈讲师企业微信答疑">
+<meta property="og:description" content="编译原理易错知识点">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-01-14T04:25:45.000Z">
-<meta property="article:modified_time" content="2023-04-24T07:46:36.445Z">
+<meta property="article:published_time" content="2023-04-24T08:38:31.000Z">
+<meta property="article:modified_time" content="2023-05-03T10:40:34.269Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>排序算法 - Chen&#39;s Blog</title>
+  <title>编译原理 - Chen&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -184,7 +184,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="排序算法"></span>
+            <span id="subtitle" data-typed-text="编译原理"></span>
           
         </div>
 
@@ -200,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-01-14 12:25" pubdate>
-          2023年1月14日 中午
+        <time datetime="2023-04-24 16:38" pubdate>
+          2023年4月24日 下午
         </time>
       </span>
     
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.7k 字
+          494 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          23 分钟
+          5 分钟
         
       </span>
     
@@ -261,12 +261,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">排序算法</h1>
+            <h1 style="display: none">编译原理</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年4月24日 下午
+                    本文最后更新于：2023年5月3日 晚上
                   
                 
               </p>
@@ -274,18 +274,36 @@
             
               <div class="markdown-body">
                 
-                <p>朋辈讲师企业微信答疑 <span id="more"></span> 想必你清楚如何通过if-else 或者
-switch-case将0-9输出，主要问题在于如何将整数从高到低处理</p>
-<p>如果直接按整数读入，会发现很难从高位到低位获得每个数字，自然很难处理</p>
-<p>但如果是一个字符串，我们似乎就可以通过索引获得0~n的数字</p>
-<p>如果学过c++，string自然是最好的选择，</p>
-<p>如果只是学了c，可以通过下面的代码依次读入每个字符</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">char</span> f[<span class="hljs-number">10</span>][<span class="hljs-number">5</span>] = &#123;<span class="hljs-string">&quot;ling&quot;</span>,<span class="hljs-string">&quot;yi&quot;</span>,<span class="hljs-string">&quot;er&quot;</span>,<span class="hljs-string">&quot;san&quot;</span>,<span class="hljs-string">&quot;si&quot;</span>,<span class="hljs-string">&quot;wu&quot;</span>,<span class="hljs-string">&quot;liu&quot;</span>,<span class="hljs-string">&quot;qi&quot;</span>,<span class="hljs-string">&quot;ba&quot;</span>,<span class="hljs-string">&quot;jiu&quot;</span>&#125;;<br>    <span class="hljs-type">char</span> c;<br>    <span class="hljs-keyword">do</span>&#123;<br>        c = getchar();<br>        <span class="hljs-keyword">if</span>(c == <span class="hljs-string">&#x27;-&#x27;</span>)&#123;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;fu&quot;</span>);<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>,f[<span class="hljs-type">int</span>(c-<span class="hljs-string">&#x27;0&#x27;</span>)]);	<span class="hljs-comment">// 注意ASCII码到实际整数的转化</span><br>        &#125;<br><br>    &#125;<span class="hljs-keyword">while</span>(c!=<span class="hljs-string">&#x27;\n&#x27;</span>);<br></code></pre></td></tr></table></figure>
-<p>print的东西可以改为if-else或者switch-case，不再赘述了。</p>
-<p>下面给出一个递归解决的方法~</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><br><span class="hljs-type">char</span> f[<span class="hljs-number">10</span>][<span class="hljs-number">5</span>] = &#123;<span class="hljs-string">&quot;ling&quot;</span>,<span class="hljs-string">&quot;yi&quot;</span>,<span class="hljs-string">&quot;er&quot;</span>,<span class="hljs-string">&quot;san&quot;</span>,<span class="hljs-string">&quot;si&quot;</span>,<span class="hljs-string">&quot;wu&quot;</span>,<span class="hljs-string">&quot;liu&quot;</span>,<span class="hljs-string">&quot;qi&quot;</span>,<span class="hljs-string">&quot;ba&quot;</span>,<span class="hljs-string">&quot;jiu&quot;</span>&#125;;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">high_to_low</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(x&gt;=<span class="hljs-number">10</span>)&#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>, f[<span class="hljs-built_in">high_to_low</span>(x/<span class="hljs-number">10</span>)]);<br>    &#125;<br>    <span class="hljs-keyword">return</span> x%<span class="hljs-number">10</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> x;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;x);<br>    <span class="hljs-keyword">if</span>(x&lt;<span class="hljs-number">0</span>)&#123;<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;fu&quot;</span>);<br>        x = -x;<br>    &#125;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%s&quot;</span>,f[<span class="hljs-built_in">high_to_low</span>(x)]);<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;time.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-built_in">srand</span>((<span class="hljs-type">unsigned</span>) <span class="hljs-built_in">time</span>(<span class="hljs-literal">NULL</span>));   <span class="hljs-comment">// 写法有些小问题</span><br>    <span class="hljs-type">int</span> a=<span class="hljs-built_in">rand</span>()%<span class="hljs-number">100</span>+<span class="hljs-number">1</span>;<span class="hljs-comment">//随机数字a</span><br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,a);<br>    <span class="hljs-type">int</span> d,b,n,i;<span class="hljs-comment">//输入数字b,n      // 没理解错的话n是最大的猜测次数吧，用int存储即可，n[100]代表有100个int</span><br>    d=<span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;b,&amp;n);    <span class="hljs-comment">// 确定题目是先读入b再读入n吗？</span><br><br>    <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;n;i++) &#123; <span class="hljs-comment">// [0,n)是n个数，[0,n]是n+1个数了</span><br>        <span class="hljs-keyword">if</span>(b&gt;<span class="hljs-number">0</span>)&#123;    <span class="hljs-comment">// 每次读入b都要判断正负，原代码只判断了第一个b的正负</span><br>            <span class="hljs-keyword">if</span> (b &gt; a)<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Too big\n&quot;</span>);<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (b &lt; a)<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Too small\n&quot;</span>);<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (b == a)&#123;   <span class="hljs-comment">//等真的的猜出来再判断输出什么</span><br>                <span class="hljs-keyword">if</span>(d==<span class="hljs-number">1</span>)<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Bingo!\n&quot;</span>); <span class="hljs-comment">// 判等是两个=</span><br>                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(d&gt;<span class="hljs-number">1</span>&amp;&amp;d&lt;=<span class="hljs-number">3</span>)<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Lucky You!\n&quot;</span>);<br>                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(d&gt;<span class="hljs-number">3</span>&amp;&amp;d&lt;=n)<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Good Guess!\n&quot;</span>);<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>            <span class="hljs-comment">// 如果最后一次没猜对会先显示too small/big然后显示game over，</span><br>            <span class="hljs-comment">// 这个地方要按照题意，如果只需要输出game over 要把下面的if放在循环的开始</span><br>            <span class="hljs-keyword">if</span>(d&gt;=n)&#123;<br>                <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Game Over\n&quot;</span>);<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>            d++;<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(b&lt;<span class="hljs-number">0</span>)&#123;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Game Over\n&quot;</span>);<br>            <span class="hljs-keyword">break</span>;<br>        &#125;<br><br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;b);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> n,m;<br>    <span class="hljs-type">int</span> a[<span class="hljs-number">10000</span>];<br>    <span class="hljs-type">int</span> cnt = <span class="hljs-number">0</span>;<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=n;i&lt;=m;i++)&#123;<br>        cnt = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">1</span>;j&lt;i;j++)&#123;       <span class="hljs-comment">// 获得i这个数的所有约数</span><br>            <span class="hljs-keyword">if</span>(i%j==<span class="hljs-number">0</span>) a[cnt++] = j;<br>        &#125;<br>        <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>; <br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;cnt;j++)&#123;     <span class="hljs-comment">// 把约数都加起来</span><br>            sum += a[j];<br>        &#125;<br>        <span class="hljs-keyword">if</span>(sum == i)&#123;       <span class="hljs-comment">// 要是加起来等于i，说明符合条件</span><br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d = &quot;</span>,i);  <span class="hljs-comment">// 先把开头print出来</span><br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;cnt;j++)&#123;     <span class="hljs-comment">// 循环打印约数</span><br>                <span class="hljs-keyword">if</span>(j!=cnt<span class="hljs-number">-1</span>)&#123;<br>                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d + &quot;</span>,a[j]);<br>                &#125;<span class="hljs-keyword">else</span>&#123;<br>                    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,a[j]);<br>                &#125;<br>            &#125;<br>            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>        &#125;<br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <p>编译原理易错知识点 <span id="more"></span></p>
+<h3 id="文法">文法</h3>
+<ol type="1">
+<li><p>符号串真前缀、真后缀、真子串要求<strong>非空</strong>且不等于原串</p></li>
+<li><p>终结符与非终结符的交集为空集</p></li>
+<li><p>开始符号S至少必须在某个产生式的左部出现一次</p></li>
+<li><p>高级程序设计语言的语法可以用2型文法描述</p></li>
+<li><p>高级程序设计语言的词法可以用3型文法描述</p></li>
+<li><p>使用<strong>正规式</strong>、<strong>正规文法</strong>描述高级程序设计语言的单词结构</p></li>
+</ol>
+<h4 id="正规式">正规式</h4>
+<ol type="1">
+<li><p>正规文法是3型文法，左线性表示为A-&gt;w或A-&gt;Bw;右线性表示为A-&gt;w或A-&gt;wB</p></li>
+<li><p><span class="math display">\[
+A=r_1^*=\varepsilon | r_1^+=\varepsilon|r_1r_1^*=\varepsilon|r_1A
+\]</span></p>
+<p><span class="math display">\[
+A=r_1^+=r_1r_1^*=r_1(\varepsilon|r_1^+)=r_1|r_1r_1^+=r_1|r_1A
+\]</span></p>
+<p><span class="math display">\[
+A=r_1^*r_2=(\varepsilon|r_1^+)r_2=r_2|r_1^+r_2=r_2|r_1r_1^*r_2=r_2|r_1A
+\]</span></p></li>
+</ol>
+<h3 id="语法">语法</h3>
+<ol type="1">
+<li>对于LL(1)文法，A的候选式中最多允许1个可以推导出<span
+class="math inline">\(\varepsilon\)</span></li>
+<li>算符优先分析不是一种严格的规范规约，规约对象不是句柄</li>
+<li>消除左递归只在自顶向下分析使用，自底向上不需要</li>
+</ol>
 
                 
               </div>
@@ -304,7 +322,7 @@ switch-case将0-9输出，主要问题在于如何将整数从高到低处理</p
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  <a href="/categories/%E8%AF%BE%E5%86%85/" class="category-chain-item">课内</a>
   
   
 
@@ -324,8 +342,8 @@ switch-case将0-9输出，主要问题在于如何将整数从高到低处理</p
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>排序算法</div>
-      <div>http://example.com/2023/01/14/朋辈答疑/</div>
+      <div>编译原理</div>
+      <div>http://example.com/2023/04/24/编译原理/</div>
     </div>
     <div class="license-meta">
       
@@ -337,13 +355,13 @@ switch-case将0-9输出，主要问题在于如何将整数从高到低处理</p
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年1月14日</div>
+          <div>2023年4月24日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年4月24日</div>
+          <div>2023年5月3日</div>
         </div>
       
       
@@ -374,9 +392,9 @@ switch-case将0-9输出，主要问题在于如何将整数从高到低处理</p
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/01/15/%E4%BA%8C%E5%88%86/" title="二分算法">
+                      <a href="/2023/04/27/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%8F%90%E9%AB%98%E8%AF%BE/" title="算法提高课">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">二分算法</span>
+                        <span class="hidden-mobile">算法提高课</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -384,8 +402,8 @@ switch-case将0-9输出，主要问题在于如何将整数从高到低处理</p
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/14/%E6%8E%92%E5%BA%8F/" title="排序算法">
-                        <span class="hidden-mobile">排序算法</span>
+                      <a href="/2023/04/12/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" title="线性代数">
+                        <span class="hidden-mobile">线性代数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
