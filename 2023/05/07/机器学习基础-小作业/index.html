@@ -16,21 +16,21 @@
   <meta name="author" content="Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="b站up开发的zlibrary书籍下载软件">
+    <meta name="description" content="基于华为云平台使用机器学习算法进行鸢尾花数据集分类">
 <meta property="og:type" content="article">
-<meta property="og:title" content="zlibrary下载软件">
-<meta property="og:url" content="http://example.com/2023/01/11/zlibrary%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6/index.html">
+<meta property="og:title" content="机器学习基础-小作业">
+<meta property="og:url" content="http://example.com/2023/05/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E5%B0%8F%E4%BD%9C%E4%B8%9A/index.html">
 <meta property="og:site_name" content="Chen&#39;s Blog">
-<meta property="og:description" content="b站up开发的zlibrary书籍下载软件">
+<meta property="og:description" content="基于华为云平台使用机器学习算法进行鸢尾花数据集分类">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-01-11T02:20:24.000Z">
-<meta property="article:modified_time" content="2023-01-11T10:01:03.146Z">
+<meta property="article:published_time" content="2023-05-07T14:24:45.000Z">
+<meta property="article:modified_time" content="2023-05-08T05:09:53.953Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>zlibrary下载软件 - Chen&#39;s Blog</title>
+  <title>机器学习基础-小作业 - Chen&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -184,7 +184,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="zlibrary下载软件"></span>
+            <span id="subtitle" data-typed-text="机器学习基础-小作业"></span>
           
         </div>
 
@@ -200,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-01-11 10:20" pubdate>
-          2023年1月11日 上午
+        <time datetime="2023-05-07 22:24" pubdate>
+          2023年5月7日 晚上
         </time>
       </span>
     
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          128 字
+          2k 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          2 分钟
+          17 分钟
         
       </span>
     
@@ -261,12 +261,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">zlibrary下载软件</h1>
+            <h1 style="display: none">机器学习基础-小作业</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年1月11日 晚上
+                    本文最后更新于：2023年5月8日 下午
                   
                 
               </p>
@@ -274,16 +274,50 @@
             
               <div class="markdown-body">
                 
-                <p>b站up开发的zlibrary书籍下载软件 <span id="more"></span> up主页:<a
-target="_blank" rel="noopener" href="https://space.bilibili.com/19276680">拾壹0x7f的个人空间_哔哩哔哩_bilibili</a></p>
-<p>在最新的视频中可以获得最新版本的软件,下面给出3.2.1的下载链接</p>
-<p>https://shiyi11.lanzouo.com/ihl860knrxuj</p>
-<figure>
-<img
-src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230111102618.png" srcset="/img/loading.gif" lazyload
-alt="软件截图" />
-<figcaption aria-hidden="true">软件截图</figcaption>
-</figure>
+                <p>基于华为云平台使用机器学习算法进行鸢尾花数据集分类 <span id="more"></span></p>
+<h3 id="实验环境搭建">实验环境搭建</h3>
+<ol type="1">
+<li><p>首先访问华为云的modelarts平台：https://console.huaweicloud.com/modelarts/，在左侧找到<strong>开发环境</strong>，选择Notebook并点击创建，如下图所示。</p>
+<p><img
+src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230508124116.png" srcset="/img/loading.gif" lazyload /></p></li>
+<li><p>随后在创建界面指定名称，设置自动停止可以保证不会忘记关闭服务器而造成损失，镜像根据需求选择即可。其他默认，点击<strong>立即创建</strong>并提交，等待创建完成即可。</p>
+<p><img
+src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230508124205.png" srcset="/img/loading.gif" lazyload /></p></li>
+<li><p>点击<strong>打开</strong>，即可进入服务器操作页面</p>
+<p><img
+src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230508124525.png" srcset="/img/loading.gif" lazyload /></p></li>
+<li><p>左上角蓝色箭头可以上传文件到服务器，右侧可以选择交互的平台，本次选择Notebook。打开后即可进入代码编写阶段。</p>
+<p><img
+src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230508124636.png" srcset="/img/loading.gif" lazyload /></p></li>
+</ol>
+<h3 id="核心代码">核心代码</h3>
+<p>本文使用<strong>sklearn</strong>实现若干模型对鸢尾花数据集的分类。由于本次实验选择的数据集为鸢尾花的前两类，他们之间是线性可分的，因此理想情况下分类准确率应为100%.</p>
+<ol type="1">
+<li><p>头文件导入</p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br>plt.rcParams[<span class="hljs-string">&quot;font.sans-serif&quot;</span>]=[<span class="hljs-string">&quot;SimHei&quot;</span>] <span class="hljs-comment">#设置字体</span><br>plt.rcParams[<span class="hljs-string">&quot;axes.unicode_minus&quot;</span>]=<span class="hljs-literal">False</span> <span class="hljs-comment">#该语句解决图像中的“-”负号的乱码问题</span><br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> accuracy_score<br></code></pre></td></tr></table></figure></p></li>
+<li><p>数据预处理</p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">data = pd.read_csv(<span class="hljs-string">&quot;iris.data&quot;</span>,header=<span class="hljs-literal">None</span>)[:<span class="hljs-number">100</span>]<br>x = data.iloc[:,:<span class="hljs-number">4</span>]<br>y = []<br><span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> data.iloc[:<span class="hljs-number">100</span>,<span class="hljs-number">4</span>]:<br>    <span class="hljs-keyword">if</span> item == <span class="hljs-string">&#x27;Iris-setosa&#x27;</span>:<br>        y.append(<span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">else</span>:<br>        y.append(<span class="hljs-number">1</span>)<br>X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=<span class="hljs-number">0.2</span>, random_state=<span class="hljs-number">42</span>)<br></code></pre></td></tr></table></figure></p></li>
+<li><p>线性模型</p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> LogisticRegression<br><br>model = LogisticRegression()<br><br>model.fit(X_train, y_train)<br><br>y_pred = model.predict(X_test)<br><br>accuracy = accuracy_score(y_test, y_pred)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Accuracy: &#123;:.2f&#125;%&quot;</span>.<span class="hljs-built_in">format</span>(accuracy * <span class="hljs-number">100</span>))<br></code></pre></td></tr></table></figure></p></li>
+<li><p>决策树</p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.tree <span class="hljs-keyword">import</span> DecisionTreeClassifier<br>model = DecisionTreeClassifier()<br><br>model.fit(X_train, y_train)<br><br>y_pred = model.predict(X_test)<br><br>accuracy = accuracy_score(y_test, y_pred)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Accuracy: &#123;:.2f&#125;%&quot;</span>.<span class="hljs-built_in">format</span>(accuracy * <span class="hljs-number">100</span>))<br></code></pre></td></tr></table></figure></p></li>
+<li><p>其他</p>
+<p>由于sklearn的模型接口一致，除model的定义不同外其他均一致，因此后续只给出头文件以及model定义</p>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 支持向量机</span><br><span class="hljs-keyword">from</span> sklearn.svm <span class="hljs-keyword">import</span> SVC<br>model = SVC()<br><br><span class="hljs-comment"># 贝叶斯</span><br><span class="hljs-keyword">from</span> sklearn.naive_bayes <span class="hljs-keyword">import</span> GaussianNB<br>model = GaussianNB()<br><br><span class="hljs-comment"># 神经网络</span><br><span class="hljs-keyword">from</span> sklearn.neural_network <span class="hljs-keyword">import</span> MLPClassifier<br>model = MLPClassifier(hidden_layer_sizes=(<span class="hljs-number">10</span>,), max_iter=<span class="hljs-number">1000</span>)<br><br><span class="hljs-comment"># 集成学习（以随机森林为例）</span><br><span class="hljs-keyword">from</span> sklearn.ensemble <span class="hljs-keyword">import</span> RandomForestClassifier<br>model = RandomForestClassifier()<br></code></pre></td></tr></table></figure></p></li>
+</ol>
+<h3 id="结果和总结">结果和总结</h3>
+<ol type="1">
+<li>实验结果</li>
+</ol>
+<p>​
+通过在华为云平台的Notebook运行，所有分类的准确率均为100%，符合预期。</p>
+<p><img
+src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/result.png" srcset="/img/loading.gif" lazyload /></p>
+<ol start="2" type="1">
+<li><p>总结</p>
+<p>通过本次实验，我深入了解了华为云平台具有创建方便、使用方式简洁、资源充足、不占有本机资源等优点，并通过实际操作熟悉了其使用方法，使我能够更加便捷地进行机器学习和数据处理等任务。</p>
+<p>在本次实验中，我们采用了鸢尾花数据集进行二分类任务，通过理论学习和实践操作的结合，我掌握了机器学习中数据预处理、模型训练和评估等基本流程，提升了我的数据分析和模型建立能力。</p></li>
+</ol>
 
                 
               </div>
@@ -302,7 +336,7 @@ alt="软件截图" />
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/" class="category-chain-item">实用工具</a>
+  <a href="/categories/%E4%BD%9C%E4%B8%9A/" class="category-chain-item">作业</a>
   
   
 
@@ -322,8 +356,8 @@ alt="软件截图" />
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>zlibrary下载软件</div>
-      <div>http://example.com/2023/01/11/zlibrary下载软件/</div>
+      <div>机器学习基础-小作业</div>
+      <div>http://example.com/2023/05/07/机器学习基础-小作业/</div>
     </div>
     <div class="license-meta">
       
@@ -335,13 +369,13 @@ alt="软件截图" />
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年1月11日</div>
+          <div>2023年5月7日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年1月11日</div>
+          <div>2023年5月8日</div>
         </div>
       
       
@@ -372,18 +406,12 @@ alt="软件截图" />
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/01/11/%E5%9F%BA%E4%BA%8E%E8%84%91%E5%8A%9F%E8%83%BD%E8%BF%9E%E6%8E%A5%E7%9F%A9%E9%98%B5%E7%9A%84Kendall%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E5%AE%9E%E7%8E%B0/" title="基于脑功能连接矩阵的Kendall特征提取实现">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">基于脑功能连接矩阵的Kendall特征提取实现</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/10/%E5%BE%AE%E8%BD%AF%E5%AE%98%E6%96%B9%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7PowerToys/" title="微软官方开源工具PowerToys">
-                        <span class="hidden-mobile">微软官方开源工具PowerToys</span>
+                      <a href="/2023/05/04/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B%E6%89%93%E5%8D%B0/" title="算法竞赛打印">
+                        <span class="hidden-mobile">算法竞赛打印</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

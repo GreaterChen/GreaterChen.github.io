@@ -24,7 +24,7 @@
 <meta property="og:description" content="经典的算法题">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-04T13:56:18.000Z">
-<meta property="article:modified_time" content="2023-05-04T13:58:16.477Z">
+<meta property="article:modified_time" content="2023-05-04T14:07:14.124Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          442 字
+          1k 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          4 分钟
+          9 分钟
         
       </span>
     
@@ -275,11 +275,15 @@
               <div class="markdown-body">
                 
                 <p>经典的算法题 <span id="more"></span></p>
-<ol type="1">
-<li>给定 N 个正整数 A1,A2,…，从中选出若干个数，使它们的和为
-M，求有多少种选择方案。</li>
-</ol>
+<h3 id="背包问题">背包问题</h3>
+<p>给定 N 个正整数 A1,A2,…，从中选出若干个数，使它们的和为
+M，求有多少种选择方案。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">int</span> n,m;<br><span class="hljs-type">int</span> a[<span class="hljs-number">110</span>];<br><span class="hljs-type">int</span> dp[<span class="hljs-number">110</span>][<span class="hljs-number">10010</span>];<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    cin&gt;&gt;n&gt;&gt;m;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++) cin&gt;&gt;a[i];<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;=n;i++) dp[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">1</span>;j&lt;=m;j++)&#123;<br>            dp[i][j] = dp[i<span class="hljs-number">-1</span>][j];<br>            <span class="hljs-keyword">if</span>(a[i]&lt;=j) dp[i][j] = dp[i][j] + dp[i<span class="hljs-number">-1</span>][j-a[i]];	<span class="hljs-comment">// 两个方案加起来</span><br>        &#125;<br>    &#125;<br>    <br>    cout&lt;&lt;dp[n][m];<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h3 id="判断闰年">判断闰年</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">if</span>(x%<span class="hljs-number">4</span>==<span class="hljs-number">0</span>&amp;&amp;x%<span class="hljs-number">100</span>!=<span class="hljs-number">0</span> || x%<span class="hljs-number">400</span> == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br></code></pre></td></tr></table></figure>
+<h3 id="蛇形数组">蛇形数组</h3>
+<p>注意算a[20,20]要满足j&gt;=20 &amp;&amp; i-j+1 &gt;=20,i要算到40多</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">int</span> a[<span class="hljs-number">300</span>][<span class="hljs-number">300</span>];<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> cnt = <span class="hljs-number">1</span>;<br>    <span class="hljs-type">int</span> reverse = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">50</span>;i++)&#123;<br>        <span class="hljs-keyword">if</span>(reverse)&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">1</span>;j&lt;=i;j++) &#123;<br>                a[j][i - j + <span class="hljs-number">1</span>] = cnt++;<br>                cout&lt;&lt;j&lt;&lt;<span class="hljs-string">&quot; &quot;</span>&lt;&lt;i-j+<span class="hljs-number">1</span>&lt;&lt;endl;<br>            &#125;<br>            reverse = <span class="hljs-number">0</span>;<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">1</span>;j&lt;=i;j++) &#123;<br>                a[i - j + <span class="hljs-number">1</span>][j] = cnt++;<br>                cout&lt;&lt;i-j+<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-string">&quot; &quot;</span>&lt;&lt;j&lt;&lt;endl;<br>            &#125;<br>            reverse = <span class="hljs-number">1</span>;<br>        &#125;<br>    &#125;<br>    cout&lt;&lt;a[<span class="hljs-number">20</span>][<span class="hljs-number">20</span>];<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -367,6 +371,12 @@ M，求有多少种选择方案。</li>
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/05/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80-%E5%B0%8F%E4%BD%9C%E4%B8%9A/" title="机器学习基础-小作业">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">机器学习基础-小作业</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
