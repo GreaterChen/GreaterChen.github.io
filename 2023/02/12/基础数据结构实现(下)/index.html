@@ -24,7 +24,7 @@
 <meta property="og:description" content="介绍Trie树、并查集、堆、散列表">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-12T10:11:39.000Z">
-<meta property="article:modified_time" content="2023-04-06T00:26:20.241Z">
+<meta property="article:modified_time" content="2023-05-10T03:43:13.334Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.9k 字
+          3.2k 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          25 分钟
+          27 分钟
         
       </span>
     
@@ -266,7 +266,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年4月6日 早上
+                    本文最后更新于：2023年5月10日 中午
                   
                 
               </p>
@@ -340,6 +340,8 @@ class="math inline">\(Q=2^{64}\)</span>. 此时采用unsigned long long
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">ULL <span class="hljs-title">get</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span></span>&#123;<br>    <span class="hljs-keyword">return</span> h[r] - h[l<span class="hljs-number">-1</span>]*P[r-l+<span class="hljs-number">1</span>];<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>比较两个字符串是否相等</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">if</span>( <span class="hljs-built_in">get</span>( l1, r1 ) == <span class="hljs-built_in">get</span>( l2, r2 ) ) <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Yes&quot;</span>); <br><span class="hljs-keyword">else</span> <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;No&quot;</span>);<br></code></pre></td></tr></table></figure>
+<h3 id="kmp">KMP</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// s[]是长文本，p[]是模式串，n是s的长度，m是p的长度</span><br>求模式串的Next数组：<br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>, j = <span class="hljs-number">0</span>; i &lt;= m; i ++ )<br>&#123;<br>    <span class="hljs-keyword">while</span> (j &amp;&amp; p[i] != p[j + <span class="hljs-number">1</span>]) j = ne[j];<br>    <span class="hljs-keyword">if</span> (p[i] == p[j + <span class="hljs-number">1</span>]) j ++ ;<br>    ne[i] = j;<br>&#125;<br><br><span class="hljs-comment">// 匹配</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>, j = <span class="hljs-number">0</span>; i &lt;= n; i ++ )<br>&#123;<br>    <span class="hljs-keyword">while</span> (j &amp;&amp; s[i] != p[j + <span class="hljs-number">1</span>]) j = ne[j];<br>    <span class="hljs-keyword">if</span> (s[i] == p[j + <span class="hljs-number">1</span>]) j ++ ;<br>    <span class="hljs-keyword">if</span> (j == m)<br>    &#123;<br>        j = ne[j];<br>        <span class="hljs-comment">// 匹配成功后的逻辑</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -397,7 +399,7 @@ class="math inline">\(Q=2^{64}\)</span>. 此时采用unsigned long long
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年4月6日</div>
+          <div>2023年5月10日</div>
         </div>
       
       
