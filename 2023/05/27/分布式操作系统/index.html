@@ -16,21 +16,29 @@
   <meta name="author" content="Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="记录硬件课设学习过程">
+    <meta name="description" content="分布式操作系统期末复习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="硬件课设">
-<meta property="og:url" content="http://example.com/2023/04/02/%E7%A1%AC%E4%BB%B6%E8%AF%BE%E8%AE%BE/index.html">
+<meta property="og:title" content="分布式操作系统">
+<meta property="og:url" content="http://example.com/2023/05/27/%E5%88%86%E5%B8%83%E5%BC%8F%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="Chen&#39;s Blog">
-<meta property="og:description" content="记录硬件课设学习过程">
+<meta property="og:description" content="分布式操作系统期末复习">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-02T05:19:52.000Z">
-<meta property="article:modified_time" content="2023-06-05T10:41:08.666Z">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230606232439.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607005703.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607010738.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607101629.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607104453.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607104716.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607153228.png">
+<meta property="article:published_time" content="2023-05-27T09:26:22.000Z">
+<meta property="article:modified_time" content="2023-06-07T08:49:26.521Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230606232439.png">
   
   
   
-  <title>硬件课设 - Chen&#39;s Blog</title>
+  <title>分布式操作系统 - Chen&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -184,7 +192,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="硬件课设"></span>
+            <span id="subtitle" data-typed-text="分布式操作系统"></span>
           
         </div>
 
@@ -200,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-02 13:19" pubdate>
-          2023年4月2日 下午
+        <time datetime="2023-05-27 17:26" pubdate>
+          2023年5月27日 下午
         </time>
       </span>
     
@@ -212,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k 字
+          6.8k 字
         
       </span>
     
@@ -223,7 +231,7 @@
         
         
         
-          18 分钟
+          57 分钟
         
       </span>
     
@@ -261,12 +269,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">硬件课设</h1>
+            <h1 style="display: none">分布式操作系统</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年6月5日 晚上
+                    本文最后更新于：2023年6月7日 下午
                   
                 
               </p>
@@ -274,166 +282,374 @@
             
               <div class="markdown-body">
                 
-                <p>记录硬件课设学习过程 <span id="more"></span></p>
-<h3 id="实验一-pl端设计">实验一 PL端设计</h3>
+                <p>分布式操作系统期末复习 <span id="more"></span></p>
+<h3 id="名词">名词</h3>
 <ol type="1">
-<li>新建工程，编写好.v文件</li>
-<li>Synthesis -&gt; Run Synthesis 检查是否具有语法错误</li>
-<li>新建simulation sources，编写仿真文件</li>
-<li>将仿真文件右键设置为top文件，Simulation -&gt; Run Simulation
-进行仿真</li>
-<li>I/O Ports 设置引脚</li>
-<li>Program and Debug -&gt; Generate Bitstream 产生字节流</li>
-<li>Open Hardware Manager 将程序烧到电路板</li>
+<li>autonomous 自治的，自己管理自己</li>
+<li>Concurrency 并发</li>
+<li>Coordination 协调</li>
+<li>Transparency 透明</li>
+<li>Trade-off 权衡</li>
+<li>latency 延迟</li>
+<li>Homogeneous 同构</li>
+<li>Heterogeneous 异构</li>
+<li>Tightly-coupled 紧耦合</li>
+<li>Paradigm 范式</li>
+<li>Tiered Architecture 分层架构</li>
+<li>synchronous 同步</li>
+<li>asynchronous 异步</li>
+<li>Transient Communication 暂时通信</li>
+<li>Persistent Communication 持久通信</li>
+<li>router 路由</li>
+<li>relay 中继</li>
+<li>Primitives 原语</li>
+<li>Message Brokers 消息代理</li>
+<li>Decoupling 解耦</li>
+<li>Processor allocation 处理器分配</li>
+<li>Deterministic Algorithm 确定性算法</li>
+<li>Heuristic Algorithm 启发式算法</li>
+<li>replica 副本</li>
+<li>Mounting 挂载</li>
+<li>recursive name resolution 递归名称解析</li>
+<li>clock skew 时钟偏移</li>
+<li>concurrent 并发</li>
+<li>Mutual Exclusion 互斥</li>
+<li>critical region 临界区</li>
+<li>Transaction 事务</li>
+<li>cascaded aborts 级联终止</li>
 </ol>
-<h3 id="实验二-ps端设计">实验二 PS端设计</h3>
+<h3 id="第一章">第一章</h3>
 <ol type="1">
-<li><p>新建工程，IP Integrator -&gt; Create Block Design</p></li>
-<li><p>查找zynq，选择第一个</p></li>
-<li><p>双击芯片，添加预配置文件</p></li>
-<li><p>MIO Configuration -&gt; I/O Peripherals -&gt; GPIO -&gt; EMIO
-GPIO (Width) 打勾，选择引脚数量</p></li>
-<li><p>将GPIO_0 DDR FIXED_IO三个引脚右键Make External引出</p></li>
-<li><p>点击Validate Design 审查是否具有错误</p>
-<figure>
-<img
-src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/image-20230402143111433.png" srcset="/img/loading.gif" lazyload
-alt="审查错误" />
-<figcaption aria-hidden="true">审查错误</figcaption>
-</figure></li>
-<li><p>右键IP文件选择Generate Output Product, 点击Generate</p>
-<figure>
-<img
-src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230402143328.png" srcset="/img/loading.gif" lazyload
-alt="生成输出" />
-<figcaption aria-hidden="true">生成输出</figcaption>
-</figure></li>
-<li><p>右键IP文件点击Create HDL Wrapper进行封装</p></li>
-<li><p>Run Synthesis</p></li>
-<li><p>Add Source -&gt; Add or create constraints
-新建约束文件并填写</p></li>
-<li><p>Generate Bitstream</p></li>
-<li><p>File-&gt;Export-&gt;Export Hardware-&gt;Include
-bitstream</p></li>
-<li><p>Launch SDK</p></li>
-<li><p>在SDK中File-&gt;New-&gt;Application Project-&gt;Next-&gt;empty
-Project</p></li>
-<li><p>bsp文件夹/system.mss中有一些测试示例，选择gpiops的Import
-Examples</p></li>
-<li><p>修改文件逻辑</p></li>
-<li><p>在Vivado中Open Target 连接电路板</p></li>
-<li><p>在SDK中Run as -&gt; Launch on Hardware(System Debugger)
-烧到电路板上</p></li>
-</ol>
-<h3 id="实验三-ps-pl已有ip">实验三 PS + PL已有IP</h3>
+<li><p>分布式操作系统定义</p>
+<p>分布式系统是独立计算机的集合，在其用户看来是一个单一的连贯系统。</p>
+<p>由位于联网计算机上的硬件或软件组件组成的任何系统，这些组件通过消息传递来通信和协调它们的操作。</p></li>
+<li><p>特性</p>
 <ol type="1">
-<li><p>同实验二的1~3，然后打开AXI总线并在Interrupts勾选Fabric
-Interrupts,展开后在PL-PS Interrupt
-Ports勾选IRQ_F2P[15:0]开启中断</p></li>
-<li><p>添加另一个IP查找GPIO，添加后双击勾选Enable Dual
-Channel开启双使能通道</p></li>
-<li><p>对于两个GPIO宽度都设置为4(LED和按键都是占4个引脚)</p></li>
-<li><p>勾选Enable Interrupt，点击确定</p></li>
-<li><p>引出DDR FIXED_IO GPIO DPIO2</p></li>
-<li><p>点击页面上方的自动连接将IP和ZYNQ连接起来，然后手动将ZYNQ和IP的中断接口连起来</p></li>
-<li><p>同实验二6~12</p></li>
-<li><p>File-&gt;new-&gt;Board Support Package 全默认即可</p></li>
-<li><p>system.mss中勾选gpio的前两个示例代码</p></li>
-<li><p>同实验二后续</p></li>
-</ol>
-<h3 id="实验四-ps-pl自定义ip">实验四 PS + PL自定义IP</h3>
+<li>Hidden ：Hide the difference and the communication among all kinds
+of computers</li>
+<li>Consistent and Uniform<br />
+</li>
+<li>Scalability
+：伸缩性，即使坏了一部分整个系统也不会瘫痪（允许某些功能不可用了）</li>
+<li>Concurrency ：Coordination among different concurrently executing
+programs that share resource</li>
+<li>No Global Clock ：</li>
+</ol></li>
+<li><p>目标</p>
 <ol type="1">
-<li><p>新建工程编准备好.v文件</p></li>
-<li><p>Tools-&gt;Create and Package New IP-&gt;Create a new AXI4
-peripheral-&gt;Edit IP</p></li>
-<li><p>添加资源，将需要封装为IP的文件（记作A）引入进来</p></li>
-<li><p>将文件中的module声明复制到自动产生文件（记作B）的末尾 user
-logic处，同时指定端口的连接</p>
-<p><img
-src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230402200933.png" srcset="/img/loading.gif" lazyload /></p></li>
-<li><p>在Users to add ports
-here处添加IP的输入输出，注意reg要改为wire</p></li>
-</ol>
-<p><img
-src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230402200643.png" srcset="/img/loading.gif" lazyload /></p>
-<ol start="6" type="1">
-<li><p>在top层两处添加端口</p>
-<p><img
-src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230402201224.png" srcset="/img/loading.gif" lazyload /></p></li>
-</ol>
-<p><img
-src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230402201255.png" srcset="/img/loading.gif" lazyload /></p>
-<ol start="7" type="1">
-<li>Run Synthesis</li>
-<li>在Package IP - AXI_SMG-&gt;File Groups页面点击Merge changes from
-File Grops Wizard,在下面一个页面进行同样的操作</li>
-<li>点击最下面Review and Package完成IP打包</li>
-<li>新建项目，IP Integrator-&gt;Create Block Design打开IP设计界面</li>
-<li>在Project-&gt;Project Setting中的IP页面中添加IP的路径</li>
-<li>预配值Zynq，勾选AXI总线（默认已勾选）</li>
-<li>引出DDR FIXED_IO led_out a_g key_in四个引脚，然后点击自动连接</li>
-<li>同实验三后续</li>
-</ol>
-<h3 id="正点原子">正点原子</h3>
-<ol type="1">
-<li>嵌入式开发流程</li>
-</ol>
-<p><img src= https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230417123616.png width="50%"></p>
-<ol start="2" type="1">
-<li>GPIO是一个外设，用来对器件的引脚作观测(input)以及控制(output)。</li>
-<li>MIO(Multiuse
-I/O),将来自PS外设X和静态存储器接口的访问多路复用到PS的引脚上。</li>
-</ol>
-<h3 id="oled">OLED</h3>
-<ol type="1">
-<li>引脚：
-<ol type="1">
-<li><p>SDA:C17</p></li>
-<li><p>SCLK:D15</p></li>
-<li><p>CS:C15</p></li>
-<li><p>GPIO[0]:D16(DC)</p></li>
-<li><p>GPIO[1]:F17(RES)</p></li>
+<li><p>Making Resources Accessible</p></li>
+<li><p>Distribution Transparency 看起来只有一个电脑</p></li>
+<li><p>Openness</p>
+<p>Mechanism : (How to do it)It need cache</p>
+<p>Policy : (What will be done)Size? • Consistency? • Always or only one
+session? • Can user control?</p></li>
+<li><p>Scalability</p></li>
 </ol></li>
 </ol>
-<h3 id="pm2.5">PM2.5</h3>
-<p>TX u4</p>
-<p>RX v4</p>
-<p>GPIO y4</p>
-<h3 id="asr">ASR</h3>
-<p>UART0_TX Y13</p>
-<p>UART0_RX Y14</p>
-<h3 id="顶层">顶层</h3>
-<h4 id="oled-1">OLED</h4>
+<h3 id="第二章-communication">第二章 Communication</h3>
 <ol type="1">
-<li><p>SDA:C17</p></li>
-<li><p>SCLK:D15</p></li>
-<li><p>CS:C15</p></li>
-<li><p>GPIO[0]:D16(DC)</p></li>
-<li><p>GPIO[1]:F17(RES)</p></li>
+<li><p>UDP offers no guarantee of delivery 不可靠的传输 No setup costs
+不需要建立连接，额外花销小</p></li>
+<li><p>RPC(Remote Procedure Call)</p>
+<p>Problems:</p>
+<ol type="1">
+<li>Call by Value：异构的计算机对于相同的字符串的解读不同</li>
+<li>Call by Reference：
+<ol type="1">
+<li>For array: copy/restore
+把整个数组发过去，搞完之后再发回本机修改</li>
+<li>For ordinary pointer 接收机器拿着指针回来找</li>
+</ol></li>
+<li>How to Create Stub：Interface Definition Language
+(IDL)使用统一接口</li>
+</ol></li>
+<li><p>RMI（Remote Method Invocation）</p>
+<p>Client:Proxy</p>
+<p>Server:Skleton</p>
+<p>RMI and RPC are same theoretically.</p></li>
+<li><p>同步通信收发都是堵塞的，异步通信发是非堵塞的收都可以</p></li>
+<li><p>Transient communication:A message is not stored in communication
+system 瞬时通信不存储信息</p>
+<ol type="1">
+<li>Sockets Interface
+<ol type="1">
+<li>TCP/UDP</li>
+<li>IP Multicast: IP multicast is available only via UDP</li>
+</ol></li>
+<li>MPI(Message Passing Interface standard)</li>
+</ol></li>
+<li><p>Persistent Communication:A message is stored in communication
+system until it is sent to receiver 持久通信</p>
+<ol type="1">
+<li>Message Queue Model 保证一定送达但是不保证时间长短
+<ol type="1">
+<li>router：进行接收转发</li>
+<li>relay：接收之后进行处理 Relay can build a scalable message-queuing
+system</li>
+<li>Application of Message Queue System
+<ol type="1">
+<li>Asynchronization 异步</li>
+<li>Decoupling of application 解耦</li>
+<li>Flow Cutting 流切割</li>
+</ol></li>
+</ol></li>
+</ol></li>
+<li><p>Stream Oriented Communication</p>
+<ol type="1">
+<li><p>Continuous representation media: Temporal relationship between
+data items is IMPORTANT to explain the meaning of data.</p></li>
+<li><p>Discrete representation media: Temporal relationship between data
+items is NOT IMPORTANT to explain the meaning of data</p></li>
+<li><p>Transmission types</p>
+<ol type="1">
+<li><p>Asynchronous transmission mode</p>
+<p>Data items are transmitted one by one. No time restriction on
+transmission.</p></li>
+<li><p>Synchronous transmission mode</p>
+<p>Every data item has a maximum end-to-end delay defined for each unit
+in a data stream.</p></li>
+<li><p>Isochronous transmission mode</p>
+<p>Data item must be transmitted on time.</p></li>
+</ol></li>
+<li><p>Interleaving frames 交错帧，减小数据包丢失的影响</p></li>
+<li><p>QoS
+Negotiation是一种网络协议，用于协商和确定网络中各种流量的优先级、带宽、延迟等服务质量参数。</p></li>
+</ol></li>
 </ol>
-<h4 id="asr-1">ASR</h4>
+<h3 id="第三章">第三章</h3>
 <ol type="1">
-<li><p>RX:R15</p>
-<p>"小植"：0x01</p>
-<p>“温湿度”：0x32(50)</p>
-<p>"空气"：0x33(51)</p>
-<p>"甲醛"：0x34(52)</p></li>
+<li><p>Server Classification</p>
+<ol type="1">
+<li>Iterative Server：Server is responsible for dealing with request and
+return the result to client</li>
+<li>Concurrent Server：Server doesn’t deal with request from client. It
+sends the request to a thread or a process,then wait for next
+request</li>
+</ol></li>
+<li><p><strong>Out-of-band</strong> data ： data that is to be processed
+by the server before any other data from that
+client.优先级很高，需要及时处理</p></li>
+<li><p>Stateless Server：Don’t save any information about client</p>
+<p>Server with state：Maintain information about client</p></li>
+<li><p><img src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230606232439.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p></li>
+<li><p>Code Migration</p>
+<ol type="1">
+<li><p>Process migration ：An entire process was moved from one machine
+to another.</p>
+<ol type="1">
+<li><p>Weak Mobility: Only migrate code segment and some initialization
+data</p></li>
+<li><p>Strong Mobility: Migrate the code segment and the executing
+segment</p></li>
+</ol></li>
+<li><p>Resource Migration:</p>
+<ol type="1">
+<li>Process-Resource Binding: ID,Value,Type</li>
+<li>Resource-Machine Binding: Unattached Resource,Fastened
+Resource,Fixed Resource</li>
+</ol></li>
+</ol></li>
+<li><p><img src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607005703.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p></li>
+<li><p>Processor Allocation Algorithm</p>
+<ol type="1">
+<li>Deterministic Algorithm：Know all information about all
+processes</li>
+<li>Heuristic Algorithm：The load of a system is unpredictable.</li>
+</ol></li>
 </ol>
-<h4 id="pm">PM</h4>
+<p><img src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607010738.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<h3 id="第四章">第四章</h3>
 <ol type="1">
-<li>RX:W13</li>
+<li>Flat Naming</li>
+<li>Struct Naming
+<ol type="1">
+<li>Iterative Name
+Resolution:迭代名称解析：每一层都给服务器发，然后服务器返回下一层地址</li>
+<li>Recursive Name
+Resolution：递归名称解析：主机只发一次，服务器之间进行通讯完成工作</li>
+</ol></li>
+<li>Attribute-Based Naming：To describe an entity in terms of
+(attribute,value) pairs</li>
 </ol>
-<h4 id="jq">JQ</h4>
+<h3 id="第五章">第五章</h3>
 <ol type="1">
-<li>RX:V14</li>
+<li><p>物理时钟</p>
+<ol type="1">
+<li>Cristian Algorithm
+<ol type="1">
+<li>如果有一个有WWV接收器的机器，其他机器都可以向这个机器请求时间</li>
+<li>Time is not allowed to run
+backward.如果一个机器的时间在同步时钟之后，时间回溯是不被允许的</li>
+</ol></li>
+<li>Berkeley Algorithm
+<ol type="1">
+<li>Time server polls the time of every machine</li>
+<li>Average the results and tell the time to other machine</li>
+</ol></li>
+<li>Averaging Algorithm
+<ol type="1">
+<li>Every machine broadcast its time to others in every time
+interval</li>
+<li>After broadcasting,machine collect time response from other machines
+in an interval S</li>
+<li>Average all the time values，Discard m highest and m lowest</li>
+<li>Try to add an estimated time delay to correct the time</li>
+</ol></li>
+<li>应用: Network Time Protoc ol (NTP)</li>
+</ol></li>
+<li><p>逻辑时钟</p>
+<ol type="1">
+<li><p>为什么不用物理时钟</p>
+<p><img src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607101629.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" /></p></li>
+<li><p>Lamport’s Logical Clocks</p>
+<pre><code class="hljs">1. If a and b are two events in a **same process**,and a happens before b,then a→b is true
+    2. If a is a **sending** event of a message in a process,b is receiving event of this message in another process,then a→b is true
+    3. If a→b is not true,b→ a is not true,a and b is concurrent 并发</code></pre>
+<p><img src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607104453.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p></li>
+</ol></li>
+<li><p>Vector Clocks</p></li>
 </ol>
-<h4 id="tts">TTS</h4>
+<p><img src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607104716.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<ol start="4" type="1">
+<li><p>Election Algorithm</p>
 <ol type="1">
-<li>TX:T16</li>
+<li>Bully Algorithm</li>
 </ol>
-<h3 id="dht11">DHT11</h3>
+<p>进程P发现协调员(coordinator)无法工作，发起一个选举，给所有比自己PID大的进程Q发消息，要是应答了则P放弃，Q继续上述过程，直到只剩一个，成为新的协调员</p>
+<ol start="2" type="1">
+<li><p>Ring Algorithm</p>
+<p>逻辑上的环，每个进程知道自己的后继进程。转一圈之后选PID最大的当新协调员。</p></li>
+</ol></li>
+<li><p>Mutual Exclusion</p>
 <ol type="1">
-<li>dht11_data:AB21</li>
+<li><p>Centralized Algorithm</p>
+<p>P是协调者，Q想进去要问P，能进就可以，不能进Q就进等待队列。里面的进程出来之后授权队列头进程</p></li>
+<li><p>Distributed Algorithm</p>
+<p>P想进去，发请求给所有进程Q，要是Q不想进去就发ok回来，要是Q就在里面就不回应，要是Q也想进去就比较时间戳，要是比自己早就回ok</p></li>
+<li><p>Token Ring Algorithm</p>
+<p>一个令牌在环里绕，拿到令牌的可以进去。</p>
+<p>这个算法不是一个fair algorithm，前面俩都是fair algorithm</p></li>
+</ol></li>
+<li><p>Distributed Transaction</p>
+<ol type="1">
+<li><p>Characteristics</p>
+<ol type="1">
+<li><p>Atomic • A transaction cannot be separated.</p></li>
+<li><p>Consistent • A transaction cannot spoil the consistent item of
+system.</p></li>
+<li><p>Isolated • Concurrent transaction cannot affect each
+other.</p></li>
+<li><p>Durable • Once a transaction is committed,the change will be
+permanent.</p></li>
+<li><p>RollBack</p></li>
+<li><p>Private Workspace: Give a private workspace to a transaction when
+it begins</p>
+<p>All data are read and written in the private workspace until the
+transaction is committed or failed</p></li>
+</ol></li>
+<li><p>Writeahead Log</p>
+<ol type="1">
+<li><p>Before a file is updated,a record is written in a log</p></li>
+<li><p>Only after write the log successfully,the change can be committed
+to the file</p>
+<ol start="2" type="1">
+<li>Serial Equivalence</li>
+</ol></li>
+</ol></li>
+<li><p>Several transactions can be executed at the same time but the
+final result is the same as the situation that all transactions are
+executed one by one</p></li>
+<li><p>Two Concurrent Control Methods</p>
+<ol type="1">
+<li><p>Pessimistic approaches 不允许可能出现的问题</p>
+<p>Timestamp Ordering</p>
+<ol type="1">
+<li>A transaction’s request to <strong>write</strong> an object is valid
+only if that object was last read and written by earlier
+transactions</li>
+<li>A transaction’s request to <strong>read</strong> an object is valid
+only if that object was last written by earlier transactions</li>
+</ol>
+<p><img src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607153228.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p></li>
+<li><p>Optimistic approaches 可以有问题，回滚就行了</p></li>
+</ol></li>
+</ol></li>
+</ol>
+<h3 id="第六章">第六章</h3>
+<ol type="1">
+<li><p>Replication 副本</p>
+<ol type="1">
+<li><p>为什么需要副本</p>
+<p>• Reliability</p>
+<p>• Performance</p>
+<p>• Fault tolerance</p></li>
+<li><p>CAP</p>
+<ol type="1">
+<li>Partition Tolerance 分区容错性
+<ol type="1">
+<li>Every subnetwork is called a partition</li>
+<li>The system still work when communication fail</li>
+</ol></li>
+<li>Consistency 一致性
+<ol type="1">
+<li>All replica in the system should be consist</li>
+</ol></li>
+<li>Availability 可用性
+<ol type="1">
+<li>All nodes in the system can be used when user need it</li>
+</ol></li>
+<li>上述三个不能bingcun
+<ol type="1">
+<li>如果想有P，那肯定得有预留的副本，那么一致性和全可用性就不可能实现</li>
+<li>如果想有CA,那P肯定不能实现</li>
+</ol></li>
+</ol></li>
+<li><p>一致性</p>
+<ol type="1">
+<li>Strict Consistency
+<ol type="1">
+<li>Any read operation on data item x can return back the result of last
+write on x.</li>
+<li>Depend on absolute global time</li>
+</ol></li>
+<li>Sequential Consistency
+<ol type="1">
+<li>The result of all process’s read and write operation are the same as
+if they are executed according to a specific order.</li>
+<li>一个进程内部执行顺序一致就行，俩进程谁先谁后无所谓？</li>
+</ol></li>
+<li>Linearizability
+<ol type="1">
+<li>every operation has a timestamp,and satisfies following
+condition</li>
+<li>时间在前的先发生</li>
+</ol></li>
+<li>Causal Consistency
+<ol type="1">
+<li>Writes that are potentially causally related must be seen by all
+processes in the same order.</li>
+<li>得分析前面的潜在因果关系，要是俩写操作判断不出来谁前谁后，那读的时候谁前谁后都可以</li>
+</ol></li>
+</ol></li>
+<li><p>修改的传播方法</p>
+<ol type="1">
+<li><p>Only propagate a notification of an update</p>
+<p>告诉别人我已经改了，别再用那个旧的了</p></li>
+<li><p>Transfer data from one copy to another</p>
+<p>把改了的数据发给别人</p></li>
+<li><p>Propagate the update to other copies</p>
+<p>告诉别人我怎么改的</p></li>
+</ol></li>
+<li><p>传染病模型</p>
+<ol type="1">
+<li><p>传统的方法是P一个人告诉其他所有人更新消息，传染病模型是P告诉Q之后，PQ一起告诉别人</p></li>
+<li><p>Anti-Entropy Model 反熵模型</p>
+<p>A server P select another server Q randomly and exchange
+updates</p></li>
+<li><p>Gossiping Model 八卦模型</p>
+<p>P拿到更新之后随机再告诉别人要更新</p></li>
+</ol></li>
+</ol></li>
 </ol>
 
                 
@@ -453,7 +669,7 @@ I/O),将来自PS外设X和静态存储器接口的访问多路复用到PS的引�
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%A1%AC%E4%BB%B6/" class="category-chain-item">硬件</a>
+  <a href="/categories/%E8%AF%BE%E5%86%85/" class="category-chain-item">课内</a>
   
   
 
@@ -473,8 +689,8 @@ I/O),将来自PS外设X和静态存储器接口的访问多路复用到PS的引�
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>硬件课设</div>
-      <div>http://example.com/2023/04/02/硬件课设/</div>
+      <div>分布式操作系统</div>
+      <div>http://example.com/2023/05/27/分布式操作系统/</div>
     </div>
     <div class="license-meta">
       
@@ -486,13 +702,13 @@ I/O),将来自PS外设X和静态存储器接口的访问多路复用到PS的引�
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月2日</div>
+          <div>2023年5月27日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年6月5日</div>
+          <div>2023年6月7日</div>
         </div>
       
       
@@ -523,9 +739,9 @@ I/O),将来自PS外设X和静态存储器接口的访问多路复用到PS的引�
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/03/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84-%E7%BA%BF%E6%AE%B5%E6%A0%91/" title="树状数组&amp;线段树">
+                      <a href="/2023/06/05/temp/" title="temp">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">树状数组&amp;线段树</span>
+                        <span class="hidden-mobile">temp</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -533,8 +749,8 @@ I/O),将来自PS外设X和静态存储器接口的访问多路复用到PS的引�
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/01/Linux%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6/" title="Linux进程调度">
-                        <span class="hidden-mobile">Linux进程调度</span>
+                      <a href="/2023/05/17/%E9%AB%98%E6%95%B0%E4%B8%8B%E4%B8%B2%E8%AE%B2/" title="高数下串讲">
+                        <span class="hidden-mobile">高数下串讲</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
