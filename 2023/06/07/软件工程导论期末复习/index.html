@@ -16,21 +16,21 @@
   <meta name="author" content="Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="OLED I2C协议 PS端的两个GPIO引脚控制输出。 SCL:时钟信号；SDA：data 传输数据   image-20230605181320275  OLED通过两个GOIO连接SCL和SDA引脚 在SDK中：  先设置GPIO的输出方向，同时设置使能让他们能够工作（参考下面图片这个东西写的）  在网上找到了OLED的资料，没有更改东西  测量空气质量(PM2.5">
+    <meta name="description" content="软件工程导论期末复习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="temp">
-<meta property="og:url" content="http://example.com/2023/06/05/temp/index.html">
+<meta property="og:title" content="软件工程导论">
+<meta property="og:url" content="http://example.com/2023/06/07/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Chen&#39;s Blog">
-<meta property="og:description" content="OLED I2C协议 PS端的两个GPIO引脚控制输出。 SCL:时钟信号；SDA：data 传输数据   image-20230605181320275  OLED通过两个GOIO连接SCL和SDA引脚 在SDK中：  先设置GPIO的输出方向，同时设置使能让他们能够工作（参考下面图片这个东西写的）  在网上找到了OLED的资料，没有更改东西  测量空气质量(PM2.5">
+<meta property="og:description" content="软件工程导论期末复习">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-06-05T10:42:26.000Z">
-<meta property="article:modified_time" content="2023-06-05T12:23:48.824Z">
+<meta property="article:published_time" content="2023-06-07T09:16:56.000Z">
+<meta property="article:modified_time" content="2023-06-07T09:19:11.424Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>temp - Chen&#39;s Blog</title>
+  <title>软件工程导论 - Chen&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -184,7 +184,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="temp"></span>
+            <span id="subtitle" data-typed-text="软件工程导论"></span>
           
         </div>
 
@@ -200,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-05 18:42" pubdate>
-          2023年6月5日 晚上
+        <time datetime="2023-06-07 17:16" pubdate>
+          2023年6月7日 下午
         </time>
       </span>
     
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          382 字
+          10 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          4 分钟
+          1 分钟
         
       </span>
     
@@ -261,12 +261,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">temp</h1>
+            <h1 style="display: none">软件工程导论</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年6月5日 晚上
+                    本文最后更新于：2023年6月7日 下午
                   
                 
               </p>
@@ -274,31 +274,7 @@
             
               <div class="markdown-body">
                 
-                <p>OLED I2C协议 PS端的两个GPIO引脚控制输出。</p>
-<p>SCL:时钟信号；SDA：data 传输数据</p>
-<figure>
-<img
-src="C:/Users/Chen/AppData/Roaming/Typora/typora-user-images/image-20230605181320275.png" srcset="/img/loading.gif" lazyload
-alt="image-20230605181320275" />
-<figcaption aria-hidden="true">image-20230605181320275</figcaption>
-</figure>
-<p>OLED通过两个GOIO连接SCL和SDA引脚</p>
-<p>在SDK中：</p>
-<ol type="1">
-<li>先设置GPIO的输出方向，同时设置使能让他们能够工作（参考下面图片这个东西写的）
-<img
-src="C:/Users/Chen/AppData/Roaming/Typora/typora-user-images/image-20230605181705293.png" srcset="/img/loading.gif" lazyload
-alt="image-20230605181705293" /></li>
-<li>在网上找到了OLED的资料，没有更改东西</li>
-</ol>
-<p>测量空气质量(PM2.5,PM1.0,PM10):</p>
-<p>UART协议(通)</p>
-<p>从下往上第一个是电源线,第二个是地线,第四个是接收数据(RX)的线,第五个是发送数据(TX)的线,别的线没有用.</p>
-<p>在BLOCK
-DESIGN中:通过系统自带的<strong>IP核</strong>连接的,IP核通过AXI总线和PS端连接.有两个引脚:TX,RX</p>
-<p>IP核的TX和PM器件的RX连接,IP核的RX和PM器件的TX相连</p>
-<p>PM是怎么读数据的:通过SDK中UART IP核自带的函数读取</p>
-<p>读取之后在OLED中显示出来</p>
+                <p>软件工程导论期末复习 <span id="more"></span></p>
 
                 
               </div>
@@ -306,6 +282,27 @@ DESIGN中:通过系统自带的<strong>IP核</strong>连接的,IP核通过AXI总
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AF%BE%E5%86%85/" class="category-chain-item">课内</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -316,8 +313,8 @@ DESIGN中:通过系统自带的<strong>IP核</strong>连接的,IP核通过AXI总
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>temp</div>
-      <div>http://example.com/2023/06/05/temp/</div>
+      <div>软件工程导论</div>
+      <div>http://example.com/2023/06/07/软件工程导论期末复习/</div>
     </div>
     <div class="license-meta">
       
@@ -329,13 +326,13 @@ DESIGN中:通过系统自带的<strong>IP核</strong>连接的,IP核通过AXI总
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年6月5日</div>
+          <div>2023年6月7日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年6月5日</div>
+          <div>2023年6月7日</div>
         </div>
       
       
