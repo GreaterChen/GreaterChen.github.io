@@ -16,21 +16,25 @@
   <meta name="author" content="Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="快排、归并排序">
+    <meta name="description" content="数据结构复习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="排序算法">
-<meta property="og:url" content="http://example.com/2023/01/14/%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:title" content="数据结构">
+<meta property="og:url" content="http://example.com/2023/06/22/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/index.html">
 <meta property="og:site_name" content="Chen&#39;s Blog">
-<meta property="og:description" content="快排、归并排序">
+<meta property="og:description" content="数据结构复习">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-01-14T04:25:45.000Z">
-<meta property="article:modified_time" content="2023-06-24T14:06:51.360Z">
+<meta property="og:image" content="c:\Users\chenl\AppData\Roaming\Typora\typora-user-images\image-20230622205421669.png">
+<meta property="og:image" content="c:\Users\chenl\AppData\Roaming\Typora\typora-user-images\image-20230622205745004.png">
+<meta property="og:image" content="c:\Users\chenl\AppData\Roaming\Typora\typora-user-images\image-20230622221713048.png">
+<meta property="article:published_time" content="2023-06-22T10:40:31.000Z">
+<meta property="article:modified_time" content="2023-06-24T14:04:45.210Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="c:\Users\chenl\AppData\Roaming\Typora\typora-user-images\image-20230622205421669.png">
   
   
   
-  <title>排序算法 - Chen&#39;s Blog</title>
+  <title>数据结构 - Chen&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -184,7 +188,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="排序算法"></span>
+            <span id="subtitle" data-typed-text="数据结构"></span>
           
         </div>
 
@@ -200,8 +204,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-01-14 12:25" pubdate>
-          2023年1月14日 中午
+        <time datetime="2023-06-22 18:40" pubdate>
+          2023年6月22日 晚上
         </time>
       </span>
     
@@ -212,7 +216,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          1.4k 字
         
       </span>
     
@@ -223,7 +227,7 @@
         
         
         
-          10 分钟
+          12 分钟
         
       </span>
     
@@ -261,7 +265,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">排序算法</h1>
+            <h1 style="display: none">数据结构</h1>
             
               <p class="note note-info">
                 
@@ -274,25 +278,89 @@
             
               <div class="markdown-body">
                 
-                <p>快排、归并排序 <span id="more"></span></p>
-<h3 id="快排">快排</h3>
-<p>维护左右两个指针，左边指针向右走直到遇到大于x的值停下，右边指针向左走直到遇到小于x的值停下，随后两个指针指向的值进行交换。</p>
-<p>快排是不稳定的。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">quick_sort</span><span class="hljs-params">(<span class="hljs-type">int</span> q[], <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span></span>&#123;<br>	<span class="hljs-keyword">if</span>(l&gt;=r) <span class="hljs-keyword">return</span>;<br>	<span class="hljs-type">int</span> x=q[l],i=l<span class="hljs-number">-1</span>,j=r+<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">while</span>(i&lt;j)&#123;<br>		<span class="hljs-keyword">do</span> i++; <span class="hljs-keyword">while</span>(q[i]&lt;x);<br>		<span class="hljs-keyword">do</span> j--; <span class="hljs-keyword">while</span>(q[j]&gt;x);<br>		<span class="hljs-keyword">if</span>(i&lt;j) <span class="hljs-built_in">swap</span>(q[i],q[j]);<br>	&#125;<br>	<span class="hljs-built_in">quick_sort</span>(q,l,j);<br>	<span class="hljs-built_in">quick_sort</span>(q,j+<span class="hljs-number">1</span>,r);<br>&#125;<br></code></pre></td></tr></table></figure>
-<h3
-id="xxxxxxxxxx26-1include-2using-namespace-std34int-a3003005int-main67-int-cnt-18-int-reverse-09-forint-i-1i50i10-ifreverse11-forint-j1jij-12-aji---j-1-cnt13-coutj-i-j1endl14-15-reverse-016-else17-forint-j1jij-18-ai---j-1j-cnt19-couti-j1-jendl20-21-reverse-122-23-24-couta202025-return-026c">xxxxxxxxxx26 1#include
-<iostream>2using namespace std;3​4int a[300][300];5int main()6{7    int
-cnt = 1;8    int reverse = 0;9    for(int i = 1;i&lt;=50;i++){10      
- if(reverse){11            for(int j=1;j&lt;=i;j++) {12              
- a[j][i - j + 1] = cnt++;13                cout&lt;&lt;j&lt;&lt;"
-"&lt;&lt;i-j+1&lt;&lt;endl;14           }15            reverse = 0;16  
-    }else{17            for(int j=1;j&lt;=i;j++) {18                a[i
-- j + 1][j] = cnt++;19                cout&lt;&lt;i-j+1&lt;&lt;"
-"&lt;&lt;j&lt;&lt;endl;20           }21            reverse = 1;22      
-}23   }24    cout&lt;&lt;a[20][20];25    return 0;26}c++</h3>
-<p>先对两侧的子序列排序，再对两个有序子序列进行合并，合并思路为双指针。</p>
-<p>归并排序是稳定的。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">merge_sort</span><span class="hljs-params">(<span class="hljs-type">int</span> q[],<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r)</span></span>&#123;<br>	<span class="hljs-keyword">if</span>(l&gt;=r) <span class="hljs-keyword">return</span>;<br>	<span class="hljs-type">int</span> mid = l + r &gt;&gt; <span class="hljs-number">1</span>;<br>	<span class="hljs-built_in">merge_sort</span>(q,l,mid);<br>	<span class="hljs-built_in">merge_sort</span>(q,mid+<span class="hljs-number">1</span>,r);<br>	<span class="hljs-type">int</span> k=<span class="hljs-number">0</span>,i=l,j=mid+<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">while</span>(i&lt;=mid &amp;&amp; j&lt;=r)&#123;<br>		<span class="hljs-keyword">if</span>(q[i]&lt;q[j]) temp[k++] = q[i++];<br>		<span class="hljs-keyword">else</span> temp[k++] = q[j++];<br>	&#125;<br>	<span class="hljs-keyword">while</span>(i&lt;=mid) temp[k++] = q[i++];<br>	<span class="hljs-keyword">while</span>(j&lt;=r) temp[k++] = q[j++];<br>	<span class="hljs-keyword">for</span>(i=l,j=<span class="hljs-number">0</span>;i&lt;=r;i++,j++)&#123;<br>		q[i] = temp[j];<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <p>数据结构复习</p>
+<span id="more"></span>
+<ol type="1">
+<li><p>数据的逻辑结构：线性结构（栈、队列）、非线性结构（树、图）</p></li>
+<li><p>数据的存储结构：顺序存储、链式存储、索引存储、散列存储</p></li>
+<li><p>满二叉树：就是都满了</p>
+<p>完全二叉树：除了最后一层都满，最后一层从左到右排列</p>
+<p>二叉排序树：左子树的值小于根节点的值，右子树的值大于根节点的值</p>
+<p>平衡二叉树：任意节点左右子树的深度差不大于1</p></li>
+<li><p>二叉树遍历</p>
+<ol type="1">
+<li>先序遍历：中左右</li>
+<li>中序遍历：左中右</li>
+<li>后序遍历：左右中</li>
+</ol></li>
+<li><p>树的遍历</p>
+<ol type="1">
+<li>先根遍历：先访问根节点，再依次遍历每棵子树</li>
+<li>后根遍历：先依次遍历每棵子树，再访问根节点</li>
+</ol></li>
+<li><p>在无向图中若任意两个顶点是联通的则称为连通图；在有向图中若任意两个顶点双向可达则称为强连接图</p></li>
+<li><p>最小生成树</p>
+<ol type="1">
+<li><p>Prim算法<span class="math inline">\(O(n^2)\)</span></p>
+<p>初始时从图中任取一个点加入T集合，之后每次选择一个与集合T距离最近的顶点加入</p>
+<p><img src="C:\Users\chenl\AppData\Roaming\Typora\typora-user-images\image-20230622205421669.png" srcset="/img/loading.gif" lazyload alt="image-20230622205421669" style="zoom:67%;" /></p></li>
+<li><p>Kruskal算法<span class="math inline">\(O(n^2)\)</span></p>
+<p>将边按权值排序，不断选择权值最小的边，使用并查集判断如果边的两个端点ab已经在一类中了则跳过，否则加入</p>
+<p><img src="C:\Users\chenl\AppData\Roaming\Typora\typora-user-images\image-20230622205745004.png" srcset="/img/loading.gif" lazyload alt="image-20230622205745004" style="zoom: 67%;" /></p></li>
+</ol></li>
+<li><p>最短路径</p>
+<ol type="1">
+<li><p>Dijkstra单源最短路<span class="math inline">\(O(n^2)\)</span></p>
+<p>初始时把源点放入S，寻找距离原点最近的顶点并入，然后更新原点到所有点的距离，重复上述过程直到到达目标点</p></li>
+<li><p>Floyd多源最短路<span class="math inline">\(O(n^3)\)</span></p>
+<p>基于动态规划，初始时对于任意两个点，如果他们之间存在边则边权值作为最短路径，若不存在则置无穷。之后每次尝试加入一个顶点k，看看每两个点之间增加k后得到的距离是否更短，若更短则进行更新。</p></li>
+</ol></li>
+<li><p>二叉排序树的删除：</p>
+<ol type="1">
+<li>叶子节点直接删</li>
+<li>只有一个子树直接替代</li>
+<li>左右子树都有，找右子树中序遍历第一个结点替代（即右子树中的最小值）</li>
+</ol></li>
+<li><p>平衡二叉树（AVL）：在二叉排序树基础上规定任意顶点左右子树高度差不超过1.插删如果破坏了平衡则对最近不平衡结点进行旋转</p></li>
+<li><p>排序算法</p>
+<ol type="1">
+<li>直接插入排序<span
+class="math inline">\(O(n^2)\)</span>：遍历数组，对于某个值，遍历他前面的有序序列找到插入的地方并插入</li>
+<li>折半插入排序<span
+class="math inline">\(O(n^2)\)</span>：在上述基础上用二分法找插入位置<span
+class="math inline">\(O(n(logn+n))\)</span></li>
+<li>冒泡排序<span
+class="math inline">\(O(n^2)\)</span>：遍历两边，若逆序则调整顺序</li>
+<li>快排<span class="math inline">\(O(nlogn)\)</span>：最坏<span
+class="math inline">\(O(n^2)\)</span>，最好<span
+class="math inline">\(O(nlogn)\)</span>，是平均性能最优的算法</li>
+<li>选择排序<span
+class="math inline">\(O(n^2)\)</span>：每次在后面序列中选一个最大的和前面的交换</li>
+<li>堆排序<span class="math inline">\(O(nlogn)\)</span></li>
+<li>归并排序<span
+class="math inline">\(O(nlogn)\)</span>：将序列不断二分直到只有一个或两个元素，然后进行排序，然后再原路合并回去，合并时采用双指针遍历一遍存入新数组即可，需要O(n)的空间</li>
+<li>基数排序$O(d(n+r))：d代表分配回收的趟数，n代表长度，r代表基数</li>
+</ol></li>
+</ol>
+<p><img src="C:\Users\chenl\AppData\Roaming\Typora\typora-user-images\image-20230622221713048.png" srcset="/img/loading.gif" lazyload alt="image-20230622221713048" style="zoom:67%;" /></p>
+<ol start="12" type="1">
+<li><p>外部排序</p>
+<p>主要思路为减少访存次数.常用归并排序.将外存上的文件划分为若干长度为l的子文件,依次读入内存使用内部排序算法进行排序并写回外存.随后逐渐进行归并操作.</p></li>
+<li><p>查找算法</p>
+<ol type="1">
+<li><p>顺序查找</p></li>
+<li><p>二分查找</p></li>
+<li><p>插值查找：<span class="math inline">\(mid = low + \frac{(key -
+a[low])*(high-low)}{a[high]-a[low]}\)</span>,时间复杂度O(lglgn)</p></li>
+<li><p>二叉排序树</p></li>
+<li><p>平衡二叉树</p></li>
+<li><p>红黑树：平衡二叉树调整太多了，红黑树稍微放宽了限制</p></li>
+<li><p>B树:除根节点的非叶节至少有m/2上取整棵子树，最多有m棵子树</p></li>
+<li><p>B+树：叶节点包含了全部关键字，非叶节点的关键字也会出现在叶结点中，叶子节点按大小顺序链接起来</p>
+<p>B+树有两种查找运算：一种从最小关键词开始查找，一种从根节点开始查找，查找到最底层cai'jie'shu</p></li>
+<li><p>散列表</p></li>
+</ol></li>
+</ol>
 
                 
               </div>
@@ -311,7 +379,7 @@ cnt = 1;8    int reverse = 0;9    for(int i = 1;i&lt;=50;i++){10      
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  <a href="/categories/%E8%AF%BE%E5%86%85/" class="category-chain-item">课内</a>
   
   
 
@@ -331,8 +399,8 @@ cnt = 1;8    int reverse = 0;9    for(int i = 1;i&lt;=50;i++){10      
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>排序算法</div>
-      <div>http://example.com/2023/01/14/排序/</div>
+      <div>数据结构</div>
+      <div>http://example.com/2023/06/22/数据结构/</div>
     </div>
     <div class="license-meta">
       
@@ -344,7 +412,7 @@ cnt = 1;8    int reverse = 0;9    for(int i = 1;i&lt;=50;i++){10      
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年1月14日</div>
+          <div>2023年6月22日</div>
         </div>
       
       
@@ -381,9 +449,9 @@ cnt = 1;8    int reverse = 0;9    for(int i = 1;i&lt;=50;i++){10      
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/01/15/%E4%BA%8C%E5%88%86/" title="二分算法">
+                      <a href="/2023/06/22/%E5%A4%8F%E4%BB%A4%E8%90%A5%E9%9D%A2%E8%AF%95/" title="夏令营面试">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">二分算法</span>
+                        <span class="hidden-mobile">夏令营面试</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -391,8 +459,8 @@ cnt = 1;8    int reverse = 0;9    for(int i = 1;i&lt;=50;i++){10      
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/14/%E6%9C%8B%E8%BE%88%E7%AD%94%E7%96%91/" title="排序算法">
-                        <span class="hidden-mobile">排序算法</span>
+                      <a href="/2023/06/07/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" title="软件工程导论">
+                        <span class="hidden-mobile">软件工程导论</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

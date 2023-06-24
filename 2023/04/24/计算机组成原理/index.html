@@ -16,21 +16,24 @@
   <meta name="author" content="Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="快排、归并排序">
+    <meta name="description" content="计组复习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="排序算法">
-<meta property="og:url" content="http://example.com/2023/01/14/%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:title" content="计算机组成原理">
+<meta property="og:url" content="http://example.com/2023/04/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/index.html">
 <meta property="og:site_name" content="Chen&#39;s Blog">
-<meta property="og:description" content="快排、归并排序">
+<meta property="og:description" content="计组复习">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-01-14T04:25:45.000Z">
-<meta property="article:modified_time" content="2023-06-24T14:06:51.360Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230625010547.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230625010509.png">
+<meta property="article:published_time" content="2023-04-24T08:38:31.000Z">
+<meta property="article:modified_time" content="2023-06-24T17:05:54.103Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230625010547.png">
   
   
   
-  <title>排序算法 - Chen&#39;s Blog</title>
+  <title>计算机组成原理 - Chen&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -184,7 +187,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="排序算法"></span>
+            <span id="subtitle" data-typed-text="计算机组成原理"></span>
           
         </div>
 
@@ -200,8 +203,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-01-14 12:25" pubdate>
-          2023年1月14日 中午
+        <time datetime="2023-04-24 16:38" pubdate>
+          2023年4月24日 下午
         </time>
       </span>
     
@@ -212,7 +215,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          2.2k 字
         
       </span>
     
@@ -223,7 +226,7 @@
         
         
         
-          10 分钟
+          19 分钟
         
       </span>
     
@@ -261,12 +264,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">排序算法</h1>
+            <h1 style="display: none">计算机组成原理</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年6月24日 晚上
+                    本文最后更新于：2023年6月25日 凌晨
                   
                 
               </p>
@@ -274,25 +277,125 @@
             
               <div class="markdown-body">
                 
-                <p>快排、归并排序 <span id="more"></span></p>
-<h3 id="快排">快排</h3>
-<p>维护左右两个指针，左边指针向右走直到遇到大于x的值停下，右边指针向左走直到遇到小于x的值停下，随后两个指针指向的值进行交换。</p>
-<p>快排是不稳定的。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">quick_sort</span><span class="hljs-params">(<span class="hljs-type">int</span> q[], <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span></span>&#123;<br>	<span class="hljs-keyword">if</span>(l&gt;=r) <span class="hljs-keyword">return</span>;<br>	<span class="hljs-type">int</span> x=q[l],i=l<span class="hljs-number">-1</span>,j=r+<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">while</span>(i&lt;j)&#123;<br>		<span class="hljs-keyword">do</span> i++; <span class="hljs-keyword">while</span>(q[i]&lt;x);<br>		<span class="hljs-keyword">do</span> j--; <span class="hljs-keyword">while</span>(q[j]&gt;x);<br>		<span class="hljs-keyword">if</span>(i&lt;j) <span class="hljs-built_in">swap</span>(q[i],q[j]);<br>	&#125;<br>	<span class="hljs-built_in">quick_sort</span>(q,l,j);<br>	<span class="hljs-built_in">quick_sort</span>(q,j+<span class="hljs-number">1</span>,r);<br>&#125;<br></code></pre></td></tr></table></figure>
-<h3
-id="xxxxxxxxxx26-1include-2using-namespace-std34int-a3003005int-main67-int-cnt-18-int-reverse-09-forint-i-1i50i10-ifreverse11-forint-j1jij-12-aji---j-1-cnt13-coutj-i-j1endl14-15-reverse-016-else17-forint-j1jij-18-ai---j-1j-cnt19-couti-j1-jendl20-21-reverse-122-23-24-couta202025-return-026c">xxxxxxxxxx26 1#include
-<iostream>2using namespace std;3​4int a[300][300];5int main()6{7    int
-cnt = 1;8    int reverse = 0;9    for(int i = 1;i&lt;=50;i++){10      
- if(reverse){11            for(int j=1;j&lt;=i;j++) {12              
- a[j][i - j + 1] = cnt++;13                cout&lt;&lt;j&lt;&lt;"
-"&lt;&lt;i-j+1&lt;&lt;endl;14           }15            reverse = 0;16  
-    }else{17            for(int j=1;j&lt;=i;j++) {18                a[i
-- j + 1][j] = cnt++;19                cout&lt;&lt;i-j+1&lt;&lt;"
-"&lt;&lt;j&lt;&lt;endl;20           }21            reverse = 1;22      
-}23   }24    cout&lt;&lt;a[20][20];25    return 0;26}c++</h3>
-<p>先对两侧的子序列排序，再对两个有序子序列进行合并，合并思路为双指针。</p>
-<p>归并排序是稳定的。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">merge_sort</span><span class="hljs-params">(<span class="hljs-type">int</span> q[],<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r)</span></span>&#123;<br>	<span class="hljs-keyword">if</span>(l&gt;=r) <span class="hljs-keyword">return</span>;<br>	<span class="hljs-type">int</span> mid = l + r &gt;&gt; <span class="hljs-number">1</span>;<br>	<span class="hljs-built_in">merge_sort</span>(q,l,mid);<br>	<span class="hljs-built_in">merge_sort</span>(q,mid+<span class="hljs-number">1</span>,r);<br>	<span class="hljs-type">int</span> k=<span class="hljs-number">0</span>,i=l,j=mid+<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">while</span>(i&lt;=mid &amp;&amp; j&lt;=r)&#123;<br>		<span class="hljs-keyword">if</span>(q[i]&lt;q[j]) temp[k++] = q[i++];<br>		<span class="hljs-keyword">else</span> temp[k++] = q[j++];<br>	&#125;<br>	<span class="hljs-keyword">while</span>(i&lt;=mid) temp[k++] = q[i++];<br>	<span class="hljs-keyword">while</span>(j&lt;=r) temp[k++] = q[j++];<br>	<span class="hljs-keyword">for</span>(i=l,j=<span class="hljs-number">0</span>;i&lt;=r;i++,j++)&#123;<br>		q[i] = temp[j];<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <p>计组复习 <span id="more"></span></p>
+<h3 id="计算机系统概述">计算机系统概述</h3>
+<ol type="1">
+<li>冯诺依曼提出计算机硬件系统由<strong>运算器、存储器、寄存器、输入设备、输出设备</strong>组成，指令和数据以同等地位存储，都以二进制表示，以<strong>运算器</strong>为核心</li>
+<li>冯诺依曼机基本工作方式是控制流驱动，提出的“存储程序”的基本思想是：将事先编制好的程序和原始数据送入主存后才能执行，一旦程序被启动执行，就无须操作人员的干预，计算机会自动逐条执行指令，直至程序执行结束。</li>
+</ol>
+<h3 id="数据的表示和计算">数据的表示和计算</h3>
+<ol type="1">
+<li><p><strong>大端方式</strong>按从最高有效字节到最低有效字节的顺序存储数据，即最高有效字节存放在前面；<strong>小端方式</strong>按从最低有效字节到最高有效字节的顺序存储数据，即最低有效字节存放在前面。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230625010547.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p></li>
+<li><p>IEEE754的短浮点数由1位符号位、8位阶码、23位尾数组成，其中阶码采用移码，偏移量为127，尾数采用原码表示</p>
+<p>真值表示为<span
+class="math inline">\((-1)^S*1.M*2^{(E-127)}\)</span></p></li>
+</ol>
+<p>### 存储系统</p>
+<ol type="1">
+<li><p>CPU可以与Cache和主存交换信息。<strong>主存和Cache</strong>之间的数据调动是由硬件自动完成的，<strong>主存和辅存</strong>之间的数据调动是由硬件和操作系统共同完成的(虚拟存储技术)。</p></li>
+<li><p>静态随机存储器（SRAM）：速度快、不需要刷新、用于高速缓存</p>
+<p>动态随机存储器（DRAM）：速度慢，需要刷新，用于内存</p></li>
+<li><p><strong>高位交叉编址</strong>中高位地址表示体号，低位地址表示体内地址。每次存完一个存储体后才存下一个，并行性差</p>
+<p>低位交叉编址中低位地址表示体号，每次存某一个存储体，下次就存下一个存储体，并行性好</p></li>
+<li><p>主存容量的扩展：</p>
+<ol type="1">
+<li><strong>位扩展</strong>改变字长，将多个存储芯片的地址端、片选端、读写控制端相应并联，数据端分别引出。</li>
+<li>字扩展增加存储体字的数量，不改变字长，通过片选信号进行选择。</li>
+</ol></li>
+<li><p>Cache和主存的映射</p>
+<ol type="1">
+<li><p>直接映射</p>
+<p>Cache行号=主存块号 mod Cache总行数</p>
+<p>即主存的第<span
+class="math inline">\(1、2^{c}+1、2^{c+1}+1\)</span>块均映射到第0行。当产生冲突时无条件进行置换</p>
+<p><img src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230625010509.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" /></p></li>
+<li><p>全相联映射</p>
+<p>主存中的每一块可以装入Cache的任意位置</p></li>
+<li><p>组相联映射</p>
+<p>组间直接映射，组内全相联映射</p></li>
+</ol></li>
+<li><p>Cache写策略</p>
+<ol type="1">
+<li>写命中
+<ol type="1">
+<li>全写法：把数据同时写入Cache和主存</li>
+<li>回写法：只把数据写入Cache同时标记脏页，当块被换出时若为脏页才写回主存</li>
+</ol></li>
+<li>写不命中
+<ol type="1">
+<li>写分配法：加载主存的块到Cache中，然后更新Cache块，常与回写法搭配</li>
+<li>非写分配法：只写入主存，不进行调块，常与全写法搭配</li>
+</ol></li>
+</ol></li>
+</ol>
+<h3 id="指令系统">指令系统</h3>
+<ol type="1">
+<li><p>数据寻址方式</p>
+<ol type="1">
+<li><p>隐含寻址：在指令中隐含特定操作数的地址</p></li>
+<li><p>立即数寻址：本身就是操作数</p></li>
+<li><p>直接寻址：指令中的地址是主存中真实的地址</p></li>
+<li><p>间接寻址：指令中的地址是数据所在地址的地址，在此基础上可以进行多级寻址</p></li>
+<li><p>寄存器寻址：给出操作数所在的寄存器编号</p></li>
+<li><p>寄存器间接寻址：指向的寄存器给出操作数所在的地址</p></li>
+<li><p>相对寻址：在PC基础上添加一个偏移量</p></li>
+<li><p>基址寻址：基址寄存器BX加上一个偏移量</p>
+<p>基址寄存器面向操作系统，其内容由操作系统或管理程序确定</p></li>
+<li><p>变址寻址：变址寄存器IX加上一个偏移量</p>
+<p>变址寄存器面向用户，可由用户改变</p></li>
+<li><p>堆栈寻址：通过堆栈指针SP寻址</p></li>
+</ol></li>
+<li><p>复杂指令系统：CISC</p>
+<p>精简指令系统：RISC</p></li>
+</ol>
+<h3 id="中央处理器">中央处理器</h3>
+<ol type="1">
+<li><p>CPU全周期：取指、译码、执行、访存、写回</p></li>
+<li><p>异常和中断</p>
+<ol type="1">
+<li>异常：故障（除0、缺页等）、自陷（单步调试）、终止（硬件故障）</li>
+<li>中断：可屏蔽中断、不可屏蔽中断</li>
+<li>响应过程
+<ol type="1">
+<li>关中断：防止在保存断点和程序状态时被打断</li>
+<li>保存断点和程序状态</li>
+<li>识别异常和中断并转到相应的处理程序</li>
+</ol></li>
+</ol></li>
+<li><p>数据旁路：在流水线设计中不等待ALU写入寄存器同时下一个读寄存器，而是直接把结果输出到ALU的输入</p></li>
+</ol>
+<h3 id="总线">总线</h3>
+<ol type="1">
+<li>特点
+<ol type="1">
+<li>分时：同一时刻只允许有一个部件向总线发送消息</li>
+<li>共享：总线上可以挂接多个部件，各个部件之间互相交换的信息可以通过这个线路进行分时共享，多个部件可以同时从总线上接收相同的消息</li>
+</ol></li>
+</ol>
+<h3 id="问答题">问答题</h3>
+<ol type="1">
+<li><p>指令和数据均存放在内存中，计算机如何区分他们是指令还是数据</p>
+<p>从时间上讲，取指令发生在取指阶段，取数据发生在执行阶段。从空间上讲，从内存读出的指令流流向控制器（指令寄存器），从内存读出的数据流流向运算器（通用寄存器）。</p></li>
+<li><p>组合逻辑电路和时序逻辑电路有什么区别？
+组合逻辑电路是具有一组输出和一组输入的非记忆性逻辑电路，它的基本特点是任何时刻的输出信号状态仅取决于该时刻各个输入信号状态的组合，而与电路在输入信号作用前的状态无关。组合电路不含存储信号的记忆单元，输出与输入之间无反馈通路，信号是单向传输的。
+时序逻辑电路中任意时刻的输出信号不仅和当时的输入信号有关，而且与电路原来的状态有关，这是时序逻辑电路在逻辑功能上的特点。因而时序逻辑电路必然包含存储记忆单元。</p>
+<p>此外，组合逻辑电路没有统一的时钟控制，而时序逻辑电路则必须在时钟节拍下工作。</p></li>
+<li><p>引入总线结构有什么好处？ ①简化了系统结构，便于系统设计制造。
+②大大减少了连线数目，便于布线，减小体积，提高系统的可靠性。
+③便于接口设计，所有与总线连接的设备均采用类似的接口。
+④便于系统的扩充、更新与灵活配置，易于实现系统的模块化。
+⑤便于设备的软件设计，所有接口的软件对不同的接口地址进行操作。
+⑥便于故障诊断和维修，同时也能降低成本。</p></li>
+<li><p>计算机系统的五层层次结构</p>
+<p>微程序机器层、传统机器语言层、操作系统层、汇编语言层、高级语言层</p>
+<p>其中后三层称为虚拟机</p></li>
+<li><p>机器字长、指令字长、存储字长</p>
+<p>机器字长：计算机能直接处理的二进制数据位数，为内部寄存器字长等长</p>
+<p>指令字长：一条指令的二进制位数</p>
+<p>存储字长：一个存储单元所能存储的二进制的位数</p>
+<p>三者都必须是字节的整数倍，彼此之间没有直接的制约关系</p></li>
+</ol>
 
                 
               </div>
@@ -311,7 +414,7 @@ cnt = 1;8    int reverse = 0;9    for(int i = 1;i&lt;=50;i++){10      
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  <a href="/categories/%E4%BF%9D%E7%A0%94/" class="category-chain-item">保研</a>
   
   
 
@@ -331,8 +434,8 @@ cnt = 1;8    int reverse = 0;9    for(int i = 1;i&lt;=50;i++){10      
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>排序算法</div>
-      <div>http://example.com/2023/01/14/排序/</div>
+      <div>计算机组成原理</div>
+      <div>http://example.com/2023/04/24/计算机组成原理/</div>
     </div>
     <div class="license-meta">
       
@@ -344,13 +447,13 @@ cnt = 1;8    int reverse = 0;9    for(int i = 1;i&lt;=50;i++){10      
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年1月14日</div>
+          <div>2023年4月24日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年6月24日</div>
+          <div>2023年6月25日</div>
         </div>
       
       
@@ -381,9 +484,9 @@ cnt = 1;8    int reverse = 0;9    for(int i = 1;i&lt;=50;i++){10      
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/01/15/%E4%BA%8C%E5%88%86/" title="二分算法">
+                      <a href="/2023/04/24/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" title="编译原理">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">二分算法</span>
+                        <span class="hidden-mobile">编译原理</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -391,8 +494,8 @@ cnt = 1;8    int reverse = 0;9    for(int i = 1;i&lt;=50;i++){10      
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/14/%E6%9C%8B%E8%BE%88%E7%AD%94%E7%96%91/" title="排序算法">
-                        <span class="hidden-mobile">排序算法</span>
+                      <a href="/2023/04/12/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" title="线性代数">
+                        <span class="hidden-mobile">线性代数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
