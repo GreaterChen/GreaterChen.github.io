@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230625134312.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-1da2f1a93c888dfe7c9002de56cff02b_1440w.webp">
 <meta property="article:published_time" content="2023-06-24T03:40:31.000Z">
-<meta property="article:modified_time" content="2023-06-25T12:00:49.032Z">
+<meta property="article:modified_time" content="2023-06-26T11:04:50.200Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230625131008.png">
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4.5k 字
+          6.4k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          38 分钟
+          53 分钟
         
       </span>
     
@@ -273,7 +273,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年6月25日 晚上
+                    本文最后更新于：2023年6月26日 晚上
                   
                 
               </p>
@@ -374,7 +374,7 @@ a_{i,j}^2)^{\frac{1}{2}}\)</span>,矩阵元素绝对值平方和再开方</li>
 <li><p><strong>合同矩阵</strong></p>
 <p>若存在可逆矩阵C，使得<span
 class="math inline">\(C^TAC=B\)</span>则称矩阵A与B合同</p></li>
-<li><p><strong>正定矩阵</strong></p>
+<li><p><strong>正交矩阵</strong></p>
 <p>满足<span class="math inline">\(A^T=A^{-1}\)</span>的矩阵</p>
 <p>行向量均正交的矩阵</p></li>
 </ol>
@@ -387,6 +387,14 @@ class="math inline">\(C^TAC=B\)</span>则称矩阵A与B合同</p></li>
 <li><p><strong>条件概率</strong></p>
 <p>在已知A发送的条件下，事件B发生的概率为条件概率，有<span
 class="math inline">\(P(B|A)=\frac{P(AB)}{P(A)}\)</span></p></li>
+<li><p><strong>全概率公式</strong></p>
+<p>把<span class="math inline">\(B_i\)</span>看作是事件<span
+class="math inline">\(A\)</span>发生的一种“可能途径”，<span
+class="math inline">\(P ( A ∣ B 1 )\)</span> 则是通过这种途径得到<span
+class="math inline">\(A\)</span>的可能性，而途径的选择是随机的，因此可以把<span
+class="math inline">\(P(A)\)</span>看作不同途径概率的和。</p>
+<p><span class="math inline">\(P(A) =\sum_{i=1}^n
+P(B_i)P(A/B_i)\)</span></p></li>
 <li><p><strong>贝叶斯公式</strong></p>
 <p><span
 class="math inline">\(P(A_j|B)=\frac{P(A_j)P(B|A_j)}{\sum_{i-1}^{n}P(A_i)P(B|A_i)}\)</span></p>
@@ -407,8 +415,8 @@ class="math inline">\(P\{X=k\}=\frac{\lambda^k}{k!}e^{-\lambda}\)</span>,称X服
 class="math inline">\(\lambda\)</span>的泊松分布</p>
 <p>为了预测在固定时间间隔内发生<strong>指定数量</strong>事件的概率,常用于对小概率事件进行建模</p>
 <p>例子：1.
-已知某家小杂货店，平均每周售出2个水果罐头。请问该店水果罐头的最佳库存量是多少</p>
-<pre><code class="hljs">      2. 一个月内某条路上出现车祸的概率</code></pre></li>
+已知某家小杂货店，平均每周售出2个水果罐头。请问该店水果罐头的最佳库存量是多少
+2. 一个月内某条路上出现车祸的概率</p></li>
 <li><p><strong>几何分布</strong>：<span
 class="math inline">\(P\{X=k\}=(1-p)^{k-1}p\)</span>,即前k-1次都失败，第k次成功了</p></li>
 <li><p><strong>超几何分布</strong>：<span
@@ -422,6 +430,86 @@ x},x&gt;0\)</span></p></li>
 <li><p><strong>正态分布</strong>：<span
 class="math inline">\(f(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)\)</span></p></li>
 </ol></li>
+<li><p><strong>期望</strong></p>
+<p>对于离散型随机变量，若级数<span
+class="math inline">\(\sum^{\infty}_{i=1}x_ip_i\)</span>绝对收敛，则期望即为该值</p>
+<p>对于连续型随机变量，若对xf(x)dx在负无穷到正无穷的积分绝对收敛，则数学期望为该值</p>
+<p>数学期望称为概率平均值，是描述随机变量平均取值状况特征的指标</p></li>
+<li><p><strong>方差</strong></p>
+<p><span
+class="math inline">\(DX=E[(X-EX)^2]=E(X^2)-(EX)^2\)</span></p></li>
+<li><p><strong>切比雪夫不等式</strong></p>
+<p><span class="math inline">\(P(|X-\mu|\geq
+k)\leq\frac{\sigma^2}{k^2}或
+P(|X-\mu|&lt;k)\geq1-\frac{\sigma^2}{k^2}\)</span></p>
+<p>方差越小，X的值越接近均值，说明方差是刻画随机变量与其期望值偏离程度的指标</p></li>
+<li><p><strong>协方差</strong></p>
+<p>随机变量XY的协方差<span
+class="math inline">\(Cov(X,Y)=E[(X-EX)(Y-EY)]=E(XY)-EXEY\)</span></p></li>
+<li><p><strong>相关系数</strong></p>
+<p><span
+class="math inline">\(\frac{Cov(X,Y)}{\sqrt{DX}\sqrt{DY}}\)</span>,若值为0则不相关</p></li>
+<li><p><strong>大数定理</strong></p>
+<ol type="1">
+<li><p>当样本量足够大时，能用频率近似代替概率；能用样本均值近似代替总体均值。</p></li>
+<li><p>伯努利大数定理：</p>
+<p>从定义概率的角度，<strong>揭示了概率与频率的关系</strong>，当N很大的时候，事件A发生的概率等于A发生的频率。</p>
+<p><span
+class="math inline">\(\lim\limits_{n\to\infty}P\left\{\left|\frac{f_A}{n}-p\right|&lt;\epsilon\right\}=1\)</span></p></li>
+<li><p>切比雪夫大数定理</p>
+<p><strong>揭示了样本均值和真实期望的关系</strong></p>
+<p><span
+class="math inline">\(\lim\limits_{n\to+\infty}P\left\{\left|\frac{1}{n}\sum_{i=1}^{n}X_i-\frac{1}{n}\sum_{i=1}^{n}\mu_i\right|&lt;\xi\right\}=1\)</span></p></li>
+<li><p>辛钦大数定律</p>
+<p><strong>揭示了算术平均值和数学期望的关系</strong></p>
+<p><span
+class="math inline">\(\lim\limits_{n\to\infty}P\left\{\left|\frac{1}{n}\sum_{i=1}^{n}X_i-\frac{1}{n}\sum_{i=1}^{n}E\left(X_{\mathbb{i}}\right)\right|\leq
+\varepsilon\right\}=1\)</span></p></li>
+</ol></li>
+<li><p><strong>中心极限定理</strong></p>
+<p>要求一系列离散随机变量独立同分布且存在均值方差</p>
+<p>样本数量无穷大的时候，<strong>样本均值的分布</strong>呈现<strong>正态分布</strong>，其对原总体的分布不做任何要求，意味着无论总体是什么分布，其抽样样本的均值的频数的分布都随着抽样数的增多而趋于正态分布。</p></li>
+<li><p><strong>事件的独立性</strong></p>
+<p>某一事件发生的概率完全不受到其他事件的影响。 用公式表示就是<span
+class="math inline">\(P(A,B)=P(A)*P(B)\)</span></p></li>
+<li><p><strong>马尔科夫链</strong></p>
+<p>马尔可夫链描述的是随机变量的一个状态序列，在这个状态序列里未来信息只与当前信息有关，而与过去的信息无关。它有两个很重要的假设：</p>
+<ol type="1">
+<li>t+1时刻的状态的概率分布只与t时刻有关</li>
+<li>t到t+1时刻状态转移与t值无关</li>
+</ol></li>
+</ol>
+<h2 id="离散数学">离散数学</h2>
+<ol type="1">
+<li><p>幂集</p>
+<p>集合的全体子集</p></li>
+<li><p>笛卡尔乘积</p>
+<p>用两个集合AB中的元素组成有序对，以A的元素作为第一个分量，B的元素作为第二个分量。这些有序对的集合称为A和B的笛卡尔乘积</p></li>
+<li><p>单射：任给x1,x2属于X,若x1!=x2,则f(x1)!=f(x2)</p></li>
+<li><p>满射：任给y属于Y，存在x属于X使得f(x)=y</p></li>
+<li><p>双射：同时满足单射和满射</p></li>
+<li><p>自反：对任意x，有R(x,x)</p></li>
+<li><p>反自反：对任意x，没有R(x,x)</p></li>
+<li><p>对称：有R(x,y)则有R(y,x)</p></li>
+<li><p>反对称：有R(x,y)则没有R(y,x)</p></li>
+<li><p>传递：有R(x,y)和R(y,z)则有R(x,z)</p></li>
+<li><p>等价关系：R是自反、对称、传递的</p></li>
+<li><p>偏序关系：R是自反、反对称、传递的</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230626185200.png" srcset="/img/loading.gif" lazyload /></p>
+<ol type="1">
+<li>最大元：在都可比的情况下最大的，有可能有好几个极大元没有最大元</li>
+<li>最小元：在都可比的情况下最小的</li>
+<li>极大元：在可比的那条链中最大的</li>
+<li>极小元：在可比的那条链中最小的</li>
+<li>上界：两个集合AB,B包含于A，对于任意的B中的x，有A中的y，x&lt;=y,则y为B的上界</li>
+<li>下界：两个集合AB,B包含于A，对于任意的B中的x，有A中的y，y&lt;=x,则y为B的下界</li>
+<li>上确界：上界中最小的</li>
+<li>下确界：下届中最小的</li>
+</ol></li>
+<li><p>逆序关系：R是反自反、反对称、传递的</p></li>
+<li><p>哈密顿图：能走出一条通过<strong>每个节点</strong>仅一次的贿赂</p></li>
+<li><p>欧拉图：能走出一条通过<strong>每条边</strong>仅一次的回路</p></li>
 </ol>
 <h2 id="cc">C/C++</h2>
 <h3 id="参数传递的方式">参数传递的方式</h3>
@@ -482,11 +570,13 @@ key），其他数据项与关键字或者主键一一对应，即其他数据�
 </ol></li>
 <li><p>BackBone</p>
 <ol type="1">
-<li><p><strong>CSPDarknet53</strong>：CSPNet的作者认为推理计算过高的问题是由于网络优化中的<strong>梯度信息重复</strong>导致的。因此采用CSP模块先将基础层的特征映射划分为两部分，然后通过跨阶段层次结构将它们合并，在减少了计算量的同时可以保证准确率。</p></li>
-<li><p><strong>Dropblock</strong>：Dropout的方式会随机的删减丢弃一些信息，但<strong>Dropblock的研究者</strong>认为，卷积层对于这种随机丢弃并不敏感，因为卷积层通常是三层连用：<strong>卷积+激活+池化层</strong>，池化层本身就是对相邻单元起作用。而且即使随机丢弃，卷积层仍然可以从相邻的激活单元学习到<strong>相同的信息</strong>。因此，在全连接层上效果很好的Dropout在卷积层上<strong>效果并不好</strong>。</p></li>
+<li><strong>CSPDarknet53</strong>：CSPNet的作者认为推理计算过高的问题是由于网络优化中的<strong>梯度信息重复</strong>导致的。因此采用CSP模块先将基础层的特征映射划分为两部分，然后通过跨阶段层次结构将它们合并，在减少了计算量的同时可以保证准确率。</li>
+<li><strong>Dropblock</strong>：Dropout的方式会随机的删减丢弃一些信息，但<strong>Dropblock的研究者</strong>认为，卷积层对于这种随机丢弃并不敏感，因为卷积层通常是三层连用：<strong>卷积+激活+池化层</strong>，池化层本身就是对相邻单元起作用。而且即使随机丢弃，卷积层仍然可以从相邻的激活单元学习到<strong>相同的信息</strong>。因此，在全连接层上效果很好的Dropout在卷积层上<strong>效果并不好</strong>。</li>
+</ol></li>
 </ol>
-<p><img src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230625131008.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;" /></p></li>
-<li><p>Neck</p>
+<p><img src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230625131008.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;" /></p>
+<ol start="3" type="1">
+<li>Neck
 <ol type="1">
 <li><strong>SPP</strong>：使用k={1<em>1,5</em>5,9<em>9,13</em>13}的最大池化的方式，再将不同尺度的特征图进行Concat操作。比单纯的使用<strong>k*k最大池化</strong>的方式，更有效的增加主干特征的接收范围，显著的分离了最重要的上下文特征。</li>
 </ol></li>
@@ -593,7 +683,7 @@ class="math inline">\(304*304*32\)</span>的特征图</p></li>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年6月25日</div>
+          <div>2023年6月26日</div>
         </div>
       
       
