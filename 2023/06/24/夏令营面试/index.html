@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230625134312.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-1da2f1a93c888dfe7c9002de56cff02b_1440w.webp">
 <meta property="article:published_time" content="2023-06-24T03:40:31.000Z">
-<meta property="article:modified_time" content="2023-06-26T11:04:50.200Z">
+<meta property="article:modified_time" content="2023-06-26T13:14:38.508Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230625131008.png">
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.4k 字
+          8.1k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          53 分钟
+          68 分钟
         
       </span>
     
@@ -309,6 +309,17 @@ class="math inline">\(\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f&#39;(c)}{g&#39;(c)}\)<
 <li><p><strong>二元函数可微条件</strong></p>
 <p>全增量减去线性增量比上根号下derta x的平方加derta
 y的平方的极限值若趋于0则可微</p></li>
+<li><p><strong>方向导数</strong></p>
+<p>在函数定义域内的点，对某一方向求导得到的导数</p>
+<p><span class="math inline">\(\frac{\partial f}{\partial
+l}=\mathrm{grad}f\cdot\frac{\overline{l}}{\left|\overline{l}\right|}\)</span></p></li>
+<li><p><strong>梯度</strong></p>
+<p><span class="math inline">\(\text{grad}f=(\frac{\partial f}{\partial
+x},\frac{\partial f}{\partial y})\)</span></p></li>
+<li><p><strong>散度</strong></p>
+<p><span class="math inline">\(\operatorname{div}F:=\nabla\cdot
+F={\frac{\partial F_{x}}{\partial x}}+{\frac{\partial F_{y}}{\partial
+y}}+{\frac{\partial F_{z}}{\partial z}}\)</span></p></li>
 </ol>
 <h2 id="线代">线代</h2>
 <ol type="1">
@@ -317,6 +328,8 @@ y的平方的极限值若趋于0则可微</p></li>
 class="math inline">\(\alpha_1、\alpha_2,...,\alpha_m\)</span>，若存在一组不全为0的数<span
 class="math inline">\(k_1,k_2,...,k_m\)</span>，使得<span
 class="math inline">\(k_1\alpha_1+k_2\alpha_2+...+k_m\alpha_m=0\)</span>则称该向量组线性相关</p></li>
+<li><p><strong>矩阵的秩</strong></p>
+<p>矩阵中非零子式的最高阶数</p></li>
 <li><p><strong>向量组的秩</strong></p>
 <p>向量组的极大线性无关组中所含向量的个数r称为向量组的秩</p></li>
 <li><p><strong>特征向量</strong></p>
@@ -511,20 +524,79 @@ src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230626185200.png" src
 <li><p>哈密顿图：能走出一条通过<strong>每个节点</strong>仅一次的贿赂</p></li>
 <li><p>欧拉图：能走出一条通过<strong>每条边</strong>仅一次的回路</p></li>
 </ol>
-<h2 id="cc">C/C++</h2>
+<h2 id="数据结构">数据结构</h2>
 <h3 id="参数传递的方式">参数传递的方式</h3>
 <ol type="1">
 <li>值传递：生成一个临时变量作为形参传递给函数</li>
 <li>指针传递：直接把地址传过去</li>
 <li>引用传递：在栈中开辟一个空间，空间里面存的是地址，对引用的操作都是间接寻址的过程</li>
 </ol>
+<h3 id="p问题np问题np完全问题">P问题、NP问题、NP完全问题</h3>
+<ol type="1">
+<li>P问题：存在多项式时间算法的问题</li>
+<li>NP问题：能在多项式时间内验证得出一个正确解的问题，也就是不好求解，但是能验证一个答案是否正确</li>
+<li>NP完全问题：所有的NP问题都可以规约到他，只要解决了这个问题，所有的NP问题都能得到解决，他本身也是个NP问题</li>
+<li>NP难问题：所有的NP问题都能约化到它，但是它不一定是一个NP问题。</li>
+</ol>
+<h3 id="稳定性">稳定性</h3>
+<p>如果两个具有相同键的对象以相同的顺序出现在排序输出中，则排序算法是<strong>稳定的</strong>。</p>
+<p>稳定性的好处：<strong>排序算法如果是稳定的，那么从一个键上排序，然后再从另一个键上排序，第一个键排序的结果可以为第二个键排序所用。</strong>
+基数排序就是这样，先按低位排序，逐次按高位排序，低位相同的元素其顺序再高位也相同时是不会改变的。</p>
+<p>稳定的排序算法：<strong>冒泡排序、插入排序、归并排序和基数排序</strong></p>
+<p>不是稳定的排序算法：<strong>选择排序、快速排序、希尔排序、堆排序</strong></p>
+<h3 id="改进冒泡排序">改进冒泡排序</h3>
+<p>设置一标志性变量pos，用于记录每趟排序中最后一次进行交换的位置。由于pos位置之后的记录均已交换到位，故在进行下一趟排序时只要扫描到pos位置即可。</p>
+<h3 id="改进快排">改进快排</h3>
+<p>只对长度大于 k kk
+的子序列递归调用快速排序，让原序列基本有序，然后再对整个基本有序序列用插入排序算法排序</p>
+<h3 id="判断图中是否有环">判断图中是否有环</h3>
+<ol type="1">
+<li>拓扑排序</li>
+<li>深搜出现重复结点</li>
+</ol>
+<h3 id="g数据1g内存如何排序">10G数据，1G内存如何排序</h3>
+<p><strong>分别排序</strong>：根据内存1G，数据10G，我们将10G数据切分成10份，通过内存调用磁盘的方式，每1G进行排序，排序结束后，我们会得到10个有序的数据数组。
+<strong>归并</strong>：多路归并过程可以使用最小堆。
+内存中开辟一个大小为10的最小堆，和一个缓冲区（小于1G，不要太小）。
+取10份排序好的数据的首位进入最小堆。则最小的数位于堆顶，移除堆顶元素并写入缓冲区，然后从移除元素的元素所属数组中的下一位进入最小堆，在次移除堆顶进入缓冲区...直到缓冲区满，缓冲区回写磁盘，清空缓冲区，再次将数据置入最小堆...
+直到10份数据全部写完，然后将最小堆的元素按顺序回写磁盘即可。</p>
+<h3 id="堆栈区别">堆栈区别</h3>
+<ol type="1">
+<li>栈：存放函数的参数值、局部变量，由编译器自动分配释放。</li>
+<li>堆 ：是由 new 分配的内存块，由应用程序控制，需要程序员手动利用
+delete 释放，如果没有，程序结束后，操作系统自动回收。</li>
+</ol>
+<h3 id="数组名数组首地址">数组名、数组首地址</h3>
+<ol type="1">
+<li>&amp;array是整个数组的首地址，array是数组首元素的首地址</li>
+<li>&amp;array加一之后移动一整个数组，array加一后移动一个数组元素</li>
+</ol>
+<h3 id="内存的分配方式">内存的分配方式</h3>
+<ol type="1">
+<li>从静态存储区域分配，如全局变量</li>
+<li>在栈上创建，函数内局部变量的存储单元都在栈上创建</li>
+<li>从堆上分配，动态内存分配</li>
+</ol>
 <h2 id="计组">计组</h2>
 <h3 id="为什么要设计多级缓存">为什么要设计多级缓存</h3>
 <ol type="1">
-<li>L1
-Cache用的晶体管比较多，同样的制程都给L1会导致缓存总容量小，命中率低</li>
+<li>L1 Cache用的晶体管比较多，同样的制程都给L1会导</li>
 <li>Cache容量上升后期对命中率的提升并不明显，边际效用递减</li>
 <li>L1如果太大，始终频率就做不了太大，影响处理器处理速度</li>
+</ol>
+<h2 id="操作系统">操作系统</h2>
+<h3 id="进程和线程">进程和线程</h3>
+<ol type="1">
+<li>进程是资源分配的基本单位，线程是调度的基本单位</li>
+<li>在操作系统的发展过程中，为了提高CPU利用率提出了多道程序的并发执行，并发执行就涉及到了程序之间的切换，当一个程序去做IO了，我得能找到一个对象让他来执行，为了表示这个对象就提出了进程。但是进程的在上下文切换时的代价较大，为了进一步提高并行性，提出线程的概念。一个进程可以创建多个线程，线程只保留一些必要的堆栈，共享进程的内存空间。</li>
+</ol>
+<h2 id="编译原理">编译原理</h2>
+<h3 id="程序的编译执行过程">程序的编译执行过程</h3>
+<ol type="1">
+<li>预处理：处理头文件、宏定义、条件编译指令</li>
+<li>编译：词法分析、语法分析、语义分析、中间代码生成、目标代码生成、目标代码优化</li>
+<li>汇编：将编译产生的源码转化为object file</li>
+<li>链接：将一些object file链接成一个可执行文件</li>
 </ol>
 <h2 id="数据库">数据库</h2>
 <h3 id="范式">范式</h3>
