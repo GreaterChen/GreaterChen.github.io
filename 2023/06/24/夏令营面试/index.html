@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230625134312.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-1da2f1a93c888dfe7c9002de56cff02b_1440w.webp">
 <meta property="article:published_time" content="2023-06-24T03:40:31.000Z">
-<meta property="article:modified_time" content="2023-06-28T07:42:41.813Z">
+<meta property="article:modified_time" content="2023-06-28T14:17:02.259Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230628102018.png">
@@ -274,7 +274,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年6月28日 下午
+                    本文最后更新于：2023年6月28日 晚上
                   
                 
               </p>
@@ -401,7 +401,7 @@ class="math inline">\(C^TAC=B\)</span>则称矩阵A与B合同</p></li>
 <li><p><strong>几何概型</strong></p>
 <p>样本空间是可度量的有界区域，每个样本点发生的可能性都相同</p></li>
 <li><p><strong>条件概率</strong></p>
-<p>在已知A发送的条件下，事件B发生的概率为条件概率，有<span
+<p>在已知A发生的条件下，事件B发生的概率为条件概率，有<span
 class="math inline">\(P(B|A)=\frac{P(AB)}{P(A)}\)</span></p></li>
 <li><p><strong>全概率公式</strong></p>
 <p>把<span class="math inline">\(B_i\)</span>看作是事件<span
@@ -418,7 +418,8 @@ class="math inline">\(P(A_j|B)=\frac{P(A_j)P(B|A_j)}{\sum_{i-1}^{n}P(A_i)P(B|A_i
 class="math inline">\(P(A_j|B)\)</span>代表在给定的图片(B)的基础上，是0/1/.../9的的概率，取其中的最大值作为预测结果即可</p>
 <p>先验概率<span
 class="math inline">\(P(A_j)\)</span>即为每个数字的样本数量占比；类条件概率<span
-class="math inline">\(P(B|A_j)\)</span>为对于数字为j的所有样本，第1,2,...,28*28个特征中颜色为白色的概率相乘的值</p></li>
+class="math inline">\(P(B|A_j)\)</span>为对于数字为j的所有样本，第1,2,...,28*28个特征中颜色为白色的概率相乘的值。</p>
+<p>分母是事件B发生的全概率</p></li>
 <li><p>常见的随机变量分布类型</p>
 <ol type="1">
 <li><p><strong>0-1分布</strong>：<span
@@ -437,7 +438,7 @@ class="math inline">\(\lambda\)</span>的泊松分布</p>
 target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/146951852">如何深刻理解二项式分布到泊松分布？
 - 知乎 (zhihu.com)</a></p>
 <p>参数 λ
-是单位时间(或单位面积)内随机事件的平均发生次数，满足线性相加（2
+是单位时间(或单位面积)内随机事件的<strong>平均发生次数</strong>，满足线性相加（2
 倍单位时间内…服从 2λ分布）。</p></li>
 <li><p><strong>几何分布</strong>：<span
 class="math inline">\(P\{X=k\}=(1-p)^{k-1}p\)</span>,即前k-1次都失败，第k次成功了</p></li>
@@ -452,8 +453,8 @@ x},x&gt;0\)</span></p></li>
 <li><p><strong>正态分布</strong>：<span
 class="math inline">\(f(x)=\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)\)</span></p></li>
 </ol></li>
-<li><p><strong>边缘分布：多维随机变量中只包含其中部分变量的概率分布。如对(X,Y)分布只研究X
-的分布。</strong></p></li>
+<li><p><strong>边缘分布</strong>：多维随机变量中只包含其中部分变量的概率分布。如对(X,Y)分布只研究X
+的分布。</p></li>
 <li><p><strong>期望</strong></p>
 <p>对于离散型随机变量，若级数<span
 class="math inline">\(\sum^{\infty}_{i=1}x_ip_i\)</span>绝对收敛，则期望即为该值</p>
@@ -466,21 +467,22 @@ class="math inline">\(DX=E[(X-EX)^2]=E(X^2)-(EX)^2\)</span></p></li>
 <p><span class="math inline">\(P(|X-\mu|\geq
 k)\leq\frac{\sigma^2}{k^2}或
 P(|X-\mu|&lt;k)\geq1-\frac{\sigma^2}{k^2}\)</span></p>
-<p>方差越小，X的值越接近均值，说明方差是刻画随机变量与其期望值偏离程度的指标</p></li>
+<p>方差越小，X的值越接近均值，说明方差是<strong>刻画随机变量与其期望值偏离程度的指标</strong></p></li>
 <li><p><strong>协方差</strong></p>
 <p>随机变量XY的协方差<span
-class="math inline">\(Cov(X,Y)=E[(X-EX)(Y-EY)]=E(XY)-EXEY\)</span></p></li>
+class="math inline">\(Cov(X,Y)=E[(X-EX)(Y-EY)]=E(XY)-EXEY\)</span></p>
+<p>用于衡量两个变量的总体误差</p></li>
 <li><p><strong>皮尔逊相关系数</strong></p>
 <p><span
 class="math inline">\(\frac{Cov(X,Y)}{\sqrt{DX}\sqrt{DY}}\)</span>,若值为0则不相关</p></li>
 <li><p><strong>大数定理</strong></p>
 <ol type="1">
 <li><p>当样本量足够大时，能用频率近似代替概率；能用样本均值近似代替总体均值。</p></li>
-<li><p>伯努利大数定理：</p>
+<li><p><strong>伯努利大数定理</strong>：</p>
 <p>从定义概率的角度，<strong>揭示了概率与频率的关系</strong>，当N很大的时候，事件A发生的概率等于A发生的频率。</p>
 <p><span
 class="math inline">\(\lim\limits_{n\to\infty}P\left\{\left|\frac{f_A}{n}-p\right|&lt;\epsilon\right\}=1\)</span></p></li>
-<li><p>切比雪夫大数定理</p>
+<li><p><strong>切比雪夫大数定理</strong></p>
 <p><strong>揭示了样本均值和真实期望的关系</strong></p>
 <p><span
 class="math inline">\(\lim\limits_{n\to+\infty}P\left\{\left|\frac{1}{n}\sum_{i=1}^{n}X_i-\frac{1}{n}\sum_{i=1}^{n}\mu_i\right|&lt;\xi\right\}=1\)</span></p></li>
@@ -541,7 +543,7 @@ class="math inline">\([x]_R\)</span>为所有满足xRy的y元素集合</p></li>
 7. 上确界：上界中最小的
 8. 下确界：下届中最小的</code></pre></li>
 <li><p>逆序关系：R是反自反、反对称、传递的</p></li>
-<li><p>哈密顿图：能走出一条通过<strong>每个节点</strong>仅一次的贿赂</p></li>
+<li><p>哈密顿图：能走出一条通过<strong>每个节点</strong>仅一次的回路</p></li>
 <li><p>欧拉图：能走出一条通过<strong>每条边</strong>仅一次的回路</p></li>
 <li><p>任意命题公式都可由仅含有 <span class="math inline">\(\{\lnot,
 \lor\}\)</span>或<span class="math inline">\(\{\lnot, \land\}\)</span>
@@ -557,7 +559,7 @@ class="math inline">\([x]_R\)</span>为所有满足xRy的y元素集合</p></li>
 class="math inline">\(x^{-1}*x=e\)</span>则为左逆元</li>
 <li>广群：S非空，*运算封闭</li>
 <li>半群：S非空，*运算封闭可结合</li>
-<li>群：S非空，*封闭可结合存在幺元，每个元素均存在逆元</li>
+<li>群：S非空，*封闭可结合存在幺元，每个元素均存在s逆元</li>
 <li>有限群：S为有限集的群</li>
 <li>阿贝尔群：S非空，*运算可以交换的群</li>
 <li>循环群：阿贝尔群，其内任意元素均可由a的幂组成，a称为生成元</li>
@@ -791,26 +793,26 @@ class="math inline">\(304*304*32\)</span>的特征图</p></li>
 </ol>
 <h2 id="英文面">英文面</h2>
 <h3 id="分钟自我介绍">2分钟自我介绍</h3>
-<p>Good morning(afternoon) professors. I am greatly honored to be here
-for this interview. Now i will give a brief introduction. My name is
+<p>Good morning(afternoon) professors. I am honored to be here for this
+interview. Now i will give a brief introduction about myself. My name is
 ChenLibiao and I am studying Computer Science and Technology at Beijing
 University of Technology.</p>
-<p>In terms of my schoolwork, my grade point average is 93.12, ranking
-2nd out of 74. I passed the CET Band 6 exam in my freshman year, but due
-to my school's policy, I was not allowed to take the exam again after
-passing it.So my score is a bit lower than I expected.</p>
-<p>In terms of competitions, I have received awards in various fields
-such as mathematics, algorithms, data analysis, and software
-development. Therefore, I believe that I possess a well-rounded
-knowledge system across these areas.</p>
-<p>In terms of scientific research, under the guidance of our school
-teacher, I successfully completed a paper on deep neural networks as the
-first author. I have extensive experience in scientific research and I
-am confident in completing research work under the guidance of teachers
-and research team.</p>
-<p>BUAA has been my dream school since my undergraduate years. If I have
-the honor of being selected as an excellent camper, I will definitely
-choose BUAA in September.</p>
+<p>First of all, for my in-class studies, I obtained a weighted average
+score of 93.12, ranking second out of 74 students. I have passed the
+CET-6 exam during the freshman year, but I was not allowed to retake the
+exam after passing it due to my school's policy. so you can see that my
+score was a bit lower than expected.</p>
+<p>In terms of competitions, I have received some awards in many fields
+such as mathematics, algorithms and data analysis So I think I have
+comprehensive knowledge</p>
+<p>In terms of scientific research, under the guidance of my tutor, I
+successfully completed a paper on deep neural networks as the first
+author. I have lots of experience in scientific research and I believe
+that I can complete high-level scientific research work under the
+guidance of teachers and research team</p>
+<p>Beihang university has been my dream school since i entered the
+university. If I have the honor of being selected as an excellent
+camper, I will surely choose Beihang University in September.</p>
 
                 
               </div>
