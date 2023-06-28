@@ -24,7 +24,7 @@
 <meta property="og:description" content="快排、归并排序">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-01-14T04:25:45.000Z">
-<meta property="article:modified_time" content="2023-06-26T11:46:31.385Z">
+<meta property="article:modified_time" content="2023-06-27T00:50:01.707Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          736 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          11 分钟
+          7 分钟
         
       </span>
     
@@ -266,7 +266,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年6月26日 晚上
+                    本文最后更新于：2023年6月27日 早上
                   
                 
               </p>
@@ -279,7 +279,6 @@
 <p>维护左右两个指针，左边指针向右走直到遇到大于x的值停下，右边指针向左走直到遇到小于x的值停下，随后两个指针指向的值进行交换。</p>
 <p>快排是不稳定的。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">quick_sort</span><span class="hljs-params">(<span class="hljs-type">int</span> q[], <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span></span>&#123;<br>	<span class="hljs-keyword">if</span>(l&gt;=r) <span class="hljs-keyword">return</span>;<br>	<span class="hljs-type">int</span> x=q[l],i=l<span class="hljs-number">-1</span>,j=r+<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">while</span>(i&lt;j)&#123;<br>		<span class="hljs-keyword">do</span> i++; <span class="hljs-keyword">while</span>(q[i]&lt;x);<br>		<span class="hljs-keyword">do</span> j--; <span class="hljs-keyword">while</span>(q[j]&gt;x);<br>		<span class="hljs-keyword">if</span>(i&lt;j) <span class="hljs-built_in">swap</span>(q[i],q[j]);<br>	&#125;<br>	<span class="hljs-built_in">quick_sort</span>(q,l,j);<br>	<span class="hljs-built_in">quick_sort</span>(q,j+<span class="hljs-number">1</span>,r);<br>&#125;<br></code></pre></td></tr></table></figure>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment">### xxxxxxxxxx26 </span><br><span class="hljs-attribute">1</span>#include &lt;iostream&gt;<span class="hljs-number">2</span>using namespace std;<span class="hljs-number">3</span>​<span class="hljs-number">4</span>int a[<span class="hljs-number">300</span>][<span class="hljs-number">300</span>];<span class="hljs-number">5</span>int main()<span class="hljs-number">6</span>&#123;<span class="hljs-number">7</span>    int cnt = <span class="hljs-number">1</span>;<span class="hljs-number">8</span>    int reverse = <span class="hljs-number">0</span>;<span class="hljs-number">9</span>    for(int i = <span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">50</span>;i++)&#123;<span class="hljs-number">10</span>        if(reverse)&#123;<span class="hljs-number">11</span>            for(int j=<span class="hljs-number">1</span>;j&lt;=i;j++) &#123;<span class="hljs-number">12</span>                a[j][i - j + <span class="hljs-number">1</span>] = cnt++;<span class="hljs-number">13</span>                cout&lt;&lt;j&lt;&lt;<span class="hljs-string">&quot; &quot;</span>&lt;&lt;i-j+<span class="hljs-number">1</span>&lt;&lt;endl;<span class="hljs-number">14</span>            &#125;<span class="hljs-number">15</span>            reverse = <span class="hljs-number">0</span>;<span class="hljs-number">16</span>        &#125;else&#123;<span class="hljs-number">17</span>            for(int j=<span class="hljs-number">1</span>;j&lt;=i;j++) &#123;<span class="hljs-number">18</span>                a[i - j + <span class="hljs-number">1</span>][j] = cnt++;<span class="hljs-number">19</span>                cout&lt;&lt;i-j+<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-string">&quot; &quot;</span>&lt;&lt;j&lt;&lt;endl;<span class="hljs-number">20</span>            &#125;<span class="hljs-number">21</span>            reverse = <span class="hljs-number">1</span>;<span class="hljs-number">22</span>        &#125;<span class="hljs-number">23</span>    &#125;<span class="hljs-number">24</span>    cout&lt;&lt;a[<span class="hljs-number">20</span>][<span class="hljs-number">20</span>];<span class="hljs-number">25</span>    return <span class="hljs-number">0</span>;<span class="hljs-number">26</span>&#125;c++<br></code></pre></td></tr></table></figure>
 <p>先对两侧的子序列排序，再对两个有序子序列进行合并，合并思路为双指针。</p>
 <p>归并排序是稳定的。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">merge_sort</span><span class="hljs-params">(<span class="hljs-type">int</span> q[],<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r)</span></span>&#123;<br>	<span class="hljs-keyword">if</span>(l&gt;=r) <span class="hljs-keyword">return</span>;<br>	<span class="hljs-type">int</span> mid = l + r &gt;&gt; <span class="hljs-number">1</span>;<br>	<span class="hljs-built_in">merge_sort</span>(q,l,mid);<br>	<span class="hljs-built_in">merge_sort</span>(q,mid+<span class="hljs-number">1</span>,r);<br>	<span class="hljs-type">int</span> k=<span class="hljs-number">0</span>,i=l,j=mid+<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">while</span>(i&lt;=mid &amp;&amp; j&lt;=r)&#123;<br>		<span class="hljs-keyword">if</span>(q[i]&lt;q[j]) temp[k++] = q[i++];<br>		<span class="hljs-keyword">else</span> temp[k++] = q[j++];<br>	&#125;<br>	<span class="hljs-keyword">while</span>(i&lt;=mid) temp[k++] = q[i++];<br>	<span class="hljs-keyword">while</span>(j&lt;=r) temp[k++] = q[j++];<br>	<span class="hljs-keyword">for</span>(i=l,j=<span class="hljs-number">0</span>;i&lt;=r;i++,j++)&#123;<br>		q[i] = temp[j];<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -340,7 +339,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年6月26日</div>
+          <div>2023年6月27日</div>
         </div>
       
       
