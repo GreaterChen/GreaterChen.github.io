@@ -25,8 +25,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230625010547.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230625010509.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230629133704.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230629133750.png">
 <meta property="article:published_time" content="2023-04-24T08:38:31.000Z">
-<meta property="article:modified_time" content="2023-06-24T17:05:54.103Z">
+<meta property="article:modified_time" content="2023-06-29T05:37:57.544Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230625010547.png">
@@ -269,7 +271,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年6月25日 凌晨
+                    本文最后更新于：2023年6月29日 下午
                   
                 
               </p>
@@ -309,11 +311,14 @@ class="math inline">\((-1)^S*1.M*2^{(E-127)}\)</span></p></li>
 <p>Cache行号=主存块号 mod Cache总行数</p>
 <p>即主存的第<span
 class="math inline">\(1、2^{c}+1、2^{c+1}+1\)</span>块均映射到第0行。当产生冲突时无条件进行置换</p>
+<p>主存块号的低c位正好是要装入的Cache行号，因此给每个Cache行设置一个长为m-c的标记，就可以知道是哪块主存在cache中了</p>
 <p><img src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230625010509.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" /></p></li>
 <li><p>全相联映射</p>
-<p>主存中的每一块可以装入Cache的任意位置</p></li>
+<p>主存中的每一块可以装入Cache的任意位置。但是需要一行一行的查找</p>
+<p><img src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230629133704.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p></li>
 <li><p>组相联映射</p>
-<p>组间直接映射，组内全相联映射</p></li>
+<p>组间直接映射，组内全相联映射</p>
+<p><img src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230629133750.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p></li>
 </ol></li>
 <li><p>Cache写策略</p>
 <ol type="1">
@@ -453,7 +458,7 @@ class="math inline">\(1、2^{c}+1、2^{c+1}+1\)</span>块均映射到第0行。�
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年6月25日</div>
+          <div>2023年6月29日</div>
         </div>
       
       
