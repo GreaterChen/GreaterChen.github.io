@@ -4,6 +4,63 @@
   
   
   <entry>
+    <title>前端学习</title>
+    <link href="/2023/07/15/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/"/>
+    <url>/2023/07/15/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/</url>
+    
+    <content type="html"><![CDATA[<p>前端开发学习 <span id="more"></span></p><h2 id="tips">Tips</h2><ol type="1"><li>连续的按钮重叠时可以在中间添加&lt;br&gt;分开各个按钮</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>软件开发</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Django</title>
+    <link href="/2023/07/13/Django/"/>
+    <url>/2023/07/13/Django/</url>
+    
+    <content type="html"><![CDATA[<p>Django学习 <span id="more"></span></p><ol type="1"><li><p>Django项目创建</p><p><ahref="https://www.acwing.com/activity/content/code/content/1969996/">工程课Django-2.1. 上课笔记 - AcWing</a></p></li><li><p>Pycharm连接服务器项目</p><p><ahref="https://blog.csdn.net/strawberry47/article/details/110440842">(141条消息)用pycharm跑服务器代码如何建立映射、如何设置自动更新、如何安装包_pycharm建立映射_strawberry47的博客-CSDN博客</a></p></li><li><p>访问静态文件：配置settings后，通过ip:port/static/images/../xxx.png访问</p></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>软件开发</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Linux服务器工具</title>
+    <link href="/2023/07/13/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B7%A5%E5%85%B7/"/>
+    <url>/2023/07/13/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B7%A5%E5%85%B7/</url>
+    
+    <content type="html"><![CDATA[<p>tmux、vim用法 <span id="more"></span></p><h2 id="tmux">tmux</h2><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs stata">功能：<br>    (1) 分屏。<br>    (2) 允许断开Terminal连接后，继续运行进程。<br>结构：<br>    一个tmux可以包含多个session，一个session可以包含多个<span class="hljs-keyword">window</span>，一个<span class="hljs-keyword">window</span>可以包含多个pane。<br>    实例：<br>        tmux:<br>            session 0:<br>                <span class="hljs-keyword">window</span> 0:<br>                    pane 0<br>                    pane 1<br>                    pane 2<br>                    ...<br>                <span class="hljs-keyword">window</span> 1<br>                <span class="hljs-keyword">window</span> 2<br>                ...<br>            session 1<br>            session 2<br>            ...<br>操作：<br>    (1) tmux：新建一个session，其中包含一个<span class="hljs-keyword">window</span>，<span class="hljs-keyword">window</span>中包含一个pane，pane里打开了一个<span class="hljs-keyword">shell</span>对话框。<br>    (2) 按下Ctrl + a后手指松开，然后按%：将当前pane左右平分成两个pane。<br>    (3) 按下Ctrl + a后手指松开，然后按<span class="hljs-string">&quot;（注意是双引号&quot;</span>）：将当前pane上下平分成两个pane。<br>    (4) Ctrl + <span class="hljs-keyword">d</span>：关闭当前pane；如果当前<span class="hljs-keyword">window</span>的所有pane均已关闭，则自动关闭<span class="hljs-keyword">window</span>；如果当前session的所有<span class="hljs-keyword">window</span>均已关闭，则自动关闭session。<br>    (5) 鼠标点击可以选pane。<br>    (6) 按下ctrl + a后手指松开，然后按方向键：选择相邻的pane。<br>    (7) 鼠标拖动pane之间的分割线，可以调整分割线的位置。<br>    (8) 按住ctrl + a的同时按方向键，可以调整pane之间分割线的位置。<br>    (9) 按下ctrl + a后手指松开，然后按z：将当前pane全屏/取消全屏。<br>    (10) 按下ctrl + a后手指松开，然后按<span class="hljs-keyword">d</span>：挂起当前session。<br>    (11) tmux a：打开之前挂起的session。<br>    (12) 按下ctrl + a后手指松开，然后按s：选择其它session。<br>        方向键 —— 上：选择上一项 session/<span class="hljs-keyword">window</span>/pane<br>        方向键 —— 下：选择下一项 session/<span class="hljs-keyword">window</span>/pane<br>        方向键 —— 右：展开当前项 session/<span class="hljs-keyword">window</span><br>        方向键 —— 左：闭合当前项 session/<span class="hljs-keyword">window</span><br>    (13) 按下Ctrl + a后手指松开，然后按c：在当前session中创建一个新的<span class="hljs-keyword">window</span>。<br>    (14) 按下Ctrl + a后手指松开，然后按w：选择其他<span class="hljs-keyword">window</span>，操作方法与(12)完全相同。<br>    (15) 按下Ctrl + a后手指松开，然后按PageUp：翻阅当前pane内的内容。<br>    (16) 鼠标滚轮：翻阅当前pane内的内容。<br>    (17) 在tmux中选中文本时，需要按住shift键。（仅支持Windows和Linux，不支持<span class="hljs-keyword">Mac</span>，不过该操作并不是必须的，因此影响不大）<br>    (18) tmux中复制/粘贴文本的通用方式：<br>        (1) 按下Ctrl + a后松开手指，然后按[<br>        (2) 用鼠标选中文本，被选中的文本会被自动复制到tmux的剪贴板<br>        (3) 按下Ctrl + a后松开手指，然后按]，会将剪贴板中的内容粘贴到光标处<br></code></pre></td></tr></table></figure><h2 id="vim">vim</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs bash">功能：<br> (1) 命令行模式下的文本编辑器。<br> (2) 根据文件扩展名自动判别编程语言。支持代码缩进、代码高亮等功能。<br> (3) 使用方式：vim filename<br>     如果已有该文件，则打开它。<br>     如果没有该文件，则打开个一个新的文件，并命名为filename<br>模式：<br> (1) 一般命令模式<br>     默认模式。命令输入方式：类似于打游戏放技能，按不同字符，即可进行不同操作。可以复制、粘贴、删除文本等。<br> (2) 编辑模式<br>     在一般命令模式里按下i，会进入编辑模式。<br>     按下ESC会退出编辑模式，返回到一般命令模式。<br> (3) 命令行模式<br>     在一般命令模式里按下:/?三个字母中的任意一个，会进入命令行模式。命令行在最下面。<br>     可以查找、替换、保存、退出、配置编辑器等。<br>操作：<br> (1) i：进入编辑模式<br> (2) ESC：进入一般命令模式<br> (3) h 或 左箭头键：光标向左移动一个字符<br> (4) j 或 向下箭头：光标向下移动一个字符<br> (5) k 或 向上箭头：光标向上移动一个字符<br> (6) l 或 向右箭头：光标向右移动一个字符<br> (7) n&lt;Space&gt;：n表示数字，按下数字后再按空格，光标会向右移动这一行的n个字符<br> (8) 0 或 功能键[Home]：光标移动到本行开头<br> (9) $ 或 功能键[End]：光标移动到本行末尾<br> (10) G：光标移动到最后一行<br> (11) :n 或 nG：n为数字，光标移动到第n行<br> (12) gg：光标移动到第一行，相当于1G<br> (13) n&lt;Enter&gt;：n为数字，光标向下移动n行<br> (14) /word：向光标之下寻找第一个值为word的字符串。<br> (15) ?word：向光标之上寻找第一个值为word的字符串。<br> (16) n：重复前一个查找操作<br> (17) N：反向重复前一个查找操作<br> (18) :n1,n2s/word1/word2/g：n1与n2为数字，在第n1行与n2行之间寻找word1这个字符串，并将该字符串替换为word2<br> (19) :1,<span class="hljs-variable">$s</span>/word1/word2/g：将全文的word1替换为word2<br> (20) :1,<span class="hljs-variable">$s</span>/word1/word2/gc：将全文的word1替换为word2，且在替换前要求用户确认。<br> (21) v：选中文本<br> (22) d：删除选中的文本<br> (23) <span class="hljs-built_in">dd</span>: 删除当前行<br> (24) y：复制选中的文本<br> (25) yy: 复制当前行<br> (26) p: 将复制的数据在光标的下一行/下一个位置粘贴<br> (27) u：撤销<br> (28) Ctrl + r：取消撤销<br> (29) 大于号 &gt;：将选中的文本整体向右缩进一次<br> (30) 小于号 &lt;：将选中的文本整体向左缩进一次<br> (31) :w 保存<br> (32) :w! 强制保存<br> (33) :q 退出<br> (34) :q! 强制退出<br> (35) :wq 保存并退出<br> (36) :<span class="hljs-built_in">set</span> <span class="hljs-built_in">paste</span> 设置成粘贴模式，取消代码自动缩进<br> (37) :<span class="hljs-built_in">set</span> nopaste 取消粘贴模式，开启代码自动缩进<br> (38) :<span class="hljs-built_in">set</span> nu 显示行号<br> (39) :<span class="hljs-built_in">set</span> nonu 隐藏行号<br> (40) gg=G：将全文代码格式化<br> (41) :noh 关闭查找关键词高亮<br> (42) Ctrl + q：当vim卡死时，可以取消当前正在执行的命令<br>异常处理：<br> 每次用vim编辑文件时，会自动创建一个.filename.swp的临时文件。<br> 如果打开某个文件时，该文件的swp文件已存在，则会报错。此时解决办法有两种：<br>     (1) 找到正在打开该文件的程序，并退出<br>     (2) 直接删掉该swp文件即可<br><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>软件开发</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>夏令营面试</title>
     <link href="/2023/06/24/%E5%A4%8F%E4%BB%A4%E8%90%A5%E9%9D%A2%E8%AF%95/"/>
     <url>/2023/06/24/%E5%A4%8F%E4%BB%A4%E8%90%A5%E9%9D%A2%E8%AF%95/</url>
@@ -104,6 +161,25 @@
     <url>/2023/05/17/%E9%AB%98%E6%95%B0%E4%B8%8B%E4%B8%B2%E8%AE%B2/</url>
     
     <content type="html"><![CDATA[<p>朋辈讲师高数下串讲 <span id="more"></span></p><h3 id="多元函数微分">多元函数微分</h3><ol type="1"><li>偏导定义</li><li>判断是否可微 P161</li><li>判断偏导是否连续 P161，P165例1.11.2</li><li>复合函数求偏导 P166 例1.11.3</li><li>隐函数公式证明 P162</li><li>无条件极值、条件极值、拉格朗日乘数法 P165 P168 P169</li><li>例1.11.8</li></ol><h3 id="二重积分">二重积分</h3><ol type="1"><li><p>对称性P176，注例，P178例1.12.2</p></li><li><p>交换积分次序 P180 例1.12.8</p></li><li><p>直角坐标和极坐标的转换 P179 例1.12.5</p></li></ol><h3 id="section"></h3>]]></content>
+    
+    
+    <categories>
+      
+      <category>课内</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>软工课设</title>
+    <link href="/2023/05/17/%E8%BD%AF%E5%B7%A5%E8%AF%BE%E8%AE%BE/"/>
+    <url>/2023/05/17/%E8%BD%AF%E5%B7%A5%E8%AF%BE%E8%AE%BE/</url>
+    
+    <content type="html"><![CDATA[<p>软工课设后端开发 <span id="more"></span></p><ol type="1"><li>getAllProductByAdmin</li></ol>]]></content>
     
     
     <categories>
