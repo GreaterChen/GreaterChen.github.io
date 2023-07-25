@@ -24,7 +24,7 @@
 <meta property="og:description" content="Java基础学习">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-25T06:35:43.000Z">
-<meta property="article:modified_time" content="2023-07-25T12:48:04.247Z">
+<meta property="article:modified_time" content="2023-07-25T16:00:01.125Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.9k 字
+          5.3k 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          24 分钟
+          45 分钟
         
       </span>
     
@@ -266,7 +266,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年7月25日 晚上
+                    本文最后更新于：2023年7月26日 凌晨
                   
                 
               </p>
@@ -340,6 +340,61 @@
 <li><p>Period &amp; Duration</p>
 <p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">LocalDate</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> LocalDate.of(<span class="hljs-number">2029</span>, <span class="hljs-number">8</span>, <span class="hljs-number">10</span>);<br><span class="hljs-type">LocalDate</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> LocalDate.of(<span class="hljs-number">2029</span>, <span class="hljs-number">12</span>, <span class="hljs-number">15</span>);<br><br><span class="hljs-comment">// 1、创建Period对象，封装两个日期对象。</span><br><span class="hljs-type">Period</span> <span class="hljs-variable">period</span> <span class="hljs-operator">=</span> Period.between(start, end);<br><br><span class="hljs-comment">// 2、通过period对象获取两个日期对象相差的信息。</span><br>System.out.println(period.getYears());<br>System.out.println(period.getMonths());<br>System.out.println(period.getDays());<br><br><span class="hljs-type">LocalDateTime</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> LocalDateTime.of(<span class="hljs-number">2025</span>, <span class="hljs-number">11</span>, <span class="hljs-number">11</span>, <span class="hljs-number">11</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>);<br><span class="hljs-type">LocalDateTime</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> LocalDateTime.of(<span class="hljs-number">2025</span>, <span class="hljs-number">11</span>, <span class="hljs-number">11</span>, <span class="hljs-number">11</span>, <span class="hljs-number">11</span>, <span class="hljs-number">11</span>);<br><span class="hljs-comment">// 1、得到Duration对象</span><br><span class="hljs-type">Duration</span> <span class="hljs-variable">duration</span> <span class="hljs-operator">=</span> Duration.between(start, end);<br><br><span class="hljs-comment">// 2、获取两个时间对象间隔的信息</span><br>System.out.println(duration.toDays());<span class="hljs-comment">// 间隔多少天</span><br>System.out.println(duration.toHours());<span class="hljs-comment">// 间隔多少小时</span><br>System.out.println(duration.toMinutes());<span class="hljs-comment">// 间隔多少分</span><br>System.out.println(duration.toSeconds());<span class="hljs-comment">// 间隔多少秒</span><br>System.out.println(duration.toMillis());<span class="hljs-comment">// 间隔多少毫秒</span><br>System.out.println(duration.toNanos());<span class="hljs-comment">// 间隔多少纳秒</span><br></code></pre></td></tr></table></figure></p></li>
 </ol>
+<h3 id="任意类数组排序">任意类数组排序</h3>
+<ol type="1">
+<li><p>方法一</p>
+<p>首先对于类，需要实现Compareable接口</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Student</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Comparable</span>&lt;Student&gt;<br></code></pre></td></tr></table></figure></p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compareTo</span><span class="hljs-params">(Student s)</span> &#123;<br>    <span class="hljs-keyword">return</span> s.getChinese() - <span class="hljs-built_in">this</span>.getChinese();<br>&#125;<br></code></pre></td></tr></table></figure></p>
+<p>随后在使用时如下所示</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Arrays.sort(students)<br></code></pre></td></tr></table></figure></p></li>
+<li><p>方法二</p>
+<p>在调用时实现比较函数</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">Arrays.sort(students, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Comparator</span>&lt;Student&gt;() &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compare</span><span class="hljs-params">(Student o1, Student o2)</span> &#123;<br>        <span class="hljs-keyword">return</span> Double.compare(o1.getHeight(), o2.getHeight()); <span class="hljs-comment">// 升序</span><br>        <span class="hljs-comment">// return Double.compare(o2.getHeight(), o1.getHeight()); // 降序</span><br>    &#125;<br>&#125;);<br></code></pre></td></tr></table></figure></p>
+<p>Lambda写法</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">Arrays.sort(students, (Student o1, Student o2) -&gt; &#123;<br>    <span class="hljs-keyword">return</span> Double.compare(o1.getHeight(), o2.getHeight()); <span class="hljs-comment">// 升序</span><br>&#125;);<br></code></pre></td></tr></table></figure></p></li>
+</ol>
+<h3 id="异常">异常</h3>
+<ol type="1">
+<li><p>自定义异常</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AgeIllegalException</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Exception</span>&#123;	<span class="hljs-comment">// 继承Exception类</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">AgeIllegalException</span><span class="hljs-params">()</span> &#123;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">AgeIllegalException</span><span class="hljs-params">(String message)</span> &#123;<br>        <span class="hljs-built_in">super</span>(message);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></p></li>
+<li><p>抛出异常</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">saveAge</span><span class="hljs-params">(<span class="hljs-type">int</span> age)</span>&#123;<br>    <span class="hljs-keyword">if</span>(age &gt; <span class="hljs-number">0</span> &amp;&amp; age &lt; <span class="hljs-number">150</span>)&#123;<br>        System.out.println(<span class="hljs-string">&quot;年龄被成功保存： &quot;</span> + age);<br>    &#125;<span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-comment">// 用一个异常对象封装这个问题</span><br>        <span class="hljs-comment">// throw 抛出去这个异常对象</span><br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AgeIllegalRuntimeException</span>(<span class="hljs-string">&quot;/age is illegal, your age is &quot;</span> + age);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></p></li>
+<li><p>捕获异常</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">try</span> &#123;<br>    saveAge2(<span class="hljs-number">225</span>);<br>    System.out.println(<span class="hljs-string">&quot;saveAge2底层执行是成功的！&quot;</span>);<br>&#125; <span class="hljs-keyword">catch</span> (AgeIllegalException e) &#123;<br>    e.printStackTrace();<br>    System.out.println(<span class="hljs-string">&quot;saveAge2底层执行是出现bug的！&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure></p></li>
+</ol>
+<h3 id="properties属性文件">Properties属性文件</h3>
+<ol type="1">
+<li><p>格式</p>
+<ol type="1">
+<li>属性文件后缀以<code>.properties</code>结尾</li>
+<li>属性文件里面的每一行都是一个键值对，键和值中间用=隔开。比如:
+<code>admin=123456</code></li>
+<li><code>#</code>表示这样是注释信息，是用来解释这一行配置是什么意思。</li>
+<li>每一行末尾不要习惯性加分号，以及空格等字符；不然会把分号，空格会当做值的一部分。</li>
+<li>键不能重复，值可以重复</li>
+</ol></li>
+<li><p>读取/写入</p>
+<ol type="1">
+<li><p>读取</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">properties.load(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FileReader</span>(<span class="hljs-string">&quot;path&quot;</span>));<br>properties.getProperty(<span class="hljs-string">&quot;a&quot;</span>)<br></code></pre></td></tr></table></figure></p></li>
+<li><p>写入</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Properties</span> <span class="hljs-variable">properties</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Properties</span>();<br>properties.setProperty(<span class="hljs-string">&quot;张无忌&quot;</span>, <span class="hljs-string">&quot;minmin&quot;</span>);<br>properties.store(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FileWriter</span>(<span class="hljs-string">&quot;path&quot;</span>), <span class="hljs-string">&quot;i saved many users!&quot;</span>);<br></code></pre></td></tr></table></figure></p></li>
+</ol></li>
+</ol>
+<h3 id="logback日志">Logback日志</h3>
+<ol type="1">
+<li><p>导入库</p>
+<ol type="1">
+<li><p>在资料中找到<code>slftj-api.jar、logback-core.jar、logback-classes.jar</code>
+这三个jar包，复制一下</p></li>
+<li><p>在当前模块下面新建一个lib文件夹，把刚刚复制的三个jar包都粘贴到此处</p></li>
+<li><p>右键lib文件夹，点击<code>Add as Library</code></p></li>
+<li><p>从资料中找到<code>logback.xml</code>配置文件，将此文件复制粘贴到src目录下（必须是src目录）</p></li>
+</ol></li>
+<li><p>在代码中使用</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> org.slf4j.Logger;<br><span class="hljs-keyword">import</span> org.slf4j.LoggerFactory;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LogTest</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">LOGGER</span> <span class="hljs-operator">=</span> LoggerFactory.getLogger(<span class="hljs-string">&quot;LogTest&quot;</span>);	<span class="hljs-comment">// 创建Logger</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-keyword">try</span>&#123;<br>            LOGGER.info(<span class="hljs-string">&quot;除法准备执行&quot;</span>);<br>            div(<span class="hljs-number">10</span>,<span class="hljs-number">0</span>);<br>            LOGGER.info(<span class="hljs-string">&quot;除法正常执行&quot;</span>);<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e)&#123;<br>            LOGGER.error(<span class="hljs-string">&quot;除法异常&quot;</span>);<br>        &#125;<br><br>    &#125;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">div</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span>&#123;<br>        LOGGER.debug(<span class="hljs-string">&quot;参数a=&quot;</span>+a+<span class="hljs-string">&quot;;参数b=&quot;</span>+b+<span class="hljs-string">&quot;;&quot;</span>);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> a/b;<br>        System.out.println(c);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></p></li>
+</ol>
 
                 
               </div>
@@ -397,7 +452,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年7月25日</div>
+          <div>2023年7月26日</div>
         </div>
       
       
