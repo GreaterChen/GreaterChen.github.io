@@ -16,21 +16,22 @@
   <meta name="author" content="Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="CCF CSP 202212 第27届题目">
+    <meta name="description" content="CCF CSP 第20届">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSP 27">
-<meta property="og:url" content="http://example.com/2023/02/24/CCF-CSP/CSP-27/index.html">
+<meta property="og:title" content="CSP 20">
+<meta property="og:url" content="http://example.com/2023/03/13/Algorithm/CCF-CSP/CSP-20/index.html">
 <meta property="og:site_name" content="Chen&#39;s Blog">
-<meta property="og:description" content="CCF CSP 202212 第27届题目">
+<meta property="og:description" content="CCF CSP 第20届">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-24T13:22:54.000Z">
-<meta property="article:modified_time" content="2023-03-13T09:05:44.895Z">
+<meta property="article:published_time" content="2023-03-13T09:10:06.000Z">
+<meta property="article:modified_time" content="2023-03-13T09:40:21.339Z">
 <meta property="article:author" content="Chen">
+<meta property="article:tag" content="STL,排序">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>CSP 27 - Chen&#39;s Blog</title>
+  <title>CSP 20 - Chen&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -184,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="CSP 27"></span>
+            <span id="subtitle" data-typed-text="CSP 20"></span>
           
         </div>
 
@@ -200,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-24 21:22" pubdate>
-          2023年2月24日 晚上
+        <time datetime="2023-03-13 17:10" pubdate>
+          2023年3月13日 下午
         </time>
       </span>
     
@@ -212,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1.9k 字
         
       </span>
     
@@ -223,7 +224,7 @@
         
         
         
-          12 分钟
+          16 分钟
         
       </span>
     
@@ -261,7 +262,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">CSP 27</h1>
+            <h1 style="display: none">CSP 20</h1>
             
               <p class="note note-info">
                 
@@ -274,14 +275,16 @@
             
               <div class="markdown-body">
                 
-                <p>CCF CSP 202212 第27届题目 <span id="more"></span></p>
-<h3 id="如此编码">如此编码</h3>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">105</span>;<br><span class="hljs-type">int</span> n,m;<br><span class="hljs-type">int</span> a[N],c[N],l[N],b[N];<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    cin&gt;&gt;n&gt;&gt;m;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;<br>        cin&gt;&gt;a[i];<br>    &#125;<br>    c[<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;<br>        c[i] = c[i<span class="hljs-number">-1</span>]*a[i];<br>        l[i] = m%c[i];<br>        l[i] = l[i] - l[i<span class="hljs-number">-1</span>];<br>        b[i] = l[i]/c[i<span class="hljs-number">-1</span>];<br>    &#125;<br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;<br>        cout&lt;&lt;b[i]&lt;&lt;<span class="hljs-string">&quot; &quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h3 id="何以包邮">何以包邮</h3>
-<h5 id="回溯暴搜">回溯暴搜</h5>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">40</span>;<br><span class="hljs-type">int</span> n,m;<br><span class="hljs-type">int</span> a[N];<br><span class="hljs-type">int</span> dp[<span class="hljs-number">100000</span>];<br><span class="hljs-type">int</span> res = <span class="hljs-number">1e9</span>;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> i,<span class="hljs-type">int</span> sum)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(i==n)&#123;<br>        <span class="hljs-keyword">if</span>(sum &gt;=m)&#123;<br>            res = <span class="hljs-built_in">min</span>(res,sum);<br>        &#125;<br>        <span class="hljs-keyword">return</span>;<br>    &#125;<br>    <span class="hljs-built_in">dfs</span>(i+<span class="hljs-number">1</span>,sum);<br>    <span class="hljs-built_in">dfs</span>(i+<span class="hljs-number">1</span>,sum+a[i]);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    cin&gt;&gt;n&gt;&gt;m;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>        cin&gt;&gt;a[i];<br>    &#125;<br>    <span class="hljs-built_in">dfs</span>(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>);<br>    cout&lt;&lt;res;<br>&#125;<br></code></pre></td></tr></table></figure>
-<h5 id="dp">DP</h5>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">40</span>;<br><span class="hljs-type">int</span> n,m;<br><span class="hljs-type">int</span> a[N];<br><span class="hljs-type">int</span> dp[<span class="hljs-number">100000</span>];<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    cin&gt;&gt;n&gt;&gt;m;<br>    <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;<br>        cin&gt;&gt;a[i];<br>        sum += a[i];<br>    &#125;<br><br>    <span class="hljs-type">int</span> target = sum - m;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=target;j&gt;=a[i];j--)&#123;<br>            dp[j] = <span class="hljs-built_in">max</span>(dp[j],dp[j-a[i]]+a[i]);<br>        &#125;<br>    &#125;<br><br>    cout&lt;&lt;sum - dp[target];<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <p>CCF CSP 第20届 <span id="more"></span></p>
+<h3 id="称检测点查询"><a
+target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/3295/">1.
+称检测点查询</a></h3>
+<p>pair模板的小根堆 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;queue&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">int</span> n,px,py;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">1010</span>;<br><br>priority_queue&lt;pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;, vector&lt;pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;&gt;, greater&lt;pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;&gt;&gt; q;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    cin&gt;&gt;n&gt;&gt;px&gt;&gt;py;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;<br>        <span class="hljs-type">int</span> x,y;<br>        cin&gt;&gt;x&gt;&gt;y;<br>        <span class="hljs-type">int</span> d = (px-x)*(px-x) + (py-y)*(py-y);<br>        q.<span class="hljs-built_in">push</span>(<span class="hljs-built_in">make_pair</span>(d,i));<br>    &#125;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">3</span>;i++)&#123;<br>        cout&lt;&lt;q.<span class="hljs-built_in">top</span>().second&lt;&lt;endl;<br>        q.<span class="hljs-built_in">pop</span>();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></p>
+<p>c++重载运算符</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;cstring&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;queue&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">int</span> n,px,py;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">1010</span>;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">Point</span>&#123;<br>    <span class="hljs-type">int</span> x;<br>    <span class="hljs-type">int</span> y;<br>    <span class="hljs-type">int</span> d;<br>    <span class="hljs-type">int</span> id;<br>    <span class="hljs-type">bool</span> <span class="hljs-keyword">operator</span>&lt;(<span class="hljs-type">const</span> Point&amp; t) <span class="hljs-type">const</span>&#123;<br>        <span class="hljs-keyword">if</span>(d!=t.d) <span class="hljs-keyword">return</span> d&lt;t.d;<br>        <span class="hljs-keyword">return</span> id &lt; t.id;<br>    &#125;<br>&#125;q[N];<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">distance</span><span class="hljs-params">(<span class="hljs-type">int</span> x,<span class="hljs-type">int</span> y)</span></span>&#123;<br>    <span class="hljs-keyword">return</span> (px-x)*(px-x) + (py-y)*(py-y);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    cin&gt;&gt;n&gt;&gt;px&gt;&gt;py;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>        <span class="hljs-type">int</span> x,y;<br>        cin&gt;&gt;x&gt;&gt;y;<br>        q[i] = &#123;x,y,<span class="hljs-built_in">distance</span>(x,y),i+<span class="hljs-number">1</span>&#125;;<br>    &#125;<br>    <br>    <span class="hljs-built_in">sort</span>(q,q+n);<br>    <br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">3</span>;i++)&#123;<br>        cout&lt;&lt;q[i].id&lt;&lt;endl;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="风险人群筛查"><a
+target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/3296/">2.风险人群筛查</a></h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">int</span> n,k,t,xl,yd,xr,yu;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> res[<span class="hljs-number">2</span>];<br>    cin&gt;&gt;n&gt;&gt;k&gt;&gt;t&gt;&gt;xl&gt;&gt;yd&gt;&gt;xr&gt;&gt;yu;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;n;i++)&#123;<br>        <span class="hljs-type">int</span> cnt = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> max_cnt = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>;j&lt;t;j++)&#123;<br>            <span class="hljs-type">int</span> x,y;<br>            cin&gt;&gt;x&gt;&gt;y;<br>            <span class="hljs-keyword">if</span>(x&gt;=xl &amp;&amp; x&lt;=xr &amp;&amp; y&gt;=yd &amp;&amp; y&lt;=yu)&#123;<br>                cnt++;<br>                <span class="hljs-keyword">if</span>(cnt &gt; max_cnt)&#123;<br>                    max_cnt = cnt;<br>                &#125;<br>            &#125;<span class="hljs-keyword">else</span>&#123;<br>                <span class="hljs-keyword">if</span>(cnt &gt; max_cnt)&#123;<br>                    max_cnt = cnt;<br>                &#125;<br>                cnt = <span class="hljs-number">0</span>;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">if</span>(max_cnt) res[<span class="hljs-number">0</span>]++;<br>        <span class="hljs-keyword">if</span>(max_cnt&gt;=k) res[<span class="hljs-number">1</span>]++;<br>    &#125;<br>    <br>    cout&lt;&lt;res[<span class="hljs-number">0</span>]&lt;&lt;endl&lt;&lt;res[<span class="hljs-number">1</span>];<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -312,6 +315,13 @@
     </div>
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/STL-%E6%8E%92%E5%BA%8F/">#STL,排序</a>
+      
+    </div>
+  
 </div>
 
 
@@ -320,8 +330,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>CSP 27</div>
-      <div>http://example.com/2023/02/24/CCF-CSP/CSP-27/</div>
+      <div>CSP 20</div>
+      <div>http://example.com/2023/03/13/Algorithm/CCF-CSP/CSP-20/</div>
     </div>
     <div class="license-meta">
       
@@ -333,7 +343,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年2月24日</div>
+          <div>2023年3月13日</div>
         </div>
       
       
@@ -370,9 +380,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/25/Algorithm/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E4%B8%AD-%E7%BA%BF%E6%80%A7DP/" title="动态规划(中) 线性DP">
+                      <a href="/2023/03/14/Algorithm/%E7%AE%97%E6%B3%95%E7%AB%9E%E8%B5%9B-Python/" title="算法竞赛-Python">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">动态规划(中) 线性DP</span>
+                        <span class="hidden-mobile">算法竞赛-Python</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -380,8 +390,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/24/CCF-CSP/CSP-28/" title="CSP 28">
-                        <span class="hidden-mobile">CSP 28</span>
+                      <a href="/2023/03/11/Algorithm/CCF-CSP/CSP-22/" title="CSP 22">
+                        <span class="hidden-mobile">CSP 22</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
