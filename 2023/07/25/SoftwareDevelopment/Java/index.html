@@ -24,7 +24,7 @@
 <meta property="og:description" content="Java基础学习">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-07-25T06:35:43.000Z">
-<meta property="article:modified_time" content="2023-07-25T06:36:16.671Z">
+<meta property="article:modified_time" content="2023-07-25T12:48:04.247Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8 字
+          2.9k 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          1 分钟
+          24 分钟
         
       </span>
     
@@ -266,7 +266,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年7月25日 下午
+                    本文最后更新于：2023年7月25日 晚上
                   
                 
               </p>
@@ -276,6 +276,70 @@
                 
                 <p>Java基础学习</p>
 <span id="more"></span>
+<h3 id="代码块">代码块</h3>
+<ol type="1">
+<li>静态代码块:
+<ol type="1">
+<li><strong>格式</strong>：static { }</li>
+<li><strong>特点</strong>：类加载时自动执行，由于类只会加载一次，所以静态代码块也只会执行一次。</li>
+<li><strong>作用</strong>：完成类的初始化，例如：对类变量的初始化赋值。</li>
+</ol></li>
+<li>实例代码块
+<ol type="1">
+<li><strong>格式</strong>：{ }<br />
+</li>
+<li><strong>特点</strong>：每次创建对象时，执行实例代码块，并在构造器前执行。</li>
+<li><strong>作用：</strong>和构造器一样，都是用来完成对象的初始化的，例如：对实例变量进行初始化赋值。</li>
+</ol></li>
+</ol>
+<h3 id="单例设计模式">单例设计模式</h3>
+<ol type="1">
+<li>保证一个类只有一个对象，防止内存占用</li>
+<li>定义方法：把类的构造器私有；定义一个类变量存储类的一个对象；提供一个类方法返回对象</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span> &#123;<br>    <span class="hljs-comment">//2. 类变量存储唯一类对象</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">A</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">A</span>();<br>    <br>    <span class="hljs-comment">//1. 私有构造器使得在外部无法构造类</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-title function_">A</span><span class="hljs-params">()</span>&#123;<br>    &#125;<br>    <br>    <span class="hljs-comment">//3. 定义一个类方法返回对象</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> A <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> a;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="多态">多态</h3>
+<ol type="1">
+<li><p>在函数传参时可以直接定义为父类并传入各个子类，但此时无法调用各个类特有的方法。</p>
+<p>为了解决该问题，可以在传入后强转类型到子类类型再处理。</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//如果p接收的是子类对象</span><br><span class="hljs-keyword">if</span>(父类变量 instance 子类)&#123;<br>    <span class="hljs-comment">//则可以将p转换为子类类型</span><br>    子类 变量名 = (子类)父类变量;<br>&#125;<br></code></pre></td></tr></table></figure></p></li>
+</ol>
+<h3 id="final">final</h3>
+<ol type="1">
+<li>用法</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">- <span class="hljs-keyword">final</span>修饰类：该类称为最终类，特点是不能被继承<br>- <span class="hljs-keyword">final</span>修饰方法：该方法称之为最终方法，特点是不能被重写。<br>- <span class="hljs-keyword">final</span>修饰变量：该变量只能被赋值一次。<br></code></pre></td></tr></table></figure>
+<ol start="2" type="1">
+<li>被 static final 修饰的成员变量，称之为常量。</li>
+</ol>
+<h3 id="object">Object</h3>
+<ol type="1">
+<li><p>可以通过重写toString()和equals()来自定义打印的信息和比较的规则</p></li>
+<li><p>如果想实现拷贝，需要实现Cloneble接口</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Cloneable</span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">protected</span> Object <span class="hljs-title function_">clone</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> CloneNotSupportedException &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">super</span>.clone();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure> 在使用时以如下方式调用 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"> <span class="hljs-type">User</span> <span class="hljs-variable">u1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-number">1</span>,<span class="hljs-string">&quot;zhangsan&quot;</span>,<span class="hljs-string">&quot;wo666&quot;</span>,<span class="hljs-keyword">new</span> <span class="hljs-title class_">double</span>[]&#123;<span class="hljs-number">99.0</span>,<span class="hljs-number">99.5</span>&#125;);<br><span class="hljs-comment">//调用方法克隆得到一个新对象</span><br>   <span class="hljs-type">User</span> <span class="hljs-variable">u2</span> <span class="hljs-operator">=</span> (User) u1.clone();<br></code></pre></td></tr></table></figure></p></li>
+</ol>
+<h3 id="日期旧">日期（旧）</h3>
+<ol type="1">
+<li><p>使用Date类获取当前时间</p>
+<pre><code class="hljs">     Date d = new Date();
+     System.out.println(d);</code></pre></li>
+<li><p>将日期格式化</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">SimpleDateFormat</span> <span class="hljs-variable">sdf</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SimpleDateFormat</span>(<span class="hljs-string">&quot;yyyy年MM月dd日 HH:mm:ss EEE a&quot;</span>);<br><br><span class="hljs-type">String</span> <span class="hljs-variable">rs</span> <span class="hljs-operator">=</span> sdf.format(d);<br><br><span class="hljs-type">Date</span> <span class="hljs-variable">time</span> <span class="hljs-operator">=</span> sdf.parse(rs)<br></code></pre></td></tr></table></figure></p></li>
+<li><p>Calendar</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Calendar</span> <span class="hljs-variable">now</span> <span class="hljs-operator">=</span> Calendar.getInstance();<br>now.get(Calendar.YEAR)	<span class="hljs-comment">// 获取年份信息</span><br>now.getTime()			<span class="hljs-comment">// 获取Date对象</span><br>now.set(Calendar.MONTH, <span class="hljs-number">9</span>);	<span class="hljs-comment">// 修改日期</span><br><br><span class="hljs-comment">//为某个信息增加或者减少多少</span><br>now.add(Calendar.DAY_OF_YEAR, <span class="hljs-number">100</span>);<br>now.add(Calendar.DAY_OF_YEAR, -<span class="hljs-number">10</span>);<br></code></pre></td></tr></table></figure></p></li>
+</ol>
+<h3 id="日期jdk8">日期（JDK8）</h3>
+<ol type="1">
+<li><p>LocalDate 年月日</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">LocalDate</span> <span class="hljs-variable">ld</span> <span class="hljs-operator">=</span> LocalDate.now();	<span class="hljs-comment">// 2023-07-25</span><br>ld.getMonth();	<span class="hljs-comment">// JULY</span><br>ld.withMonth(<span class="hljs-number">12</span>);	<span class="hljs-comment">// 修改月份</span><br>ld.plusYears(<span class="hljs-number">2</span>);	<span class="hljs-comment">// 添加年份</span><br>ld.minusYears(<span class="hljs-number">2</span>);	<span class="hljs-comment">// 减小年份</span><br><br><span class="hljs-type">LocalDate</span> <span class="hljs-variable">ld8</span> <span class="hljs-operator">=</span> LocalDate.of(<span class="hljs-number">2099</span>, <span class="hljs-number">12</span>, <span class="hljs-number">12</span>);	<span class="hljs-comment">// 创建LocalDate</span><br><span class="hljs-comment">//判断2个日期对象，是否相等，在前还是在后： equals isBefore isAfter</span><br>System.out.println(ld8.equals(ld9));<span class="hljs-comment">// true</span><br>System.out.println(ld8.isAfter(ld)); <span class="hljs-comment">// true</span><br>System.out.println(ld8.isBefore(ld)); <span class="hljs-comment">// false</span><br></code></pre></td></tr></table></figure></p></li>
+<li><p>LocalTime 时 分 秒 纳秒</p>
+<p>内置函数同LocalDate</p></li>
+<li><p>LocalDateTime 年 月 日 时 分 秒 纳秒</p></li>
+<li><p>DateTimeFormatter</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"> <span class="hljs-type">DateTimeFormatter</span> <span class="hljs-variable">formatter</span> <span class="hljs-operator">=</span> DateTimeFormatter.ofPattern(<span class="hljs-string">&quot;yyyy年MM月dd日 HH:mm:ss&quot;</span>);<br><br>formatter.format(LocalDateTime.now());	<span class="hljs-comment">// 转化</span><br>LocalDateTime.parse(dateStr, formatter);	<span class="hljs-comment">// 解析</span><br></code></pre></td></tr></table></figure></li>
+<li><p>Period &amp; Duration</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">LocalDate</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> LocalDate.of(<span class="hljs-number">2029</span>, <span class="hljs-number">8</span>, <span class="hljs-number">10</span>);<br><span class="hljs-type">LocalDate</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> LocalDate.of(<span class="hljs-number">2029</span>, <span class="hljs-number">12</span>, <span class="hljs-number">15</span>);<br><br><span class="hljs-comment">// 1、创建Period对象，封装两个日期对象。</span><br><span class="hljs-type">Period</span> <span class="hljs-variable">period</span> <span class="hljs-operator">=</span> Period.between(start, end);<br><br><span class="hljs-comment">// 2、通过period对象获取两个日期对象相差的信息。</span><br>System.out.println(period.getYears());<br>System.out.println(period.getMonths());<br>System.out.println(period.getDays());<br><br><span class="hljs-type">LocalDateTime</span> <span class="hljs-variable">start</span> <span class="hljs-operator">=</span> LocalDateTime.of(<span class="hljs-number">2025</span>, <span class="hljs-number">11</span>, <span class="hljs-number">11</span>, <span class="hljs-number">11</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>);<br><span class="hljs-type">LocalDateTime</span> <span class="hljs-variable">end</span> <span class="hljs-operator">=</span> LocalDateTime.of(<span class="hljs-number">2025</span>, <span class="hljs-number">11</span>, <span class="hljs-number">11</span>, <span class="hljs-number">11</span>, <span class="hljs-number">11</span>, <span class="hljs-number">11</span>);<br><span class="hljs-comment">// 1、得到Duration对象</span><br><span class="hljs-type">Duration</span> <span class="hljs-variable">duration</span> <span class="hljs-operator">=</span> Duration.between(start, end);<br><br><span class="hljs-comment">// 2、获取两个时间对象间隔的信息</span><br>System.out.println(duration.toDays());<span class="hljs-comment">// 间隔多少天</span><br>System.out.println(duration.toHours());<span class="hljs-comment">// 间隔多少小时</span><br>System.out.println(duration.toMinutes());<span class="hljs-comment">// 间隔多少分</span><br>System.out.println(duration.toSeconds());<span class="hljs-comment">// 间隔多少秒</span><br>System.out.println(duration.toMillis());<span class="hljs-comment">// 间隔多少毫秒</span><br>System.out.println(duration.toNanos());<span class="hljs-comment">// 间隔多少纳秒</span><br></code></pre></td></tr></table></figure></p></li>
+</ol>
 
                 
               </div>
