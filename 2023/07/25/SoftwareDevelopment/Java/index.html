@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/1668051403591.png">
 <meta property="article:published_time" content="2023-07-25T06:35:43.000Z">
-<meta property="article:modified_time" content="2023-07-27T06:34:15.661Z">
+<meta property="article:modified_time" content="2023-07-27T13:59:26.496Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/1668051403591.png">
@@ -225,7 +225,7 @@
         
         
         
-          105 分钟
+          110 分钟
         
       </span>
     
@@ -268,7 +268,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年7月27日 下午
+                    本文最后更新于：2023年7月27日 晚上
                   
                 
               </p>
@@ -481,6 +481,12 @@ src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230726201654.png" src
 <p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ServerReaderThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Thread</span>&#123;<br>    <span class="hljs-keyword">private</span> Socket socket;<br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">ServerReaderThread</span><span class="hljs-params">(Socket socket)</span>&#123;<br>        <span class="hljs-built_in">this</span>.socket = socket;<br>    &#125;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-type">InputStream</span> <span class="hljs-variable">is</span> <span class="hljs-operator">=</span> socket.getInputStream();<br>            <span class="hljs-type">DataInputStream</span> <span class="hljs-variable">dis</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DataInputStream</span>(is);<br>            <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)&#123;<br>                <span class="hljs-keyword">try</span> &#123;<br>                    <span class="hljs-type">String</span> <span class="hljs-variable">msg</span> <span class="hljs-operator">=</span> dis.readUTF();<br>                    System.out.println(msg);<br><br>                &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>                    System.out.println(<span class="hljs-string">&quot;有人下线了：&quot;</span> + socket.getRemoteSocketAddress());<br>                    dis.close();<br>                    socket.close();<br>                    <span class="hljs-keyword">break</span>;<br>                &#125;<br>            &#125;<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></p>
 <p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Server</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        System.out.println(<span class="hljs-string">&quot;-----服务端启动成功-------&quot;</span>);<br>        <span class="hljs-comment">// 1、创建ServerSocket的对象，同时为服务端注册端口。</span><br>        <span class="hljs-type">ServerSocket</span> <span class="hljs-variable">serverSocket</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ServerSocket</span>(<span class="hljs-number">8888</span>);<br><br>        <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) &#123;<br>            <span class="hljs-comment">// 2、使用serverSocket对象，调用一个accept方法，等待客户端的连接请求</span><br>            <span class="hljs-type">Socket</span> <span class="hljs-variable">socket</span> <span class="hljs-operator">=</span> serverSocket.accept();<br><br>            System.out.println(<span class="hljs-string">&quot;有人上线了：&quot;</span> + socket.getRemoteSocketAddress());<br><br>            <span class="hljs-comment">// 3、把这个客户端对应的socket通信管道，交给一个独立的线程负责处理。</span><br>            <span class="hljs-keyword">new</span> <span class="hljs-title class_">ServerReaderThread</span>(socket).start();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></p></li>
 </ol>
+<h3 id="junit测试">junit测试</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StringUtil</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">printNumber</span><span class="hljs-params">(String name)</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;名字长度：&quot;</span>+name.length());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StringUtilTest</span>&#123;<br>    <span class="hljs-meta">@Test</span>	<span class="hljs-comment">// 必须加注解</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testGetMaxIndex</span><span class="hljs-params">()</span>&#123;<br>       <span class="hljs-type">int</span> <span class="hljs-variable">index1</span> <span class="hljs-operator">=</span> StringUtil.getMaxIndex(<span class="hljs-literal">null</span>);<br>       System.out.println(index1);<br>        <br>       <span class="hljs-type">int</span> <span class="hljs-variable">index2</span> <span class="hljs-operator">=</span> StringUtil.getMaxIndex(<span class="hljs-string">&quot;admin&quot;</span>);<br>       System.out.println(index2);<br>        <br>        <span class="hljs-comment">//断言机制：预测index2的结果,用来判断逻辑是否有问题</span><br>        Assert.assertEquals(<span class="hljs-string">&quot;方法内部有Bug&quot;</span>,<span class="hljs-number">4</span>,index2);	<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img
+src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230727215753.png" srcset="/img/loading.gif" lazyload /></p>
+<p>假设我想在每个测试方法中使用Socket对象，并且用完之后，需要把Socket关闭，上述注解就会起作用</p>
 
                 
               </div>
@@ -568,6 +574,12 @@ src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20230726201654.png" src
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/07/27/PhysicalTeaching/Prepare/%E7%89%A9%E7%90%86%E5%BF%85%E4%BF%AE%E4%B8%80/" title="物理必修一">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">物理必修一</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
