@@ -16,21 +16,21 @@
   <meta name="author" content="Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="计算机系统学习">
+    <meta name="description" content="记录常见的小知识点">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计算机系统">
-<meta property="og:url" content="http://example.com/2023/08/22/SoftwareDevelopment/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:title" content="小知识">
+<meta property="og:url" content="http://example.com/2024/03/06/Algorithm/%E5%B0%8F%E7%9F%A5%E8%AF%86/index.html">
 <meta property="og:site_name" content="Chen&#39;s Blog">
-<meta property="og:description" content="计算机系统学习">
+<meta property="og:description" content="记录常见的小知识点">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-08-22T13:10:49.000Z">
-<meta property="article:modified_time" content="2023-08-23T14:02:16.003Z">
+<meta property="article:published_time" content="2024-03-06T07:36:22.000Z">
+<meta property="article:modified_time" content="2024-03-06T07:46:10.172Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>计算机系统 - Chen&#39;s Blog</title>
+  <title>小知识 - Chen&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -184,7 +184,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="计算机系统"></span>
+            <span id="subtitle" data-typed-text="小知识"></span>
           
         </div>
 
@@ -200,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-08-22 21:10" pubdate>
-          2023年8月22日 晚上
+        <time datetime="2024-03-06 15:36" pubdate>
+          2024年3月6日 下午
         </time>
       </span>
     
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          83 字
+          339 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          1 分钟
+          3 分钟
         
       </span>
     
@@ -261,12 +261,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">计算机系统</h1>
+            <h1 style="display: none">小知识</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年8月23日 晚上
+                    本文最后更新于：2024年3月6日 下午
                   
                 
               </p>
@@ -274,12 +274,17 @@
             
               <div class="markdown-body">
                 
-                <p>计算机系统学习 <span id="more"></span></p>
+                <p>记录常见的小知识点</p>
+<span id="more"></span>
+<h3 id="位运算相关操作">位运算相关操作</h3>
 <ol type="1">
-<li>L1 Cache 和 L2 Cache 都是每个 CPU 核心独有的，而 L3 Cache 是多个 CPU
-核心共享的。</li>
-<li>MESI协议用来保证多核之间的缓存一致性 <a
-target="_blank" rel="noopener" href="https://xiaolincoding.com/os/1_hardware/cpu_mesi.html">CPU缓存一致性</a></li>
+<li><p>获取一个数的二进制表示中第k位</p>
+<p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">n&gt;&gt;k&amp;<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure></p></li>
+<li><p>获取一个数最后一位1</p>
+<p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">n&amp;-n<br></code></pre></td></tr></table></figure></p>
+<p>给定一个长度为 n的数列，请你求出数列中每个数的二进制表示中 1
+的个数。</p>
+<p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">int</span> n;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    cin&gt;&gt;n;<br>    <span class="hljs-keyword">while</span>(n--)&#123;<br>        <span class="hljs-type">int</span> m;<br>        cin&gt;&gt;m;<br>        <span class="hljs-type">int</span> cnt = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>(m&amp;-m)&#123;<br>            cnt ++;<br>            m -= (m &amp; -m);<br>        &#125;<br>        cout&lt;&lt;cnt&lt;&lt;<span class="hljs-string">&quot; &quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></p></li>
 </ol>
 
                 
@@ -299,7 +304,7 @@ target="_blank" rel="noopener" href="https://xiaolincoding.com/os/1_hardware/cpu
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" class="category-chain-item">软件开发</a>
+  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
   
   
 
@@ -319,8 +324,8 @@ target="_blank" rel="noopener" href="https://xiaolincoding.com/os/1_hardware/cpu
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>计算机系统</div>
-      <div>http://example.com/2023/08/22/SoftwareDevelopment/计算机系统/</div>
+      <div>小知识</div>
+      <div>http://example.com/2024/03/06/Algorithm/小知识/</div>
     </div>
     <div class="license-meta">
       
@@ -332,13 +337,13 @@ target="_blank" rel="noopener" href="https://xiaolincoding.com/os/1_hardware/cpu
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年8月22日</div>
+          <div>2024年3月6日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年8月23日</div>
+          <div>2024年3月6日</div>
         </div>
       
       
@@ -369,18 +374,12 @@ target="_blank" rel="noopener" href="https://xiaolincoding.com/os/1_hardware/cpu
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/03/06/Algorithm/%E5%B0%8F%E7%9F%A5%E8%AF%86/" title="小知识">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">小知识</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/25/SoftwareDevelopment/Java/" title="Java">
-                        <span class="hidden-mobile">Java</span>
+                      <a href="/2023/08/22/SoftwareDevelopment/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/" title="计算机系统">
+                        <span class="hidden-mobile">计算机系统</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

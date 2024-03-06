@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>小知识</title>
+    <link href="/2024/03/06/Algorithm/%E5%B0%8F%E7%9F%A5%E8%AF%86/"/>
+    <url>/2024/03/06/Algorithm/%E5%B0%8F%E7%9F%A5%E8%AF%86/</url>
+    
+    <content type="html"><![CDATA[<p>记录常见的小知识点</p><span id="more"></span><h3 id="位运算相关操作">位运算相关操作</h3><ol type="1"><li><p>获取一个数的二进制表示中第k位</p><p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">n&gt;&gt;k&amp;<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure></p></li><li><p>获取一个数最后一位1</p><p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">n&amp;-n<br></code></pre></td></tr></table></figure></p><p>给定一个长度为 n的数列，请你求出数列中每个数的二进制表示中 1的个数。</p><p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-type">int</span> n;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    cin&gt;&gt;n;<br>    <span class="hljs-keyword">while</span>(n--)&#123;<br>        <span class="hljs-type">int</span> m;<br>        cin&gt;&gt;m;<br>        <span class="hljs-type">int</span> cnt = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>(m&amp;-m)&#123;<br>            cnt ++;<br>            m -= (m &amp; -m);<br>        &#125;<br>        cout&lt;&lt;cnt&lt;&lt;<span class="hljs-string">&quot; &quot;</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></p></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>算法</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>计算机系统</title>
     <link href="/2023/08/22/SoftwareDevelopment/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/"/>
     <url>/2023/08/22/SoftwareDevelopment/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/</url>
