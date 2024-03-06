@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>计算机系统</title>
+    <link href="/2023/08/22/SoftwareDevelopment/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/"/>
+    <url>/2023/08/22/SoftwareDevelopment/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/</url>
+    
+    <content type="html"><![CDATA[<p>计算机系统学习 <span id="more"></span></p><ol type="1"><li>L1 Cache 和 L2 Cache 都是每个 CPU 核心独有的，而 L3 Cache 是多个 CPU核心共享的。</li><li>MESI协议用来保证多核之间的缓存一致性 <ahref="https://xiaolincoding.com/os/1_hardware/cpu_mesi.html">CPU缓存一致性</a></li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>软件开发</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Java</title>
     <link href="/2023/07/25/SoftwareDevelopment/Java/"/>
     <url>/2023/07/25/SoftwareDevelopment/Java/</url>
