@@ -16,21 +16,23 @@
   <meta name="author" content="Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Django学习">
+    <meta name="description" content="springBoot学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Django">
-<meta property="og:url" content="http://example.com/2023/07/13/SoftwareDevelopment/Django/index.html">
+<meta property="og:title" content="SpringBoot">
+<meta property="og:url" content="http://example.com/2024/03/07/SoftwareDevelopment/SpringBoot/index.html">
 <meta property="og:site_name" content="Chen&#39;s Blog">
-<meta property="og:description" content="Django学习">
+<meta property="og:description" content="springBoot学习">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-13T12:36:17.000Z">
-<meta property="article:modified_time" content="2023-07-14T06:12:28.573Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240307182743.png">
+<meta property="article:published_time" content="2024-03-07T10:26:52.000Z">
+<meta property="article:modified_time" content="2024-03-07T11:10:10.615Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240307182743.png">
   
   
   
-  <title>Django - Chen&#39;s Blog</title>
+  <title>SpringBoot - Chen&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -184,7 +186,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Django"></span>
+            <span id="subtitle" data-typed-text="SpringBoot"></span>
           
         </div>
 
@@ -200,8 +202,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-13 20:36" pubdate>
-          2023年7月13日 晚上
+        <time datetime="2024-03-07 18:26" pubdate>
+          2024年3月7日 晚上
         </time>
       </span>
     
@@ -212,7 +214,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          190 字
+          1.9k 字
         
       </span>
     
@@ -223,7 +225,7 @@
         
         
         
-          2 分钟
+          16 分钟
         
       </span>
     
@@ -261,12 +263,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Django</h1>
+            <h1 style="display: none">SpringBoot</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年7月14日 下午
+                    本文最后更新于：2024年3月7日 晚上
                   
                 
               </p>
@@ -274,19 +276,19 @@
             
               <div class="markdown-body">
                 
-                <p>Django学习 <span id="more"></span></p>
-<ol type="1">
-<li><p>Django项目创建</p>
-<p><a
-target="_blank" rel="noopener" href="https://www.acwing.com/activity/content/code/content/1969996/">工程课
-Django-2.1. 上课笔记 - AcWing</a></p></li>
-<li><p>Pycharm连接服务器项目</p>
-<p><a
-target="_blank" rel="noopener" href="https://blog.csdn.net/strawberry47/article/details/110440842">(141条消息)
-用pycharm跑服务器代码
-如何建立映射、如何设置自动更新、如何安装包_pycharm建立映射_strawberry47的博客-CSDN博客</a></p></li>
-<li><p>访问静态文件：配置settings后，通过ip:port/static/images/../xxx.png访问</p></li>
-</ol>
+                <p>springBoot学习</p>
+<span id="more"></span>
+<h3 id="简单示例">简单示例</h3>
+<p>首先在新创建的Springboot的项目中新建controller文件夹，创建一个controller文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240307182743.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> org.example.springboot.controller;<br><br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;<br><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RestController;<br><br><span class="hljs-meta">@RestController</span>	<span class="hljs-comment">// Controller + ResponseBody</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HelloController</span> &#123;<br>    <span class="hljs-meta">@RequestMapping(&quot;/hello&quot;)</span>	<span class="hljs-comment">// 设置路径,RequestMapping可以接收各种方式的请求</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">hello</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;Hello&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello&quot;</span>;	<span class="hljs-comment">// 返回值</span><br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h3 id="各种参数传递方式">各种参数传递方式</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> org.example.springboot.pojo;<br><br><span class="hljs-keyword">import</span> lombok.Data;<br><br><span class="hljs-meta">@Data</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> &#123;<br>    <span class="hljs-keyword">private</span> String username;<br>    <span class="hljs-keyword">private</span> Integer age;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> org.example.springboot.pojo;<br><br><span class="hljs-keyword">import</span> lombok.Data;<br><br><span class="hljs-meta">@Data</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Address</span> &#123;<br>    <span class="hljs-keyword">private</span> String province;<br>    <span class="hljs-keyword">private</span> String city;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> org.example.springboot.pojo;<br><br><span class="hljs-keyword">import</span> lombok.Data;<br><br><span class="hljs-meta">@Data</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ComplexUser</span>&#123;<br><br>    <span class="hljs-keyword">private</span> String username;<br>    <span class="hljs-keyword">private</span> Integer age;<br>    <span class="hljs-keyword">private</span> Address address;<br><br><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 简单参数传递</span><br><span class="hljs-comment">// 要求传参的名字和参数名字相同</span><br><span class="hljs-meta">@GetMapping(&quot;/request_1&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">request1</span><span class="hljs-params">(String name, Integer age)</span>&#123;<br>    <span class="hljs-keyword">return</span> name + String.valueOf(age);<br>&#125;<br><br><span class="hljs-comment">// 可以使用RequestParam来指定传过来的参数名字</span><br><span class="hljs-meta">@GetMapping(&quot;/request_2&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">request2</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam(name=&quot;username&quot;)</span>String name, Integer age)</span>&#123;<br>    <span class="hljs-keyword">return</span> name + String.valueOf(age);<br>&#125;<br><br><span class="hljs-comment">// 通过Get获得实体参数，传参方式同上</span><br><span class="hljs-comment">// 可以只传一部分属性</span><br><span class="hljs-meta">@GetMapping(&quot;/request_3&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">request3</span><span class="hljs-params">(User user)</span>&#123;<br>    <span class="hljs-keyword">return</span> user.getUsername() + String.valueOf(user.getAge());<br>&#125;<br><br><span class="hljs-comment">// 通过Post传递复杂实体，注意一定要实现getter和setter方法（用@Data注解简化）</span><br><span class="hljs-meta">@PostMapping(&quot;/request_4&quot;)</span><br><span class="hljs-keyword">public</span> ComplexUser <span class="hljs-title function_">request4</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> ComplexUser user)</span>&#123;	<span class="hljs-comment">// 注意一定要@RequestBody</span><br>    <span class="hljs-keyword">return</span> user;<br>&#125;<br><br><span class="hljs-comment">// 路径参数</span><br><span class="hljs-meta">@PostMapping(&quot;request_5/&#123;id&#125;&quot;)</span><br><span class="hljs-keyword">public</span> Integer <span class="hljs-title function_">request5</span><span class="hljs-params">(<span class="hljs-meta">@PathVariable</span> Integer id)</span>&#123;<br>    <span class="hljs-keyword">return</span> id;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="统一返回类">统一返回类</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Result</span> &#123;<br>    <span class="hljs-keyword">private</span> Integer code;<br>    <span class="hljs-keyword">private</span> String msg;<br>    <span class="hljs-keyword">private</span> Object data;<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -325,8 +327,8 @@ target="_blank" rel="noopener" href="https://blog.csdn.net/strawberry47/article/
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Django</div>
-      <div>http://example.com/2023/07/13/SoftwareDevelopment/Django/</div>
+      <div>SpringBoot</div>
+      <div>http://example.com/2024/03/07/SoftwareDevelopment/SpringBoot/</div>
     </div>
     <div class="license-meta">
       
@@ -338,13 +340,13 @@ target="_blank" rel="noopener" href="https://blog.csdn.net/strawberry47/article/
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月13日</div>
+          <div>2024年3月7日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年7月14日</div>
+          <div>2024年3月7日</div>
         </div>
       
       
@@ -375,9 +377,9 @@ target="_blank" rel="noopener" href="https://blog.csdn.net/strawberry47/article/
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/15/SoftwareDevelopment/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/" title="前端学习">
+                      <a href="/2024/03/07/SoftwareDevelopment/MySQL/" title="MySQL">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">前端学习</span>
+                        <span class="hidden-mobile">MySQL</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -385,8 +387,8 @@ target="_blank" rel="noopener" href="https://blog.csdn.net/strawberry47/article/
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/13/SoftwareDevelopment/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B7%A5%E5%85%B7/" title="Linux服务器工具">
-                        <span class="hidden-mobile">Linux服务器工具</span>
+                      <a href="/2024/03/06/SoftwareDevelopment/JavaBasis/" title="JavaBasis">
+                        <span class="hidden-mobile">JavaBasis</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

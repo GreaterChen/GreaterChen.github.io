@@ -16,21 +16,21 @@
   <meta name="author" content="Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前端开发学习">
+    <meta name="description" content="Java基础的学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前端学习">
-<meta property="og:url" content="http://example.com/2023/07/15/SoftwareDevelopment/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:title" content="JavaBasis">
+<meta property="og:url" content="http://example.com/2024/03/06/SoftwareDevelopment/JavaBasis/index.html">
 <meta property="og:site_name" content="Chen&#39;s Blog">
-<meta property="og:description" content="前端开发学习">
+<meta property="og:description" content="Java基础的学习">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-15T07:59:08.000Z">
-<meta property="article:modified_time" content="2023-07-15T08:00:25.391Z">
+<meta property="article:published_time" content="2024-03-06T14:08:27.000Z">
+<meta property="article:modified_time" content="2024-03-07T10:26:24.671Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>前端学习 - Chen&#39;s Blog</title>
+  <title>JavaBasis - Chen&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -184,7 +184,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="前端学习"></span>
+            <span id="subtitle" data-typed-text="JavaBasis"></span>
           
         </div>
 
@@ -200,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-15 15:59" pubdate>
-          2023年7月15日 下午
+        <time datetime="2024-03-06 22:08" pubdate>
+          2024年3月6日 晚上
         </time>
       </span>
     
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          41 字
+          2.5k 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          1 分钟
+          21 分钟
         
       </span>
     
@@ -261,12 +261,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">前端学习</h1>
+            <h1 style="display: none">JavaBasis</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年7月15日 下午
+                    本文最后更新于：2024年3月7日 晚上
                   
                 
               </p>
@@ -274,11 +274,26 @@
             
               <div class="markdown-body">
                 
-                <p>前端开发学习 <span id="more"></span></p>
-<h2 id="tips">Tips</h2>
-<ol type="1">
-<li>连续的按钮重叠时可以在中间添加&lt;br&gt;分开各个按钮</li>
-</ol>
+                <p>Java基础的学习</p>
+<span id="more"></span>
+<h3 id="scanner键盘录入">Scanner键盘录入</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">lesson1</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-comment">// 声明Scanner</span><br>        <span class="hljs-type">Scanner</span> <span class="hljs-variable">scanner</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(System.in);<br>		<span class="hljs-comment">// 获取下一个输入</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">next</span> <span class="hljs-operator">=</span> scanner.next();<br>        System.out.println(next);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="random">Random</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Random</span> <span class="hljs-variable">random</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();<br><span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> random.nextInt(<span class="hljs-number">10</span>);<br>System.out.println(i);<br></code></pre></td></tr></table></figure>
+<h3 id="数组">数组</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">int</span> []a = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">5</span>];<br><span class="hljs-type">int</span> [][]b = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">10</span>][<span class="hljs-number">10</span>];<br><span class="hljs-type">int</span> <span class="hljs-variable">length</span> <span class="hljs-operator">=</span> a.length;  <span class="hljs-comment">// 获取数组长度</span><br><br>a[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;<br>b[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;<br><br>System.out.println(Arrays.toString(a)); <span class="hljs-comment">// 打印数组</span><br>System.out.println(Arrays.deepToString(b)); <span class="hljs-comment">// 打印二维数组</span><br></code></pre></td></tr></table></figure>
+<h3 id="字符串">字符串</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;abcde&quot;</span>;<br><br><span class="hljs-type">String</span> <span class="hljs-variable">substring</span> <span class="hljs-operator">=</span> s.substring(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>);   <span class="hljs-comment">// [1,3)</span><br>System.out.println(substring);  <span class="hljs-comment">// &quot;bc&quot;</span><br><br><span class="hljs-type">String</span> <span class="hljs-variable">substring1</span> <span class="hljs-operator">=</span> s.substring(<span class="hljs-number">3</span>); <span class="hljs-comment">// [3,)</span><br>System.out.println(substring1); <span class="hljs-comment">// &quot;de&quot;</span><br><br><span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> s.indexOf(<span class="hljs-string">&quot;de&quot;</span>);<br>System.out.println(i);  <span class="hljs-comment">// 3</span><br><br>s = <span class="hljs-string">&quot;abcabcabc&quot;</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">i1</span> <span class="hljs-operator">=</span> s.indexOf(<span class="hljs-string">&quot;c&quot;</span>, <span class="hljs-number">3</span>); <span class="hljs-comment">// 从下标为3的位置开始找</span><br>System.out.println(i1); <span class="hljs-comment">// 5</span><br><br><br><span class="hljs-type">String</span> <span class="hljs-variable">s2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;abcabcabc&quot;</span>;<br><span class="hljs-keyword">if</span>(s.equals(s2))&#123;   <span class="hljs-comment">// == 是比较内存地址， equals是比较内容</span><br>    System.out.println(<span class="hljs-string">&quot;equals&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="arraylist">ArrayList</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java">ArrayList&lt;Integer&gt; arrayList = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>arrayList.add(<span class="hljs-number">5</span>);<br>arrayList.add(<span class="hljs-number">10</span>);<br><span class="hljs-type">int</span> <span class="hljs-variable">size</span> <span class="hljs-operator">=</span> arrayList.size();<br>System.out.println(size);<br><br><span class="hljs-type">Integer</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> arrayList.get(<span class="hljs-number">1</span>);<br>System.out.println(i);<br><br>arrayList.remove(<span class="hljs-number">1</span>);    <span class="hljs-comment">// 移除下标为1的元素</span><br>System.out.println(arrayList);  <span class="hljs-comment">// [5]</span><br><br>arrayList.set(<span class="hljs-number">0</span>,<span class="hljs-number">10</span>);<br>System.out.println(arrayList);  <span class="hljs-comment">// [10]</span><br></code></pre></td></tr></table></figure>
+<h3 id="hashset">HashSet</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java">HashSet&lt;Integer&gt; set = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashSet</span>&lt;&gt;();<br><br>set.add(<span class="hljs-number">1</span>);<br>set.add(<span class="hljs-number">1</span>);<br>set.add(<span class="hljs-number">3</span>);<br><br>System.out.println(set);<br><br><span class="hljs-type">boolean</span> <span class="hljs-variable">contains</span> <span class="hljs-operator">=</span> set.contains(<span class="hljs-number">3</span>);<br>System.out.println(contains);<br><br>set.remove(<span class="hljs-number">1</span>);<br>System.out.println(set);<br></code></pre></td></tr></table></figure>
+<h3 id="priorityqueue">PriorityQueue</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java">PriorityQueue&lt;Integer&gt; queue = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;();<br><br><span class="hljs-comment">// 添加元素</span><br>queue.offer(<span class="hljs-number">3</span>);<br>queue.offer(<span class="hljs-number">1</span>);<br>queue.offer(<span class="hljs-number">5</span>);<br><br><span class="hljs-comment">// 删除元素</span><br>queue.poll();<br>System.out.println(queue);  <span class="hljs-comment">// [3,5]</span><br><br><span class="hljs-type">Integer</span> <span class="hljs-variable">peek</span> <span class="hljs-operator">=</span> queue.peek();<br>System.out.println(peek); <span class="hljs-comment">// 返回顶端元素</span><br></code></pre></td></tr></table></figure>
+<h3 id="hashmap">HashMap</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java">HashMap&lt;String, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br><br>map.put(<span class="hljs-string">&quot;陈&quot;</span>, <span class="hljs-number">21</span>);<br>map.put(<span class="hljs-string">&quot;刘&quot;</span>, <span class="hljs-number">18</span>);<br><br><span class="hljs-type">Integer</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> map.get(<span class="hljs-string">&quot;陈&quot;</span>);<br>System.out.println(i);  <span class="hljs-comment">// 21</span><br><br><span class="hljs-comment">// 修改元素</span><br>map.put(<span class="hljs-string">&quot;陈&quot;</span>, <span class="hljs-number">22</span>);<br>System.out.println(map.get(<span class="hljs-string">&quot;陈&quot;</span>));<br><br>map.remove(<span class="hljs-string">&quot;刘&quot;</span>);<br>System.out.println(map);<br></code></pre></td></tr></table></figure>
+<h3 id="collections">Collections</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java">ArrayList&lt;Integer&gt; arrayList = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br><br>arrayList.add(<span class="hljs-number">3</span>);<br>arrayList.add(<span class="hljs-number">1</span>);<br>arrayList.add(<span class="hljs-number">5</span>);<br><br>Collections.sort(arrayList);	<span class="hljs-comment">// 排序</span><br>System.out.println(arrayList);<br><br>Collections.shuffle(arrayList);	<span class="hljs-comment">// 打乱</span><br>System.out.println(arrayList);<br><br><span class="hljs-type">Integer</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> Collections.max(arrayList);	<span class="hljs-comment">// 获取最大值</span><br>System.out.println(max);<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -317,8 +332,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>前端学习</div>
-      <div>http://example.com/2023/07/15/SoftwareDevelopment/前端学习/</div>
+      <div>JavaBasis</div>
+      <div>http://example.com/2024/03/06/SoftwareDevelopment/JavaBasis/</div>
     </div>
     <div class="license-meta">
       
@@ -330,13 +345,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月15日</div>
+          <div>2024年3月6日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年7月15日</div>
+          <div>2024年3月7日</div>
         </div>
       
       
@@ -367,9 +382,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/23/SoftwareDevelopment/SSM%E5%AD%A6%E4%B9%A0/" title="SSM学习">
+                      <a href="/2024/03/07/SoftwareDevelopment/SpringBoot/" title="SpringBoot">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SSM学习</span>
+                        <span class="hidden-mobile">SpringBoot</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -377,8 +392,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/13/SoftwareDevelopment/Django/" title="Django">
-                        <span class="hidden-mobile">Django</span>
+                      <a href="/2024/03/06/Algorithm/%E5%B0%8F%E7%9F%A5%E8%AF%86/" title="小知识">
+                        <span class="hidden-mobile">小知识</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
