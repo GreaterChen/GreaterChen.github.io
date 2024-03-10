@@ -24,7 +24,7 @@
 <meta property="og:description" content="Java基础的学习">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-06T14:08:27.000Z">
-<meta property="article:modified_time" content="2024-03-07T10:26:24.671Z">
+<meta property="article:modified_time" content="2024-03-07T14:03:11.237Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.5k 字
+          2.8k 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          21 分钟
+          24 分钟
         
       </span>
     
@@ -294,6 +294,9 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java">HashMap&lt;String, Integer&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br><br>map.put(<span class="hljs-string">&quot;陈&quot;</span>, <span class="hljs-number">21</span>);<br>map.put(<span class="hljs-string">&quot;刘&quot;</span>, <span class="hljs-number">18</span>);<br><br><span class="hljs-type">Integer</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> map.get(<span class="hljs-string">&quot;陈&quot;</span>);<br>System.out.println(i);  <span class="hljs-comment">// 21</span><br><br><span class="hljs-comment">// 修改元素</span><br>map.put(<span class="hljs-string">&quot;陈&quot;</span>, <span class="hljs-number">22</span>);<br>System.out.println(map.get(<span class="hljs-string">&quot;陈&quot;</span>));<br><br>map.remove(<span class="hljs-string">&quot;刘&quot;</span>);<br>System.out.println(map);<br></code></pre></td></tr></table></figure>
 <h3 id="collections">Collections</h3>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java">ArrayList&lt;Integer&gt; arrayList = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br><br>arrayList.add(<span class="hljs-number">3</span>);<br>arrayList.add(<span class="hljs-number">1</span>);<br>arrayList.add(<span class="hljs-number">5</span>);<br><br>Collections.sort(arrayList);	<span class="hljs-comment">// 排序</span><br>System.out.println(arrayList);<br><br>Collections.shuffle(arrayList);	<span class="hljs-comment">// 打乱</span><br>System.out.println(arrayList);<br><br><span class="hljs-type">Integer</span> <span class="hljs-variable">max</span> <span class="hljs-operator">=</span> Collections.max(arrayList);	<span class="hljs-comment">// 获取最大值</span><br>System.out.println(max);<br></code></pre></td></tr></table></figure>
+<h3 id="静态工厂">静态工厂</h3>
+<p>https://chat.openai.com/share/f828a7ac-be8f-48e5-abee-63c659b6a088</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Singleton instance;<br><br>    <span class="hljs-comment">// 私有化构造函数，防止外部通过new创建实例</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-title function_">Singleton</span><span class="hljs-params">()</span> &#123;&#125;<br><br>    <span class="hljs-comment">// 公共的静态工厂方法，返回唯一实例</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">synchronized</span> Singleton <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">if</span> (instance == <span class="hljs-literal">null</span>) &#123;<br>            instance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Singleton</span>();<br>        &#125;<br>        <span class="hljs-keyword">return</span> instance;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
                 
               </div>
