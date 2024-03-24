@@ -24,7 +24,7 @@
 <meta property="og:description" content="记录Mybatis主要用法">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-13T07:26:51.000Z">
-<meta property="article:modified_time" content="2024-03-18T07:50:45.242Z">
+<meta property="article:modified_time" content="2024-03-23T11:41:56.978Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          15k 字
+          17k 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          125 分钟
+          139 分钟
         
       </span>
     
@@ -266,7 +266,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年3月18日 下午
+                    本文最后更新于：2024年3月23日 晚上
                   
                 
               </p>
@@ -402,6 +402,36 @@ src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240315205558.png" src
 <p>批量插入的例子本质上是一条SQL语句，而实现批量更新则需要多条SQL语句拼起来，用分号分开。也就是一次性发送多条SQL语句让数据库执行。此时需要在数据库连接信息的URL地址中设置：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">atguigu.dev.url=jdbc:mysql:///mybatis-example?allowMultiQueries=true<br></code></pre></td></tr></table></figure>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">update</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;update&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">foreach</span> <span class="hljs-attr">collection</span>=<span class="hljs-string">&quot;list&quot;</span> <span class="hljs-attr">item</span>=<span class="hljs-string">&quot;order&quot;</span>&gt;</span><br>        update t_order set order_name = #&#123;order.orderName&#125; where order_id = #&#123;order.orderId&#125;;<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">foreach</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">update</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h2 id="mybatisplus">MybatisPlus</h2>
+<h3 id="逻辑删除">逻辑删除</h3>
+<ol type="1">
+<li>数据库和实体类添加逻辑删除字段,
+可以是一个布尔类型、整数类型或枚举类型。</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">USER</span> <span class="hljs-keyword">ADD</span> deleted <span class="hljs-type">INT</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-number">0</span> ;  # <span class="hljs-type">int</span> 类型 <span class="hljs-number">1</span> 逻辑删除 <span class="hljs-number">0</span> 未逻辑删除<br></code></pre></td></tr></table></figure>
+<ol start="2" type="1">
+<li><p>指定逻辑删除字段和属性值</p>
+<p>单一指定</p></li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-variable">@Data</span><br>public class <span class="hljs-keyword">User</span> &#123;<br><br>   <span class="hljs-operator">/</span><span class="hljs-operator">/</span> <span class="hljs-variable">@TableId</span><br>    private <span class="hljs-type">Integer</span> id;<br>    private String name;<br>    private <span class="hljs-type">Integer</span> age;<br>    private String email;<br>     <span class="hljs-variable">@TableLogic</span><br>    <span class="hljs-operator">/</span><span class="hljs-operator">/</span>逻辑删除字段 <span class="hljs-type">int</span> mybatis<span class="hljs-operator">-</span>plus下,默认 逻辑删除值为<span class="hljs-number">1</span> 未逻辑删除 <span class="hljs-number">1</span> <br>    private <span class="hljs-type">Integer</span> deleted;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>​ 全局指定</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs YAML"><span class="hljs-attr">mybatis-plus:</span><br>  <span class="hljs-attr">global-config:</span><br>    <span class="hljs-attr">db-config:</span><br>      <span class="hljs-attr">logic-delete-field:</span> <span class="hljs-string">deleted</span> <span class="hljs-comment"># 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)</span><br>      <span class="hljs-attr">logic-delete-value:</span> <span class="hljs-number">1</span> <span class="hljs-comment"># 逻辑已删除值(默认为 1)</span><br>      <span class="hljs-attr">logic-not-delete-value:</span> <span class="hljs-number">0</span> <span class="hljs-comment"># 逻辑未删除值(默认为 0)</span><br></code></pre></td></tr></table></figure>
+<h3 id="乐观锁和悲观锁">乐观锁和悲观锁</h3>
+<h4 id="悲观锁">悲观锁</h4>
+<p>悲观锁的基本思想是，在整个数据访问过程中，将共享资源锁定，以确保其他线程或进程不能同时访问和修改该资源。悲观锁的核心思想是"先保护，再修改"。在悲观锁的应用中，线程在访问共享资源之前会获取到锁，并在整个操作过程中保持锁的状态，阻塞其他线程的访问。只有当前线程完成操作后，才会释放锁，让其他线程继续操作资源。这种锁机制可以确保资源独占性和数据的一致性，但是在高并发环境下，悲观锁的效率相对较低。</p>
+<h4 id="乐观锁">乐观锁</h4>
+<p>乐观锁的基本思想是，认为并发冲突的概率较低，因此不需要提前加锁，而是<strong>在数据更新阶段</strong>进行冲突检测和处理。乐观锁的核心思想是"先修改，后校验"。在乐观锁的应用中，线程在读取共享资源时不会加锁，而是记录特定的<strong>版本信息</strong>。当线程准备更新资源时，会先检查该资源的版本信息是否与之前读取的版本信息一致，如果一致则执行更新操作，否则说明有其他线程修改了该资源，需要进行相应的冲突处理。乐观锁通过避免加锁操作，提高了系统的并发性能和吞吐量，但是在并发冲突较为频繁的情况下，乐观锁会导致较多的冲突处理和重试操作。</p>
+<h4 id="乐观锁实现">乐观锁实现</h4>
+<p>添加版本号更新插件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-meta">@Bean</span><br><span class="hljs-keyword">public</span> MybatisPlusInterceptor <span class="hljs-title function_">mybatisPlusInterceptor</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-type">MybatisPlusInterceptor</span> <span class="hljs-variable">interceptor</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MybatisPlusInterceptor</span>();<br>    interceptor.addInnerInterceptor(<span class="hljs-keyword">new</span> <span class="hljs-title class_">OptimisticLockerInnerInterceptor</span>());<br>    <span class="hljs-keyword">return</span> interceptor;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>乐观锁字段添加@Version注解</p>
+<p>注意: 数据库也需要添加version字段</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Java">ALTER TABLE USER ADD VERSION INT DEFAULT <span class="hljs-number">1</span> ;  # <span class="hljs-type">int</span> 类型 乐观锁字段<br></code></pre></td></tr></table></figure>
+<pre><code class="hljs">- 支持的数据类型只有:int,Integer,long,Long,Date,Timestamp,LocalDateTime
+- 仅支持 `updateById(id)` 与 `update(entity, wrapper)` 方法</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-meta">@Version</span><br><span class="hljs-keyword">private</span> Integer version;<br></code></pre></td></tr></table></figure>
+<p>正常更新使用即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-comment">//演示乐观锁生效场景</span><br><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testQuick7</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-comment">//步骤1: 先查询,在更新 获取version数据</span><br>    <span class="hljs-comment">//同时查询两条,但是version唯一,最后更新的失败</span><br>    <span class="hljs-type">User</span> <span class="hljs-variable">user</span>  <span class="hljs-operator">=</span> userMapper.selectById(<span class="hljs-number">5</span>);<br>    <span class="hljs-type">User</span> <span class="hljs-variable">user1</span>  <span class="hljs-operator">=</span> userMapper.selectById(<span class="hljs-number">5</span>);<br><br>    user.setAge(<span class="hljs-number">20</span>);<br>    user1.setAge(<span class="hljs-number">30</span>);<br><br>    userMapper.updateById(user);<br>    <span class="hljs-comment">//乐观锁生效,失败!</span><br>    userMapper.updateById(user1);<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -459,7 +489,7 @@ src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240315205558.png" src
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月18日</div>
+          <div>2024年3月23日</div>
         </div>
       
       
@@ -489,6 +519,12 @@ src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240315205558.png" src
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/03/21/%E6%AF%95%E8%AE%BE/" title="毕设">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">毕设</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
