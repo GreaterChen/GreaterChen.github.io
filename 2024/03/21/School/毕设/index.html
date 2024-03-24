@@ -16,21 +16,21 @@
   <meta name="author" content="Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Redis学习">
+    <meta name="description" content="本科毕设">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis">
-<meta property="og:url" content="http://example.com/2024/03/24/Redis/index.html">
+<meta property="og:title" content="毕设">
+<meta property="og:url" content="http://example.com/2024/03/21/School/%E6%AF%95%E8%AE%BE/index.html">
 <meta property="og:site_name" content="Chen&#39;s Blog">
-<meta property="og:description" content="Redis学习">
+<meta property="og:description" content="本科毕设">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-24T09:19:26.000Z">
-<meta property="article:modified_time" content="2024-03-24T09:23:32.933Z">
+<meta property="article:published_time" content="2024-03-21T03:08:20.000Z">
+<meta property="article:modified_time" content="2024-03-23T07:47:59.880Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Redis - Chen&#39;s Blog</title>
+  <title>毕设 - Chen&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -184,7 +184,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Redis"></span>
+            <span id="subtitle" data-typed-text="毕设"></span>
           
         </div>
 
@@ -200,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-24 17:19" pubdate>
-          2024年3月24日 下午
+        <time datetime="2024-03-21 11:08" pubdate>
+          2024年3月21日 上午
         </time>
       </span>
     
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          20 字
+          1.2k 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          1 分钟
+          11 分钟
         
       </span>
     
@@ -261,12 +261,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Redis</h1>
+            <h1 style="display: none">毕设</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年3月24日 下午
+                    本文最后更新于：2024年3月23日 下午
                   
                 
               </p>
@@ -274,11 +274,47 @@
             
               <div class="markdown-body">
                 
-                <p>Redis学习</p>
-<span id="more"></span>
-<h3 id="sql-nosql">SQL &amp; noSQL</h3>
-<p><img
-src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240324171909.png" srcset="/img/loading.gif" lazyload /></p>
+                <p>本科毕设 <span id="more"></span></p>
+<h3 id="现有情况">现有情况</h3>
+<ol type="1">
+<li><p>Exp17为做基于特征分布的零样本学习的文件夹</p>
+<ol type="1">
+<li>输入数据格式为（batch_size, 4, 96, 96, 64）</li>
+</ol></li>
+<li><p>Exp10/utils是生成训练数据的代码</p>
+<ol type="1">
+<li>上面的4代表四个模态['FLAIR', 'T1', 'T1C', 'T2']</li>
+<li>（96，96，64）为经过mask之后将图片缩放到的大小</li>
+<li>labels = np.array([tri_category, six_category, IDH,
+onep19q])，因此在进行三分类、六分类的时候要改WholeDataset里面的信息。</li>
+</ol></li>
+<li><p>七个模态</p>
+<p>这些模态通常指的是磁共振成像（MRI）中的不同成像技术或序列，每种模态可以揭示脑组织的不同属性或病理状态。MRI是一种强大的医学成像工具，能够提供高分辨率的三维图像，用于诊断、研究和治疗规划。以下是提到的模态的简要说明：</p>
+<ol type="1">
+<li><strong>ADC (Apparent Diffusion Coefficient)</strong>:
+体现水分子在组织中扩散能力的图像。ADC图像常用于脑卒中的诊断，特别是早期识别缺血性脑卒中，因为水分子在受损脑细胞中的扩散受到限制。</li>
+<li><strong>DWI (Diffusion Weighted Imaging)</strong>:
+一种特殊的MRI技术，用来测量水分子在脑组织中的扩散过程。DWI对于检测急性或早期脑缺血非常有用，因为缺血区域的水分子扩散会受到限制。</li>
+<li><strong>FLAIR (Fluid Attenuated Inversion Recovery)</strong>:
+一种特殊的成像序列，用于抑制脑脊液（CSF）的信号，使脑组织中的病变（如多发性硬化斑块或其他炎症）更容易被检测到。</li>
+<li><strong>T1</strong>:
+一种MRI序列，能够提供组织结构的详细图像。在T1加权成像中，脂肪组织显示为高信号（亮白色），而水和脑脊液显示为低信号（暗色）。</li>
+<li><strong>T1C (T1 with Contrast)</strong>:
+使用对比剂（如含钆的药物）进行的T1成像。对比剂可以提高某些病变（如肿瘤）的可见性，因为这些病变可能会吸收对比剂而显示为更高的信号强度。</li>
+<li><strong>T2</strong>:
+另一种MRI序列，与T1成像相反，水和脑脊液在T2加权成像中显示为高信号（亮白色）。T2成像对于检测脑内的水分变化和病变非常有用。</li>
+</ol>
+<p>这些模态各有其独特的优点，在临床诊断和研究中常常结合使用，以提供有关疾病状态的更全面视图。例如，结合使用这些模态可以更精确地检测和定位脑肿瘤、脑缺血、炎症性疾病和其他脑部病变。</p></li>
+</ol>
+<h3 id="实验结果">实验结果</h3>
+<h4 id="三分类特征约束有样本学习">三分类+特征约束+有样本学习</h4>
+<p>测试集总体精度为: 0.7213930487632751 测试集各类精度为:
+tensor([0.0811, 0.5625, 0.9394]) 测试集混淆矩阵为: tensor([[ 3., 13.,
+21.], [ 1., 18., 13.], [ 2., 6., 124.]])</p>
+<h3 id="三分类有样本学习">三分类+有样本学习</h3>
+<p>测试集总体精度为: 0.8756219148635864 测试集各类精度为:
+tensor([0.6486, 0.7500, 0.9697]) 测试集混淆矩阵为: tensor([[ 24., 7.,
+6.], [ 4., 24., 4.], [ 2., 2., 128.]])</p>
 
                 
               </div>
@@ -286,27 +322,6 @@ src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240324171909.png" src
             <hr/>
             <div>
               <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" class="category-chain-item">软件开发</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
   
   
 </div>
@@ -317,8 +332,8 @@ src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240324171909.png" src
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Redis</div>
-      <div>http://example.com/2024/03/24/Redis/</div>
+      <div>毕设</div>
+      <div>http://example.com/2024/03/21/School/毕设/</div>
     </div>
     <div class="license-meta">
       
@@ -330,13 +345,13 @@ src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240324171909.png" src
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年3月24日</div>
+          <div>2024年3月21日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月24日</div>
+          <div>2024年3月23日</div>
         </div>
       
       
@@ -367,12 +382,18 @@ src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240324171909.png" src
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2024/03/22/SoftwareDevelopment/SpringMVC/" title="SpringMVC">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SpringMVC</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/03/22/SoftwareDevelopment/SpringMVC/" title="SpringMVC">
-                        <span class="hidden-mobile">SpringMVC</span>
+                      <a href="/2024/03/13/SoftwareDevelopment/Mybatis/" title="Mybatis">
+                        <span class="hidden-mobile">Mybatis</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
