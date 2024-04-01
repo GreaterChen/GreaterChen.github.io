@@ -24,7 +24,7 @@
 <meta property="og:description" content="本科毕设">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-21T03:08:20.000Z">
-<meta property="article:modified_time" content="2024-03-23T07:47:59.880Z">
+<meta property="article:modified_time" content="2024-04-01T12:39:33.723Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          1.6k 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          11 分钟
+          14 分钟
         
       </span>
     
@@ -266,7 +266,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年3月23日 下午
+                    本文最后更新于：2024年4月1日 晚上
                   
                 
               </p>
@@ -305,16 +305,40 @@ onep19q])，因此在进行三分类、六分类的时候要改WholeDataset里�
 另一种MRI序列，与T1成像相反，水和脑脊液在T2加权成像中显示为高信号（亮白色）。T2成像对于检测脑内的水分变化和病变非常有用。</li>
 </ol>
 <p>这些模态各有其独特的优点，在临床诊断和研究中常常结合使用，以提供有关疾病状态的更全面视图。例如，结合使用这些模态可以更精确地检测和定位脑肿瘤、脑缺血、炎症性疾病和其他脑部病变。</p></li>
+<li><p>样本分布</p>
+<figure>
+<img
+src="C:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240401154222425.png" srcset="/img/loading.gif" lazyload
+alt="image-20240401154222425" />
+<figcaption aria-hidden="true">image-20240401154222425</figcaption>
+</figure>
+<p>郑大校准前</p>
+<p>[309, 263, 1096]</p>
+<p>[229, 1096, 38, 42, 174, 89]</p>
+<p>郑大校准后</p>
+<p>三分类</p>
+<p>​ 训练集：[363, 269, 1036]</p>
+<p>​ 验证集：[67, 48, 179]</p>
+<p>​ 测试集：[45, 33, 123]</p>
+<p>六分类</p>
+<p>​ 训练集：[247, 1036, 102, 14, 180, 89]</p>
+<p>​ 验证集：[43, 179, 20, 4, 32, 16]</p>
+<p>​ 测试集：[29, 123, 13, 3, 22, 11]</p></li>
 </ol>
 <h3 id="实验结果">实验结果</h3>
 <h4 id="三分类特征约束有样本学习">三分类+特征约束+有样本学习</h4>
 <p>测试集总体精度为: 0.7213930487632751 测试集各类精度为:
 tensor([0.0811, 0.5625, 0.9394]) 测试集混淆矩阵为: tensor([[ 3., 13.,
 21.], [ 1., 18., 13.], [ 2., 6., 124.]])</p>
-<h3 id="三分类有样本学习">三分类+有样本学习</h3>
-<p>测试集总体精度为: 0.8756219148635864 测试集各类精度为:
-tensor([0.6486, 0.7500, 0.9697]) 测试集混淆矩阵为: tensor([[ 24., 7.,
-6.], [ 4., 24., 4.], [ 2., 2., 128.]])</p>
+<h4 id="三分类baseline-300轮">三分类baseline 300轮</h4>
+<p>测试集总体精度为: 0.9850746393203735 测试集各类精度为:
+tensor([1.0000, 0.9688, 0.9848]) 测试集混淆矩阵为: tensor([[ 37., 0.,
+0.], [ 1., 31., 0.], [ 2., 0., 130.]])</p>
+<h4 id="三分类特征约束有样本学习-300轮">三分类+特征约束+有样本学习
+300轮</h4>
+<p>测试集总体精度为: 0.7960199117660522 测试集各类精度为:
+tensor([0.4865, 0.6250, 0.9242]) 测试集混淆矩阵为: tensor([[ 18., 5.,
+14.], [ 7., 20., 5.], [ 5., 5., 122.]])</p>
 
                 
               </div>
@@ -351,7 +375,7 @@ tensor([0.6486, 0.7500, 0.9697]) 测试集混淆矩阵为: tensor([[ 24., 7.,
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月23日</div>
+          <div>2024年4月1日</div>
         </div>
       
       
