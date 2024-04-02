@@ -24,7 +24,7 @@
 <meta property="og:description" content="本科毕设">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-21T03:08:20.000Z">
-<meta property="article:modified_time" content="2024-04-01T12:39:33.723Z">
+<meta property="article:modified_time" content="2024-04-02T13:57:43.148Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -266,7 +266,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年4月1日 晚上
+                    本文最后更新于：2024年4月2日 晚上
                   
                 
               </p>
@@ -326,11 +326,8 @@ alt="image-20240401154222425" />
 <p>​ 测试集：[29, 123, 13, 3, 22, 11]</p></li>
 </ol>
 <h3 id="实验结果">实验结果</h3>
-<h4 id="三分类特征约束有样本学习">三分类+特征约束+有样本学习</h4>
-<p>测试集总体精度为: 0.7213930487632751 测试集各类精度为:
-tensor([0.0811, 0.5625, 0.9394]) 测试集混淆矩阵为: tensor([[ 3., 13.,
-21.], [ 1., 18., 13.], [ 2., 6., 124.]])</p>
 <h4 id="三分类baseline-300轮">三分类baseline 300轮</h4>
+<p>数据来源于Exp19</p>
 <p>测试集总体精度为: 0.9850746393203735 测试集各类精度为:
 tensor([1.0000, 0.9688, 0.9848]) 测试集混淆矩阵为: tensor([[ 37., 0.,
 0.], [ 1., 31., 0.], [ 2., 0., 130.]])</p>
@@ -339,6 +336,12 @@ tensor([1.0000, 0.9688, 0.9848]) 测试集混淆矩阵为: tensor([[ 37., 0.,
 <p>测试集总体精度为: 0.7960199117660522 测试集各类精度为:
 tensor([0.4865, 0.6250, 0.9242]) 测试集混淆矩阵为: tensor([[ 18., 5.,
 14.], [ 7., 20., 5.], [ 5., 5., 122.]])</p>
+<h4 id="三分类特征约束0样本学习-300轮">三分类+特征约束+0样本学习
+300轮</h4>
+<p>数据来源于Exp17_fix</p>
+<p>测试集总体精度为: 0.7064676880836487 测试集各类精度为:
+tensor([0.0000, 0.7273, 0.9593]) 测试集混淆矩阵为: tensor([[ 0., 24.,
+21.], [ 0., 24., 9.], [ 0., 5., 118.]])</p>
 
                 
               </div>
@@ -375,7 +378,7 @@ tensor([0.4865, 0.6250, 0.9242]) 测试集混淆矩阵为: tensor([[ 18., 5.,
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年4月1日</div>
+          <div>2024年4月2日</div>
         </div>
       
       

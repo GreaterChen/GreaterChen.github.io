@@ -24,7 +24,7 @@
 <meta property="og:description" content="Redis学习">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-24T09:19:26.000Z">
-<meta property="article:modified_time" content="2024-04-01T14:11:54.366Z">
+<meta property="article:modified_time" content="2024-04-02T13:11:39.757Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          26k 字
+          29k 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          216 分钟
+          239 分钟
         
       </span>
     
@@ -266,7 +266,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年4月1日 晚上
+                    本文最后更新于：2024年4月2日 晚上
                   
                 
               </p>
@@ -677,10 +677,37 @@ Grid）。它不仅提供了一系列的分布式的Java常用对象，还提供
 <li>使用Redisson</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">RLock</span> <span class="hljs-variable">lock</span> <span class="hljs-operator">=</span> redissonClient.getLock(<span class="hljs-string">&quot;lock:order:&quot;</span> + voucherId + <span class="hljs-string">&quot;:&quot;</span> + id);<br><span class="hljs-type">boolean</span> <span class="hljs-variable">isLock</span> <span class="hljs-operator">=</span> lock.tryLock();<br><br><span class="hljs-keyword">if</span>(!isLock)&#123;<br>    <span class="hljs-keyword">return</span> Result.fail(<span class="hljs-string">&quot;不允许重复下单&quot;</span>);<br>&#125;<br><span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-type">IVoucherOrderService</span> <span class="hljs-variable">proxy</span> <span class="hljs-operator">=</span> (IVoucherOrderService) AopContext.currentProxy();<br>    <span class="hljs-keyword">return</span> proxy.createOrder(seckillVoucher);<br>&#125;<span class="hljs-keyword">finally</span> &#123;<br>    lock.unlock();<br>&#125;<br></code></pre></td></tr></table></figure>
-<h4 id="可重入锁">可重入锁</h4>
+<h4 id="可重入性">可重入性</h4>
 <p>redis中锁的存储使用hash结构，其中key为线程名称，value为重入次数，第一次获取即为1，第二次当前线程获取时即变为2</p>
 <p><img
 src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240401220957.png" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="主从一致性">主从一致性</h4>
+<p>为了提高redis的可用性，我们会搭建集群或者主从，现在以主从为例</p>
+<p>此时我们去写命令，写在主机上，
+主机会将数据同步给从机，但是假设在主机还没有来得及把数据写入到从机去的时候，此时主机宕机，哨兵会发现主机宕机，并且选举一个slave变成master，而此时新的master中实际上并没有锁信息，此时锁信息就已经丢掉了。</p>
+<p>为了解决这个问题，redission提出来了MutiLock锁，使用这把锁咱们就不使用主从了，每个节点的地位都是一样的，
+这把锁加锁的逻辑需要写入到每一个主丛节点上，<strong>只有所有的服务器都写入成功，此时才是加锁成功</strong>，假设现在某个节点挂了，那么他去获得锁的时候，只要有一个节点拿不到，都不能算是加锁成功，就保证了加锁的可靠性。</p>
+<p>当我们去设置了多个锁时，redission会将多个锁添加到一个集合中，然后用while循环去不停去尝试拿锁，但是会有一个总共的加锁时间，这个时间是用需要加锁的个数
+* 1500ms
+，假设有3个锁，那么时间就是4500ms，假设在这4500ms内，所有的锁都加锁成功，
+那么此时才算是加锁成功，如果在4500ms有线程加锁失败，则会再次去进行重试.</p>
+<h3 id="秒杀优化">秒杀优化</h3>
+<h4 id="异步秒杀">异步秒杀</h4>
+<p>当用户下单之后，判断库存是否充足只需要导redis中去根据key找对应的value是否大于0即可，如果不充足，则直接结束，如果充足，继续在redis中判断用户是否可以下单，如果set集合中没有这条数据，说明他可以下单，如果set集合中没有这条记录，则将userId和优惠卷存入到redis中，并且返回0，整个过程需要保证是原子性的，我们可以使用lua来操作</p>
+<p>当以上判断逻辑走完之后，我们可以判断当前redis中返回的结果是否是0
+，如果是0，则表示可以下单，则将之前说的信息存入到到queue中去，然后返回，然后再来个线程异步的下单，前端可以通过返回的订单id来判断是否下单成功。</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240402185808.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240402185840.png" srcset="/img/loading.gif" lazyload /></p>
+<ol type="1">
+<li><p>在添加秒杀券的时候同步存入redis</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-meta">@Transactional</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addSeckillVoucher</span><span class="hljs-params">(Voucher voucher)</span> &#123;<br>    <span class="hljs-comment">// 保存优惠券</span><br>    save(voucher);<br>    <span class="hljs-comment">// 保存秒杀信息</span><br>    <span class="hljs-type">SeckillVoucher</span> <span class="hljs-variable">seckillVoucher</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SeckillVoucher</span>();<br>    seckillVoucher.setVoucherId(voucher.getId());<br>    seckillVoucher.setStock(voucher.getStock());<br>    seckillVoucher.setBeginTime(voucher.getBeginTime());<br>    seckillVoucher.setEndTime(voucher.getEndTime());<br>    seckillVoucherService.save(seckillVoucher);<br>    <span class="hljs-comment">// 保存秒杀库存到Redis中</span><br>    <span class="hljs-comment">//SECKILL_STOCK_KEY 这个变量定义在RedisConstans中</span><br>    <span class="hljs-comment">//private static final String SECKILL_STOCK_KEY =&quot;seckill:stock:&quot;</span><br>    stringRedisTemplate.opsForValue().set(SECKILL_STOCK_KEY + voucher.getId(), voucher.getStock().toString());<br>&#125;<br></code></pre></td></tr></table></figure></p></li>
+<li><p>编写lua脚本保证原子性</p>
+<p><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-comment">-- 1.参数列表</span><br><span class="hljs-comment">-- 1.1.优惠券id</span><br><span class="hljs-keyword">local</span> voucherId = ARGV[<span class="hljs-number">1</span>]<br><span class="hljs-comment">-- 1.2.用户id</span><br><span class="hljs-keyword">local</span> userId = ARGV[<span class="hljs-number">2</span>]<br><span class="hljs-comment">-- 1.3.订单id</span><br><span class="hljs-keyword">local</span> orderId = ARGV[<span class="hljs-number">3</span>]<br><br><span class="hljs-comment">-- 2.数据key</span><br><span class="hljs-comment">-- 2.1.库存key</span><br><span class="hljs-keyword">local</span> stockKey = <span class="hljs-string">&#x27;seckill:stock:&#x27;</span> .. voucherId<br><span class="hljs-comment">-- 2.2.订单key</span><br><span class="hljs-keyword">local</span> orderKey = <span class="hljs-string">&#x27;seckill:order:&#x27;</span> .. voucherId<br><br><span class="hljs-comment">-- 3.脚本业务</span><br><span class="hljs-comment">-- 3.1.判断库存是否充足 get stockKey</span><br><span class="hljs-keyword">if</span>(<span class="hljs-built_in">tonumber</span>(redis.call(<span class="hljs-string">&#x27;get&#x27;</span>, stockKey)) &lt;= <span class="hljs-number">0</span>) <span class="hljs-keyword">then</span><br>    <span class="hljs-comment">-- 3.2.库存不足，返回1</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- 3.2.判断用户是否下单 SISMEMBER orderKey userId</span><br><span class="hljs-keyword">if</span>(redis.call(<span class="hljs-string">&#x27;sismember&#x27;</span>, orderKey, userId) == <span class="hljs-number">1</span>) <span class="hljs-keyword">then</span><br>    <span class="hljs-comment">-- 3.3.存在，说明是重复下单，返回2</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">2</span><br><span class="hljs-keyword">end</span><br><span class="hljs-comment">-- 3.4.扣库存 incrby stockKey -1</span><br>redis.call(<span class="hljs-string">&#x27;incrby&#x27;</span>, stockKey, <span class="hljs-number">-1</span>)<br><span class="hljs-comment">-- 3.5.下单（保存用户）sadd orderKey userId</span><br>redis.call(<span class="hljs-string">&#x27;sadd&#x27;</span>, orderKey, userId)<br><span class="hljs-comment">-- 3.6.发送消息到队列中， XADD stream.orders * k1 v1 k2 v2 ...</span><br>redis.call(<span class="hljs-string">&#x27;xadd&#x27;</span>, <span class="hljs-string">&#x27;stream.orders&#x27;</span>, <span class="hljs-string">&#x27;*&#x27;</span>, <span class="hljs-string">&#x27;userId&#x27;</span>, userId, <span class="hljs-string">&#x27;voucherId&#x27;</span>, voucherId, <span class="hljs-string">&#x27;id&#x27;</span>, orderId)<br><span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure></p></li>
+<li><p>添加堵塞队列，返回结果</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-keyword">public</span> Result <span class="hljs-title function_">secikllVoucher</span><span class="hljs-params">(Long voucherId)</span> &#123;<br>    <span class="hljs-type">Long</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> redisTemplate.execute(<br>            SECKILL_SCRIPT,<br>            Collections.emptyList(),<br>            voucherId,<br>            UserHolder.getUser().getId()<br>    );<br><br>    <span class="hljs-type">int</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> result.intValue();<br>    <span class="hljs-keyword">if</span>(r!=<span class="hljs-number">0</span>)&#123;<br>        <span class="hljs-keyword">if</span>(r==<span class="hljs-number">1</span>)&#123;<br>            <span class="hljs-keyword">return</span> Result.fail(<span class="hljs-string">&quot;库存不足&quot;</span>);<br>        &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(r==<span class="hljs-number">2</span>)&#123;<br>            <span class="hljs-keyword">return</span> Result.fail(<span class="hljs-string">&quot;不能重复下单&quot;</span>);<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-type">long</span> <span class="hljs-variable">orderId</span> <span class="hljs-operator">=</span> idWorker.nextId(<span class="hljs-string">&quot;voucher:order&quot;</span>);<br>    <span class="hljs-keyword">return</span> Result.ok(orderId);<br>&#125;<br></code></pre></td></tr></table></figure></p></li>
+</ol>
 
                 
               </div>
@@ -738,7 +765,7 @@ src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240401220957.png" src
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年4月1日</div>
+          <div>2024年4月2日</div>
         </div>
       
       
