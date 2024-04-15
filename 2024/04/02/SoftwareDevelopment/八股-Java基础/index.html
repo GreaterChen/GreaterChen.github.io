@@ -1,0 +1,949 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Chen">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Java基础学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="后端八股">
+<meta property="og:url" content="http://example.com/2024/04/02/SoftwareDevelopment/%E5%85%AB%E8%82%A1-Java%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Chen&#39;s Blog">
+<meta property="og:description" content="Java基础学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240415163935.png">
+<meta property="article:published_time" content="2024-04-02T10:32:33.179Z">
+<meta property="article:modified_time" content="2024-04-15T10:58:04.191Z">
+<meta property="article:author" content="Chen">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240415163935.png">
+  
+  
+  
+  <title>后端八股 - Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Chen&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="后端八股"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Chen
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-04-02 18:32" pubdate>
+          2024年4月2日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          59 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">后端八股</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2024年4月15日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>Java基础学习</p>
+<span id="more"></span>
+<h3 id="resource-和-autowired"><span class="citation"
+data-cites="Resource">@Resource</span> 和 <span class="citation"
+data-cites="Autowired">@Autowired</span></h3>
+<p><code>@Autowired</code>和<code>@Resource</code>都是Spring框架提供的用于依赖注入的注解，但它们在注入方式和来源上有所不同。</p>
+<h4 id="autowired"><code>@Autowired</code></h4>
+<ul>
+<li><strong>按类型自动装配</strong>：<code>@Autowired</code>默认按照类型进行自动装配。如果Spring容器中存在多个相同类型的bean，则会抛出异常，除非使用<code>@Qualifier</code>注解指定具体的bean。</li>
+<li><strong>不需要指定bean的名称</strong>：因为<code>@Autowired</code>是按类型注入的，所以它不依赖于变量的名称。这意味着不管变量叫什么名字，只要类型匹配，Spring就会注入相应的bean。</li>
+<li><strong>可选性</strong>：通过设置<code>@Autowired(required = false)</code>，可以使得某个bean的注入变为可选，即如果容器中没有找到对应类型的bean，Spring不会抛出异常，而是会留下一个null值。</li>
+<li><strong>灵活性和使用范围</strong>：<code>@Autowired</code>可以用于构造函数、setter方法、属性以及自定义方法上，提供了更广的使用范围。</li>
+</ul>
+<h4 id="resource"><code>@Resource</code></h4>
+<ul>
+<li><strong>按名称自动装配</strong>：<code>@Resource</code>默认按照名称进行自动装配。如果没有指定名称，它会使用变量名作为bean名称去查找对应的bean。如果找不到匹配的名称，才会退回到按类型查找。</li>
+<li><strong>需要考虑bean的名称</strong>：因为<code>@Resource</code>首先尝试按名称匹配bean，所以变量名或者指定的名称（使用<code>name</code>属性）对于找到正确的bean很重要。</li>
+<li><strong>来源不同</strong>：<code>@Resource</code>注解是由JDK提供的（<code>javax.annotation.Resource</code>），属于JSR-250规范的一部分，而<code>@Autowired</code>是Spring特有的注解。</li>
+</ul>
+<h4 id="使用场景和选择">使用场景和选择</h4>
+<ul>
+<li>当你想要更精确地控制bean的选择时（特别是当存在多个相同类型的bean，但你希望注入一个特定名称的bean），<code>@Resource</code>可能是更好的选择。</li>
+<li>如果你倾向于按类型装配依赖，或者想要利用Spring更丰富的自动装配特性（例如可选注入、构造函数注入等），<code>@Autowired</code>可能更适合你的需求。</li>
+</ul>
+<h3 id="所有对象实例都存在于堆中吗">所有对象实例都存在于堆中吗？</h3>
+<p>在Java中，对象通常是在堆内存中分配的。堆内存用于存储Java程序运行期间创建的对象实例，而栈内存则用于存储方法调用时的局部变量和方法调用的上下文。但是，有一种优化技术，称为逃逸分析，可以改变这种分配方式。</p>
+<p>逃逸分析是一种确定对象分配范围和寿命的技术。简单来说，它分析数据是否会“逃逸”出它被创建的上下文。如果一个对象只在一个方法中被使用，并且不会被返回或赋值给方法外的变量，那么这个对象就被认为是“不逃逸”的。</p>
+<p>如果JIT（Just-In-Time编译器）在运行时通过逃逸分析确定一个对象不会逃逸到方法外部，它可以采取一种称为“标量替换”的优化手段。标量替换允许JIT编译器“拆解”这个对象，将其字段直接存储在栈上，而不是作为一个整体对象存储在堆上。这样做有几个好处：</p>
+<ol type="1">
+<li><strong>性能提升</strong>：访问栈上的数据比堆上的数据要快，因为栈上的数据通常在内存中的位置更为靠近执行线程。</li>
+<li><strong>减少垃圾收集压力</strong>：由于对象不在堆上分配，因此不需要由垃圾收集器回收，这可以减少垃圾收集的开销。</li>
+</ol>
+<h3 id="浮点数运算精度丢失">浮点数运算精度丢失</h3>
+<p>计算机是二进制的，而且计算机在表示一个数字时，宽度是有限的，无限循环的小数存储在计算机时，只能被截断，所以就会导致小数精度发生损失的情况。这也就是解释了为什么浮点数没有办法用二进制精确表示。</p>
+<p><code>BigDecimal</code>
+可以实现对浮点数的运算，不会造成精度丢失。通常情况下，大部分需要浮点数精确运算结果的业务场景（比如涉及到钱的场景）都是通过
+<code>BigDecimal</code> 来做的。</p>
+<h3 id="重载和重写">重载和重写</h3>
+<p>重载就是同样的一个方法能够根据输入数据的不同，做出不同的处理</p>
+<p>重写就是当子类继承自父类的相同方法，输入数据一样，但要做出有别于父类的响应时，你就要覆盖父类方法</p>
+<h3 id="面向对象三大特性">面向对象三大特性</h3>
+<h4 id="封装">封装</h4>
+<p>封装是指把一个对象的状态信息（也就是属性）<strong>隐藏</strong>在对象内部，不允许外部对象直接访问对象的<strong>内部信息</strong>。但是可以提供一些可以被外界访问的方法来操作属性。</p>
+<h4 id="继承">继承</h4>
+<p>不同类型的对象，相互之间经常有一定数量的共同点。同时，每一个对象还定义了额外的特性使得他们与众不同。继承是使用已存在的类的定义作为基础建立新类的技术，新类的定义可以增加新的数据或新的功能，也可以用父类的功能，但不能选择性地继承父类。通过使用继承，可以快速地创建新的类，可以提高代码的重用，程序的可维护性，节省大量创建新类的时间
+，提高我们的开发效率。</p>
+<h4 id="多态">多态</h4>
+<p>多态，顾名思义，表示一个对象具有多种的状态，具体表现为父类的引用指向子类的实例</p>
+<ol type="1">
+<li><p>对象类型和引用类型之间具有继承（类）/实现（接口）的关系；</p></li>
+<li><p>引用类型变量发出的方法调用的到底是哪个类中的方法，必须在程序运行期间才能确定；</p></li>
+<li><p>多态不能调用“只在子类存在但在父类不存在”的方法；</p></li>
+<li><p>如果子类重写了父类的方法，真正执行的是子类覆盖的方法，如果子类没有覆盖父类的方法，执行的是父类的方法。</p></li>
+</ol>
+<h3
+id="接口和抽象类有什么共同点和区别">接口和抽象类有什么共同点和区别？</h3>
+<p><strong>共同点</strong>：</p>
+<ul>
+<li>都不能被实例化。</li>
+<li>都可以包含抽象方法。</li>
+<li>都可以有默认实现的方法（Java 8 可以用 <code>default</code>
+关键字在接口中定义默认方法）。</li>
+</ul>
+<p><strong>区别</strong>：</p>
+<ul>
+<li>接口主要用于对类的行为进行约束，是横向对功能的拓展。你实现了某个接口就具有了对应的行为。抽象类主要用于代码复用，强调的是所属关系。</li>
+<li>一个类只能继承一个类，但是可以实现多个接口。</li>
+<li>接口中的成员变量只能是 <code>public static final</code>
+类型的，不能被修改且必须有初始值，而抽象类的成员变量默认
+default，可在子类中被重新定义，也可被重新赋值</li>
+</ul>
+<h3
+id="深拷贝和浅拷贝区别了解吗-什么是引用拷贝">深拷贝和浅拷贝区别了解吗-什么是引用拷贝</h3>
+<p>关于深拷贝和浅拷贝区别，我这里先给结论：</p>
+<ul>
+<li><p><strong>浅拷贝</strong>：浅拷贝会在堆上创建一个新的对象（区别于引用拷贝的一点），不过，如果原对象内部的属性是引用类型的话，浅拷贝会直接复制内部对象的引用地址，也就是说拷贝对象和原对象共用同一个内部对象。</p></li>
+<li><p><strong>深拷贝</strong>：深拷贝会完全复制整个对象，包括这个对象所包含的内部对象。</p></li>
+<li><p><strong>引用拷贝</strong>:引用拷贝就是两个不同的引用指向同一个对象</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240403201541.png" srcset="/img/loading.gif" lazyload /></p></li>
+</ul>
+<h3 id="和-equals-的区别">== 和 equals() 的区别</h3>
+<p><strong><code>==</code></strong>
+比较的就是值，对于基本数据类型来说，<code>==</code>
+比较的就是本身的数值，对于引用数据类型来说，它存的值是对象的地址，所以此时<code>==</code>
+比较的是对象的内存地址。<code>equals()</code>是<code>Object</code>类的一个方法，所以基本数据类型是没有equals这个方法的，但是所有引用数据类型都有equals方法</p>
+<p><strong><code>equals()</code></strong>
+不能用于判断基本数据类型的变量，只能用来判断两个对象是否相等。而<code>Object</code>类是所有类的直接或间接父类，因此所有的类都有<code>equals()</code>方法。</p>
+<ul>
+<li><strong>类没有重写
+<code>equals()</code>方法</strong>：通过<code>equals()</code>比较该类的两个对象时，等价于通过“==”比较这两个对象，使用的默认是
+<code>Object</code>类<code>equals()</code>方法。</li>
+<li><strong>类重写了 <code>equals()</code>方法</strong>：一般我们都重写
+<code>equals()</code>方法来比较两个对象中的属性是否相等；若它们的属性相等，则返回
+true(即，认为这两个对象相等)。</li>
+</ul>
+<h3 id="为什么要有-hashcode">为什么要有 hashCode？</h3>
+<blockquote>
+<p>当你把对象加入 <code>HashSet</code> 时，<code>HashSet</code>
+会先计算对象的 <code>hashCode</code>
+值来判断对象加入的位置，同时也会与其他已经加入的对象的
+<code>hashCode</code> 值作比较，如果没有相符的
+<code>hashCode</code>，<code>HashSet</code>
+会假设对象没有重复出现。但是如果发现有相同 <code>hashCode</code>
+值的对象，这时会调用 <code>equals()</code> 方法来检查
+<code>hashCode</code>
+相等的对象是否真的相同。如果两者相同，<code>HashSet</code>
+就不会让其加入操作成功。如果不同的话，就会重新散列到其他位置。这样我们就大大减少了
+<code>equals</code> 的次数，相应就大大提高了执行速度。</p>
+</blockquote>
+<p>其实， <code>hashCode()</code> 和
+<code>equals()</code>都是用于比较两个对象是否相等。</p>
+<p><strong>那为什么 JDK 还要同时提供这两个方法呢？</strong></p>
+<p>这是因为在一些容器（比如
+<code>HashMap</code>、<code>HashSet</code>）中，有了
+<code>hashCode()</code>
+之后，判断元素是否在对应容器中的<strong>效率会更高</strong>（参考添加元素进<code>HashSet</code>的过程）</p>
+<p><strong>为什么重写 equals() 时必须重写 hashCode() 方法？</strong></p>
+<p><code>equals()</code>是判断两个对象相等的金标准。那为什么要有hashcode呢？因为有了
+<code>hashCode()</code>
+之后，判断元素是否在对应容器中的<strong>效率会更高</strong>，在hashset中想插入一个对象，会先比较是否有hashcode相等的对象，如果相等，因为有散列冲突的问题存在，就需要进一步使用equals进行比较。也就是说如果
+<code>equals</code> 方法判断两个对象是相等的，那这两个对象的
+<code>hashCode</code> 值也要相等。</p>
+<p>如果重写 <code>equals()</code> 时没有重写 <code>hashCode()</code>
+方法的话就可能会导致 <code>equals</code>
+方法判断是相等的两个对象，<code>hashCode</code> 值却不相等。</p>
+<p><strong>总结</strong>：</p>
+<ul>
+<li><code>equals</code> 方法判断两个对象是相等的，那这两个对象的
+<code>hashCode</code> 值也要相等。</li>
+<li>两个对象有相同的 <code>hashCode</code>
+值，他们也不一定是相等的（哈希碰撞）。</li>
+</ul>
+<h3
+id="为什么jdk动态代理需要实现接口的类">为什么JDK动态代理需要实现接口的类？</h3>
+<p><strong>JDK 动态代理类使用步骤</strong></p>
+<ol type="1">
+<li>定义一个接口及其实现类；</li>
+<li>自定义 <code>InvocationHandler</code>
+并重写<code>invoke</code>方法，在 <code>invoke</code>
+方法中我们会调用原生方法（被代理类的方法）并自定义一些处理逻辑；</li>
+<li>通过
+<code>Proxy.newProxyInstance(ClassLoader loader,Class&lt;?&gt;[] interfaces,InvocationHandler h)</code>
+方法创建代理对象；</li>
+</ol>
+<p>jdk动态代理生成的代理类实现了我们业务定义的接口，并重写了我们接口的方法，如此才实现代理的功能，所以我们的目标类需要实现接口。</p>
+<p>在JDK动态代理中，当你创建一个代理实例时，你需要提供一个实现了一个或多个接口的类的实例，以及一个调用处理器（InvocationHandler）。Java运行时使用这些信息<strong>动态创建一个新的类</strong>，这个类在运行时被定义为提供的接口的一个<strong>实现</strong>。这意味着动态代理类在运行时创建，并且其类型信息是基于这些接口的。</p>
+<p><strong>这个动态创建的类会将所有方法调用转发给调用处理器</strong>，这允许你在方法调用前后插入自定义逻辑，例如日志记录、事务处理等。这种转发是通过在代理类中重写接口的方法实现的，然后在这些方法中调用调用处理器。</p>
+<h3 id="代理模式">代理模式</h3>
+<p><strong>使用代理对象来代替对真实对象(real
+object)的访问，这样就可以在不修改原目标对象的前提下，提供额外的功能操作，扩展目标对象的功能。</strong></p>
+<ol type="1">
+<li><strong>JDK 动态代理只能代理实现了接口的类或者直接代理接口，而 CGLIB
+可以代理未实现任何接口的类。</strong>JDK动态代理基于<strong>接口</strong>实现,CGLIB基于<strong>继承</strong>实现.
+CGLIB
+动态代理是通过生成一个被代理类的子类来拦截被代理类的方法调用，因此不能代理声明为
+final 类型的类和方法。</li>
+<li>就二者的效率来说，大部分情况都是 JDK 动态代理更优秀，随着 JDK
+版本的升级，这个优势更加明显。</li>
+</ol>
+<h3 id="为什么bigdecimal没有精度问题">为什么BigDecimal没有精度问题</h3>
+<p><code>BigDecimal</code>内部通过一个整数（<code>BigInteger</code>）来表示小数的精确值，和一个单独的整数来表示小数点的位置（也就是说，一个<code>BigDecimal</code>由一个不可变的<strong>任意精度整数</strong>非标度值和<strong>32位的整数标度组成</strong>，标度表示小数点右边的位数）。这意味着<code>BigDecimal</code>可以表示任意精度的小数，精度仅受可用内存的限制。</p>
+<p>BigDecimal等值比较应使用compareTo()方法,而不是equals()方法,因为前者不会判断精度</p>
+<h3 id="基本类型和包装类型">基本类型和包装类型</h3>
+<ol type="1">
+<li>包装类型可用于泛型，而基本类型不可以</li>
+<li>基本数据类型作为局部变量存放在栈中的局部变量表，成员变量存放在堆中；包装类型几乎都存在于堆中（逃逸分析）</li>
+<li>基本数据类型有默认值，包装类型默认为null</li>
+</ol>
+<h3 id="为什么string是不可变的">为什么String是不可变的</h3>
+<ol type="1">
+<li>保证 String
+对象的安全性，避免被篡改，毕竟像密码这种隐私信息一般就是用字符串存储的</li>
+<li>保证哈希值不会频繁变更。毕竟要经常作为哈希表的键值，经常变更的话，哈希表的性能就会很差劲。</li>
+<li>可以实现字符串常量池，Java
+会将相同内容的字符串存储在字符串常量池中。这样，具有相同内容的字符串变量可以指向同一个
+String 对象，节省内存空间。</li>
+</ol>
+<h3 id="字符串常量池">字符串常量池</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;陈&quot;</span>);<br></code></pre></td></tr></table></figure>
+<p>这行代码共创建了一个或两个对象：一个在字符串常量池中，一个在堆中</p>
+<p>字符串常量池的位置：</p>
+<ol type="1">
+<li>Java7之前在永久代中，永久代在堆中</li>
+<li>java7时移动到堆中，永久代还在堆中</li>
+<li>java8之后永久代被元空间替代，字符串常量池仍在堆中</li>
+</ol>
+<h3 id="永久代方法区元空间">永久代、方法区、元空间</h3>
+<ul>
+<li>方法区是 Java 虚拟机规范中的一个概念，就像是一个接口</li>
+<li>永久代是 HotSpot
+虚拟机中对方法区的一个实现，就像是接口的实现类；</li>
+<li>Java 8
+的时候，移除了永久代，取而代之的是元空间，是方法区的另外一种实现，更灵活了。
+<ul>
+<li>它不会导致 OutOfMemoryError
+错误，因为元空间的大小可以动态调整。</li>
+<li>元空间使用本机内存，而不是 JVM
+堆内存，这可以避免堆内存的碎片化问题。</li>
+<li>元空间中的垃圾收集与堆中的垃圾收集是分离的，这可以避免应用程序在运行过程中因为进行类加载和卸载而频繁地触发
+Full GC。</li>
+</ul></li>
+</ul>
+<h3 id="intern的作用">intern()的作用</h3>
+<ul>
+<li>如果字符串常量池中保存了对应的字符串对象的引用，就直接返回该引用。</li>
+<li>如果字符串常量池中没有保存了对应的字符串对象的引用，那就在常量池中创建一个指向该字符串对象的引用并返回。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Java&quot;</span>;<br></code></pre></td></tr></table></figure>
+<p>JVM首先会检查字符串常量池中是否已经存在字面值为"Java"的字符串对象。如果存在，就不会再创建一个新的字符串对象，而是直接将<code>s1</code>引用指向常量池中那已存在的字符串对象。如果不存在，JVM会在字符串常量池中创建一个新的字符串对象"Java"，然后<code>s1</code>引用指向这个新创建的对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">s</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;Java&quot;</span>)<br></code></pre></td></tr></table></figure>
+<p>首先，如果字符串常量池中没有字面值为"java"的字符串，JVM会在常量池中创建一个"java"的字符串对象。如果常量池中已经存在"java"，则不会再创建。接着，<code>new String("java")</code>表达式会在堆内存中创建一个新的<code>String</code>对象。这个新的<code>String</code>对象会复制一份常量池中的"java"字符串作为自己的值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">s1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(<span class="hljs-string">&quot;bro&quot;</span>);<br><span class="hljs-type">String</span> <span class="hljs-variable">s2</span> <span class="hljs-operator">=</span> s1.intern();<br>System.out.println(s1 == s2);<br></code></pre></td></tr></table></figure>
+<p>返回false，因为s1指向的是堆中的对象，但是s2指向的是字符串常量池中的对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">s1</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Java&quot;</span>;<br><span class="hljs-type">String</span> <span class="hljs-variable">s2</span> <span class="hljs-operator">=</span> s1.intern();<br>System.out.println(s1 == s2);<br></code></pre></td></tr></table></figure>
+<p>返回true，因为s1是对于常量池中的引用，s2也是</p>
+<h3 id="stringbuffer和stringbuilder">StringBuffer和StringBuilder</h3>
+<ol type="1">
+<li><code>String</code>
+中的对象是不可变的，也就可以理解为常量，线程安全。</li>
+<li><code>AbstractStringBuilder</code> 是 <code>StringBuilder</code> 与
+<code>StringBuffer</code> 的公共父类，定义了一些字符串的基本操作，如
+<code>expandCapacity</code>、<code>append</code>、<code>insert</code>、<code>indexOf</code>
+等公共方法。</li>
+<li><code>StringBuffer</code>
+对方法加了同步锁或者对调用的方法加了同步锁，所以是线程安全的。</li>
+<li><code>StringBuilder</code>
+并没有对方法进行加同步锁，所以是非线程安全的。如果要在多线程环境下修改字符串，可以使用
+<code>ThreadLocal</code>来避免多线程冲突。</li>
+</ol>
+<h3 id="异常">异常</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240415163935.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;" /></p>
+<ol type="1">
+<li><p><strong><code>Exception</code></strong>
+:程序本身可以处理的异常，可以通过 <code>catch</code>
+来进行捕获。</p></li>
+<li><p><strong><code>Error</code></strong>：<code>Error</code>
+属于程序无法处理的错误</p></li>
+<li><p>Java 代码在编译过程中，如果受检查异常（Checked Exception）没有被
+<code>catch</code>或者<code>throws</code>
+关键字处理的话，就没办法通过编译。</p></li>
+</ol>
+<h3 id="try-catch-final">try-catch-final</h3>
+<h4
+id="try和final中都有return怎么执行">try和final中都有return，怎么执行？</h4>
+<p>当 try 语句和 finally 语句中都有 return 语句时，try 语句块中的 return
+语句会被忽略。这是因为 try 语句中的 return
+返回值会先被暂存在一个本地变量中，当执行到 finally 语句中的 return
+之后，这个本地变量的值就变为了 finally 语句中的 return 返回值。</p>
+<h4 id="final一定会执行吗">final一定会执行吗？</h4>
+<p>finally 之前虚拟机被终止运行的话，finally 中的代码就不会被执行</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">try</span> &#123;<br>    System.out.println(<span class="hljs-string">&quot;Try to do something&quot;</span>);<br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;RuntimeException&quot;</span>);<br>&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>    System.out.println(<span class="hljs-string">&quot;Catch Exception -&gt; &quot;</span> + e.getMessage());<br>    <span class="hljs-comment">// 终止当前正在运行的Java虚拟机</span><br>    System.exit(<span class="hljs-number">1</span>);<br>&#125; <span class="hljs-keyword">finally</span> &#123;<br>    System.out.println(<span class="hljs-string">&quot;Finally&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="反射">反射</h3>
+<p>赋予了我们在运行时分析类以及执行类中方法的能力。通过反射可以获取任意一个类的所有属性和方法，还可以调用这些方法和属性。可以让我们的代码更加灵活、为各种框架提供开箱即用的功能提供了便利。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" class="category-chain-item">软件开发</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>后端八股</div>
+      <div>http://example.com/2024/04/02/SoftwareDevelopment/八股-Java基础/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Chen</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年4月2日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年4月15日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/04/10/%E4%BD%BF%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E5%88%86%E5%B8%83/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/03/25/SoftwareDevelopment/Redis%E9%87%87%E7%94%A8string%E5%AD%98%E5%82%A8%E5%AE%9E%E4%BD%93%E5%AF%B9%E8%B1%A1/" title="Redis采用string存储实体对象">
+                        <span class="hidden-mobile">Redis采用string存储实体对象</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
