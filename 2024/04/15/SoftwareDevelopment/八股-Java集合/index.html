@@ -1,0 +1,856 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Chen">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Java集合学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="八股-Java集合">
+<meta property="og:url" content="http://example.com/2024/04/15/SoftwareDevelopment/%E5%85%AB%E8%82%A1-Java%E9%9B%86%E5%90%88/index.html">
+<meta property="og:site_name" content="Chen&#39;s Blog">
+<meta property="og:description" content="Java集合学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-04-15T11:00:40.000Z">
+<meta property="article:modified_time" content="2024-04-15T14:19:05.351Z">
+<meta property="article:author" content="Chen">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>八股-Java集合 - Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Chen&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="八股-Java集合"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Chen
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-04-15 19:00" pubdate>
+          2024年4月15日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          56 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">八股-Java集合</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2024年4月15日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>Java集合学习</p>
+<span id="more"></span>
+<h3 id="list">List</h3>
+<h4 id="arraylist和array的区别">ArrayList和Array的区别</h4>
+<ol type="1">
+<li><p><code>ArrayList</code>会根据实际存储的元素动态地扩容或缩容，而
+<code>Array</code> 被创建之后就不能改变它的长度了。</p></li>
+<li><p><code>ArrayList</code>
+允许你使用泛型来确保类型安全，<code>Array</code> 则不可以。</p></li>
+<li><p><code>ArrayList</code>
+中只能存储对象。对于基本类型数据，需要使用其对应的包装类（如
+Integer、Double 等）。<code>Array</code>
+可以直接存储基本类型数据，也可以存储对象。</p></li>
+<li><p><code>ArrayList</code>
+支持插入、删除、遍历等常见操作，并且提供了丰富的 API 操作方法，比如
+<code>add()</code>、<code>remove()</code>等。<code>Array</code>
+只是一个固定长度的数组，只能按照下标访问其中的元素，不具备动态添加、删除元素的能力。</p></li>
+<li><p><code>ArrayList</code>创建时不需要指定大小，而<code>Array</code>创建时必须指定大小。</p></li>
+</ol>
+<h4 id="arraylist和linkedlist">ArrayList和LinkedList</h4>
+<ol type="1">
+<li>ArrayList的插入在不引发扩容的情况下，要看插入位置，头插<code>O(n)</code>，尾插<code>O(1)</code>,其他位置平均<code>O(n)</code>。由于ArrayList支持动态扩容，当前数组容量不足以插入的时候会创建新的列表，同时把数据拷贝过去，因此扩容需要<code>O(n)</code>的时间复杂度。删除同理但是不需要考虑扩容问题。</li>
+<li>LinkedList是双向链表，头尾插删均为<code>O(1)</code>,指定位置插删需要先移动到指定位置，因此为<code>O(n)</code></li>
+</ol>
+<h4 id="arraylist扩容过程">ArrayList扩容过程</h4>
+<p>以无参数构造方法创建 <code>ArrayList</code>
+时，实际上初始化赋值的是一个空数组。当真正对数组进行添加元素操作时，才真正分配容量。即向数组中添加第一个元素时，数组容量扩为
+10</p>
+<p>在添加元素前，首先判断容量是否满足</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 将指定的元素追加到此列表的末尾。</span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">add</span><span class="hljs-params">(E e)</span> &#123;<br>    <span class="hljs-comment">// 加元素之前，先调用ensureCapacityInternal方法</span><br>    ensureCapacityInternal(size + <span class="hljs-number">1</span>);  <span class="hljs-comment">// Increments modCount!!</span><br>    <span class="hljs-comment">// 这里看到ArrayList添加元素的实质就相当于为数组赋值</span><br>    elementData[size++] = e;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>calculateCapacity计算当前所需容量，如果第一次添加元素同时采用默认构造方式，会构造一个长度为10的列表</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 根据给定的最小容量和当前数组元素来计算所需容量。</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">calculateCapacity</span><span class="hljs-params">(Object[] elementData, <span class="hljs-type">int</span> minCapacity)</span> &#123;<br>    <span class="hljs-comment">// 如果当前数组元素为空数组（初始情况），返回默认容量和最小容量中的较大值作为所需容量</span><br>    <span class="hljs-keyword">if</span> (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) &#123;<br>        <span class="hljs-keyword">return</span> Math.max(DEFAULT_CAPACITY, minCapacity);<br>    &#125;<br>    <span class="hljs-comment">// 否则直接返回最小容量</span><br>    <span class="hljs-keyword">return</span> minCapacity;<br>&#125;<br><br><span class="hljs-comment">// 确保内部容量达到指定的最小容量。</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">ensureCapacityInternal</span><span class="hljs-params">(<span class="hljs-type">int</span> minCapacity)</span> &#123;<br>    ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>如果当前容量小于最小需要的容量，就会进行扩容操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//判断是否需要扩容</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">ensureExplicitCapacity</span><span class="hljs-params">(<span class="hljs-type">int</span> minCapacity)</span> &#123;<br>    modCount++;<br>    <span class="hljs-comment">//判断当前数组容量是否足以存储minCapacity个元素</span><br>    <span class="hljs-keyword">if</span> (minCapacity - elementData.length &gt; <span class="hljs-number">0</span>)<br>        <span class="hljs-comment">//调用grow方法进行扩容</span><br>        grow(minCapacity);<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 要分配的最大数组大小</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">MAX_ARRAY_SIZE</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE - <span class="hljs-number">8</span>;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * ArrayList扩容的核心方法。</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">grow</span><span class="hljs-params">(<span class="hljs-type">int</span> minCapacity)</span> &#123;<br>    <span class="hljs-comment">// oldCapacity为旧容量，newCapacity为新容量</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">oldCapacity</span> <span class="hljs-operator">=</span> elementData.length;<br>    <span class="hljs-comment">// 将oldCapacity 右移一位，其效果相当于oldCapacity /2，</span><br>    <span class="hljs-comment">// 我们知道位运算的速度远远快于整除运算，整句运算式的结果就是将新容量更新为旧容量的1.5倍，</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">newCapacity</span> <span class="hljs-operator">=</span> oldCapacity + (oldCapacity &gt;&gt; <span class="hljs-number">1</span>);<br><br>    <span class="hljs-comment">// 然后检查新容量是否大于最小需要容量，若还是小于最小需要容量，那么就把最小需要容量当作数组的新容量，</span><br>    <span class="hljs-keyword">if</span> (newCapacity - minCapacity &lt; <span class="hljs-number">0</span>)<br>        newCapacity = minCapacity;<br><br>    <span class="hljs-comment">// 如果新容量大于 MAX_ARRAY_SIZE,进入(执行) `hugeCapacity()` 方法来比较 minCapacity 和 MAX_ARRAY_SIZE，</span><br>    <span class="hljs-comment">// 如果minCapacity大于最大容量，则新容量则为`Integer.MAX_VALUE`，否则，新容量大小则为 MAX_ARRAY_SIZE 即为 `Integer.MAX_VALUE - 8`。</span><br>    <span class="hljs-keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="hljs-number">0</span>)<br>        newCapacity = hugeCapacity(minCapacity);<br><br>    <span class="hljs-comment">// minCapacity is usually close to size, so this is a win:</span><br>    elementData = Arrays.copyOf(elementData, newCapacity);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>Arrays.copyOf()内部调用System.arraycopy，内部自动申请一个新的数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] copyOf(<span class="hljs-type">int</span>[] original, <span class="hljs-type">int</span> newLength) &#123;<br>  <span class="hljs-comment">// 申请一个新的数组</span><br>    <span class="hljs-type">int</span>[] copy = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[newLength];<br><span class="hljs-comment">// 调用System.arraycopy,将源数组中的数据进行拷贝,并返回新的数组</span><br>    System.arraycopy(original, <span class="hljs-number">0</span>, copy, <span class="hljs-number">0</span>,<br>                     Math.min(original.length, newLength));<br>    <span class="hljs-keyword">return</span> copy;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h3 id="hashmap">HashMap</h3>
+<h4 id="扩容机制">扩容机制</h4>
+<p>jdk1.8之前采用数组+链表实现，即拉链法避免冲突</p>
+<p>jdk1.8之后，当链表长度大于阈值（默认为 8）时，会首先调用
+<code>treeifyBin()</code>方法。这个方法会根据 HashMap
+数组来决定是否转换为红黑树。只有当数组长度大于或者等于 64
+的情况下，才会执行转换红黑树操作，以减少搜索时间。否则，就是只是执行
+<code>resize()</code> 方法对数组扩容。</p>
+<h4 id="负载因子">负载因子</h4>
+<p>oadFactor 负载因子是控制数组存放数据的疏密程度，loadFactor 越趋近于
+1，那么
+数组中存放的数据(entry)也就越多，也就越密，也就是会让链表的长度增加，loadFactor
+越小，也就是趋近于
+0，数组中存放的数据(entry)也就越少，也就越稀疏。默认值为0.75。<code>HashMap</code>
+默认的初始化大小为 16。之后每次扩充，容量变为原来的 2 倍。</p>
+<h4 id="插入元素">插入元素</h4>
+<p>如果定位到的数组位置没有元素 就直接插入。</p>
+<p>如果定位到的数组位置有元素就和要插入的 key 比较，如果存在 key
+相同就直接覆盖，如果 key 不相同，就判断 p
+是否是一个树节点，如果是就将元素添加进入红黑树。如果不是就遍历链表插入(插入的是链表尾部)。</p>
+<h4 id="hashmap和hashset">HashMap和Hashset</h4>
+<p>在 <code>HashSet</code> 的实现中，每个插入到 <code>HashSet</code>
+中的元素实际上作为 <code>HashMap</code>
+的键存储，而与每个键关联的值（value）则是一个固定的对象，通常是一个预定义的静态的私有对象（通常是
+<code>new Object()</code>
+的实例或者类似的占位符对象）。这个对象在所有的实例中是相同的</p>
+<h4 id="hashmap和treemap">HashMap和TreeMap</h4>
+<p><code>TreeMap</code> 和<code>HashMap</code>
+都继承自<code>AbstractMap</code>
+，但是需要注意的是<code>TreeMap</code>它还实现了<code>NavigableMap</code>接口和<code>SortedMap</code>
+接口。</p>
+<p><code>NavigableMap</code> 接口提供了丰富的方法来探索和操作键值对:</p>
+<ol type="1">
+<li><p><strong>定向搜索</strong>: <code>ceilingEntry()</code>,
+<code>floorEntry()</code>, <code>higherEntry()</code>和
+<code>lowerEntry()</code>
+等方法可以用于定位大于、小于、大于等于、小于等于给定键的最接近的键值对。</p></li>
+<li><p><strong>子集操作</strong>: <code>subMap()</code>,
+<code>headMap()</code>和 <code>tailMap()</code>
+方法可以高效地创建原集合的子集视图，而无需复制整个集合。</p></li>
+<li><p><strong>逆序视图</strong>:<code>descendingMap()</code>
+方法返回一个逆序的 <code>NavigableMap</code> 视图，使得可以反向迭代整个
+<code>TreeMap</code>。</p></li>
+<li><p><strong>边界操作</strong>: <code>firstEntry()</code>,
+<code>lastEntry()</code>, <code>pollFirstEntry()</code>和
+<code>pollLastEntry()</code> 等方法可以方便地访问和移除元素</p></li>
+</ol>
+<p>这些方法都是基于红黑树数据结构的属性实现的，红黑树保持平衡状态，从而保证了搜索操作的时间复杂度为
+O(log n)，这让 <code>TreeMap</code>
+成为了处理有序集合搜索问题的强大工具。</p>
+<p><code>SortedMap</code>接口让 <code>TreeMap</code>
+有了对集合中的元素根据键排序的能力。默认是按 key 的升序排序，</p>
+<h4 id="hashmap为什么线程不安全">Hashmap为什么线程不安全</h4>
+<p>两个线程 1,2 同时进行 put
+操作，并且发生了哈希冲突。不同的线程可能在不同的时间片获得 CPU
+执行的机会，当前线程 1 执行完哈希冲突判断后，由于时间片耗尽挂起。线程 2
+先完成了插入操作。随后，线程 1 获得时间片，由于之前已经进行过 hash
+碰撞的判断，所有此时会直接进行插入，这就导致线程 2 插入的数据被线程 1
+覆盖了。</p>
+<h4 id="concurrenthashmap">ConcurrentHashMap</h4>
+<p>Java7 中 <code>ConcurrentHashMap</code> 使用的分段锁，也就是每一个
+Segment 上同时只有一个线程可以操作，每一个 <code>Segment</code>
+都是一个类似 <code>HashMap</code>
+数组的结构，它可以扩容，它的冲突会转化为链表。但是 <code>Segment</code>
+的个数一但初始化就不能改变。</p>
+<p>Java8 中的 <code>ConcurrentHashMap</code> 使用的
+<code>Synchronized</code> 锁加 CAS 的机制。结构也由 Java7 中的
+<strong><code>Segment</code> 数组 + <code>HashEntry</code> 数组 +
+链表</strong> 进化成了 <strong>Node 数组 + 链表 / 红黑树</strong>，Node
+是类似于一个 HashEntry
+的结构。它的冲突再达到一定大小时会转化成红黑树，在冲突小于一定数量时又退回链表。</p>
+<h4 id="linkedhashmap">LinkedHashMap</h4>
+<p><code>LinkedHashMap</code> 是 Java 集合框架中 <code>HashMap</code>
+的一个子类，它继承了 <code>HashMap</code> 的所有属性和方法，并且在
+<code>HashMap</code> 的基础重写了
+<code>afterNodeRemoval</code>、<code>afterNodeInsertion</code>、<code>afterNodeAccess</code>
+方法。使之拥有顺序插入和访问有序的特性。</p>
+<ol type="1">
+<li><p>如何按照插入顺序迭代元素？</p>
+<p>LinkedHashMap内部维护了一个双向链表，用于记录元素的插入顺序。当使用迭代器迭代元素时即为在链表中进行移动</p></li>
+<li><p>如何按照访问顺序迭代元素</p>
+<p>通过构造函数中的accessOrder参数指定，当设置为true时，每访问一个元素，该元素会被移动到链表的末尾</p></li>
+<li><p>如何实现LRU</p>
+<p>将accessOrder设置为true，同时重写removeEldestEntry当链表大小超过容量时返回true，这样一旦插入操作使得返回为true时，会移除链表首元素。</p>
+<p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LRUCache</span>&lt;K, V&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title class_">LinkedHashMap</span>&lt;K, V&gt; &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> capacity;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">LRUCache</span><span class="hljs-params">(<span class="hljs-type">int</span> capacity)</span> &#123;<br>        <span class="hljs-built_in">super</span>(capacity, <span class="hljs-number">0.75f</span>, <span class="hljs-literal">true</span>);<br>        <span class="hljs-built_in">this</span>.capacity = capacity;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 判断size超过容量时返回true，告知LinkedHashMap移除最老的缓存项(即链表的第一个元素)</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">protected</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">removeEldestEntry</span><span class="hljs-params">(Map.Entry&lt;K, V&gt; eldest)</span> &#123;<br>        <span class="hljs-keyword">return</span> size() &gt; capacity;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></p></li>
+</ol>
+<h4 id="copyonwritearraylist">CopyOnWriteArrayList</h4>
+<p>当需要修改（ <code>add</code>，<code>set</code>、<code>remove</code>
+等操作） <code>CopyOnWriteArrayList</code>
+的内容时，不会直接修改原数组，而是会先创建底层数组的副本，对副本数组进行修改，修改完之后再将修改后的数组赋值回去，这样就可以保证写操作不会影响读操作了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 插入元素到 CopyOnWriteArrayList 的尾部</span><br><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">add</span><span class="hljs-params">(E e)</span> &#123;<br>    <span class="hljs-keyword">final</span> <span class="hljs-type">ReentrantLock</span> <span class="hljs-variable">lock</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.lock;<br>    <span class="hljs-comment">// 加锁</span><br>    lock.lock();<br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-comment">// 获取原来的数组</span><br>        Object[] elements = getArray();<br>        <span class="hljs-comment">// 原来数组的长度</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> elements.length;<br>        <span class="hljs-comment">// 创建一个长度+1的新数组，并将原来数组的元素复制给新数组</span><br>        Object[] newElements = Arrays.copyOf(elements, len + <span class="hljs-number">1</span>);<br>        <span class="hljs-comment">// 元素放在新数组末尾</span><br>        newElements[len] = e;<br>        <span class="hljs-comment">// array指向新数组</span><br>        setArray(newElements);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125; <span class="hljs-keyword">finally</span> &#123;<br>        <span class="hljs-comment">// 解锁</span><br>        lock.unlock();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="arrayblockingqueue">ArrayBlockingQueue</h4>
+<p><code>ArrayBlockingQueue</code> 是 <code>BlockingQueue</code>
+接口的有界队列实现类，常用于多线程之间的数据共享，底层采用数组实现.</p>
+<ul>
+<li><code>ArrayBlockingQueue</code>
+内部维护一个定长的数组用于存储元素。</li>
+<li>通过使用 <code>ReentrantLock</code>
+锁对象对读写操作进行同步，即通过锁机制来实现线程安全。</li>
+<li>通过 <code>Condition</code> 实现线程间的等待和唤醒操作。</li>
+</ul>
+<p>这里再详细介绍一下线程间的等待和唤醒具体的实现（不需要记具体的方法，面试中回答要点即可）：</p>
+<ul>
+<li>当队列已满时，生产者线程会调用 <code>notFull.await()</code>
+方法让生产者进行等待，等待队列非满时插入（非满条件）。</li>
+<li>当队列为空时，消费者线程会调用
+<code>notEmpty.await()</code>方法让消费者进行等待，等待队列非空时消费（非空条件）。</li>
+<li>当有新的元素被添加时，生产者线程会调用
+<code>notEmpty.signal()</code>方法唤醒正在等待消费的消费者线程。</li>
+<li>当队列中有元素被取出时，消费者线程会调用
+<code>notFull.signal()</code>方法唤醒正在等待插入元素的生产者线程。</li>
+</ul>
+<h4 id="delayqueue">DelayQueue</h4>
+<ol type="1">
+<li><p>实现原理</p>
+<p><code>DelayQueue</code> 底层是使用优先队列 <code>PriorityQueue</code>
+来存储元素，而 <code>PriorityQueue</code>
+采用二叉小顶堆的思想确保值小的元素排在最前面，这就使得
+<code>DelayQueue</code> 对于延迟任务优先级的管理就变得十分方便了。同时
+<code>DelayQueue</code> 为了保证线程安全还用到了可重入锁
+<code>ReentrantLock</code>,确保单位时间内只有一个线程可以操作延迟队列。最后，为了实现多线程之间等待和唤醒的交互效率，<code>DelayQueue</code>
+还用到了 <code>Condition</code>，通过 <code>Condition</code> 的
+<code>await</code> 和 <code>signal</code>
+方法完成多线程之间的等待唤醒。</p></li>
+<li><p>使用场景</p>
+<p><code>DelayQueue</code>
+通常用于实现定时任务调度和缓存过期删除等场景。在定时任务调度中，需要将需要执行的任务封装成延迟任务对象，并将其添加到
+<code>DelayQueue</code> 中，<code>DelayQueue</code>
+会自动按照剩余延迟时间进行升序排序(默认情况)，以保证任务能够按照时间先后顺序执行。对于缓存过期这个场景而言，在数据被缓存到内存之后，我们可以将缓存的
+key 封装成一个延迟的删除任务，并将其添加到 <code>DelayQueue</code>
+中，当数据过期时，拿到这个任务的 key，将这个 key 从内存中移除。</p></li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" class="category-chain-item">软件开发</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>八股-Java集合</div>
+      <div>http://example.com/2024/04/15/SoftwareDevelopment/八股-Java集合/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Chen</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年4月15日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年4月15日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/04/12/Algorithm/%E5%8D%9A%E5%BC%88%E8%AE%BA/" title="博弈论">
+                        <span class="hidden-mobile">博弈论</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
