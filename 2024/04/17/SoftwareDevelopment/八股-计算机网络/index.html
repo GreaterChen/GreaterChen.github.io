@@ -1,0 +1,857 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Chen">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="计算机网络学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="八股-计算机网络">
+<meta property="og:url" content="http://example.com/2024/04/17/SoftwareDevelopment/%E5%85%AB%E8%82%A1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:site_name" content="Chen&#39;s Blog">
+<meta property="og:description" content="计算机网络学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240417162244.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240417162623.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240417162744.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240417173130.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240417170858.png">
+<meta property="article:published_time" content="2024-04-17T07:23:47.000Z">
+<meta property="article:modified_time" content="2024-04-17T09:52:48.036Z">
+<meta property="article:author" content="Chen">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240417162244.png">
+  
+  
+  
+  <title>八股-计算机网络 - Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Chen&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="八股-计算机网络"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Chen
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-04-17 15:23" pubdate>
+          2024年4月17日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          30 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">八股-计算机网络</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2024年4月17日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>计算机网络学习</p>
+<span id="more"></span>
+<h3 id="网络分层模型">网络分层模型</h3>
+<p>现在被提起最多的网络模型主要有两个，一个是国际标准化组织提出的OSI7层网络模型，一个是目前被广泛使用的TCP/IP四层网络模型。</p>
+<h4 id="osi七层模型">OSI七层模型</h4>
+<p>OSI七层网络模型自底向上分为物理层、数据链路层、网络层、传输层、会话层、表示层、应用层，由于它比较复杂而且不实用，而且有些功能在多个层中重复出现，所以并没有被广泛使用。</p>
+<p><img
+src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240417152617.png" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="tcpip四层模型">TCP/IP四层模型</h4>
+<p>自底向上分为网络接口层、网络层、传输层、应用层。</p>
+<ol type="1">
+<li>应用层：主要提供两个终端设备上的<strong>应用程序</strong>之间信息交换的服务，它定义了信息交换的格式。应用层的协议比较丰富，而且和我们日常使用息息相关，比如浏览网页的HTTP，HTTPS，文件传输的FTP，解析域名的DNS等等。</li>
+<li>传输层：传输层的主要任务就是负责向两台终端设备进程之间的通信<strong>提供通用的数据传输服务</strong>。协议主要包括TCP和UDP。</li>
+<li>网络层：负责在若干设备组成的互联网上根据IP地址对数据包进行转发和路由。包含的协议有IP网际协议、ARP地址解析协议、NAT网络地址转换协议等等</li>
+<li>网络接口层：将网络层交下来的 IP
+数据报组装成帧，在两个相邻节点间的链路上传送帧。每一帧包括数据和必要的控制信息（如同步信息，地址信息，差错控制等）。实现相邻计算机节点之间比特流的透明传送，尽可能屏蔽掉具体传输介质和物理设备的差异</li>
+</ol>
+<h4 id="为什么要分层">为什么要分层</h4>
+<ol type="1">
+<li>各层之间相互独立，不需要关心其他层是如何实现的，只需要知道如何调用下层提供好的接口即可</li>
+<li>提高整体灵活性，每一层都可以使用最适合的技术实现，只需要确保功能和接口不改变即可。符合高内聚低耦合的设计原则</li>
+</ol>
+<h3 id="网址处理流程">网址处理流程</h3>
+<h4 id="域名解析工作流程">域名解析工作流程</h4>
+<ol type="1">
+<li><p>首先查看浏览器缓存、操作系统缓存，hosts文件，如果有直接使用</p></li>
+<li><p>客户端首先会发出一个 DNS 请求（UDP），并发给本地 DNS
+服务器（也就是客户端的 TCP/IP 设置中填写的 DNS 服务器地址）。</p>
+<p>当客户端发出DNS查询时，它通常使用UDP协议发送到目标DNS服务器的端口53，当DNS响应数据超过512字节（UDP限制）时，会使用TCP来传输。</p></li>
+<li><p>本地域名服务器收到客户端的请求后，如果缓存里的表格能找到，则它直接返回
+IP 地址。如果没有，本地 DNS 会去问它的根域名服务器</p></li>
+<li><p>根 DNS 收到来自本地 DNS
+的请求后，找到顶级域名服务器地址返回</p></li>
+<li><p>本地DNS收到顶级域名服务器地址后再次发送请求</p></li>
+<li><p>顶级域名服务器给出权威DNS服务器地址</p></li>
+<li><p>本地DNS向权威DNS服务器发送请求</p></li>
+<li><p>权威DNS查询后将IP返回</p></li>
+</ol>
+<h4 id="tcp">TCP</h4>
+<h5 id="请求头结构">请求头结构</h5>
+<p><img src="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240417162244.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" /></p>
+<ol type="1">
+<li>首先，<strong>源端口号</strong>和<strong>目标端口</strong>号是不可少的，如果没有这两个端口号，数据就不知道应该发给哪个应用。</li>
+</ol>
+<p>​
+端口号如何获取？许多网络服务有默认端口号比如HTTP是80，HTTPS是443；其他的需要在URL中明确指出端口号。</p>
+<ol start="2" type="1">
+<li>接下来有包的<strong>序</strong>号，这个是为了解决包乱序的问题。</li>
+<li><strong>确认号</strong>，目的是确认发出去对方是否有收到。如果没有收到就应该重新发送，直到送达，这个是为了解决丢包的问题。</li>
+<li><strong>状态位</strong>。例如 <code>SYN</code>
+是发起一个连接，<code>ACK</code> 是回复，<code>RST</code>
+是重新连接，<code>FIN</code> 是结束连接等。TCP
+是面向连接的，因而双方要维护连接的状态，这些带状态位的包的发送，会引起双方的状态变更。</li>
+<li><strong>窗口大小</strong>。TCP
+要做<strong>流量控制</strong>，通信双方各声明一个窗口（缓存大小），标识自己当前能够的处理能力</li>
+</ol>
+<h5 id="分割数据">分割数据</h5>
+<p>如果 HTTP 请求消息比较长，超过了 <code>MSS</code> 的长度，这时 TCP
+就需要把 HTTP
+的数据拆解成一块块的数据发送，而不是一次性发送所有数据。数据会被以
+<code>MSS</code>
+的长度为单位进行拆分，拆分出来的每一块数据都会被放进单独的网络包中。也就是在每个被拆分的数据加上
+TCP 头信息，然后交给 IP 模块来发送数据。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240417162623.png" srcset="/img/loading.gif" lazyload style="zoom:67%;" /></p>
+<h4 id="ip">IP</h4>
+<h5 id="ip报文头部格式">IP报文头部格式</h5>
+<p><img src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240417162744.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<ol type="1">
+<li><p>在 IP 协议里面需要有<strong>源地址 IP</strong> 和
+<strong>目标地址 IP</strong></p></li>
+<li><p>因为 HTTP 是经过 TCP 传输的，所以在 IP
+包头的<strong>协议号</strong>，要填写为
+<code>06</code>（十六进制），表示协议为 TCP。</p></li>
+</ol>
+<h4 id="mac">MAC</h4>
+<p>MAC 头部是以太网使用的头部，它包含了接收方和发送方的 MAC
+地址等信息。</p>
+<p>发送方MAC地址在网卡生产时写入到 ROM 里的，只要将这个值读取出来写入到
+MAC 头部就可以了。</p>
+<p>接收方MAC地址需要ARP协议获取。如果对方和自己处于同一个子网中，ARP
+协议会在以太网中以<strong>广播</strong>的形式询问MAC地址，目标主机即可返回MAC地址。如果对方和自己不处于同一个子网，ARP协议广播获得默认路由的MAC地址并发送，由路由找到目标子网（路由器之间的传输也需要MAC地址）。</p>
+<h3 id="http">HTTP</h3>
+<h4 id="消息头常见字段">消息头常见字段</h4>
+<ol type="1">
+<li>Host：指定请求将发送到的服务器的域名和端口号</li>
+<li>Content-Length：表明了请求体的大小，解决粘包</li>
+<li>Connection：用于客户端要求服务器使用「HTTP
+长连接」机制，以便其他请求复用。</li>
+<li>Content-type：用于服务器回应时，告诉客户端，本次数据是什么格式。</li>
+</ol>
+<p><img src="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240417173130.png" srcset="/img/loading.gif" lazyload style="zoom: 33%;" /></p>
+<h4 id="常见状态码">常见状态码</h4>
+<p><img src="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240417170858.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" /></p>
+<ol type="1">
+<li>200 OK 表示一切正常</li>
+<li>204 No Content 没有响应体body数据</li>
+<li>206 Partial Content
+应用于分块下载或断点续传，表示body数据是资源的一部分</li>
+<li>301 Moved Permanently
+表示永久重定向，说明请求的资源已经不存在了，需改用新的 URL 再次访问</li>
+<li>302 Found 表示临时重定向，说明请求的资源还在，但暂时需要用另一个 URL
+来访问</li>
+<li>304 Not Modified
+不具有跳转的含义，表示资源未修改，告诉客户端可以继续使用缓存资源，用于缓存控制</li>
+<li>400 Bad request 表示客户端请求的报文有错误</li>
+<li>403 Forbidden 表示服务器禁止访问资源，并不是客户端的请求出错</li>
+<li>404 Not Found
+表示请求的资源在服务器上不存在或未找到，所以无法提供给客户端</li>
+<li>500 Internal Server Error 表示服务器发生错误</li>
+<li>501 Not Implemented 表示客户端请求的功能还不支持</li>
+<li>502 Bad Gateway
+服务器作为网关或代理时返回的错误码，表示服务器自身工作正常，访问后端服务器发生了错误</li>
+<li>503 Service Unavailable 表示服务器当前很忙，暂时无法响应客户端</li>
+</ol>
+<h4 id="粘包问题">粘包问题</h4>
+<p>HTTP 是基于 TCP 传输协议进行通信的，而使用了 TCP
+传输协议，就会存在一个“粘包”的问题，即可能一个请求会分散在好几个TCP包中，也有可能好几个请求的内容出现在一个TCP包中。</p>
+<p><strong>HTTP 协议通过设置回车符、换行符作为 HTTP header 的边界，通过
+Content-Length 字段作为 HTTP body
+的边界，这两个方式都是为了解决“粘包”的问题</strong>。</p>
+<h4 id="http缓存">HTTP缓存</h4>
+<h5 id="强制缓存">强制缓存</h5>
+<p>只要浏览器判断缓存没有过期，则直接使用浏览器的本地缓存，决定是否使用缓存的主动性在于浏览器这边，响应头中Cache-Control存储一个相对时间用来判断是否过期。</p>
+<h5 id="协商缓存">协商缓存</h5>
+<p><strong>协商缓存这两个字段都需要配合强制缓存中 Cache-Control
+字段来使用，只有在未能命中强制缓存的时候，才能发起带有协商缓存字段的请求</strong>。</p>
+<p>第一种：请求头部中的 <code>If-Modified-Since</code>
+字段与响应头部中的 <code>Last-Modified</code>
+字段实现，这两个字段的意思是：</p>
+<ul>
+<li>响应头部中的
+<code>Last-Modified</code>：标示这个响应资源的最后修改时间；</li>
+<li>请求头部中的
+<code>If-Modified-Since</code>：当资源过期了，发现响应头中具有
+Last-Modified 声明，则再次发起请求的时候带上 Last-Modified
+的时间，服务器收到请求后发现有 If-Modified-Since
+则与被请求资源的最后修改时间进行对比（Last-Modified），如果最后修改时间较新（大），说明资源又被改过，则返回最新资源，HTTP
+200 OK；如果最后修改时间较旧（小），说明资源无新修改，响应 HTTP 304
+走缓存。</li>
+</ul>
+<p>第二种：请求头部中的 <code>If-None-Match</code> 字段与响应头部中的
+<code>ETag</code> 字段，这两个字段的意思是：</p>
+<ul>
+<li>响应头部中 <code>Etag</code>：唯一标识响应资源；</li>
+<li>请求头部中的
+<code>If-None-Match</code>：当资源过期时，浏览器发现响应头里有
+Etag，则再次向服务器发起请求时，会将请求头 If-None-Match 值设置为 Etag
+的值。服务器收到请求后进行比对，如果资源没有变化返回
+304，如果资源变化了返回 200。</li>
+</ul>
+<h4 id="https">HTTPS</h4>
+<p>HTTPS 解决 HTTP 不安全的缺陷，在 TCP 和 HTTP 网络层之间加入了 SSL/TLS
+安全协议，使得报文能够加密传输。</p>
+<h5 id="混合加密">混合加密</h5>
+<p>HTTPS
+采用的是<strong>对称加密</strong>和<strong>非对称加密</strong>结合的「混合加密」方式：</p>
+<ul>
+<li>在通信建立前采用<strong>非对称加密</strong>的方式交换「会话秘钥」，后续就不再使用非对称加密。</li>
+<li>在通信过程中全部使用<strong>对称加密</strong>的「会话秘钥」的方式加密明文数据。</li>
+</ul>
+<h5 id="摘要算法数字签名">摘要算法+数字签名</h5>
+<p>用摘要算法（哈希函数）来计算出内容的哈希值，也就是内容的「指纹」，这个哈希值是唯一的，且无法通过哈希值推导出内容。</p>
+<p>通过哈希算法可以确保内容不会被篡改，<strong>但是并不能保证「内容 +
+哈希值」不会被中间人替换，因为这里缺少对客户端收到的消息是否来源于服务端的证明</strong>。那为了避免这种情况，计算机里会用<strong>非对称加密算法</strong>来解决。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" class="category-chain-item">软件开发</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>八股-计算机网络</div>
+      <div>http://example.com/2024/04/17/SoftwareDevelopment/八股-计算机网络/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Chen</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年4月17日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年4月17日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/04/16/SoftwareDevelopment/%E5%85%AB%E8%82%A1-JVM/" title="八股-JVM">
+                        <span class="hidden-mobile">八股-JVM</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
