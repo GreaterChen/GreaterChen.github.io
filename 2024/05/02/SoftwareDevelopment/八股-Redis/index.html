@@ -1,0 +1,1309 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Chen">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Redis学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="八股-Redis">
+<meta property="og:url" content="http://example.com/2024/05/02/SoftwareDevelopment/%E5%85%AB%E8%82%A1-Redis/index.html">
+<meta property="og:site_name" content="Chen&#39;s Blog">
+<meta property="og:description" content="Redis学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/e84b052381e240eeb8cc97d6b729968b.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/98987d9417b2bab43087f45fc959d32a.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/2b7231b6aabb9a9a2e2390ab3a280b2d-20230309232920063.png">
+<meta property="article:published_time" content="2024-05-02T12:54:54.000Z">
+<meta property="article:modified_time" content="2024-05-03T12:38:36.883Z">
+<meta property="article:author" content="Chen">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.xiaolincoding.com//mysql/other/e84b052381e240eeb8cc97d6b729968b.png">
+  
+  
+  
+  <title>八股-Redis - Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Chen&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="八股-Redis"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Chen
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-05-02 20:54" pubdate>
+          2024年5月2日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          14k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          114 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">八股-Redis</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2024年5月3日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>Redis学习 <span id="more"></span></p>
+<h2 id="数据类型">数据类型</h2>
+<h3 id="string">String</h3>
+<h4 id="底层实现">底层实现</h4>
+<p>String 类型的底层的数据结构实现主要是 int 和
+SDS（简单动态字符串）。</p>
+<ol type="1">
+<li><p>如果一个字符串对象保存的是整数值，并且这个整数值可以用<code>long</code>类型来表示，那么字符串对象会将整数值保存在字符串对象结构的<code>ptr</code>属性里面（将<code>void*</code>转换成
+long），并将字符串对象的编码设置为<code>int</code>。</p></li>
+<li><p>如果字符串对象保存的是一个字符串，并且这个字符申的长度小于等于 32
+字节（redis
+2.+版本），那么字符串对象将使用一个简单动态字符串（SDS）来保存这个字符串，并将对象的编码设置为<code>embstr</code>，
+<code>embstr</code>编码是专门用于保存短字符串的一种优化编码方式</p></li>
+<li><p>如果字符串对象保存的是一个字符串，并且这个字符串的长度大于 32
+字节（redis
+2.+版本），那么字符串对象将使用一个简单动态字符串（SDS）来保存这个字符串，并将对象的编码设置为<code>raw</code></p></li>
+</ol>
+<p>embstr和raw编码都会使用SDS来保存值，但不同之处在于embstr会通过一次内存分配函数来分配一块连续的内存空间来保存redisObject和SDS，而raw编码会通过调用两次内存分配函数来分别分配两块空间来保存redisObject和SDS</p>
+<h4 id="分布式锁">分布式锁</h4>
+<p>SET 命令有个 NX
+参数可以实现「key不存在才插入」，可以用它来实现分布式锁：</p>
+<ul>
+<li>如果 key 不存在，则显示插入成功，可以用来表示加锁成功；</li>
+<li>如果 key 存在，则会显示插入失败，可以用来表示加锁失败。</li>
+</ul>
+<p>而解锁的过程就是将 lock_key
+键删除，但不能乱删，要保证执行操作的客户端就是加锁的客户端。所以，解锁的时候，我们要先判断锁的
+unique_value 是否为加锁客户端，是的话，才将 lock_key 键删除。</p>
+<p>可以看到，解锁是有两个操作，这时就需要 Lua
+脚本来保证解锁的原子性，因为 Redis 在执行 Lua
+脚本时，可以以原子性的方式执行，保证了锁释放操作的原子性。</p>
+<h3 id="list">List</h3>
+<h4 id="底层实现-1">底层实现</h4>
+<p>List
+类型的底层数据结构是由<strong>双向链表或压缩列表</strong>实现的：</p>
+<ul>
+<li>如果列表的元素个数小于 <code>512</code> 个（默认值，可由
+<code>list-max-ziplist-entries</code> 配置），列表每个元素的值都小于
+<code>64</code> 字节（默认值，可由 <code>list-max-ziplist-value</code>
+配置），Redis 会使用<strong>压缩列表</strong>作为 List
+类型的底层数据结构；</li>
+<li>如果列表的元素不满足上面的条件，Redis
+会使用<strong>双向链表</strong>作为 List 类型的底层数据结构；</li>
+</ul>
+<p>但是<strong>在 Redis 3.2 版本之后，List 数据类型底层数据结构就只由
+quicklist 实现了，替代了双向链表和压缩列表</strong></p>
+<h4 id="消息队列">消息队列</h4>
+<p>List 本身就是按先进先出的顺序对数据进行存取的，所以，如果使用 List
+作为消息队列保存消息的话，就已经能满足消息保序的需求了</p>
+<ol type="1">
+<li>堵塞问题</li>
+</ol>
+<p>​ 在生产者往 List 中写入数据时，List
+并不会主动地通知消费者有新消息写入，如果消费者想要及时处理消息，就需要在程序中不停地
+调用 <code>RPOP</code>
+命令（比如使用一个while(1)循环）。如果有新消息写入，RPOP命令就会返回结果，否则，RPOP命令返回空值，再继续
+循环。所以，即使没有新消息写入List，消费者也要不停地调用 RPOP
+命令，这就会导致消费者程序的 CPU 一直消耗在执行 RPOP
+命令上，带来不必要的性能损失。</p>
+<p>​ 为了解决这个问题，Redis提供了 BRPOP
+命令。<strong>BRPOP命令也称为阻塞式读取，客户端在没有读到队列数据时，自动阻塞，直到
+有新的数据写入队列，再开始读取新数据</strong>。和消费者程序自己不停地调用RPOP命令相比，这种方式能节省CPU开销。</p>
+<ol start="2" type="1">
+<li>处理重复的消息</li>
+</ol>
+<p>​
+<strong>自行为每个消息生成一个全局唯一ID</strong>，生成之后，我们在用
+LPUSH 命令把消息插入 List 时，需要在消息中包含这个全局唯一 ID。</p>
+<ol start="3" type="1">
+<li>保证消息可靠性</li>
+</ol>
+<p>​ 为了留存消息，List 类型提供了 <code>BRPOPLPUSH</code>
+命令，这个命令的<strong>作用是让消费者程序从一个 List
+中读取消息，同时，Redis 会把这 个消息再插入到另一个 List（可以叫作备份
+List）留存</strong>。这样一来，如果消费者程序读了消息但没能正常处理，等它重启后，就可以
+从备份 List 中重新读取消息并进行处理了。</p>
+<h3 id="hash">Hash</h3>
+<p>Hash
+类型的底层数据结构是由<strong>压缩列表或哈希表</strong>实现的：</p>
+<ul>
+<li>如果哈希类型元素个数小于 <code>512</code> 个（默认值，可由
+<code>hash-max-ziplist-entries</code> 配置），所有值小于 <code>64</code>
+字节（默认值，可由 <code>hash-max-ziplist-value</code> 配置）的话，Redis
+会使用<strong>压缩列表</strong>作为 Hash 类型的底层数据结构；</li>
+<li>如果哈希类型元素不满足上面条件，Redis
+会使用<strong>哈希表</strong>作为 Hash 类型的 底层数据结构。</li>
+</ul>
+<p><strong>在 Redis 7.0 中，压缩列表数据结构已经废弃了，交由 listpack
+数据结构来实现了</strong>。</p>
+<h3 id="set">Set</h3>
+<p>Set
+类型是一个无序并唯一的键值集合，它的存储顺序不会按照插入的先后顺序进行存储。</p>
+<p>Set
+类型的底层数据结构是由<strong>哈希表或整数集合</strong>实现的：</p>
+<ul>
+<li>如果集合中的元素都是整数且元素个数小于 <code>512</code>
+（默认值，<code>set-maxintset-entries</code>配置）个，Redis
+会使用<strong>整数集合</strong>作为 Set 类型的底层数据结构；</li>
+<li>如果集合中的元素不满足上面条件，则 Redis
+使用<strong>哈希表</strong>作为 Set 类型的底层数据结构。</li>
+</ul>
+<h3 id="zset">Zset</h3>
+<p>Zset 类型（有序集合类型）相比于 Set 类型多了一个排序属性
+score（分值），对于有序集合 ZSet
+来说，每个存储元素相当于有两个值组成的，一个是有序集合的元素值，一个是排序值。</p>
+<p>Zset
+类型的底层数据结构是由<strong>压缩列表或跳表</strong>实现的：</p>
+<ul>
+<li>如果有序集合的元素个数小于 <code>128</code> 个，并且每个元素的值小于
+<code>64</code> 字节时，Redis 会使用<strong>压缩列表</strong>作为 Zset
+类型的底层数据结构；</li>
+<li>如果有序集合的元素不满足上面的条件，Redis
+会使用<strong>跳表</strong>作为 Zset 类型的底层数据结构；</li>
+</ul>
+<p><strong>在 Redis 7.0 中，压缩列表数据结构已经废弃了，交由 listpack
+数据结构来实现了。</strong></p>
+<h3 id="bitmap">Bitmap</h3>
+<p>Bitmap，即位图，是一串连续的二进制数组（0和1），可以通过偏移量（offset）定位元素。BitMap通过最小的单位bit来进行<code>0|1</code>的设置，表示某个元素的值或者状态，时间复杂度为O(1)。由于
+bit
+是计算机中最小的单位，使用它进行储存将非常节省空间，特别适合一些数据量大且使用<strong>二值统计的场景</strong>。</p>
+<p>Bitmap 本身是用 String
+类型作为底层数据结构实现的一种统计二值状态的数据类型。String
+类型是会保存为二进制的字节数组，所以，Redis 就把字节数组的每个 bit
+位利用起来，用来表示一个元素的二值状态，你可以把 Bitmap 看作是一个 bit
+数组。</p>
+<h2 id="数据结构">数据结构</h2>
+<figure>
+<img
+src="https://cdn.xiaolincoding.com//mysql/other/9fa26a74965efbf0f56b707a03bb9b7f-20230309232518487.png" srcset="/img/loading.gif" lazyload
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h3 id="压缩列表">压缩列表</h3>
+<p>压缩列表的最大特点，就是它被设计成一种内存紧凑型的数据结构，占用一块连续的内存空间，不仅可以利用
+CPU
+缓存，而且会针对不同长度的数据，进行相应编码，这种方法可以有效地节省内存开销。</p>
+<figure>
+<img
+src="https://cdn.xiaolincoding.com//mysql/other/ab0b44f557f8b5bc7acb3a53d43ebfcb.png" srcset="/img/loading.gif" lazyload
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>压缩列表在表头有三个字段：</p>
+<ul>
+<li><strong><em>zlbytes</em></strong>，记录整个压缩列表占用对内存字节数；</li>
+<li><strong><em>zltail</em></strong>，记录压缩列表「尾部」节点距离起始地址由多少字节，也就是列表尾的偏移量；</li>
+<li><strong><em>zllen</em></strong>，记录压缩列表包含的节点数量；</li>
+<li><strong><em>zlend</em></strong>，标记压缩列表的结束点，固定值
+0xFF（十进制255）。</li>
+</ul>
+<p>在压缩列表中，如果我们要查找定位第一个元素和最后一个元素，可以通过表头三个字段（zllen）的长度直接定位，复杂度是
+O(1)。而<strong>查找其他元素时，就没有这么高效了，只能逐个查找，此时的复杂度就是
+O(N) 了，因此压缩列表不适合保存过多的元素</strong>。</p>
+<p>压缩列表节点包含三部分内容：</p>
+<ul>
+<li><strong><em>prevlen</em></strong>，记录了「前一个节点」的长度，目的是为了实现从后向前遍历；</li>
+<li><strong><em>encoding</em></strong>，记录了当前节点实际数据的「类型和长度」，类型主要有两种：字符串和整数。</li>
+<li><strong><em>data</em></strong>，记录了当前节点的实际数据，类型和长度都由
+<code>encoding</code> 决定；</li>
+</ul>
+<p>压缩列表里的每个节点中的 prevlen
+属性都记录了「前一个节点的长度」，而且 prevlen
+属性的空间大小跟前一个节点长度值有关，比如：</p>
+<ul>
+<li>如果<strong>前一个节点的长度小于 254 字节</strong>，那么 prevlen
+属性需要用 <strong>1 字节的空间</strong>来保存这个长度值；</li>
+<li>如果<strong>前一个节点的长度大于等于 254 字节</strong>，那么 prevlen
+属性需要用 <strong>5 字节的空间</strong>来保存这个长度值；</li>
+</ul>
+<h4 id="连锁更新">连锁更新</h4>
+<p>压缩列表新增某个元素或修改某个元素时，如果空间不不够，压缩列表占用的内存空间就需要重新分配。而当新插入的元素较大时，可能会导致后续元素的
+prevlen
+占用空间都发生变化，从而引起「连锁更新」问题，导致每个元素的空间都要重新分配，造成访问压缩列表性能的下降。</p>
+<h3 id="整数集合">整数集合</h3>
+<p>整数集合本质上是一块连续内存空间，保存元素的容器是一个 contents
+数组，虽然 contents 被声明为 int8_t 类型的数组，但是实际上 contents
+数组并不保存任何 int8_t 类型的元素，contents 数组的真正类型取决于 intset
+结构体里的 encoding 属性的值</p>
+<h4 id="升级操作">升级操作</h4>
+<p>整数集合会有一个升级规则，就是当我们将一个新元素加入到整数集合里面，如果新元素的类型（int32_t）比整数集合现有所有元素的类型（int16_t）都要长时，整数集合需要先进行升级，也就是按新元素的类型（int32_t）扩展
+contents
+数组的空间大小，然后才能将新元素加入到整数集合里，当然升级的过程中，也要维持整数集合的有序性。</p>
+<p><img src="https://cdn.xiaolincoding.com//mysql/other/e84b052381e240eeb8cc97d6b729968b.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:50%;" /></p>
+<h3 id="跳表">跳表</h3>
+<p>zset 结构体里有两个数据结构：一个是跳表，一个是哈希表。Zset
+对象能支持范围查询（如 ZRANGEBYSCORE
+操作），这是因为它的数据结构设计采用了跳表，而又能以常数复杂度获取元素权重（如
+ZSCORE 操作），这是因为它同时采用了哈希表进行索引。询。</p>
+<p>跳表是一个带有层级关系的链表，而且每一层级可以包含多个节点，每一个节点通过指针连接起来</p>
+<figure>
+<img
+src="https://cdn.xiaolincoding.com/gh/xiaolincoder/redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/3%E5%B1%82%E8%B7%B3%E8%A1%A8-%E8%B7%A8%E5%BA%A6.png" srcset="/img/loading.gif" lazyload
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h4 id="创建过程">创建过程</h4>
+<p><strong>跳表在创建节点的时候，随机生成每个节点的层数</strong>，并没有严格维持相邻两层的节点数量比例为
+2 : 1 的情况。</p>
+<p>具体的做法是，<strong>跳表在创建节点时候，会生成范围为[0-1]的一个随机数，如果这个随机数小于
+0.25（相当于概率 25%），那么层数就增加 1
+层，然后继续生成下一个随机数，直到随机数的结果大于 0.25
+结束，最终确定该节点的层数</strong>。</p>
+<h4 id="查询过程">查询过程</h4>
+<p>查找一个跳表节点的过程时，跳表会从头节点的最高层开始，逐一遍历每一层。在遍历某一层的跳表节点时，会用跳表节点中的
+SDS 类型的元素和元素的权重来进行判断，共有两个判断条件：</p>
+<ul>
+<li>如果当前节点的权重「小于」要查找的权重时，跳表就会访问该层上的下一个节点。</li>
+<li>如果当前节点的权重「等于」要查找的权重时，并且当前节点的 SDS
+类型数据「小于」要查找的数据时，跳表就会访问该层上的下一个节点。</li>
+</ul>
+<p>如果上面两个条件都不满足，或者下一个节点为空时，跳表就会使用目前遍历到的节点的
+level
+数组里的下一层指针，然后沿着下一层指针继续查找，这就相当于跳到了下一层接着查找。</p>
+<figure>
+<img
+src="https://cdn.xiaolincoding.com/gh/xiaolincoder/redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/3%E5%B1%82%E8%B7%B3%E8%A1%A8-%E8%B7%A8%E5%BA%A6.drawio.png" srcset="/img/loading.gif" lazyload
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>如果要查找「元素：abcd，权重：4」的节点，查找的过程是这样的：</p>
+<ul>
+<li>先从头节点的最高层开始，L2
+指向了「元素：abc，权重：3」节点，这个节点的权重比要查找节点的小，所以要访问该层上的下一个节点；</li>
+<li>但是该层的下一个节点是空节点（
+leve[2]指向的是空节点），于是就会跳到「元素：abc，权重：3」节点的下一层去找，也就是
+leve[1];</li>
+<li>「元素：abc，权重：3」节点的 leve[1]
+的下一个指针指向了「元素：abcde，权重：4」的节点，然后将其和要查找的节点比较。虽然「元素：abcde，权重：4」的节点的权重和要查找的权重相同，但是当前节点的
+SDS
+类型数据「大于」要查找的数据，所以会继续跳到「元素：abc，权重：3」节点的下一层去找，也就是
+leve[0]；</li>
+<li>「元素：abc，权重：3」节点的 leve[0]
+的下一个指针指向了「元素：abcd，权重：4」的节点，该节点正是要查找的节点，查询结束。</li>
+</ul>
+<h4 id="查找某个元素的排位">查找某个元素的排位</h4>
+<p>查找图中节点 3 在跳表中的排位，从头节点开始查找节点
+3，查找的过程只经过了一个层（L2），并且层的跨度是 3，所以节点 3
+在跳表中的排位是 3。</p>
+<h4 id="为什么不用平衡树">为什么不用平衡树？</h4>
+<ul>
+<li><strong>在做范围查找的时候，跳表比平衡树操作要简单</strong>。在平衡树上，我们找到指定范围的小值之后，还需要以中序遍历的顺序继续寻找其它不超过大值的节点。如果不对平衡树进行一定的改造，这里的中序遍历并不容易实现。而在跳表上进行范围查找就非常简单，只需要在找到小值之后，对第
+1 层链表进行若干步的遍历就可以实现。</li>
+<li><strong>从算法实现难度上来比较，跳表比平衡树要简单得多</strong>。平衡树的插入和删除操作可能引发子树的调整，逻辑复杂，而跳表的插入和删除只需要修改相邻节点的指针，操作简单又快速。</li>
+<li><strong>从内存占用上来比较，跳表比平衡树更灵活一些</strong>。平衡树每个节点包含
+2 个指针（分别指向左右子树），而跳表每个节点包含的指针数目平均为
+1/(1-p)，具体取决于参数 p 的大小。如果像 Redis里的实现一样，取
+p=1/4，那么平均每个节点包含 1.33 个指针，比平衡树更有优势。</li>
+</ul>
+<h3 id="quicklist">quicklist</h3>
+<p>quicklist 就是「双向链表 + 压缩列表」组合，因为一个 quicklist
+就是一个链表，而链表中的每个元素又是一个压缩列表。<strong>过控制每个链表节点中的压缩列表的大小或者元素个数，来规避连锁更新的问题。因为压缩列表元素越少或越小，连锁更新带来的影响就越小，从而提供了更好的访问性能。</strong></p>
+<figure>
+<img
+src="https://cdn.xiaolincoding.com//mysql/other/f46cbe347f65ded522f1cc3fd8dba549.png" srcset="/img/loading.gif" lazyload
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<h3 id="listpack">listpack</h3>
+<figure>
+<img
+src="https://cdn.xiaolincoding.com//mysql/other/c5fb0a602d4caaca37ff0357f05b0abf.png" srcset="/img/loading.gif" lazyload
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>listpack 头包含两个属性，分别记录了 listpack 总字节数和元素数量，然后
+listpack 末尾也有个结尾标识。图中的 listpack entry 就是 listpack
+的节点了。</p>
+<p>每个entry主要包含三个方面内容：</p>
+<ul>
+<li>encoding，定义该元素的编码类型，会对不同长度的整数和字符串进行编码；</li>
+<li>data，实际存放的数据；</li>
+<li>len，encoding+data的总长度；</li>
+</ul>
+<h2 id="持久化">持久化</h2>
+<h3 id="aof日志">AOF日志</h3>
+<h4 id="实现方式">实现方式</h4>
+<p>下面这种保存写操作命令到日志的持久化方式，就是 Redis 里的
+<strong>AOF(Append Only File)</strong>
+持久化功能，<strong>注意只会记录写操作命令，读操作命令是不会被记录的</strong>，因为没意义。</p>
+<figure>
+<img
+src="https://cdn.xiaolincoding.com//mysql/other/6f0ab40396b7fc2c15e6f4487d3a0ad7.png" srcset="/img/loading.gif" lazyload
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<p>但是这么做有两个风险：</p>
+<ol type="1">
+<li><p>执行写操作命令和记录日志是两个过程，那当 Redis
+在还没来得及将命令写入到硬盘时，服务器发生宕机了，这个数据就会有<strong>丢失的风险</strong>。</p></li>
+<li><p>由于写操作命令执行成功后才记录到 AOF
+日志，所以不会阻塞当前写操作命令的执行，但是<strong>可能会给「下一个」命令带来阻塞风险</strong>。</p></li>
+</ol>
+<h4 id="三种写回策略">三种写回策略</h4>
+<ol type="1">
+<li><p>Redis 执行完写操作命令后，会将命令追加到
+<code>server.aof_buf</code> 缓冲区；</p></li>
+<li><p>然后通过 write() 系统调用，将 aof_buf 缓冲区的数据写入到 AOF
+文件，此时数据并没有写入到硬盘，而是拷贝到了内核缓冲区 page
+cache，等待内核将数据写入硬盘；</p></li>
+<li><p>具体内核缓冲区的数据什么时候写入到硬盘，由内核决定。</p>
+<p>在 <code>redis.conf</code> 配置文件中的 <code>appendfsync</code>
+配置项可以有以下 3 种参数可填：</p>
+<ul>
+<li><strong>Always</strong>，这个单词的意思是「总是」，所以它的意思是每次写操作命令执行完后，同步将
+AOF 日志数据写回硬盘；</li>
+<li><strong>Everysec</strong>，这个单词的意思是「每秒」，所以它的意思是每次写操作命令执行完后，先将命令写入到
+AOF 文件的内核缓冲区，然后每隔一秒将缓冲区里的内容写回到硬盘；</li>
+<li><strong>No</strong>，意味着不由 Redis
+控制写回硬盘的时机，转交给操作系统控制写回的时机，也就是每次写操作命令执行完后，先将命令写入到
+AOF 文件的内核缓冲区，再由操作系统决定何时将缓冲区内容写回硬盘。</li>
+</ul></li>
+</ol>
+<p><img src="https://cdn.xiaolincoding.com//mysql/other/98987d9417b2bab43087f45fc959d32a.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:50%;" /></p>
+<h4 id="重写机制">重写机制</h4>
+<p>AOF
+重写机制是在重写时，读取当前数据库中的所有键值对，然后将每一个键值对用一条命令记录到「新的
+AOF 文件」，等到全部记录完后，就将新的 AOF 文件替换掉现有的 AOF
+文件。</p>
+<p>这个过程其实是很耗时的，所以重写的操作不能放在主进程里。所以，Redis
+的<strong>重写 AOF 过程是由后台子进程 *bgrewriteaof*
+来完成的</strong>，这么做可以达到两个好处：</p>
+<ul>
+<li>子进程进行 AOF
+重写期间，主进程可以继续处理命令请求，从而避免阻塞主进程；</li>
+<li>子进程带有主进程的数据副本，这里使用子进程而不是线程，因为如果是使用线程，多线程之间会共享内存，那么在修改共享内存数据的时候，需要通过加锁来保证数据的安全，而这样就会降低性能。而使用子进程，创建子进程时，父子进程是共享内存数据的，不过这个共享的内存只能以只读的方式，而当父子进程任意一方修改了该共享内存，就会发生「写时复制」，于是父子进程就有了独立的数据副本，就不用加锁来保证数据安全。</li>
+</ul>
+<p>还有个问题，重写 AOF 日志过程中，如果主进程修改了已经存在
+key-value，此时这个 key-value
+数据在子进程的内存数据就跟主进程的内存数据不一致了，这时要怎么办呢？</p>
+<p>为了解决这种数据不一致问题，Redis 设置了一个 <strong>AOF
+重写缓冲区</strong>，这个缓冲区在创建 bgrewriteaof
+子进程之后开始使用。</p>
+<p>在重写 AOF 期间，当 Redis
+执行完一个写命令之后，它会<strong>同时将这个写命令写入到 「AOF
+缓冲区」和 「AOF 重写缓冲区」</strong>。</p>
+<p>当子进程完成 AOF
+重写工作后，会向主进程发送一条信号，主进程收到该信号后，会调用一个信号处理函数，该函数主要做以下工作：</p>
+<ul>
+<li>将 AOF 重写缓冲区中的所有内容追加到新的 AOF 的文件中，使得新旧两个
+AOF 文件所保存的数据库状态一致；</li>
+<li>新的 AOF 的文件进行改名，覆盖现有的 AOF 文件。</li>
+</ul>
+<h3 id="rdb快照">RDB快照</h3>
+<p>RDB 快照就是记录某一个瞬间的内存数据，记录的是实际数据，而 AOF
+文件记录的是命令操作的日志，而不是实际的数据。</p>
+<p>因此在 Redis 恢复数据时， RDB 恢复数据的效率会比 AOF 高些，因为直接将
+RDB 文件读入内存就可以，不需要像 AOF
+那样还需要额外执行操作命令的步骤才能恢复数据。</p>
+<p>所以可以认为，执行快照是一个比较重的操作，如果频率太频繁，可能会对
+Redis
+性能产生影响。如果频率太低，服务器故障时，丢失的数据会更多。通常可能设置至少
+5 分钟才保存一次快照，这时如果 Redis
+出现宕机等情况，则意味着最多可能丢失 5 分钟数据。这就是 RDB
+快照的缺点，在服务器发生故障时，丢失的数据会比 AOF
+持久化的方式更多，因为 RDB
+快照是全量快照的方式，因此执行的频率不能太频繁，否则会影响 Redis
+性能，而 AOF
+日志可以以秒级的方式记录操作命令，所以丢失的数据就相对更少。</p>
+<p>Redis 在使用 bgsave
+快照过程中，如果主线程修改了内存数据，不管是否是共享的内存数据，RDB
+快照都无法写入主线程刚修改的数据，因为此时主线程（父进程）的内存数据和子进程的内存数据已经分离了，子进程写入到
+RDB 文件的内存数据只能是原本的内存数据。</p>
+<h3 id="混合持久化">混合持久化</h3>
+<p>混合持久化工作在 <strong>AOF 日志重写过程</strong>。</p>
+<p>当开启了混合持久化时，在 AOF 重写日志时，<code>fork</code>
+出来的重写子进程会先将与主线程共享的内存数据以 RDB 方式写入到 AOF
+文件，然后主线程处理的操作命令会被记录在重写缓冲区里，重写缓冲区里的增量命令会以
+AOF 方式写入到 AOF 文件，写入完成后通知主进程将新的含有 RDB 格式和 AOF
+格式的 AOF 文件替换旧的的 AOF 文件。</p>
+<p>也就是说，使用了混合持久化，AOF 文件的<strong>前半部分是 RDB
+格式的全量数据，后半部分是 AOF 格式的增量数据</strong>。</p>
+<h2 id="过期删除">过期删除</h2>
+<p>常见的三种过期删除策略：</p>
+<ul>
+<li>定时删除：<strong>在设置 key
+的过期时间时，同时创建一个定时事件，当时间到达时，由事件处理器自动执行
+key 的删除操作。</strong></li>
+<li>惰性删除：<strong>不主动删除过期键，每次从数据库访问 key 时，都检测
+key 是否过期，如果过期则删除该 key。</strong></li>
+<li>定期删除：<strong>每隔一段时间「随机」从数据库中取出一定数量的 key
+进行检查，并删除其中的过期key。</strong></li>
+</ul>
+<p><strong>Redis
+选择「惰性删除+定期删除」这两种策略配和使用</strong>，以求在合理使用 CPU
+时间和避免内存浪费之间取得平衡。</p>
+<h2 id="内存淘汰">内存淘汰</h2>
+<p><em>1、不进行数据淘汰的策略</em></p>
+<p><strong>noeviction</strong>（Redis3.0之后，默认的内存淘汰策略）
+：它表示当运行内存超过最大设置内存时，不淘汰任何数据，这时如果有新的数据写入，会报错通知禁止写入，不淘汰任何数据，但是如果没用数据写入的话，只是单纯的查询或者删除操作的话，还是可以正常工作。</p>
+<p><em>2、进行数据淘汰的策略</em></p>
+<p>针对「进行数据淘汰」这一类策略，又可以细分为「在设置了过期时间的数据中进行淘汰」和「在所有数据范围内进行淘汰」这两类策略。</p>
+<p>在设置了过期时间的数据中进行淘汰：</p>
+<ul>
+<li><strong>volatile-random</strong>：随机淘汰设置了过期时间的任意键值；</li>
+<li><strong>volatile-ttl</strong>：优先淘汰更早过期的键值。</li>
+<li><strong>volatile-lru</strong>（Redis3.0
+之前，默认的内存淘汰策略）：淘汰所有设置了过期时间的键值中，最久未使用的键值；</li>
+<li><strong>volatile-lfu</strong>（Redis 4.0
+后新增的内存淘汰策略）：淘汰所有设置了过期时间的键值中，最少使用的键值；</li>
+</ul>
+<p>在所有数据范围内进行淘汰：</p>
+<ul>
+<li><strong>allkeys-random</strong>：随机淘汰任意键值;</li>
+<li><strong>allkeys-lru</strong>：淘汰整个键值中最久未使用的键值；</li>
+<li><strong>allkeys-lfu</strong>（Redis 4.0
+后新增的内存淘汰策略）：淘汰整个键值中最少使用的键值。</li>
+</ul>
+<h3 id="lru算法">LRU算法</h3>
+<p><strong>LRU</strong> 全称是 Least Recently Used
+翻译为<strong>最近最少使用</strong>，会选择淘汰最近最少使用的数据。</p>
+<p>传统 LRU
+算法的实现是基于「链表」结构，链表中的元素按照操作顺序从前往后排列，最新操作的键会被移动到表头，当需要内存淘汰时，只需要删除链表尾部的元素即可，因为链表尾部的元素就代表最久未被使用的元素。</p>
+<p>Redis 实现的是一种<strong>近似 LRU
+算法</strong>，目的是为了更好的节约内存，它的<strong>实现方式是在 Redis
+的对象结构体中添加一个额外的字段，用于记录此数据的最后一次访问时间</strong>。当
+Redis
+进行内存淘汰时，会使用<strong>随机采样的方式来淘汰数据</strong>，它是随机取
+5 个值（此值可配置），然后<strong>淘汰最久没有使用的那个</strong>。</p>
+<p>但是 LRU
+算法有一个问题，<strong>无法解决缓存污染问题</strong>，比如应用一次读取了大量的数据，而这些数据只会被读取这一次，那么这些数据会留存在
+Redis 缓存中很长一段时间，造成缓存污染。</p>
+<h3 id="lfu算法">LFU算法</h3>
+<p>LFU 全称是 Least Frequently Used
+翻译为<strong>最近最不常用</strong>，LFU
+算法是根据数据访问次数来淘汰数据的，它的核心思想是“如果数据过去被访问多次，那么将来被访问的频率也更高”。</p>
+<p>所以， LFU
+算法会记录每个数据的访问次数。当一个数据被再次访问时，就会增加该数据的访问次数。这样就解决了偶尔被访问一次之后，数据留存在缓存中很长一段时间的问题，相比于
+LRU 算法也更合理一些。</p>
+<p>Redis 对象头中的 lru 字段，在 LRU 算法下和 LFU
+算法下使用方式并不相同。</p>
+<p><strong>在 LRU 算法中</strong>，Redis 对象头的 24 bits 的 lru
+字段是用来记录 key 的访问时间戳，因此在 LRU
+模式下，Redis可以根据对象头中的 lru 字段记录的值，来比较最后一次 key
+的访问时间长，从而淘汰最久未被使用的 key。</p>
+<p><strong>在 LFU 算法中</strong>，Redis对象头的 24 bits 的 lru
+字段被分成两段来存储，高 16bit 存储 ldt(Last Decrement Time)，低 8bit
+存储 logc(Logistic Counter)。</p>
+<ul>
+<li>ldt 是用来记录 key 的访问时间戳；</li>
+<li>logc 是用来记录 key
+的访问频次，它的值越小表示使用频率越低，越容易淘汰，每个新加入的 key
+的logc 初始值为 5。</li>
+</ul>
+<p>注意，logc 并不是单纯的访问次数，而是访问频次（访问频率），因为
+<strong>logc 会随时间推移而衰减的</strong>。</p>
+<p>在每次 key 被访问时，会先对 logc
+做一个衰减操作，衰减的值跟前后访问时间的差距有关系，如果上一次访问的时间与这一次访问的时间差距很大，那么衰减的值就越大，这样实现的
+LFU
+算法是根据<strong>访问频率</strong>来淘汰数据的，而不只是访问次数。访问频率需要考虑
+key 的访问是多长时间段内发生的。key 的先前访问距离当前时间越长，那么这个
+key 的访问频率相应地也就会降低，这样被淘汰的概率也会更大。</p>
+<p>对 logc 做完衰减操作后，就开始对 logc
+进行增加操作，增加操作并不是单纯的 + 1，而是根据概率增加，如果 logc
+越大的 key，它的 logc 就越难再增加。</p>
+<p>所以，Redis 在访问 key 时，对于 logc 是这样变化的：</p>
+<ol type="1">
+<li>先按照上次访问距离当前的时长，来对 logc 进行衰减；</li>
+<li>然后，再按照一定概率增加 logc 的值</li>
+</ol>
+<p>redis.conf 提供了两个配置项，用于调整 LFU 算法从而控制 logc
+的增长和衰减：</p>
+<ul>
+<li><code>lfu-decay-time</code> 用于调整 logc
+的衰减速度，它是一个以分钟为单位的数值，默认值为1，lfu-decay-time
+值越大，衰减越慢；</li>
+<li><code>lfu-log-factor</code> 用于调整 logc 的增长速度，lfu-log-factor
+值越大，logc 增长越慢。</li>
+</ul>
+<h2 id="缓存问题">缓存问题</h2>
+<h3 id="缓存雪崩">缓存雪崩</h3>
+<p>当<strong>大量缓存数据在同一时间过期（失效）或者 Redis
+故障宕机</strong>时，如果此时有大量的用户请求，都无法在 Redis
+中处理，于是全部请求都直接访问数据库，从而导致数据库的压力骤增，严重的会造成数据库宕机，从而形成一系列连锁反应，造成整个系统崩溃，这就是<strong>缓存雪崩</strong>的问题。</p>
+<ol type="1">
+<li><p>大数据量同时过期:</p>
+<ul>
+<li><p>均匀设置过期时间</p>
+<p>如果要给缓存数据设置过期时间，应该避免将大量的数据设置成同一个过期时间。我们可以在对缓存数据设置过期时间时，<strong>给这些数据的过期时间加上一个随机数</strong>，这样就保证数据不会在同一时间过期。</p></li>
+<li><p>互斥锁</p>
+<p>当业务线程在处理用户请求时，<strong>如果发现访问的数据不在 Redis
+里，就加个互斥锁，保证同一时间内只有一个请求来构建缓存</strong>（从数据库读取数据，再将数据更新到
+Redis
+里），当缓存构建完成后，再释放锁。未能获取互斥锁的请求，要么等待锁释放后重新读取缓存，要么就返回空值或者默认值。</p></li>
+<li><p>后台更新缓存</p></li>
+</ul></li>
+<li><p>Redis故障宕机</p>
+<ul>
+<li><p>服务熔断或请求限流机制</p>
+<p><strong>服务熔断</strong>机制:<strong>暂停业务应用对缓存服务的访问，直接返回错误</strong>，不用再继续访问数据库，从而降低对数据库的访问压力，保证数据库系统的正常运行，然后等到
+Redis 恢复正常后，再允许业务应用访问缓存服务。</p>
+<p><strong>请求限流</strong>机制:<strong>只将少部分请求发送到数据库进行处理，再多的请求就在入口直接拒绝服务</strong>，等到
+Redis 恢复正常并把缓存预热完后，再解除请求限流的机制。</p></li>
+<li><p>构建 Redis 缓存高可靠集群</p>
+<p>如果 Redis
+缓存的主节点故障宕机，从节点可以切换成为主节点，继续提供缓存服务，避免了由于
+Redis 故障宕机而导致的缓存雪崩问题。</p></li>
+</ul></li>
+</ol>
+<h3 id="缓存击穿">缓存击穿</h3>
+<p>如果缓存中的<strong>某个热点数据过期</strong>了，此时大量的请求访问了该热点数据，就无法从缓存中读取，直接访问数据库，数据库很容易就被高并发的请求冲垮。</p>
+<ul>
+<li>互斥锁方案，保证同一时间只有一个业务线程更新缓存，未能获取互斥锁的请求，要么等待锁释放后重新读取缓存，要么就返回空值或者默认值。</li>
+<li>不给热点数据设置过期时间，由后台异步更新缓存，或者在热点数据准备要过期前，提前通知后台线程更新缓存以及重新设置过期时间；</li>
+</ul>
+<h3 id="缓存穿透">缓存穿透</h3>
+<p>当用户访问的数据，<strong>既不在缓存中，也不在数据库中</strong>，导致请求在访问缓存时，发现缓存缺失，再去访问数据库时，发现数据库中也没有要访问的数据，没办法构建缓存数据，来服务后续的请求。那么当有大量这样的请求到来时，数据库的压力骤增，这就是<strong>缓存穿透</strong>的问题。</p>
+<p>缓存穿透的发生一般有这两种情况：</p>
+<ul>
+<li>业务误操作，缓存中的数据和数据库中的数据都被误删除了，所以导致缓存和数据库中都没有数据；</li>
+<li>黑客恶意攻击，故意大量访问某些读取不存在数据的业务；</li>
+</ul>
+<p>应对缓存穿透的方案，常见的方案有三种。</p>
+<ul>
+<li><p>第一种方案，非法请求的限制；</p>
+<p>当有大量恶意请求访问不存在的数据的时候，也会发生缓存穿透，因此在 API
+入口处我们要判断求请求参数是否合理，请求参数是否含有非法值、请求字段是否存在，如果判断出是恶意请求就直接返回错误，避免进一步访问缓存和数据库。</p></li>
+<li><p>第二种方案，缓存空值或者默认值；</p>
+<p>当我们线上业务发现缓存穿透的现象时，可以针对查询的数据，在缓存中设置一个空值或者默认值，这样后续请求就可以从缓存中读取到空值或者默认值，返回给应用，而不会继续查询数据库。</p></li>
+<li><p>第三种方案，使用布隆过滤器快速判断数据是否存在，避免通过查询数据库来判断数据是否存在；</p>
+<p>我们可以在写入数据库数据时，使用布隆过滤器做个标记，然后在用户请求到来时，业务线程确认缓存失效后，可以通过查询布隆过滤器快速判断数据是否存在，如果不存在，就不用通过查询数据库来判断数据是否存在。</p>
+<p>即使发生了缓存穿透，大量请求只会查询 Redis
+和布隆过滤器，而不会查询数据库，保证了数据库能正常运行，Redis
+自身也是支持布隆过滤器的。</p></li>
+</ul>
+<h4 id="布隆过滤器">布隆过滤器</h4>
+<figure>
+<img
+src="https://cdn.xiaolincoding.com//mysql/other/86b0046c2622b2c4bda697f9bc0f5b28.png" srcset="/img/loading.gif" lazyload
+alt="图片" />
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<p>在数据库写入数据 x 后，把数据 x 标记在布隆过滤器时，数据 x 会被 3
+个哈希函数分别计算出 3 个哈希值，然后在对这 3 个哈希值对 8
+取模，假设取模的结果为 1、4、6，然后把位图数组的第 1、4、6
+位置的值设置为 1。<strong>当应用要查询数据 x
+是否数据库时，通过布隆过滤器只要查到位图数组的第 1、4、6
+位置的值是否全为 1，只要有一个为 0，就认为数据 x
+不在数据库中</strong>。</p>
+<h3 id="数据一致性">数据一致性</h3>
+<ol type="1">
+<li><p>先更新数据库 &amp; 先更新缓存</p>
+<p><strong>无论是「先更新数据库，再更新缓存」，还是「先更新缓存，再更新数据库」，这两个方案都存在并发问题，当两个请求并发更新同一条数据的时候，可能会出现缓存和数据库中的数据不一致的现象</strong>。如果非要选一个,就先更新数据库再更新缓存,因为更新缓存比较快,发生并发问题的概率比较小.</p></li>
+<li><p>先更新数据库 &amp; 先删除缓存</p>
+<p>二者也都是会出现并发问题,删除一个数据，相比更新一个数据更加轻量级，出问题的概率更小。<strong>「先更新数据库
++
+再删除缓存」的方案，更好一些,原因同上</strong>.为了确保万无一失，还给缓存数据加上了「<strong>过期时间</strong>」，就算在这期间存在缓存数据不一致，有过期时间来兜底，这样也能达到最终一致。</p>
+<p>如果删除缓存失败了怎么办?</p>
+<p>如果删除缓存失败,会导致缓存和数据库的短期不一致性.我们可以引入<strong>消息队列</strong>，将第二个操作（删除缓存）要操作的数据加入到消息队列，由消费者来操作数据。</p>
+<ul>
+<li>如果应用<strong>删除缓存失败</strong>，可以从消息队列中重新读取数据，然后再次删除缓存，这个就是<strong>重试机制</strong>。当然，如果重试超过的一定次数，还是没有成功，我们就需要向业务层发送报错信息了。</li>
+<li>如果<strong>删除缓存成功</strong>，就要把数据从消息队列中移除，避免重复操作，否则就继续重试。</li>
+</ul></li>
+</ol>
+<p>「先更新数据库，再删除缓存」的方案虽然保证了数据库与缓存的数据一致性，但是每次更新数据的时候，缓存的数据都会被删除，这样会对缓存的命中率带来影响。所以，<strong>如果我们的业务对缓存命中率有很高的要求，我们可以采用「更新数据库
++
+更新缓存」的方案，因为更新缓存并不会出现缓存未命中的情况</strong>。</p>
+<p>所以我们得增加一些手段来解决这个问题，这里提供两种做法：</p>
+<ul>
+<li>在更新缓存前先加个<strong>分布式锁</strong>，保证同一时间只运行一个请求更新缓存，就会不会产生并发问题了，当然引入了锁后，对于写入的性能就会带来影响。</li>
+<li>在更新完缓存时，给缓存加上较短的<strong>过期时间</strong>，这样即时出现缓存不一致的情况，缓存的数据也会很快过期，对业务还是能接受的。</li>
+</ul>
+<h2 id="高可用">高可用</h2>
+<h3 id="主从复制">主从复制</h3>
+<p><img src="https://cdn.xiaolincoding.com//mysql/other/2b7231b6aabb9a9a2e2390ab3a280b2d-20230309232920063.png" srcset="/img/loading.gif" lazyload alt="图片" style="zoom:67%;" /></p>
+<h4 id="首次同步">首次同步</h4>
+<figure>
+<img
+src="https://cdn.xiaolincoding.com//mysql/other/ea4f7e86baf2435af3999e5cd38b6a26.png" srcset="/img/loading.gif" lazyload
+alt="图片" />
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<h4 id="增量复制">增量复制</h4>
+<p>如果主从服务器间的网络连接断开了，那么就无法进行命令传播了，这时从服务器的数据就没办法和主服务器保持一致了，客户端就可能从「从服务器」读到旧的数据。如果此时断开的网络，又恢复正常了，要怎么继续保证主从服务器的数据一致性呢？</p>
+<ul>
+<li>从服务器在恢复网络后，会发送 psync 命令给主服务器，此时的 psync
+命令里的 offset 参数不是 -1；</li>
+<li>主服务器收到该命令后，然后用 CONTINUE
+响应命令告诉从服务器接下来采用增量复制的方式同步数据；</li>
+<li>然后主服务将主从服务器断线期间，所执行的写命令发送给从服务器，然后从服务器执行这些命令。</li>
+</ul>
+<p><strong>主服务器怎么知道要将哪些增量数据发送给从服务器呢？</strong></p>
+<p>在主服务器进行命令传播时，不仅会将写命令发送给从服务器，还会将写命令写入到
+repl_backlog_buffer 缓冲区里，因此
+这个缓冲区里会保存着最近传播的写命令。</p>
+<p>网络断开后，当从服务器重新连上主服务器时，从服务器会通过 psync
+命令将自己的复制偏移量 slave_repl_offset
+发送给主服务器，主服务器根据自己的 master_repl_offset 和
+slave_repl_offset 之间的差距，然后来决定对从服务器执行哪种同步操作：</p>
+<ul>
+<li>如果判断出从服务器要读取的数据还在 repl_backlog_buffer
+缓冲区里，那么主服务器将采用<strong>增量同步</strong>的方式；</li>
+<li>相反，如果判断出从服务器要读取的数据已经不存在 repl_backlog_buffer
+缓冲区里，那么主服务器将采用<strong>全量同步</strong>的方式。</li>
+</ul>
+<h3 id="哨兵机制">哨兵机制</h3>
+<p>在 Redis
+的主从架构中，由于主从模式是读写分离的，如果主节点（master）挂了，那么将没有主节点来服务客户端的写操作请求，也没有主节点给从节点（slave）进行数据同步了。<strong>哨兵（*Sentinel*）机制</strong>的作用是实现<strong>主从节点故障转移</strong>。它会监测主节点是否存活，如果发现主节点挂了，它就会选举一个从节点切换为主节点，并且把新主节点的相关信息通知给从节点和客户端。</p>
+<h4 id="如何判断主节点故障">如何判断主节点故障</h4>
+<p>哨兵会每隔 1 秒给所有主从节点发送 PING 命令，当主从节点收到 PING
+命令后，会发送一个响应命令给哨兵，这样就可以判断它们是否在正常运行。如果主节点或者从节点没有在规定的时间内响应哨兵的
+PING
+命令，哨兵就会将它们标记为「<strong>主观下线</strong>」当一个哨兵判断主节点为「主观下线」后，就会向其他哨兵发起命令，其他哨兵收到这个命令后，就会根据自身和主节点的网络状况，做出赞成投票或者拒绝投票的响应。当这个哨兵的赞同票数达到哨兵配置文件中的
+quorum 配置项设定的值后，这时主节点就会被该哨兵标记为「客观下线」。</p>
+<p>哨兵判断完主节点客观下线后，哨兵就要开始在多个「从节点」中，选出一个从节点来做新主节点。</p>
+<h4 id="主从故障转移">主从故障转移</h4>
+<ul>
+<li>第一步：在已下线主节点（旧主节点）属下的所有「从节点」里面，挑选出一个从节点，并将其转换为主节点。</li>
+<li>第二步：让已下线主节点属下的所有「从节点」修改复制目标，修改为复制「新主节点」；</li>
+<li>第三步：将新主节点的 IP
+地址和信息，通过「发布者/订阅者机制」通知给客户端；</li>
+<li>第四步：继续监视旧主节点，当这个旧主节点重新上线时，将它设置为新主节点的从节点；</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" class="category-chain-item">软件开发</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>八股-Redis</div>
+      <div>http://example.com/2024/05/02/SoftwareDevelopment/八股-Redis/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Chen</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年5月2日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年5月3日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/05/03/%E5%85%88%E9%AA%8C%E5%88%86%E5%B8%83%E8%AE%A1%E7%AE%97/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/05/02/%E8%AE%BA%E6%96%87/" title="论文">
+                        <span class="hidden-mobile">论文</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

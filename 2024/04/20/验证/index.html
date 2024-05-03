@@ -16,21 +16,23 @@
   <meta name="author" content="Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="CCF CSP 202212 第28届题目">
+    <meta name="description" content="数据标签 第0类：星形 第1类：少突 第2类：胶母 风险次序 1config.DATASET.ORDINAL &#x3D; [1, 0, 2] [1,0,2] 即少突&gt;星型&gt;胶母 验证中间类KL散度思路 验证思路上可能会有理论或者想法上的错误，如果有请老师指正 期望特征分布： \[ \mathcal{N}\left(\begin{bmatrix}\hat{\mu}_1\\\h">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSP 28">
-<meta property="og:url" content="http://example.com/2023/02/24/Algorithm/CCF-CSP/CSP-28/index.html">
+<meta property="og:title" content="Chen&#39;s Blog">
+<meta property="og:url" content="http://example.com/2024/04/20/%E9%AA%8C%E8%AF%81/index.html">
 <meta property="og:site_name" content="Chen&#39;s Blog">
-<meta property="og:description" content="CCF CSP 202212 第28届题目">
+<meta property="og:description" content="数据标签 第0类：星形 第1类：少突 第2类：胶母 风险次序 1config.DATASET.ORDINAL &#x3D; [1, 0, 2] [1,0,2] 即少突&gt;星型&gt;胶母 验证中间类KL散度思路 验证思路上可能会有理论或者想法上的错误，如果有请老师指正 期望特征分布： \[ \mathcal{N}\left(\begin{bmatrix}\hat{\mu}_1\\\h">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-24T13:22:54.000Z">
-<meta property="article:modified_time" content="2023-03-13T09:05:47.699Z">
+<meta property="og:image" content="c:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240422223629374.png">
+<meta property="article:published_time" content="2024-04-20T13:09:04.038Z">
+<meta property="article:modified_time" content="2024-05-03T08:28:39.889Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="c:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240422223629374.png">
   
   
   
-  <title>CSP 28 - Chen&#39;s Blog</title>
+  <title>Chen&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -184,7 +186,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="CSP 28"></span>
+            <span id="subtitle" data-typed-text=""></span>
           
         </div>
 
@@ -200,8 +202,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-24 21:22" pubdate>
-          2023年2月24日 晚上
+        <time datetime="2024-04-20 21:09" pubdate>
+          2024年4月20日 晚上
         </time>
       </span>
     
@@ -212,7 +214,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          968 字
+          2.9k 字
         
       </span>
     
@@ -223,7 +225,7 @@
         
         
         
-          9 分钟
+          25 分钟
         
       </span>
     
@@ -261,12 +263,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">CSP 28</h1>
+            <h1 style="display: none"></h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年3月13日 下午
+                    本文最后更新于：2024年5月3日 下午
                   
                 
               </p>
@@ -274,10 +276,73 @@
             
               <div class="markdown-body">
                 
-                <p>CCF CSP 202212 第28届题目 <span id="more"></span></p>
-<h3 id="训练计划"><a
-target="_blank" rel="noopener" href="http://118.190.20.162/view.page?gpid=T159">2.训练计划</a></h3>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;algorithm&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;vector&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">105</span>;<br><span class="hljs-type">int</span> n,m;<br><span class="hljs-type">int</span> a[N],p[N],l[N];<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br><br>    cin&gt;&gt;n&gt;&gt;m;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=m;i++)&#123;<br>        cin&gt;&gt;a[i];<br>    &#125;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=m;i++)&#123;<br>        cin&gt;&gt;p[i];<br>    &#125;<br><br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">min</span><span class="hljs-params">(m+<span class="hljs-number">1</span>,<span class="hljs-number">1</span>)</span></span>;<br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=m;i++)&#123;<br>        <span class="hljs-keyword">if</span>(a[i]!=<span class="hljs-number">0</span>) min[i] = min[a[i]] + p[a[i]];<br>    &#125;<br><br>    vector&lt;<span class="hljs-type">int</span>&gt;<span class="hljs-built_in">max</span>(m+<span class="hljs-number">1</span>,<span class="hljs-number">0</span>);<br>    <span class="hljs-type">int</span> sign = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=m;i++)&#123;<br>        max[i] = n - p[i] + <span class="hljs-number">1</span>;<br>    &#125;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=m;i&gt;=<span class="hljs-number">1</span>;i--)&#123;<br>        <span class="hljs-keyword">if</span>(a[i] != <span class="hljs-number">0</span>)&#123;<br>            <span class="hljs-type">int</span> early = <span class="hljs-number">10</span> - max[i] + <span class="hljs-number">1</span> + l[i];<br>            l[a[i]] = l[a[i]]&gt;early?l[a[i]]:early;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=m;i++)&#123;<br>        max[i] -= l[i];<br>        <span class="hljs-keyword">if</span>(max[i]&lt;<span class="hljs-number">0</span>) sign = <span class="hljs-number">0</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=m;i++)&#123;<br>        cout&lt;&lt;min[i]&lt;&lt;<span class="hljs-string">&quot; &quot;</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">if</span>(sign)&#123;<br>        cout&lt;&lt;endl;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=m;i++)&#123;<br>            cout&lt;&lt;max[i]&lt;&lt;<span class="hljs-string">&quot; &quot;</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+                <h4 id="数据标签">数据标签</h4>
+<p>第0类：星形</p>
+<p>第1类：少突</p>
+<p>第2类：胶母</p>
+<h4 id="风险次序">风险次序</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">config.DATASET.ORDINAL = [<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>]<br></code></pre></td></tr></table></figure>
+<p>[1,0,2] 即少突&gt;星型&gt;胶母</p>
+<h4 id="验证中间类kl散度思路">验证中间类KL散度思路</h4>
+<p><strong>验证思路上可能会有理论或者想法上的错误，如果有请老师指正</strong></p>
+<p>期望特征分布： <span class="math display">\[
+\mathcal{N}\left(\begin{bmatrix}\hat{\mu}_1\\\hat{\mu}_1+\Delta_2\\\hat{\mu}_1+\Delta_2+\Delta_3\end{bmatrix},\begin{bmatrix}\hat{\sigma}_1^2&amp;\hat{\sigma}_1^2&amp;\hat{\sigma}_1^2\\\hat{\sigma}_1^2&amp;\hat{\sigma}_1^2+\hat{\sigma}_2^2&amp;\hat{\sigma}_1^2+\hat{\sigma}_2^2\\\hat{\sigma}_1^2&amp;\hat{\sigma}_1^2+\hat{\sigma}_2^2&amp;\hat{\sigma}_1^2+\hat{\sigma}_2^2+\hat{\sigma}_3^2\end{bmatrix}\right),
+\]</span>
+<strong>假设三个类别全都参与训练</strong>，那么可以分别计算出三个类别样本的均值和方差，随后构造出后验分布：
+<span class="math display">\[
+\mathcal{N}\left(\begin{bmatrix}\mu_1\\\mu_2\\\mu_3\end{bmatrix},\begin{bmatrix}\sigma_1^2&amp;0&amp;0\\0&amp;\sigma_2^2&amp;0\\0&amp;0&amp;\sigma_3^2\end{bmatrix}\right),
+\]</span>
+根据KL散度即可计算出特征分布之间的差别，即可进行反向传播训练。</p>
+<p>在上述公式基础上提取两侧类别（即少突和胶母）之后的特征分布： <span
+class="math display">\[
+\mathcal{N}\left(\begin{bmatrix}\hat{\mu}_1\\\\\hat{\mu}_1+\Delta_2+\Delta_3\end{bmatrix},\begin{bmatrix}\hat{\sigma}_1^2&amp;&amp;\hat{\sigma}_1^2\\&amp;&amp;\\\hat{\sigma}_1^2&amp;&amp;\hat{\sigma}_1^2+\hat{\sigma}_2^2+\hat{\sigma}_3^2\end{bmatrix}\right),
+\]</span>
+在训练过程中，每一个batch里面保证三类样本数量都大于1，那么提取出其中少突和胶母的样本，计算少突和胶母两个类别的均值、方差，构造后验分布：
+<span class="math display">\[
+\mathcal{N}\left(\begin{bmatrix}\mu_1\\\\\mu_3\end{bmatrix},\begin{bmatrix}\sigma_1^2&amp;&amp;0\\&amp;&amp;\\0&amp;&amp;\sigma_3^2\end{bmatrix}\right),
+\]</span> 计算这一对先验、后验分布的KL散度进行训练。</p>
+<p>在验证特征分布拟合情况时，有一些问题。虽然少突和胶母可以通过均值和协方差计算KL散度，但是星型由于只有均值方差信息，一般来说是构造单变量特征分布（即使用均值和方差，没有协方差矩阵），然后跟先验分布中中间类别的均值和方差（对角线中间的元素）构造的单变量特征分布计算KL散度，但是KL散度对单变量和多元变量的<strong>计算公式不同</strong>，因此这样的比较没有意义。</p>
+<p>随后我尝试将星型的特征分布构造成多元特征分布的形式，即 <span
+class="math display">\[
+\mathcal{N}\left(\begin{bmatrix}\mu_1\end{bmatrix},\begin{bmatrix}\sigma_1^2\end{bmatrix}\right),
+\]</span>
+然后把先验分布也构造成上面这样的形式，使用KL散度计算，得到以下两个结论：</p>
+<ol type="1">
+<li><p>在同样输入的情况下对比了单变量形式和多变量形式KL散度，发现确实不一样，即计算方式不同</p></li>
+<li><p>发现第一轮（即所有数据都是随机取值的时候）少突胶母的KL散度比星型的KL散度要高一个数量级，初步认为多元变量的KL散度和<strong>变量类别数量</strong>有关。具体原因我还没搞明白，但是至少可以得知这样比较并不合理。</p>
+<p><img src="C:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240422223629374.png" srcset="/img/loading.gif" lazyload alt="image-20240422223629374" style="zoom: 50%;" /></p></li>
+</ol>
+<p>因此我在验证时采用的思路是在网络训练完成后，三个类别都采用<strong>单变量特征分布</strong>的方式计算KL散度，比较拟合程度。</p>
+<p>最后得到的KL损失：</p>
+<p>少突：13.2096</p>
+<p>星型：67.6947</p>
+<p>胶母：7.4124</p>
+<p>同时我还统计了星型和少突、胶母的KL散度：</p>
+<p><strong>星型和少突：2.8314</strong></p>
+<p>星型和胶母：70.3912</p>
+<h4
+id="验证插值生成星型样本特征分布效果">验证插值生成星型样本特征分布效果</h4>
+<p>在验证集上，将少突和胶母的样本进行插值，插值数量为少突样本数量*胶母样本数量（5292）。计算生成样本的均值、方差，构造单变量特征分布。然后分别和三个类别的特征分布计算KL散度。</p>
+<p>和少突KL散度：36.4242</p>
+<p>和真实星型KL散度：21.7936</p>
+<p>和胶母KL散度：32.6070</p>
+<h4 id="验证插值生成星型样本分类效果">验证插值生成星型样本分类效果</h4>
+<p>只有少突和胶母的情况下：</p>
+<p>测试集总体精度为: 0.6052631735801697 测试集各类精度为:
+tensor([0.0000, 0.8214, 0.8313]) 测试集混淆矩阵为: tensor([[ 0., 29.,
+12.], [ 0., 23., 5.], [ 0., 14., 69.]])</p>
+<p>为了防止生成星型样本数量过多导致模型将所有样本分类为星型，这一部分每个batch插值生成的数量为max(少突样本数量，胶母样本数量)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-04-<span class="hljs-number">24</span> 01:07:<span class="hljs-number">57</span>,<span class="hljs-number">874</span> - INFO: Epoch: [<span class="hljs-number">199</span>][<span class="hljs-number">0</span>/<span class="hljs-number">20</span>]      Loss <span class="hljs-number">0.23033</span> (<span class="hljs-number">0.23033</span>)Acc [<span class="hljs-number">0.9230769</span> <span class="hljs-number">0.5714286</span> <span class="hljs-number">0.6923077</span>]<br><span class="hljs-number">2024</span>-04-<span class="hljs-number">24</span> 01:08:<span class="hljs-number">00</span>,<span class="hljs-number">406</span> - INFO: Epoch: [<span class="hljs-number">199</span>][<span class="hljs-number">10</span>/<span class="hljs-number">20</span>]     Loss <span class="hljs-number">0.18733</span> (<span class="hljs-number">0.26353</span>)Acc [<span class="hljs-number">0.8333333</span> <span class="hljs-number">0.875</span>     <span class="hljs-number">0.75</span>     ]<br><span class="hljs-number">2024</span>-04-<span class="hljs-number">24</span> 01:08:06,<span class="hljs-number">154</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-04-<span class="hljs-number">24</span> 01:08:06,<span class="hljs-number">154</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.5650224089622498</span><br><span class="hljs-number">2024</span>-04-<span class="hljs-number">24</span> 01:08:06,<span class="hljs-number">155</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.2909</span>, <span class="hljs-number">0.7619</span>, <span class="hljs-number">0.6190</span>])<br></code></pre></td></tr></table></figure>
+<p>加入mix-up后：</p>
+<p>测试集总体精度为: 0.5592105388641357 测试集各类精度为:
+tensor([0.5301, 0.7059, 0.5577]) 测试集混淆矩阵为: tensor([[44., 29.,
+10.], [ 3., 12., 2.], [14., 9., 29.]])</p>
+<p>对于测试集，对于真实样本是星型的，模型给予的平均准确率是39.39%</p>
+<p>对于真实标签不是星型的，模型给予的平均准确率是37.4%</p>
+<ol type="1">
+<li>增大类间距</li>
+<li>插值的维度变化一下</li>
+</ol>
 
                 
               </div>
@@ -285,27 +350,6 @@ target="_blank" rel="noopener" href="http://118.190.20.162/view.page?gpid=T159">
             <hr/>
             <div>
               <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/CCF-CSP/" class="category-chain-item">CCF CSP</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
   
   
 </div>
@@ -316,8 +360,8 @@ target="_blank" rel="noopener" href="http://118.190.20.162/view.page?gpid=T159">
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>CSP 28</div>
-      <div>http://example.com/2023/02/24/Algorithm/CCF-CSP/CSP-28/</div>
+      <div></div>
+      <div>http://example.com/2024/04/20/验证/</div>
     </div>
     <div class="license-meta">
       
@@ -329,13 +373,13 @@ target="_blank" rel="noopener" href="http://118.190.20.162/view.page?gpid=T159">
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年2月24日</div>
+          <div>2024年4月20日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年3月13日</div>
+          <div>2024年5月3日</div>
         </div>
       
       
@@ -366,9 +410,9 @@ target="_blank" rel="noopener" href="http://118.190.20.162/view.page?gpid=T159">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/24/Algorithm/CCF-CSP/CSP-27/" title="CSP 27">
+                      <a href="/2024/05/02/%E8%AE%BA%E6%96%87/" title="论文">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CSP 27</span>
+                        <span class="hidden-mobile">论文</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -376,8 +420,8 @@ target="_blank" rel="noopener" href="http://118.190.20.162/view.page?gpid=T159">
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/23/Algorithm/%E5%B8%B8%E7%94%A8STL/" title="常用STL">
-                        <span class="hidden-mobile">常用STL</span>
+                      <a href="/2024/04/18/SoftwareDevelopment/%E5%85%AB%E8%82%A1-MySQL/" title="八股-MySQL">
+                        <span class="hidden-mobile">八股-MySQL</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
