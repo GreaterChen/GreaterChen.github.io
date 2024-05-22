@@ -26,7 +26,7 @@
 <meta property="og:image" content="c:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240503144718803.png">
 <meta property="og:image" content="c:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240503144732302.png">
 <meta property="article:published_time" content="2024-05-03T06:46:10.131Z">
-<meta property="article:modified_time" content="2024-05-03T12:54:58.103Z">
+<meta property="article:modified_time" content="2024-05-16T12:29:03.476Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="c:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240503144718803.png">
@@ -215,7 +215,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          4k 字
+          4.7k 字
         
       </span>
     
@@ -226,7 +226,7 @@
         
         
         
-          34 分钟
+          40 分钟
         
       </span>
     
@@ -269,7 +269,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年5月3日 晚上
+                    本文最后更新于：2024年5月16日 晚上
                   
                 
               </p>
@@ -294,8 +294,6 @@ class="math inline">\(\Delta\)</span>由真实分布的方差得到，但是论�
 <p>首先定义了三个可学习的矩阵，并进行初始化。可以看出<code>self.mus</code>即为上述<span
 class="math inline">\(\mu_1\)</span>,共128维（可调整），<code>self.sigmas</code>为<span
 class="math inline">\(\hat\sigma_1，\hat\sigma_2，\hat\sigma_3\)</span>​</p>
-<p><code>self.nablas</code>应为<span
-class="math inline">\(\Delta\)</span>,后续会进行说明</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">self.mus = nn.Parameter(torch.rand((<span class="hljs-number">1</span>, <span class="hljs-number">128</span>)), requires_grad=<span class="hljs-literal">True</span>)<br>self.nablas = nn.Parameter(torch.rand((<span class="hljs-number">3</span>, <span class="hljs-number">128</span>)), requires_grad=<span class="hljs-literal">True</span>)<br>self.sigmas = nn.Parameter(torch.rand((<span class="hljs-number">3</span>, <span class="hljs-number">128</span>)), requires_grad=<span class="hljs-literal">True</span>)<br><br>nn.init.kaiming_uniform_(self.mus, a=math.sqrt(<span class="hljs-number">5</span>))  <span class="hljs-comment"># He initialization</span><br>nn.init.kaiming_uniform_(self.nablas, a=math.sqrt(<span class="hljs-number">5</span>))<br>nn.init.kaiming_uniform_(self.sigmas, a=math.sqrt(<span class="hljs-number">5</span>))<br></code></pre></td></tr></table></figure>
 <p>随后获得先验分布的代码如下</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_joint_priors</span>(<span class="hljs-params">mus, nablas, sigmas, num_classes</span>):<br>    <span class="hljs-comment"># 得到先验分布的 mu 和 covariance matrix</span><br>    <span class="hljs-comment"># 得到上三角部分为 1 的矩阵</span><br>    <span class="hljs-comment"># 通过矩阵相乘来得到 joint distribution 中的 mu 和 sigma</span><br>    <span class="hljs-comment"># 将 nablas 和 sigmas 转换为有效的值</span><br>    <br>    <span class="hljs-comment"># [clb] 将nalbas转化为正值</span><br>    nablas = torch.exp(nablas)<br>    <span class="hljs-comment"># [clb] 将sigmas缩放到（0，1）同时保持方差与类别间偏移量的比例关系</span><br>    sigmas = (torch.sigmoid(sigmas) * nablas / <span class="hljs-number">3</span>) ** <span class="hljs-number">2</span><br>    <span class="hljs-comment"># [clb] 最终triu是一个下三角矩阵</span><br>    triu = torch.triu(torch.ones(num_classes, num_classes)).T.cuda()<br>    <span class="hljs-comment"># [clb] 假设nablas表示为[[n1],[n2],[n3]],操作后为[[n1],[n1+n2],[n1+n2+n3]]</span><br>    joint_nablas = torch.matmul(triu, nablas) <span class="hljs-comment"># (K, d)</span><br>    <span class="hljs-comment"># [clb] 得到论文中的均值分布，即为[[u1+n1],[u1+n1+n2],[u1+n1+n2+n3]]</span><br>    joint_mus = mus + joint_nablas  <span class="hljs-comment"># (K, d)</span><br>    <br>    mat = torch.zeros(num_classes, num_classes, num_classes).cuda()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_classes):<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_classes):<br>            mat[i, j][:<span class="hljs-built_in">min</span>(i,j)+<span class="hljs-number">1</span>] = <span class="hljs-number">1</span><br>            <br>    <span class="hljs-comment"># [clb] 循环之后的mat:</span><br>    <span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">        tensor([[[1., 0., 0.],</span><br><span class="hljs-string">                [1., 0., 0.],</span><br><span class="hljs-string">                [1., 0., 0.]],</span><br><span class="hljs-string"></span><br><span class="hljs-string">                [[1., 0., 0.],</span><br><span class="hljs-string">                [1., 1., 0.],</span><br><span class="hljs-string">                [1., 1., 0.]],</span><br><span class="hljs-string"></span><br><span class="hljs-string">                [[1., 0., 0.],</span><br><span class="hljs-string">                [1., 1., 0.],</span><br><span class="hljs-string">                [1., 1., 1.]]])</span><br><span class="hljs-string">    &#x27;&#x27;&#x27;</span><br>    <br>    <span class="hljs-comment"># [clb] 得到论文中的协方差分布</span><br>    joint_sigmas = torch.matmul(mat, sigmas)<br><br>    <span class="hljs-keyword">return</span> joint_mus.<span class="hljs-built_in">type</span>(torch.cuda.FloatTensor), joint_sigmas.<span class="hljs-built_in">type</span>(torch.cuda.FloatTensor)<br><br></code></pre></td></tr></table></figure>
@@ -310,9 +308,9 @@ class="math inline">\(\mu_1\)</span>得到完整的先验均值分布吗？</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">sigmas = (torch.sigmoid(sigmas) * nablas / <span class="hljs-number">3</span>) ** <span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
 <h4 id="改进的实现方式">改进的实现方式</h4>
 <p>我按照我的想法重写了计算均值矩阵的代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">sigmas = torch.sigmoid(sigmas) <br>deltas = sigmas * <span class="hljs-number">3</span><br>sigmas = sigmas ** <span class="hljs-number">2</span><br>joint_mus = torch.cat((mus, mus + deltas[<span class="hljs-number">1</span>], mus + deltas[<span class="hljs-number">1</span>] + deltas[<span class="hljs-number">2</span>]), dim=<span class="hljs-number">0</span>)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">sigmas = torch.sigmoid(sigmas) <br>deltas = sigmas * <span class="hljs-number">3</span><br>joint_mus = torch.cat((mus, mus + deltas[<span class="hljs-number">1</span>], mus + deltas[<span class="hljs-number">1</span>] + deltas[<span class="hljs-number">2</span>]), dim=<span class="hljs-number">0</span>)<br>sigmas_2 = sigmas ** <span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
 <ol type="1">
-<li>通过sigmoid保证方差sigmas是正的（但是放缩到0-1合理吗？真实特征分布也不一定是0-1的吧）</li>
+<li>通过sigmoid保证方差sigmas是正的</li>
 <li>通过3sigmas得到deltas，即均值之间的间隔</li>
 <li>平方后得到方差</li>
 <li>根据原论文均值公式，得到<span
@@ -320,11 +318,13 @@ class="math inline">\([\mu_1,\mu_1+\Delta_2,\mu_1+\Delta_2+\Delta_3]\)</span>​
 </ol>
 <p>更改后实验结果:</p>
 <p><strong>少突胶母</strong></p>
-<p>测试集总体精度为: 0.4615384638309479 测试集各类精度为:
-tensor([0.0000, 0.7500, 0.7714])</p>
+<p>测试集总体精度为: 0.48076921701431274 测试集各类精度为:
+tensor([0.0000, 0.8571, 0.7429]) 测试集混淆矩阵为: tensor([[ 0., 32.,
+9.], [ 0., 24., 4.], [ 0., 9., 26.]])</p>
 <p><strong>mix-up</strong></p>
-<p>测试集总体精度为: 0.375 测试集各类精度为: tensor([0.0976, 0.7143,
-0.4286])</p>
+<p>测试集总体精度为: 0.4134615361690521 测试集各类精度为:
+tensor([0.1707, 0.7857, 0.4000]) 测试集混淆矩阵为: tensor([[ 7., 30.,
+4.], [ 3., 22., 3.], [16., 5., 14.]])</p>
 <h4 id="问题分析">问题分析</h4>
 <p>在训练过程中，我是提取少突胶母的先验分布，如下所示： <span
 class="math display">\[
@@ -363,6 +363,16 @@ tensor([0.0000, 0.8929, 0.7429]) 测试集混淆矩阵为: tensor([[ 0., 33.,
 <p>测试集总体精度为: 0.49038460850715637 测试集各类精度为:
 tensor([0.0000, 0.7857, 0.8286]) 测试集混淆矩阵为: tensor([[ 0., 29.,
 12.], [ 0., 22., 6.], [ 0., 6., 29.]])</p>
+<h3 id="修改先验分布">修改先验分布</h3>
+<p>将第二类的方差赋值为第一类方差</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">sigmas = torch.sigmoid(sigmas)<br>    sigmas_expanded = torch.cat([<br>            sigmas[<span class="hljs-number">0</span>:<span class="hljs-number">1</span>],  <span class="hljs-comment"># sigmas[0] 的副本</span><br>            sigmas[<span class="hljs-number">0</span>:<span class="hljs-number">1</span>],  <span class="hljs-comment"># 再次添加sigmas[0] 作为 sigmas[1]</span><br>            sigmas[<span class="hljs-number">1</span>:<span class="hljs-number">2</span>]   <span class="hljs-comment"># sigmas[2] 使用原来的sigmas[1]</span><br>        ], dim=<span class="hljs-number">0</span>)<br>    deltas = sigmas_expanded * <span class="hljs-number">3</span><br>    sigmas_2 = sigmas_expanded ** <span class="hljs-number">2</span><br>    joint_mus = torch.cat((mus, mus + deltas[<span class="hljs-number">1</span>], mus + deltas[<span class="hljs-number">1</span>] + deltas[<span class="hljs-number">2</span>]), dim=<span class="hljs-number">0</span>)<br></code></pre></td></tr></table></figure>
+<p>测试集总体精度为: 0.5 测试集各类精度为: tensor([0.0000, 0.8571,
+0.8000]) 测试集混淆矩阵为: tensor([[ 0., 32., 9.], [ 0., 24., 4.], [ 0.,
+7., 28.]])</p>
+<p>测试集总体精度为: 0.38461539149284363 测试集各类精度为:
+tensor([0.0732, 0.7500, 0.4571]) 测试集混淆矩阵为: tensor([[ 3., 31.,
+7.], [ 4., 21., 3.], [12., 7., 16.]])</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-07 <span class="hljs-number">21</span>:<span class="hljs-number">29</span>:09,<span class="hljs-number">562</span> - INFO: Epoch: [<span class="hljs-number">196</span>][<span class="hljs-number">0</span>/<span class="hljs-number">14</span>]	Loss <span class="hljs-number">0.33698</span> (<span class="hljs-number">0.33698</span>)Acc [<span class="hljs-number">0.85</span>      <span class="hljs-number">0.5833333</span> <span class="hljs-number">0.55</span>     ]<br><span class="hljs-number">2024</span>-05-07 <span class="hljs-number">21</span>:<span class="hljs-number">29</span>:<span class="hljs-number">11</span>,<span class="hljs-number">923</span> - INFO: Epoch: [<span class="hljs-number">196</span>][<span class="hljs-number">10</span>/<span class="hljs-number">14</span>]	Loss <span class="hljs-number">0.34989</span> (<span class="hljs-number">0.36267</span>)Acc [<span class="hljs-number">0.7083333</span> <span class="hljs-number">0.875</span>     <span class="hljs-number">0.5217391</span>]<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -399,7 +409,7 @@ tensor([0.0000, 0.7857, 0.8286]) 测试集混淆矩阵为: tensor([[ 0., 29.,
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年5月3日</div>
+          <div>2024年5月16日</div>
         </div>
       
       
@@ -429,6 +439,12 @@ tensor([0.0000, 0.7857, 0.8286]) 测试集混淆矩阵为: tensor([[ 0., 29.,
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/05/05/SoftwareDevelopment/%E5%85%AB%E8%82%A1-Spring/" title="八股-Spring">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">八股-Spring</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

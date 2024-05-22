@@ -18,19 +18,21 @@
   
     <meta name="description" content="记录Mybatis主要用法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mybatis">
-<meta property="og:url" content="http://example.com/2024/03/13/SoftwareDevelopment/Mybatis/index.html">
+<meta property="og:title" content="八股-Mybatis">
+<meta property="og:url" content="http://example.com/2024/03/13/SoftwareDevelopment/%E5%85%AB%E8%82%A1-Mybatis/index.html">
 <meta property="og:site_name" content="Chen&#39;s Blog">
 <meta property="og:description" content="记录Mybatis主要用法">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240513135837.png">
 <meta property="article:published_time" content="2024-03-13T07:26:51.000Z">
-<meta property="article:modified_time" content="2024-03-26T11:40:57.588Z">
+<meta property="article:modified_time" content="2024-05-13T06:01:25.910Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240513135837.png">
   
   
   
-  <title>Mybatis - Chen&#39;s Blog</title>
+  <title>八股-Mybatis - Chen&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -184,7 +186,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Mybatis"></span>
+            <span id="subtitle" data-typed-text="八股-Mybatis"></span>
           
         </div>
 
@@ -212,7 +214,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          17k 字
+          18k 字
         
       </span>
     
@@ -223,7 +225,7 @@
         
         
         
-          141 分钟
+          153 分钟
         
       </span>
     
@@ -261,12 +263,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Mybatis</h1>
+            <h1 style="display: none">八股-Mybatis</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年3月26日 晚上
+                    本文最后更新于：2024年5月13日 下午
                   
                 
               </p>
@@ -434,6 +436,59 @@ src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240315205558.png" src
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-meta">@Version</span><br><span class="hljs-keyword">private</span> Integer version;<br></code></pre></td></tr></table></figure>
 <p>正常更新使用即可</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs Java"><span class="hljs-comment">//演示乐观锁生效场景</span><br><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testQuick7</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-comment">//步骤1: 先查询,在更新 获取version数据</span><br>    <span class="hljs-comment">//同时查询两条,但是version唯一,最后更新的失败</span><br>    <span class="hljs-type">User</span> <span class="hljs-variable">user</span>  <span class="hljs-operator">=</span> userMapper.selectById(<span class="hljs-number">5</span>);<br>    <span class="hljs-type">User</span> <span class="hljs-variable">user1</span>  <span class="hljs-operator">=</span> userMapper.selectById(<span class="hljs-number">5</span>);<br><br>    user.setAge(<span class="hljs-number">20</span>);<br>    user1.setAge(<span class="hljs-number">30</span>);<br><br>    userMapper.updateById(user);<br>    <span class="hljs-comment">//乐观锁生效,失败!</span><br>    userMapper.updateById(user1);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="面试">面试</h2>
+<h3 id="模糊查询like语句该怎么写">模糊查询like语句该怎么写</h3>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt; select id= <span class="hljs-string">&quot;listUserLikeUsername&quot;</span> resultType= <span class="hljs-string">&quot;com.jourwon.pojo.User&quot;</span>&gt;<br>    select id, sex, age, username, password from person where username LIKE <span class="hljs-title function_">CONCAT</span><span class="hljs-params">(<span class="hljs-string">&#x27;%&#x27;</span>, pattern, <span class="hljs-string">&#x27;%&#x27;</span>)</span><br>&lt;/select&gt;<br></code></pre></td></tr></table></figure>
+<h3 id="mybatis延迟加载">Mybatis延迟加载</h3>
+<p>Mybatis支持 association关联对象和collection关联集合对象的延迟加载。在
+Mybatis配置文件中,可以配置是否启用延迟加载
+lazyLoadingEnabled=true|false。</p>
+<p>它的原理是,使用CGLIB创建目标对象的代理对象,当调用目标方法时,进入拦截器方法,
+比如调用 a.getB().getName(), 拦截器invoke()方法发现 a.getB()是 null值 ,
+那么就会单独发送事先保存好的查询关联B 对象的sql, 把 B 查询上来,然后调用
+a.setB(b),于是a 的对象b 属性就有值了, 接着完成
+a.getB().getName()方法的调用。这就是延迟加载的基本原理。</p>
+<h3 id="mybatis的缓存">Mybatis的缓存</h3>
+<ol type="1">
+<li>一级缓存: 基于 PerpetualCache 的 HashMap
+本地缓存,其<strong>存储作用域为 SqlSession</strong>, 各个
+SqlSession之间的缓存相互隔离 ,当 Session flush 或 close 之后 , 该
+SqlSession 中的所有 Cache 就将清空, MyBatis默认打开一级缓存。</li>
+<li>二级缓存与一级缓存其机制相同 ,默认也是采用 PerpetualCache, HashMap
+存储,不同之处在于其存储作用域为
+Mapper(Namespace),可以在多个SqlSession之间共享, 并且可自定义存储源 , 如
+Ehcache。默认不打开二级缓存,要开启二级缓存,使用二级缓存属性类需要实现
+Serializable序列化接又 ( 可用来保存对象的状态
+),可在它的映射文件中配置。</li>
+</ol>
+<h3 id="mybatis工作流程">Mybatis工作流程</h3>
+<ol type="1">
+<li>读取 MyBatis 配置文件——mybatis-config.xml、加载映射文件——映射文件即
+SQL 映射文件 ,文件中配置了操作数据库的 SQL
+语句。最后生成一个配置对象。</li>
+<li>构造会话工厂 :通过 MyBatis 的环境等配置信息构建会话工厂
+SqlSessionFactory。</li>
+<li>创建会话对象:由会话工厂创建 SqlSession
+对象,<strong>该对象中包含了执行 SQL 语句的所有方法</strong>。</li>
+<li>Executor 执行器 : MyBatis 底层定义了一个 Executor
+接口来操作数据库,它将根据 SqlSession 传递的参数动态地生成需要执行的 SQL
+语句,同时负责查询缓存的维护。</li>
+<li>StatementHandler:数据库会话器,
+串联起参数映射的处理和运行结果映射的处理。</li>
+<li>参数处理:对输入参数的类型进行处理,并预编译。</li>
+<li>结果处理:对返回结果的类型进行处理,根据对象映射规则,
+返回相应的对象。</li>
+</ol>
+<h3 id="mybatis功能架构">Mybatis功能架构</h3>
+<p><img src="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240513135837.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;" /></p>
+<ol type="1">
+<li><p>API接口层: 提供给外部使用的接又 API,开发人员通过这些本地
+API来操纵数据库。接口层一接收到调用请求就会调用数据处理层来完成具体的数据处理。</p></li>
+<li><p>数据处理层 : 负责具体的
+SQL查找、SQL解析、SQL执行和执行结果映射处理等。它主要的目的是根据调用的请求完成一次数据库操作。</p></li>
+<li><p>基础支撑层 : 负责最基础的功能支撑 ,
+包括连接管理、事务管理、配置加载和缓存处理,这些都是共用的东西,将他们抽取出来作为最基础的组件。为上层的数据处理层提供最基础的支撑。</p></li>
+</ol>
 
                 
               </div>
@@ -472,8 +527,8 @@ src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240315205558.png" src
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Mybatis</div>
-      <div>http://example.com/2024/03/13/SoftwareDevelopment/Mybatis/</div>
+      <div>八股-Mybatis</div>
+      <div>http://example.com/2024/03/13/SoftwareDevelopment/八股-Mybatis/</div>
     </div>
     <div class="license-meta">
       
@@ -491,7 +546,7 @@ src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240315205558.png" src
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月26日</div>
+          <div>2024年5月13日</div>
         </div>
       
       

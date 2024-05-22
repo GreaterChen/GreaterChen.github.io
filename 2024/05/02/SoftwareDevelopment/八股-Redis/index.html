@@ -26,8 +26,9 @@
 <meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/e84b052381e240eeb8cc97d6b729968b.png">
 <meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/98987d9417b2bab43087f45fc959d32a.png">
 <meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/2b7231b6aabb9a9a2e2390ab3a280b2d-20230309232920063.png">
+<meta property="og:image" content="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240513154413.png">
 <meta property="article:published_time" content="2024-05-02T12:54:54.000Z">
-<meta property="article:modified_time" content="2024-05-03T12:38:36.883Z">
+<meta property="article:modified_time" content="2024-05-13T08:16:17.418Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.xiaolincoding.com//mysql/other/e84b052381e240eeb8cc97d6b729968b.png">
@@ -216,7 +217,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          14k 字
+          15k 字
         
       </span>
     
@@ -227,7 +228,7 @@
         
         
         
-          114 分钟
+          124 分钟
         
       </span>
     
@@ -270,7 +271,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年5月3日 晚上
+                    本文最后更新于：2024年5月13日 下午
                   
                 
               </p>
@@ -890,6 +891,64 @@ quorum 配置项设定的值后，这时主节点就会被该哨兵标记为「�
 地址和信息，通过「发布者/订阅者机制」通知给客户端；</li>
 <li>第四步：继续监视旧主节点，当这个旧主节点重新上线时，将它设置为新主节点的从节点；</li>
 </ul>
+<h4 id="主节点如何选举">主节点如何选举</h4>
+<ol type="1">
+<li>过滤 :“不健康”( 主观下线、断线)、5 秒内没有回复过 Sentinel节点
+ping响应、与主节点失联超过 down-after-milliseconds*10秒。</li>
+<li>选择slave-priority( 从节点优先级 )最高的从节点列表,如果存在则返回
+,不存在则继续。</li>
+<li>选择复制偏移量最大的从节点(复制的最完整),如果存在则返回
+,不存在则继续。</li>
+<li>选择runid最小的从节点。</li>
+</ol>
+<h3 id="集群">集群</h3>
+<h4 id="好处">好处</h4>
+<ol type="1">
+<li>数据分区: 数据分区 (或称数据分片)
+是集群最核心的功能。集群将数据分散到多个节点,一方面突破了 Redis
+单机内存大小的限制, 存储容量大大增加;
+另一方面每个主节点都可以对外提供读服务和写服务,大大提高了集群的响应能力。</li>
+<li>高可用: 集群支持主从复制和主节点的自动故障转移 (与哨兵类似),
+当任一节点发生故障时,集群仍然可以对外提供服务。</li>
+</ol>
+<h4 id="集群分区">集群分区</h4>
+<p>其中的虚拟节点称为槽(slot)。槽是介于数据和实际节点之间的虚拟概念,
+每个实际节点包含一定数量的槽 , 每个槽包含哈希值在一定范围内的数据。</p>
+<p><img src="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240513154413.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<p>在使用了槽的一致性哈希分区中,槽是数据管理和迁移的基本单位。槽解耦了数据和实际节点之间的关系,增加或删除节点对系统的影响很小。仍以上图为例
+,系统中有 4 个实际节点,假设为其分配 16 个槽(0-15); 槽 0-3 位于 node1;
+4-7 位于 node2; 以此类推.... 如果此时删除 node2 , 只需要将槽 4-7
+重新分配即可,例如槽 4-5 分配给 node1 , 槽 6 分配给 node3 , 槽 7 分配给
+node4 ,数据在其他节点的分布仍然较为均衡。</p>
+<h2 id="其他问题">其他问题</h2>
+<h3 id="热点key">热点key</h3>
+<h4 id="监视热点key">监视热点key</h4>
+<p>使用monitor命令统计热点 key,monitor命令可以监控到 Redis
+执行的所有命令</p>
+<h4 id="解决办法">解决办法</h4>
+<ol type="1">
+<li>把热 key打散到不同的服务器，降低压力</li>
+<li>加入二级缓存，提前加载热 key数据到内存中，如果
+redis宕机，走内存查询</li>
+</ol>
+<h4 id="热点key重建">热点key重建</h4>
+<p>开发的时候一般使用“缓存+ 过期时间”的策略,
+既可以加速数据读写,又保证数据的定期更新,这种模式基本能够满足绝大部分需求。但是有两个问题如果同时出现
+,可能就会出现比较大的问题:</p>
+<ol type="1">
+<li>当前key是一个热点 key( 例如一个热门的娱乐新闻 ),并发量非常大。</li>
+<li>重建缓存不能在短时间完成,可能是一个复杂计算 , 例如复杂的
+SQL、多次IO、多个依赖等。在缓存失效的瞬间
+,有大量线程来重建缓存,造成后端负载加大,甚至可能会让应用崩溃。</li>
+</ol>
+<p>解决办法：</p>
+<ol type="1">
+<li>互斥锁 ( mutex key)。
+这种方法只允许一个线程重建缓存,其他线程等待重建缓存的线程执行完 ,
+重新从缓存获取数据即可。</li>
+<li>永远不过期。从缓存层面来看，确实没有设置过期时间，所以不会出现热点
+key过期后产生的问题，也就是“物理”不过期。从功能层面来看，为每个value设置一个逻辑过期时间，当发现超过逻辑过期时间后，会使用单独的线程去构建缓存。</li>
+</ol>
 
                 
               </div>
@@ -947,7 +1006,7 @@ quorum 配置项设定的值后，这时主节点就会被该哨兵标记为「�
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年5月3日</div>
+          <div>2024年5月13日</div>
         </div>
       
       

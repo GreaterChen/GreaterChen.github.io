@@ -16,21 +16,21 @@
   <meta name="author" content="Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="黑马SSM学习">
+    <meta name="description" content="下面实验展示了在我自己实现的次序约束下，增大类间距的实验结果。 可以看到对于先验分布的KL散度（第一个矩阵），三个实验的类间差距是逐渐增大的，也就是说增大类间距的目的是实现了的。 但是发现后验分布相对于先验分布的KL散度矩阵（第三个矩阵）的数值也是增大的，说明后验分布和先验分布的拟合情况变差了。结合后验分布KL散度矩阵（第二个矩阵），可以看到三个类别间距几乎没有变化。 自实现3sigmas">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SSM学习">
-<meta property="og:url" content="http://example.com/2023/07/23/SoftwareDevelopment/SSM%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:title" content="Chen&#39;s Blog">
+<meta property="og:url" content="http://example.com/2024/05/19/%E5%A2%9E%E5%A4%A7%E7%B1%BB%E9%97%B4%E8%B7%9D%E7%BB%93%E6%9E%9C/index.html">
 <meta property="og:site_name" content="Chen&#39;s Blog">
-<meta property="og:description" content="黑马SSM学习">
+<meta property="og:description" content="下面实验展示了在我自己实现的次序约束下，增大类间距的实验结果。 可以看到对于先验分布的KL散度（第一个矩阵），三个实验的类间差距是逐渐增大的，也就是说增大类间距的目的是实现了的。 但是发现后验分布相对于先验分布的KL散度矩阵（第三个矩阵）的数值也是增大的，说明后验分布和先验分布的拟合情况变差了。结合后验分布KL散度矩阵（第二个矩阵），可以看到三个类别间距几乎没有变化。 自实现3sigmas">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-07-23T11:14:58.000Z">
-<meta property="article:modified_time" content="2024-03-23T09:57:54.336Z">
+<meta property="article:published_time" content="2024-05-19T08:01:57.295Z">
+<meta property="article:modified_time" content="2024-05-19T08:07:16.390Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>SSM学习 - Chen&#39;s Blog</title>
+  <title>Chen&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -184,7 +184,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="SSM学习"></span>
+            <span id="subtitle" data-typed-text=""></span>
           
         </div>
 
@@ -200,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-07-23 19:14" pubdate>
-          2023年7月23日 晚上
+        <time datetime="2024-05-19 16:01" pubdate>
+          2024年5月19日 下午
         </time>
       </span>
     
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          975 字
+          2.6k 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          9 分钟
+          22 分钟
         
       </span>
     
@@ -261,12 +261,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SSM学习</h1>
+            <h1 style="display: none"></h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年3月23日 下午
+                    本文最后更新于：2024年5月19日 下午
                   
                 
               </p>
@@ -274,32 +274,28 @@
             
               <div class="markdown-body">
                 
-                <p>黑马SSM学习 <span id="more"></span></p>
-<h2 id="spring">Spring</h2>
-<h3 id="iocinversion-of-control控制反转"><strong>IoC</strong>（Inversion
-of Control）控制反转：</h3>
-<ol type="1">
-<li><p>使用对象时由主动new产生对象转化为由IoC提供对象,目的是进行解耦</p></li>
-<li><p>IoC容器负责对象的创建、初始化等一系列工作，被创建的对象称为<strong>Bean</strong></p></li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;bean id=<span class="hljs-string">&quot;bookDao&quot;</span> class=<span class="hljs-string">&quot;com.itheima.dao.impl.BookDaoImpl&quot;</span>/&gt;<br></code></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建Ioc对象</span><br><span class="hljs-type">ApplicationContext</span> <span class="hljs-variable">ctx</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ClassPathXmlApplicationContext</span>(<span class="hljs-string">&quot;applicationContext.xml&quot;</span>);<br><span class="hljs-comment">// 取出Bean</span><br><span class="hljs-type">BookDao</span> <span class="hljs-variable">bookDao</span> <span class="hljs-operator">=</span> (BookDao) ctx.getBean(<span class="hljs-string">&quot;bookDao&quot;</span>);<br><span class="hljs-comment">// 调用函数进行操作</span><br>bookDao.save();<br></code></pre></td></tr></table></figure>
-<h3 id="didependency-injection依赖注入"><strong>DI</strong>(Dependency
-Injection)依赖注入</h3>
-<ol type="1">
-<li>在容器中建立bean与bean之间的依赖关系的整个过程</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 在service层为IoC容器提供set方法</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setBookDao</span><span class="hljs-params">(BookDao bookDao)</span> &#123;<br>        <span class="hljs-built_in">this</span>.bookDao = bookDao;<br>    &#125;<br></code></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;bean id=<span class="hljs-string">&quot;bookService&quot;</span> class=<span class="hljs-string">&quot;com.itheima.service.impl.BookServiceImpl&quot;</span>&gt;<br>   &lt;!--配置server与dao的关系--&gt;<br>   &lt;!--property标签表示配置当前bean的属性<br>   name属性表示配置哪一个具体的属性<br>   ref属性表示参照哪一个bean--&gt;<br>   &lt;property name=<span class="hljs-string">&quot;bookDao&quot;</span> ref=<span class="hljs-string">&quot;bookDao&quot;</span>/&gt;<br>&lt;/bean&gt;<br></code></pre></td></tr></table></figure>
-<ol start="2" type="1">
-<li>建立之后在Service中可以直接不使用new创建DAO对象</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> BookDao bookDao;<br></code></pre></td></tr></table></figure>
-<h3 id="bean">Bean</h3>
-<ol type="1">
-<li>默认单例，即多次创建指向的都是同一个对象，可以通过scope属性更改</li>
-<li>可以使用无参构造方法创建，即对bean对应的class中写一个无参构造函数（或者别写有参构造函数，默认会有一个无参构造函数）</li>
-</ol>
+                <p>下面实验展示了在我自己实现的次序约束下，增大类间距的实验结果。</p>
+<p>可以看到对于先验分布的KL散度（第一个矩阵），三个实验的类间差距是逐渐增大的，也就是说<strong>增大类间距的目的是实现了的</strong>。</p>
+<p>但是发现后验分布相对于先验分布的KL散度矩阵（第三个矩阵）的数值也是增大的，说明后验分布和先验分布的拟合情况变差了。结合后验分布KL散度矩阵（第二个矩阵），可以看到三个类别间距几乎没有变化。</p>
+<h4 id="自实现3sigmas">自实现3sigmas</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">12</span>:09:<span class="hljs-number">33</span>,<span class="hljs-number">395</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">12</span>:09:<span class="hljs-number">33</span>,<span class="hljs-number">396</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.18834081292152405</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">12</span>:09:<span class="hljs-number">33</span>,<span class="hljs-number">398</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">0.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">12</span>:09:<span class="hljs-number">33</span>,<span class="hljs-number">398</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">12</span>:09:<span class="hljs-number">33</span>,<span class="hljs-number">430</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">0.0000</span>,  <span class="hljs-number">2.3466</span>,  <span class="hljs-number">5.4760</span>],<br>        [ <span class="hljs-number">4.6534</span>,  <span class="hljs-number">0.0000</span>,  <span class="hljs-number">1.0370</span>],<br>        [<span class="hljs-number">14.5220</span>,  <span class="hljs-number">1.4446</span>,  <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">12</span>:09:<span class="hljs-number">33</span>,<span class="hljs-number">431</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0483</span>, <span class="hljs-number">1.0680</span>],<br>        [<span class="hljs-number">0.0633</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.7878</span>],<br>        [<span class="hljs-number">3.1680</span>, <span class="hljs-number">1.7479</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">12</span>:09:<span class="hljs-number">33</span>,<span class="hljs-number">431</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.3395</span>, <span class="hljs-number">1.4037</span>, <span class="hljs-number">3.4232</span>],<br>        [<span class="hljs-number">0.5201</span>, <span class="hljs-number">1.0773</span>, <span class="hljs-number">2.9596</span>],<br>        [<span class="hljs-number">4.0475</span>, <span class="hljs-number">0.0211</span>, <span class="hljs-number">0.7556</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">12</span>:09:<span class="hljs-number">33</span>,<span class="hljs-number">432</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.6637</span>, <span class="hljs-number">0.3037</span>, <span class="hljs-number">0.4288</span>],<br>        [<span class="hljs-number">1.5965</span>, <span class="hljs-number">0.5473</span>, <span class="hljs-number">1.9794</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h4 id="自实现6sigmas">自实现6sigmas</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">13</span>:<span class="hljs-number">18</span>:<span class="hljs-number">43</span>,<span class="hljs-number">761</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">13</span>:<span class="hljs-number">18</span>:<span class="hljs-number">43</span>,<span class="hljs-number">762</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.18834081292152405</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">13</span>:<span class="hljs-number">18</span>:<span class="hljs-number">43</span>,<span class="hljs-number">765</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">0.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">13</span>:<span class="hljs-number">18</span>:<span class="hljs-number">43</span>,<span class="hljs-number">765</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">13</span>:<span class="hljs-number">18</span>:<span class="hljs-number">43</span>,<span class="hljs-number">797</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">0.0000</span>,  <span class="hljs-number">9.0966</span>, <span class="hljs-number">17.8626</span>],<br>        [<span class="hljs-number">18.1534</span>,  <span class="hljs-number">0.0000</span>,  <span class="hljs-number">3.0291</span>],<br>        [<span class="hljs-number">47.4098</span>,  <span class="hljs-number">4.4731</span>,  <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">13</span>:<span class="hljs-number">18</span>:<span class="hljs-number">43</span>,<span class="hljs-number">798</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0515</span>, <span class="hljs-number">1.1501</span>],<br>        [<span class="hljs-number">0.0668</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.8324</span>],<br>        [<span class="hljs-number">2.8963</span>, <span class="hljs-number">1.5915</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">13</span>:<span class="hljs-number">18</span>:<span class="hljs-number">43</span>,<span class="hljs-number">799</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">1.9369</span>, <span class="hljs-number">4.1442</span>, <span class="hljs-number">5.9740</span>],<br>        [<span class="hljs-number">2.6208</span>, <span class="hljs-number">3.4994</span>, <span class="hljs-number">5.2066</span>],<br>        [<span class="hljs-number">9.7777</span>, <span class="hljs-number">0.7345</span>, <span class="hljs-number">1.6030</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">13</span>:<span class="hljs-number">18</span>:<span class="hljs-number">43</span>,<span class="hljs-number">799</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.6438</span>, <span class="hljs-number">0.2972</span>, <span class="hljs-number">0.4486</span>],<br>        [<span class="hljs-number">4.9561</span>, <span class="hljs-number">2.1339</span>, <span class="hljs-number">3.4890</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h4 id="自实现10sigmas">自实现10sigmas</h4>
+<p>```python 2024-05-19 15:50:51,893 - INFO: ---------------------
+2024-05-19 15:50:51,894 - INFO: 验证集总体精度为: 0.18834081292152405
+2024-05-19 15:50:51,895 - INFO: 验证集各类精度为: tensor([0., 1., 0.])
+2024-05-19 15:50:51,895 - INFO: --------------------- 2024-05-19
+15:50:51,919 - INFO: 先验分布KL散度矩阵: tensor([[ 0.0000, 25.0966,
+47.0659], [ 50.1534, 0.0000, 8.1720], [126.3276, 12.1709, 0.0000]],
+device='cuda:0') 2024-05-19 15:50:51,920 - INFO: 后验分布KL散度矩阵:
+tensor([[0.0000, 0.0514, 1.2257], [0.0687, 0.0000, 0.9138], [3.2759,
+1.7643, 0.0000]], device='cuda:0') 2024-05-19 15:50:51,920 - INFO:
+后验分布相对于先验验分布KL散度矩阵: tensor([[ 3.8568, 13.1958, 15.1707],
+[ 5.0922, 11.9641, 13.8473], [19.1877, 4.3346, 5.4597]],
+device='cuda:0') 2024-05-19 15:50:51,921 - INFO: 混合类KL散度矩阵:
+tensor([[0.7233, 0.3478, 0.4682], [9.6102, 7.9507, 9.5023]],
+device='cuda:0')</p>
 
                 
               </div>
@@ -307,27 +303,6 @@ Injection)依赖注入</h3>
             <hr/>
             <div>
               <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" class="category-chain-item">软件开发</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
   
   
 </div>
@@ -338,8 +313,8 @@ Injection)依赖注入</h3>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>SSM学习</div>
-      <div>http://example.com/2023/07/23/SoftwareDevelopment/SSM学习/</div>
+      <div></div>
+      <div>http://example.com/2024/05/19/增大类间距结果/</div>
     </div>
     <div class="license-meta">
       
@@ -351,13 +326,13 @@ Injection)依赖注入</h3>
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年7月23日</div>
+          <div>2024年5月19日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月23日</div>
+          <div>2024年5月19日</div>
         </div>
       
       
@@ -388,18 +363,12 @@ Injection)依赖注入</h3>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/07/25/SoftwareDevelopment/Java/" title="Java">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/07/13/SoftwareDevelopment/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B7%A5%E5%85%B7/" title="Linux服务器工具">
-                        <span class="hidden-mobile">Linux服务器工具</span>
+                      <a href="/2024/05/16/%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0/" title="">
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

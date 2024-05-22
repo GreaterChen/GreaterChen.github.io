@@ -16,21 +16,21 @@
   <meta name="author" content="Chen">
   <meta name="keywords" content="">
   
-    <meta name="description" content="日常使用pandas、numpy等数据处理库遇到的问题">
+    <meta name="description" content="Spring学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python数据处理小知识">
-<meta property="og:url" content="http://example.com/2023/02/13/Python/python%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%B0%8F%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:title" content="八股-Spring">
+<meta property="og:url" content="http://example.com/2024/05/05/SoftwareDevelopment/%E5%85%AB%E8%82%A1-Spring/index.html">
 <meta property="og:site_name" content="Chen&#39;s Blog">
-<meta property="og:description" content="日常使用pandas、numpy等数据处理库遇到的问题">
+<meta property="og:description" content="Spring学习">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-13T10:11:32.000Z">
-<meta property="article:modified_time" content="2023-02-15T15:50:00.523Z">
+<meta property="article:published_time" content="2024-05-05T08:09:14.000Z">
+<meta property="article:modified_time" content="2024-05-13T06:49:30.044Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>python数据处理小知识 - Chen&#39;s Blog</title>
+  <title>八股-Spring - Chen&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -184,7 +184,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="python数据处理小知识"></span>
+            <span id="subtitle" data-typed-text="八股-Spring"></span>
           
         </div>
 
@@ -200,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-13 18:11" pubdate>
-          2023年2月13日 晚上
+        <time datetime="2024-05-05 16:09" pubdate>
+          2024年5月5日 下午
         </time>
       </span>
     
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          210 字
+          3k 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          2 分钟
+          26 分钟
         
       </span>
     
@@ -261,12 +261,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">python数据处理小知识</h1>
+            <h1 style="display: none">八股-Spring</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2023年2月15日 晚上
+                    本文最后更新于：2024年5月13日 下午
                   
                 
               </p>
@@ -274,11 +274,138 @@
             
               <div class="markdown-body">
                 
-                <p>日常使用pandas、numpy等数据处理库遇到的问题 <span id="more"></span></p>
-<h3
-id="将两个dataframe在竖直方向上合并">将两个DataFrame在竖直方向上合并</h3>
-<p>当读取多个源文件，并希望将多个表合并为一个表时，使用类似于以下的结构</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs py"> entire_data = pd.read_csv(<span class="hljs-string">&quot;&quot;</span>)<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,n):<br>    data = pd.read_csv(<span class="hljs-string">&quot;&quot;</span>)<br>	entire_data = pd.concat([entire_data,data])<br></code></pre></td></tr></table></figure>
+                <p>Spring学习 <span id="more"></span></p>
+<h2 id="spring">Spring</h2>
+<h3 id="特性">特性</h3>
+<ol type="1">
+<li><p>支持IOC和DI</p></li>
+<li><p>支持AOP编程</p></li>
+<li><p>支持声明式事务</p></li>
+</ol>
+<h3 id="设计模式">设计模式</h3>
+<ol type="1">
+<li>工厂模式：Spring 容器本质是一个大工厂,使用工厂模式通过
+BeanFactory、ApplicationContext 创建 bean 对象。</li>
+<li>代理模式：AOP</li>
+<li>单例模式：Bean默认单例</li>
+<li>模板模式：Spring 中 JdbcTemplate、RestTemplate 等以 Template
+结尾的对数据库、网络等等进行操作的模板类 ,就使用到了模板模式。</li>
+</ol>
+<h3 id="beanfactory">BeanFactory</h3>
+<p>BeanFactory 是 Spring
+框架的基础，其作为一个顶级接口定义了容器的基本行为，例如管理 bean
+的生命周期、配置文件的加载和解析、bean 的装配和依赖注入等。BeanFactory
+接口提供了访问 bean 的方式，例如 getBean() 方法获取指定的 bean
+实例。它可以从不同的来源（例如 Mysql 数据库、XML 文件、Java
+配置类等）获取 bean 定义，并将其转换为 bean 实例。同时，BeanFactory
+还包含很多子类（例如，ApplicationContext
+接口）提供了额外的强大功能。</p>
+<h3 id="resource-和-autowired"><span class="citation"
+data-cites="Resource">@Resource</span> 和 <span class="citation"
+data-cites="Autowired">@Autowired</span></h3>
+<ol type="1">
+<li><p><span class="citation"
+data-cites="Resource注解是JDK扩展包中的">@Resource注解是JDK扩展包中的</span>，也就是说属于JDK的一部分。所以该注解是标准注解，更加具有通用性。</p>
+<p><span class="citation"
+data-cites="Autowired注解是Spring框架自己的">@Autowired注解是Spring框架自己的</span>。</p></li>
+<li><p><span class="citation"
+data-cites="Resource注解默认">@Resource注解默认</span><strong>根据Bean名称装配</strong>，未指定name时，使用属性名作为name。通过name找不到的话会自动启动通过类型装配。</p>
+<p><span class="citation"
+data-cites="Autowired注解默认">@Autowired注解默认</span><strong>根据类型装配</strong>，如果想根据名称装配，需要配合@Qualifier注解一起用。</p></li>
+</ol>
+<h3 id="bean是线程安全的吗">Bean是线程安全的吗？</h3>
+<p>因为单例 Bean,是全局只有一个 Bean,所有线程共享。如果说单例
+Bean,是一个无状态的,也就是线程中的操作不会对 Bean
+中的成员变量执行查询以外的操作,那么这个单例 Bean 是线程安全的。比如
+Spring mvc 的 Controller、Service、Dao 等,这些 Bean
+大多是无状态的,只关注于方法本身。假如这个 Bean 是有状态的,也就是会对
+Bean 中的成员变量进行写操作,那么可能就存在线程安全的问题。</p>
+<p>常见的有这么些解决办法 :</p>
+<ol type="1">
+<li>将 Bean 定义为多例这样每一个线程请求过来都会创建一个新的 Bean,
+但是这样容器就不好管理 Bean,不能这么办。</li>
+<li>在 Bean
+对象中尽量避免定义可变的成员变量削足适履了属于是,也不能这么干。</li>
+<li>将 Bean 中的成员变量保存在 ThreadLocal 中 我们知道 ThredLoca
+能保证多线程下变量的隔离,可以在类中定义一个 ThreadLocal
+成员变量,将需要的可变成员变量保存在 ThreadLocal 里
+,这是推荐的一种方式。</li>
+</ol>
+<h3 id="循环依赖问题">循环依赖问题</h3>
+<p>Spring 通过三级缓存解决了循环依赖：</p>
+<p>一级缓存 : Map&lt;String,Object&gt; singletonObjects, 单例池
+,用于保存实例化、属性赋值 ( 注入)、初始化完成的 bean 实例</p>
+<p>二级缓存 : Map&lt;String,Object&gt; earlySingletonObjects,
+早期曝光对象,用于保存实例化完成的 bean 实例</p>
+<p>三级缓存 : Map&lt;String,ObjectFactory&lt;?&gt;&gt;
+singletonFactories, 早期曝光对象工厂,用于保存 bean
+创建工厂,以便于后面扩展有机会创建代理对象。</p>
+<p>A 实例的初始化过程:</p>
+<ol type="1">
+<li>创建 A 实例 ,实例化的时候把 A 对象工厂放入三级缓存,表示 A
+开始实例化了,虽然我这个对象还不完整,但是先曝光出来让大家知道</li>
+<li>A 注入属性时 ,发现依赖 B, 此时 B 还没有被创建出来,所以去实例化
+B</li>
+<li>B 注入属性时发现依赖 A, 它就会从缓存里找 A
+对象。依次从一级到三级缓存查询 A, 从三级缓存通过对象工厂拿到 A,发现 A
+虽然不太完善 , 但是存在,把 A 放入二级缓存,同时删除三级缓存中的 A, 此时,
+B 已经实例化并且初始化完成,把 B 放入一级缓存。</li>
+<li>接着 A 继续属性赋值, 顺利从一级缓存拿到实例化且初始化完成的 B 对象,A
+对象创建也完成,删除二级缓存中的 A, 同时把 A 放入一级缓存</li>
+</ol>
+<p>实例化和属性赋值是分开的，所以里面有操作的空间。如果都是构造器注入的化，那么都得在实例化这一步完成注入，所以自然是无法支持了。</p>
+<h3 id="声明式事务实现原理">声明式事务实现原理</h3>
+<ol type="1">
+<li><p>在 Bean 初始化阶段创建代理对象: Spring 容器在初始化每个单例 bean
+的时候, 会遍历容器中的所有 BeanPostProcessor 实现类 ,并执行其
+postProcessAfterInitialization 方法 ,在执行 AbstractAutoProxyCreator
+类的 postProcessAfterInitialization
+方法时会遍历容器中所有的切面,查找与当前实例化 bean
+匹配的切面,这里会获取事务属性切面,查找@Transactional 注解及其属性值 ,
+然后根据得到的切面创建一个代理对象,默认是使用 JDK
+动态代理创建代理,如果目标类是接又 , 则使用 JDK 动态代理,否则使用
+Cglib。</p></li>
+<li><p>在执行目标方法时进行事务增强操作: 当通过代理对象调用 Bean
+方法的时候, 会触发对应的 AOP
+增强拦截器,声明式事务是一种环绕增强,对应接又为 MethodInterceptor
+,事务增强对该接又的实现为 TransactionInterceptor ,</p></li>
+</ol>
+<h3 id="声明式事务失效情况">声明式事务失效情况</h3>
+<ol type="1">
+<li><p>应用在非public修饰的方法上</p></li>
+<li><p>注解属性 propagation设置错误</p>
+<p>即事务的传播机制有的会让当前事务失效，比如TransactionDefinition.PROPAGATION_SUPPORTS:
+如果当前存在事务,则加入该事务;
+如果当前没有事务,则以非事务的方式继续运行。</p></li>
+<li><p>注解属性 rollbackFor 设置错误</p>
+<p>rollbackFor 可以指定能够触发事务回滚的异常类型。Spring
+默认抛出了未检查 unchecked 异常(继承自 RuntimeException 的异常)或者
+Error 才回滚事务,其他异常不会触发回滚事务。</p></li>
+<li><p>同一个类中方法调用,导致@Transactional 失效</p>
+<p>比如有一个类 Test, 它的一个方法 A, A 再调用本类的方法 B(不论方法 B
+是用 public 还是 private 修饰),但方法 A 没有声明注解事务,而 B
+方法有。则外部调用方法 A 之后,方法 B
+的事务是不会起作用的。因为只有当事务方法被当前类以外的代码调用时，才会由
+Spring 生成的代理对象来管理。</p></li>
+</ol>
+<h3 id="spring-mvc-的工作流程">Spring MVC 的工作流程</h3>
+<p><img
+src="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240513144842.png" srcset="/img/loading.gif" lazyload /></p>
+<ol type="1">
+<li>客户端向服务端发送一次请求,这个请求会先到前端控制器
+DispatcherServlet(也叫中央控制器)。</li>
+<li>DispatcherServlet 接收到请求后会调用 HandlerMapping
+处理器映射器。由此得知 , 该请求该由哪个 Controller 来处理(并未调用
+Controller, 只是得知 )</li>
+<li>DispatcherServlet 调用 HandlerAdapter
+处理器适配器,告诉处理器适配器应该要去执行哪个 Controller</li>
+<li>HandlerAdapter 处理器适配器去执行 Controller 并得到
+ModelAndView(数据和视图 ) ,并层层返回给 DispatcherServlet</li>
+<li>DispatcherServlet 将 ModelAndView 交给 ViewReslover 视图解析器解析 ,
+然后返回真正的视图。</li>
+<li>DispatcherServlet 将模型数据填充到视图中 7. DispatcherServlet
+将结果响应给客户端</li>
+</ol>
 
                 
               </div>
@@ -297,7 +424,7 @@ id="将两个dataframe在竖直方向上合并">将两个DataFrame在竖直方�
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%B0%8F%E7%9F%A5%E8%AF%86/" class="category-chain-item">小知识</a>
+  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" class="category-chain-item">软件开发</a>
   
   
 
@@ -317,8 +444,8 @@ id="将两个dataframe在竖直方向上合并">将两个DataFrame在竖直方�
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>python数据处理小知识</div>
-      <div>http://example.com/2023/02/13/Python/python数据处理小知识/</div>
+      <div>八股-Spring</div>
+      <div>http://example.com/2024/05/05/SoftwareDevelopment/八股-Spring/</div>
     </div>
     <div class="license-meta">
       
@@ -330,13 +457,13 @@ id="将两个dataframe在竖直方向上合并">将两个DataFrame在竖直方�
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年2月13日</div>
+          <div>2024年5月5日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年2月15日</div>
+          <div>2024年5月13日</div>
         </div>
       
       
@@ -367,9 +494,9 @@ id="将两个dataframe在竖直方向上合并">将两个DataFrame在竖直方�
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/23/Algorithm/%E5%B8%B8%E7%94%A8STL/" title="常用STL">
+                      <a href="/2024/05/15/%E5%88%86%E5%B8%83/" title="">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">常用STL</span>
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -377,8 +504,8 @@ id="将两个dataframe在竖直方向上合并">将两个DataFrame在竖直方�
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/02/12/Algorithm/%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9E%E7%8E%B0(%E4%B8%8B)/" title="基础数据结构实现(下)">
-                        <span class="hidden-mobile">基础数据结构实现(下)</span>
+                      <a href="/2024/05/03/%E5%85%88%E9%AA%8C%E5%88%86%E5%B8%83%E8%AE%A1%E7%AE%97/" title="">
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
