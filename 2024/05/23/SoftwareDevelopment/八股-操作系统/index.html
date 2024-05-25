@@ -1,0 +1,997 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Chen">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="操作系统学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="八股-操作系统">
+<meta property="og:url" content="http://example.com/2024/05/23/SoftwareDevelopment/%E5%85%AB%E8%82%A1-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="Chen&#39;s Blog">
+<meta property="og:description" content="操作系统学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost3@main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CPU%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/%20MESI%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E8%A1%A8%E6%A0%BC.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/30-%E5%93%B2%E5%AD%A6%E5%AE%B6%E8%BF%9B%E9%A4%90-%E6%96%B9%E6%A1%88%E5%9B%9B%E7%A4%BA%E4%BE%8B.jpg">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/%E8%BF%9E%E7%BB%AD%E7%A9%BA%E9%97%B4%E5%AD%98%E6%94%BE%E6%96%B9%E5%BC%8F.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E5%88%86%E9%85%8D%E8%A1%A8.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/%E9%9D%9E%E8%BF%9E%E7%BB%AD%E7%A9%BA%E9%97%B4%E5%AD%98%E6%94%BE%E6%96%B9%E5%BC%8F-%E7%B4%A2%E5%BC%95%E6%96%B9%E5%BC%8F.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/Unix%20%E5%A4%9A%E7%BA%A7%E7%B4%A2%E5%BC%95.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/%E5%9D%97%E7%BB%84.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost2/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E9%9B%B6%E6%8B%B7%E8%B4%9D/DRM%20I_O%20%E8%BF%87%E7%A8%8B.png">
+<meta property="article:published_time" content="2024-05-23T13:27:36.000Z">
+<meta property="article:modified_time" content="2024-05-25T12:31:06.426Z">
+<meta property="article:author" content="Chen">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost3@main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CPU%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/%20MESI%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E8%A1%A8%E6%A0%BC.png">
+  
+  
+  
+  <title>八股-操作系统 - Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Chen&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="八股-操作系统"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Chen
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-05-23 21:27" pubdate>
+          2024年5月23日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          66 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">八股-操作系统</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2024年5月25日 晚上
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>操作系统学习</p>
+<span id="more"></span>
+<h4 id="cache的数据写回">Cache的数据写回</h4>
+<ol type="1">
+<li>写直达：<strong>把数据同时写入内存和 Cache 中</strong></li>
+<li>写回：<strong>当发生写操作时，新的数据仅仅被写入 Cache Block
+里，只有当修改过的 Cache
+Block「被替换」时才需要写到内存中</strong>，减少了数据写回内存的频率，这样便可以提高系统的性能。</li>
+</ol>
+<h4 id="cache缓存一致性问题">Cache缓存一致性问题</h4>
+<p>MESI协议</p>
+<p>我们举个具体的例子来看看这四个状态的转换：</p>
+<ul>
+<li><em>Modified</em>，已修改</li>
+<li><em>Exclusive</em>，独占</li>
+<li><em>Shared</em>，共享</li>
+<li><em>Invalidated</em>，已失效</li>
+</ul>
+<ol type="1">
+<li>当 A 号 CPU 核心从内存读取变量 i 的值，数据被缓存在 A 号 CPU
+核心自己的 Cache 里面，此时其他 CPU 核心的 Cache
+没有缓存该数据，于是标记 Cache Line 状态为「独占」，此时其 Cache
+中的数据与内存是一致的；</li>
+<li>然后 B 号 CPU 核心也从内存读取了变量 i 的值，此时会发送消息给其他
+CPU 核心，由于 A 号 CPU 核心已经缓存了该数据，所以会把数据返回给 B 号
+CPU 核心。在这个时候， A 和 B 核心缓存了相同的数据，Cache Line
+的状态就会变成「共享」，并且其 Cache 中的数据与内存也是一致的；</li>
+<li>当 A 号 CPU 核心要修改 Cache 中 i 变量的值，发现数据对应的 Cache
+Line 的状态是共享状态，则要向所有的其他 CPU
+核心广播一个请求，要求先把其他核心的 Cache 中对应的 Cache Line
+标记为「无效」状态，然后 A 号 CPU 核心才更新 Cache 里面的数据，同时标记
+Cache Line 为「已修改」状态，此时 Cache 中的数据就与内存不一致了。</li>
+<li>如果 A 号 CPU 核心「继续」修改 Cache 中 i 变量的值，由于此时的 Cache
+Line 是「已修改」状态，因此不需要给其他 CPU
+核心发送消息，直接更新数据即可。</li>
+<li>如果 A 号 CPU 核心的 Cache 里的 i 变量对应的 Cache Line
+要被「替换」，发现 Cache Line
+状态是「已修改」状态，就会在替换前先把数据同步到内存。</li>
+</ol>
+<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost3@main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CPU%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/%20MESI%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E8%A1%A8%E6%A0%BC.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:50%;" /></p>
+<h4 id="cache伪共享">Cache伪共享</h4>
+<p>假设有一个双核心的 CPU，这两个 CPU
+核心并行运行着两个不同的线程，它们同时从内存中读取两个不同的数据，分别是类型为
+<code>long</code> 的变量 A 和
+B，这个两个数据的地址在物理内存上是<strong>连续</strong>的，如果 Cahce
+Line 的大小是 64 字节，并且变量 A 在 Cahce Line
+的开头位置，那么这两个数据是位于<strong>同一个 Cache Line
+中</strong>，又因为 CPU Cache Line 是 CPU 从内存读取数据到 Cache
+的单位，所以这两个数据会被同时读入到了两个 CPU 核心中各自 Cache
+中。果这两个不同核心的线程分别修改不同的数据，比如 1 号 CPU
+核心的线程只修改了 变量 A，或 2 号 CPU 核心的线程的线程只修改了变量
+B，就会导致伪共享。</p>
+<p>对于多个线程共享的热点数据，即经常会修改的数据，应该避免这些数据刚好在同一个
+Cache Line 中。避免 Cache 伪共享实际上是用空间换时间的思想，浪费一部分
+Cache 空间，从而换来性能的提升。</p>
+<h4 id="软中断">软中断</h4>
+<p>Linux
+系统<strong>为了解决中断处理程序执行过长和中断丢失的问题，将中断过程分成了两个阶段，分别是「上半部和下半部分」</strong>。</p>
+<ul>
+<li><strong>上半部用来快速处理中断</strong>，一般会暂时关闭中断请求，主要负责处理跟硬件紧密相关或者时间敏感的事情。</li>
+<li><strong>下半部用来延迟处理上半部未完成的工作</strong>，一般以「内核线程」的方式运行。</li>
+</ul>
+<p>中断处理程序的上部分和下半部可以理解为：</p>
+<ul>
+<li><strong>上半部直接处理硬件请求，也就是硬中断</strong>，主要是负责耗时短的工作，特点是快速执行；</li>
+<li><strong>下半部是由内核触发，也就说软中断</strong>，主要是负责上半部未完成的工作，通常都是耗时比较长的事情，特点是延迟执行；</li>
+</ul>
+<h4 id="为什么要有虚拟地址">为什么要有虚拟地址</h4>
+<ol type="1">
+<li><p>为了在多进程环境下，使得进程之间的内存地址不受影响，相互隔离，于是操作系统就为每个进程独立分配一套<strong>虚拟地址空间</strong>，每个程序只关心自己的虚拟地址就可以，实际上大家的虚拟地址都是一样的，但分布到物理地址内存是不一样的。作为程序，也不用关心物理地址的事情。</p></li>
+<li><p>虚拟内存可以使得进程对运行内存超过物理内存大小，因为程序运行符合局部性原理，CPU
+访问内存会有很明显的重复访问的倾向性，对于那些没有被经常使用到的内存，我们可以把它换出到物理内存之外，比如硬盘上的
+swap 区域。</p></li>
+</ol>
+<h4 id="进程上下文切换">进程上下文切换</h4>
+<p>进程是由内核管理和调度的，所以进程的切换只能发生在内核态。</p>
+<p>所以，<strong>进程的上下文切换不仅包含了虚拟内存、栈、全局变量等用户空间的资源，还包括了内核堆栈、寄存器等内核空间的资源</strong></p>
+<p>通常，会把交换的信息保存在进程的 PCB</p>
+<h4 id="什么是线程">什么是线程</h4>
+<p><strong>线程是进程当中的一条执行流程。</strong></p>
+<p>同一个进程内多个线程之间可以共享代码段、数据段、打开的文件等资源，但每个线程各自都有一套独立的寄存器和栈，这样可以确保线程的控制流是相对独立的。</p>
+<p>线程与进程的比较如下：</p>
+<ul>
+<li>进程是资源（包括内存、打开的文件等）分配的单位，线程是 CPU
+调度的单位；</li>
+<li>进程拥有一个完整的资源平台，而线程只独享必不可少的资源，如寄存器和栈；</li>
+<li>线程同样具有就绪、阻塞、执行三种基本状态，同样具有状态之间的转换关系；</li>
+<li>线程能减少并发执行的时间和空间开销；</li>
+</ul>
+<h4 id="线程上下文切换">线程上下文切换</h4>
+<p>这还得看线程是不是属于同一个进程：</p>
+<ul>
+<li>当两个线程不是属于同一个进程，则切换的过程就跟进程上下文切换一样；</li>
+<li><strong>当两个线程是属于同一个进程，因为虚拟内存是共享的，所以在切换时，虚拟内存这些资源就保持不动，只需要切换线程的私有数据、寄存器等不共享的数据</strong>；</li>
+</ul>
+<p>所以，线程的上下文切换相比进程，开销要小很多</p>
+<h4 id="进程间通信方式">进程间通信方式</h4>
+<p>每个进程的用户地址空间都是独立的，一般而言是不能互相访问的，但内核空间是每个进程都共享的，所以进程之间要通信必须通过内核。</p>
+<h5 id="管道">管道</h5>
+<p><strong>管道传输数据是单向的</strong>，如果想相互通信，我们需要创建两个管道才行。</p>
+<p><strong>对于匿名管道，它的通信范围是存在父子关系的进程</strong>。因为管道没有实体，也就是没有管道文件，只能通过
+fork 来复制父进程 fd 文件描述符，来达到通信的目的。</p>
+<p><strong>对于命名管道，它可以在不相关的进程间也能相互通信</strong>。因为命令管道，提前创建了一个类型为管道的设备文件，在进程里只要使用这个设备文件，就可以相互通信。</p>
+<h5 id="消息队列">消息队列</h5>
+<p><strong>消息队列是保存在内核中的消息链表</strong>，在发送数据时，会分成一个一个独立的数据单元，也就是消息体（数据块），消息体是用户自定义的数据类型，消息的发送方和接收方要约定好消息体的数据类型，所以每个消息体都是固定大小的存储块，不像管道是无格式的字节流数据。如果进程从消息队列中读取了消息体，内核就会把这个消息体删除。</p>
+<p>消息队列生命周期随内核，如果没有释放消息队列或者没有关闭操作系统，消息队列会一直存在，而前面提到的匿名管道的生命周期，是随进程的创建而建立，随进程的结束而销毁。</p>
+<h5 id="共享内存">共享内存</h5>
+<p><strong>共享内存的机制，就是拿出一块虚拟地址空间来，映射到相同的物理内存中</strong>。这样这个进程写入的东西，另外一个进程马上就能看到了，都不需要拷贝来拷贝去，传来传去，大大提高了进程间通信的速度。</p>
+<h5 id="信号量">信号量</h5>
+<p>用了共享内存通信方式，带来新的问题，那就是如果多个进程同时修改同一个共享内存，很有可能就冲突了。例如两个进程都同时写一个地址，那先写的那个进程会发现内容被别人覆盖了。信号量其实是一个整型的计数器，主要用于实现进程间的互斥与同步，而不是用于缓存进程间通信的数据。</p>
+<h5 id="信号">信号</h5>
+<p>上面说的进程间通信，都是常规状态下的工作模式。<strong>对于异常情况下的工作模式，就需要用「信号」的方式来通知进程。</strong>信号是进程间通信机制中<strong>唯一的异步通信机制</strong>，因为可以在任何时候发送信号给某一进程，</p>
+<h4 id="同步问题">同步问题</h4>
+<h5 id="哲学家进餐">哲学家进餐</h5>
+<p><strong>用一个数组 state
+来记录每一位哲学家的三个状态，分别是在进餐状态、思考状态、饥饿状态（正在试图拿叉子）。</strong></p>
+<p>那么，<strong>一个哲学家只有在两个邻居都没有进餐时，才可以进入进餐状态。</strong></p>
+<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E4%BA%92%E6%96%A5%E4%B8%8E%E5%90%8C%E6%AD%A5/30-%E5%93%B2%E5%AD%A6%E5%AE%B6%E8%BF%9B%E9%A4%90-%E6%96%B9%E6%A1%88%E5%9B%9B%E7%A4%BA%E4%BE%8B.jpg" srcset="/img/loading.gif" lazyload alt="img" style="zoom: 25%;" /></p>
+<h4 id="死锁">死锁</h4>
+<h5 id="产生条件">产生条件</h5>
+<p>死锁只有<strong>同时满足</strong>以下四个条件才会发生：</p>
+<ul>
+<li>互斥条件；</li>
+<li>持有并等待条件；</li>
+<li>不可剥夺条件；</li>
+<li>环路等待条件；</li>
+</ul>
+<h5 id="预防死锁">预防死锁</h5>
+<p><strong>1、静态分配策略</strong></p>
+<p>静态分配策略可以破坏死锁产生的第二个条件（占有并等待）。所谓静态分配策略，就是指一个进程必须在执行前就申请到它所需要的全部资源，并且知道它所要的资源都得到满足之后才开始执行。进程要么占有所有的资源然后开始执行，要么不占有资源，不会出现占有一些资源等待一些资源的情况。</p>
+<p>静态分配策略逻辑简单，实现也很容易，但这种策略
+<strong>严重地降低了资源利用率</strong>，因为在每个进程所占有的资源中，有些资源是在比较靠后的执行时间里采用的，甚至有些资源是在额外的情况下才使用的，这样就可能造成一个进程占有了一些
+<strong>几乎不用的资源而使其他需要该资源的进程产生等待</strong>
+的情况。</p>
+<p><strong>2、层次分配策略</strong></p>
+<p>层次分配策略破坏了产生死锁的第四个条件(循环等待)。在层次分配策略下，所有的资源被分成了多个层次，一个进程得到某一次的一个资源后，它只能再申请较高一层的资源；当一个进程要释放某层的一个资源时，必须先释放所占用的较高层的资源，按这种策略，是不可能出现循环等待链的，因为那样的话，就出现了已经申请了较高层的资源，反而去申请了较低层的资源，不符合层次分配策略</p>
+<h5 id="避免死锁">避免死锁</h5>
+<p>允许系统中<strong>同时存在四个必要条件</strong>
+，只要掌握并发进程中与每个进程有关的资源动态申请情况，做出
+<strong>明智和合理的选择</strong>
+，仍然可以避免死锁，因为四大条件仅仅是产生死锁的必要条件。</p>
+<p>银行家算法用一句话表达就是：当一个进程申请使用资源的时候，<strong>银行家算法</strong>
+通过先 <strong>试探</strong> 分配给该进程资源，然后通过
+<strong>安全性算法</strong>
+判断分配后系统是否处于安全状态，若不安全则试探分配作废，让该进程继续等待，若能够进入到安全的状态，则就
+<strong>真的分配资源给该进程</strong>。</p>
+<h5 id="检测和接触死锁">检测和接触死锁</h5>
+<p>这种方法对资源的分配不加以任何限制，也不采取死锁避免措施，但系统
+<strong>定时地运行一个 “死锁检测”</strong>
+的程序，判断系统内是否出现死锁，如果检测到系统发生了死锁，再采取措施去解除它。</p>
+<p>当死锁检测程序检测到存在死锁发生时，应设法让其解除，让系统从死锁状态中恢复过来，常用的解除死锁的方法有以下四种：</p>
+<ol type="1">
+<li><strong>立即结束所有进程的执行，重新启动操作系统</strong>：这种方法简单，但以前所在的工作全部作废，损失很大。</li>
+<li><strong>撤销涉及死锁的所有进程，解除死锁后继续运行</strong>：这种方法能彻底打破<strong>死锁的循环等待</strong>条件，但将付出很大代价，例如有些进程可能已经计算了很长时间，由于被撤销而使产生的部分结果也被消除了，再重新执行时还要再次进行计算。</li>
+<li><strong>逐个撤销涉及死锁的进程，回收其资源直至死锁解除。</strong></li>
+<li><strong>抢占资源</strong>：从涉及死锁的一个或几个进程中抢占资源，把夺得的资源再分配给涉及死锁的进程直至死锁解除。</li>
+</ol>
+<h4 id="互斥锁">互斥锁</h4>
+<p><strong>互斥锁</strong>加锁失败后，线程会<strong>释放 CPU</strong>
+，给其他线程；互斥锁是一种「独占锁」，比如当线程 A
+加锁成功后，此时互斥锁已经被线程 A 独占了，只要线程 A
+没有释放手中的锁，线程 B 加锁就会失败，于是就会释放 CPU
+让给其他线程，<strong>既然线程 B 释放掉了 CPU，自然线程 B
+加锁的代码就会被阻塞</strong>。</p>
+<h4 id="自旋锁">自旋锁</h4>
+<p><strong>如果你能确定被锁住的代码执行时间很短，就不应该用互斥锁，而应该选用自旋锁，否则使用互斥锁。</strong></p>
+<p>使用自旋锁的时候，当发生多线程竞争锁的情况，加锁失败的线程会「忙等待」，直到它拿到锁。这里的「忙等待」可以用
+<code>while</code> 循环等待实现，不过最好是使用 CPU 提供的
+<code>PAUSE</code>
+指令来实现「忙等待」，因为可以减少循环等待时的耗电量。</p>
+<h4 id="文件的存储方式">文件的存储方式</h4>
+<ol type="1">
+<li>连续空间存储</li>
+</ol>
+<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/%E8%BF%9E%E7%BB%AD%E7%A9%BA%E9%97%B4%E5%AD%98%E6%94%BE%E6%96%B9%E5%BC%8F.png" srcset="/img/loading.gif" lazyload alt="连续空间存放方式" style="zoom:50%;" /></p>
+<p>连续空间存放的方式虽然读写效率高，<strong>但是有「磁盘空间碎片」和「文件长度不易扩展」的缺陷。</strong></p>
+<ol start="2" type="1">
+<li><p>非连续空间存储</p>
+<ol type="1">
+<li><p>链表方式</p>
+<ol type="1">
+<li><p>隐式链表：每个数据块末尾存储下一个数据块地址，文件头包含起始块和末尾块</p>
+<figure>
+<img
+src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/%E9%9D%9E%E8%BF%9E%E7%BB%AD%E7%A9%BA%E9%97%B4%E5%AD%98%E6%94%BE%E6%96%B9%E5%BC%8F-%E9%93%BE%E8%A1%A8%E6%96%B9%E5%BC%8F.png" srcset="/img/loading.gif" lazyload
+alt="隐式链表" />
+<figcaption aria-hidden="true">隐式链表</figcaption>
+</figure></li>
+<li><p>显式链表：<strong>把用于链接文件各数据块的指针，显式地存放在内存的一张链接表中</strong>，该表在整个磁盘仅设置一张，<strong>每个表项中存放链接指针，指向下一个数据块号</strong>。</p>
+<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E5%88%86%E9%85%8D%E8%A1%A8.png" srcset="/img/loading.gif" lazyload alt="显式链接" style="zoom:50%;" /></p></li>
+</ol></li>
+<li><p>索引方式</p>
+<p>索引的实现是为每个文件创建一个「<strong>索引数据块</strong>」，里面存放的是<strong>指向文件数据块的指针列表</strong>，说白了就像书的目录一样，要找哪个章节的内容，看目录查就可以。</p>
+<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/%E9%9D%9E%E8%BF%9E%E7%BB%AD%E7%A9%BA%E9%97%B4%E5%AD%98%E6%94%BE%E6%96%B9%E5%BC%8F-%E7%B4%A2%E5%BC%95%E6%96%B9%E5%BC%8F.png" srcset="/img/loading.gif" lazyload alt="索引的方式" style="zoom:50%;" /></p></li>
+</ol></li>
+<li><p>Unix的存储方式</p>
+<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/Unix%20%E5%A4%9A%E7%BA%A7%E7%B4%A2%E5%BC%95.png" srcset="/img/loading.gif" lazyload alt="早期 Unix 文件系统" style="zoom:50%;" /></p></li>
+</ol>
+<h4 id="空闲空间存储方式">空闲空间存储方式</h4>
+<ol type="1">
+<li>空闲表法：为所有空闲空间建立一张表，表内容包括空闲区的第一个块号和该空闲区的块个数，注意，这个方式是连续分配的</li>
+<li>空闲链表法：每一个空闲块里有一个指针指向下一个空闲块，这样也能很方便的找到空闲块并管理起来</li>
+<li>位图法：利用二进制的一位来表示磁盘中一个盘块的使用情况，磁盘上所有的盘块都有一个二进制位与之对应。当值为
+0 时，表示对应的盘块空闲，值为 1 时，表示对应的盘块已分配。</li>
+</ol>
+<h4 id="文件系统的结构">文件系统的结构</h4>
+<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/%E5%9D%97%E7%BB%84.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:50%;" /></p>
+<p>最前面的第一个块是引导块，在系统启动时用于启用引导，接着后面就是一个一个连续的块组了，块组的内容如下：</p>
+<ul>
+<li><em>超级块</em>，包含的是文件系统的重要信息，比如 inode
+总个数、块总个数、每个块组的 inode 个数、每个块组的块个数等等。</li>
+<li><em>块组描述符</em>，包含文件系统中各个块组的状态，比如块组中空闲块和
+inode
+的数目等，每个块组都包含了文件系统中「所有块组的组描述符信息」。</li>
+<li><em>数据位图和 inode 位图</em>， 用于表示对应的数据块或 inode
+是空闲的，还是被使用中。</li>
+<li><em>inode 列表</em>，包含了块组中所有的 inode，inode
+用于保存文件系统中与各个文件和目录相关的所有元数据。</li>
+<li><em>数据块</em>，包含文件的有用数据。</li>
+</ul>
+<h4 id="硬链接和软链接">硬链接和软链接</h4>
+<p>硬链接是<strong>多个目录项中的「索引节点」指向一个文件</strong>，也就是指向同一个
+inode，但是 inode 是不可能跨越文件系统的，每个文件系统都有各自的 inode
+数据结构和列表，所以<strong>硬链接是不可用于跨文件系统的</strong>。由于多个目录项都是指向一个
+inode，那么<strong>只有删除文件的所有硬链接以及源文件时，系统才会彻底删除该文件。</strong></p>
+<p>软链接相当于重新创建一个文件，这个文件有<strong>独立的
+inode</strong>，但是这个<strong>文件的内容是另外一个文件的路径</strong>，所以访问软链接的时候，实际上相当于访问到了另外一个文件，所以<strong>软链接是可以跨文件系统的</strong>，甚至<strong>目标文件被删除了，链接文件还是在的，只不过指向的文件找不到了而已。</strong></p>
+<h4 id="dma">DMA</h4>
+<p><strong>CPU
+不再参与「将数据从磁盘控制器缓冲区搬运到内核空间」的工作，这部分工作全程由
+DMA 完成</strong>。但是 CPU
+在这个过程中也是必不可少的，因为传输什么数据，从哪里传输到哪里，都需要
+CPU 来告诉 DMA 控制器。</p>
+<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost2/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E9%9B%B6%E6%8B%B7%E8%B4%9D/DRM%20I_O%20%E8%BF%87%E7%A8%8B.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:50%;" /></p>
+<h4 id="io多路复用">IO多路复用</h4>
+<h5 id="selectpoll">select/poll</h5>
+<p>select 实现多路复用的方式是，将已连接的 Socket
+都放到一个<strong>文件描述符集合</strong>，然后调用 select
+函数将文件描述符集合<strong>拷贝</strong>到内核里，让内核来检查是否有网络事件产生，检查的方式很粗暴，就是通过<strong>遍历</strong>文件描述符集合的方式，当检查到有事件产生后，将此
+Socket 标记为可读或可写，
+接着再把整个文件描述符集合<strong>拷贝</strong>回用户态里，然后用户态还需要再通过<strong>遍历</strong>的方法找到可读或可写的
+Socket，然后再对其处理。select 使用固定长度的
+BitsMap，表示文件描述符集合，而且所支持的文件描述符的个数是有限制的，在
+Linux 系统中，由内核中的 FD_SETSIZE 限制， 默认最大值为
+<code>1024</code>，只能监听 0~1023 的文件描述符。</p>
+<p>poll 不再用 BitsMap
+来存储所关注的文件描述符，取而代之用动态数组，以链表形式来组织，突破了
+select 的文件描述符个数限制，当然还会受到系统文件描述符限制。</p>
+<h5 id="epoll">epoll</h5>
+<p>epoll 通过两个方面，很好解决了 select/poll 的问题。</p>
+<p><em>第一点</em>，epoll
+在内核里使用<strong>红黑树来跟踪进程所有待检测的文件描述字</strong>，把需要监控的
+socket 通过 <code>epoll_ctl()</code>
+函数加入内核中的红黑树里，红黑树是个高效的数据结构，增删改一般时间复杂度是
+<code>O(logn)</code>。而 select/poll 内核里没有类似 epoll
+红黑树这种保存所有待检测的 socket 的数据结构，所以 select/poll
+每次操作时都传入整个 socket 集合给内核，而 epoll
+因为在内核维护了红黑树，可以保存所有待检测的 socket
+，所以只需要传入一个待检测的
+socket，减少了内核和用户空间大量的数据拷贝和内存分配。</p>
+<p><em>第二点</em>， epoll
+使用<strong>事件驱动</strong>的机制，内核里<strong>维护了一个链表来记录就绪事件</strong>，当某个
+socket
+有事件发生时，通过<strong>回调函数</strong>内核会将其加入到这个就绪事件列表中，当用户调用
+<code>epoll_wait()</code>
+函数时，只会返回有事件发生的文件描述符的个数，不需要像 select/poll
+那样轮询扫描整个 socket 集合，大大提高了检测的效率。</p>
+<h4 id="僵尸进程孤儿进程">僵尸进程/孤儿进程</h4>
+<p>当一个进程调用
+exit()系统调用结束自己的生命时，内核会释放该进程的所有资源，包括打开的文件、占用的内存等，但是该进程对应的
+PCB 依然存在于系统中。这些信息只有在父进程调用 wait()或
+waitpid()系统调用时才会被释放，以便让父进程得到子进程的状态信息。</p>
+<p><strong>僵尸进程</strong>：子进程已经终止，但是其父进程仍在运行，且父进程没有调用
+wait()或
+waitpid()等系统调用来获取子进程的状态信息，释放子进程占用的资源，导致子进程的
+PCB
+依然存在于系统中，但无法被进一步使用。这种情况下，子进程被称为“僵尸进程”。避免僵尸进程的产生，父进程需要及时调用
+wait()或 waitpid()系统调用来回收子进程。</p>
+<p><strong>孤儿进程</strong>：一个进程的父进程已经终止或者不存在，但是该进程仍在运行。这种情况下，该进程就是孤儿进程。孤儿进程通常是由于父进程意外终止或未及时调用
+wait()或
+waitpid()等系统调用来回收子进程导致的。为了避免孤儿进程占用系统资源，操作系统会将孤儿进程的父进程设置为
+init 进程（进程号为 1），由 init 进程来回收孤儿进程的资源。</p>
+<h4 id="磁盘调度算法">磁盘调度算法</h4>
+<p><strong>先来先服务算法（First-Come
+First-Served，FCFS）</strong>：按照请求到达磁盘调度器的顺序进行处理，先到达的请求的先被服务。FCFS
+算法实现起来比较简单，不存在算法开销。不过，由于没有考虑磁头移动的路径和方向，平均寻道时间较长。同时，该算法容易出现饥饿问题，即一些后到的磁盘请求可能需要等待很长时间才能得到服务。</p>
+<p><strong>最短寻道时间优先算法（Shortest Seek Time
+First，SSTF）</strong>：也被称为最佳服务优先（Shortest Service Time
+First，SSTF）算法，优先选择距离当前磁头位置最近的请求进行服务。SSTF
+算法能够最小化磁头的寻道时间，但容易出现饥饿问题，即磁头附近的请求不断被服务，远离磁头的请求长时间得不到响应。实际应用中，需要优化一下该算法的实现，避免出现饥饿问题。<strong>扫描算法（SCAN）</strong>：也被称为电梯（Elevator）算法，基本思想和电梯非常类似。磁头沿着一个方向扫描磁盘，如果经过的磁道有请求就处理，直到到达磁盘的边界，然后改变移动方向，依此往复。SCAN
+算法能够保证所有的请求得到服务，解决了饥饿问题。但是，如果磁头从一个方向刚扫描完，请求才到的话。这个请求就需要等到磁头从相反方向过来之后才能得到处理。</p>
+<p><strong>循环扫描算法（Circular Scan，C-SCAN）</strong>：SCAN
+算法的变体，只在磁盘的一侧进行扫描，并且只按照一个方向扫描，直到到达磁盘边界，然后回到磁盘起点，重新开始循环。</p>
+<p><strong>边扫描边观察算法（LOOK）</strong>：SCAN
+算法中磁头到了磁盘的边界才改变移动方向，这样可能会做很多无用功，因为磁头移动方向上可能已经没有请求需要处理了。LOOK
+算法对 SCAN
+算法进行了改进，如果磁头移动方向上已经没有别的请求，就可以立即改变磁头移动方向，依此往复。也就是边扫描边观察指定方向上还有无请求，因此叫
+LOOK。<strong>均衡循环扫描算法（C-LOOK）</strong>：C-SCAN
+只有到达磁盘边界时才能改变磁头移动方向，并且磁头返回时也需要返回到磁盘起点，这样可能会做很多无用功。C-LOOK
+算法对 C-SCAN
+算法进行了改进，如果磁头移动的方向上已经没有磁道访问请求了，就可以立即让磁头返回，并且磁头只需要返回到有磁道访问请求的位置即可</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/" class="category-chain-item">软件开发</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>八股-操作系统</div>
+      <div>http://example.com/2024/05/23/SoftwareDevelopment/八股-操作系统/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Chen</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年5月23日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年5月25日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/05/19/%E5%A2%9E%E5%A4%A7%E7%B1%BB%E9%97%B4%E8%B7%9D%E7%BB%93%E6%9E%9C/" title="">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
