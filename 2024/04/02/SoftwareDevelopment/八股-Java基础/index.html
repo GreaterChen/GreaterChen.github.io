@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240415163935.png">
 <meta property="article:published_time" content="2024-04-02T10:32:33.179Z">
-<meta property="article:modified_time" content="2024-04-15T10:58:04.191Z">
+<meta property="article:modified_time" content="2024-05-27T14:26:03.510Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240415163935.png">
@@ -214,7 +214,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7k 字
+          6.9k 字
         
       </span>
     
@@ -225,7 +225,7 @@
         
         
         
-          59 分钟
+          58 分钟
         
       </span>
     
@@ -268,7 +268,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年4月15日 晚上
+                    本文最后更新于：2024年5月27日 晚上
                   
                 
               </p>
@@ -278,28 +278,6 @@
                 
                 <p>Java基础学习</p>
 <span id="more"></span>
-<h3 id="resource-和-autowired"><span class="citation"
-data-cites="Resource">@Resource</span> 和 <span class="citation"
-data-cites="Autowired">@Autowired</span></h3>
-<p><code>@Autowired</code>和<code>@Resource</code>都是Spring框架提供的用于依赖注入的注解，但它们在注入方式和来源上有所不同。</p>
-<h4 id="autowired"><code>@Autowired</code></h4>
-<ul>
-<li><strong>按类型自动装配</strong>：<code>@Autowired</code>默认按照类型进行自动装配。如果Spring容器中存在多个相同类型的bean，则会抛出异常，除非使用<code>@Qualifier</code>注解指定具体的bean。</li>
-<li><strong>不需要指定bean的名称</strong>：因为<code>@Autowired</code>是按类型注入的，所以它不依赖于变量的名称。这意味着不管变量叫什么名字，只要类型匹配，Spring就会注入相应的bean。</li>
-<li><strong>可选性</strong>：通过设置<code>@Autowired(required = false)</code>，可以使得某个bean的注入变为可选，即如果容器中没有找到对应类型的bean，Spring不会抛出异常，而是会留下一个null值。</li>
-<li><strong>灵活性和使用范围</strong>：<code>@Autowired</code>可以用于构造函数、setter方法、属性以及自定义方法上，提供了更广的使用范围。</li>
-</ul>
-<h4 id="resource"><code>@Resource</code></h4>
-<ul>
-<li><strong>按名称自动装配</strong>：<code>@Resource</code>默认按照名称进行自动装配。如果没有指定名称，它会使用变量名作为bean名称去查找对应的bean。如果找不到匹配的名称，才会退回到按类型查找。</li>
-<li><strong>需要考虑bean的名称</strong>：因为<code>@Resource</code>首先尝试按名称匹配bean，所以变量名或者指定的名称（使用<code>name</code>属性）对于找到正确的bean很重要。</li>
-<li><strong>来源不同</strong>：<code>@Resource</code>注解是由JDK提供的（<code>javax.annotation.Resource</code>），属于JSR-250规范的一部分，而<code>@Autowired</code>是Spring特有的注解。</li>
-</ul>
-<h4 id="使用场景和选择">使用场景和选择</h4>
-<ul>
-<li>当你想要更精确地控制bean的选择时（特别是当存在多个相同类型的bean，但你希望注入一个特定名称的bean），<code>@Resource</code>可能是更好的选择。</li>
-<li>如果你倾向于按类型装配依赖，或者想要利用Spring更丰富的自动装配特性（例如可选注入、构造函数注入等），<code>@Autowired</code>可能更适合你的需求。</li>
-</ul>
 <h3 id="所有对象实例都存在于堆中吗">所有对象实例都存在于堆中吗？</h3>
 <p>在Java中，对象通常是在堆内存中分配的。堆内存用于存储Java程序运行期间创建的对象实例，而栈内存则用于存储方法调用时的局部变量和方法调用的上下文。但是，有一种优化技术，称为逃逸分析，可以改变这种分配方式。</p>
 <p>逃逸分析是一种确定对象分配范围和寿命的技术。简单来说，它分析数据是否会“逃逸”出它被创建的上下文。如果一个对象只在一个方法中被使用，并且不会被返回或赋值给方法外的变量，那么这个对象就被认为是“不逃逸”的。</p>
@@ -347,11 +325,10 @@ id="接口和抽象类有什么共同点和区别">接口和抽象类有什么�
 类型的，不能被修改且必须有初始值，而抽象类的成员变量默认
 default，可在子类中被重新定义，也可被重新赋值</li>
 </ul>
-<h3
-id="深拷贝和浅拷贝区别了解吗-什么是引用拷贝">深拷贝和浅拷贝区别了解吗-什么是引用拷贝</h3>
+<h3 id="深拷贝浅拷贝引用拷贝">深拷贝、浅拷贝、引用拷贝</h3>
 <p>关于深拷贝和浅拷贝区别，我这里先给结论：</p>
 <ul>
-<li><p><strong>浅拷贝</strong>：浅拷贝会在堆上创建一个新的对象（区别于引用拷贝的一点），不过，如果原对象内部的属性是引用类型的话，浅拷贝会直接复制内部对象的引用地址，也就是说拷贝对象和原对象共用同一个内部对象。</p></li>
+<li><p><strong>浅拷贝</strong>：浅拷贝会在堆上<strong>创建一个新的对象</strong>（区别于引用拷贝的一点），不过，如果原对象内部的属性是引用类型的话，浅拷贝会直接复制内部对象的引用地址，也就是说拷贝对象和原对象共用同一个内部对象。</p></li>
 <li><p><strong>深拷贝</strong>：深拷贝会完全复制整个对象，包括这个对象所包含的内部对象。</p></li>
 <li><p><strong>引用拷贝</strong>:引用拷贝就是两个不同的引用指向同一个对象</p>
 <p><img
@@ -528,6 +505,13 @@ id="try和final中都有return怎么执行">try和final中都有return，怎么�
 <h4 id="final一定会执行吗">final一定会执行吗？</h4>
 <p>finally 之前虚拟机被终止运行的话，finally 中的代码就不会被执行</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">try</span> &#123;<br>    System.out.println(<span class="hljs-string">&quot;Try to do something&quot;</span>);<br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(<span class="hljs-string">&quot;RuntimeException&quot;</span>);<br>&#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>    System.out.println(<span class="hljs-string">&quot;Catch Exception -&gt; &quot;</span> + e.getMessage());<br>    <span class="hljs-comment">// 终止当前正在运行的Java虚拟机</span><br>    System.exit(<span class="hljs-number">1</span>);<br>&#125; <span class="hljs-keyword">finally</span> &#123;<br>    System.out.println(<span class="hljs-string">&quot;Finally&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="try-with-resource">try with resource</h4>
+<p>Java
+中类似于<code>InputStream</code>、<code>OutputStream</code>、<code>Scanner</code>、<code>PrintWriter</code>等的资源都需要我们调用<code>close()</code>方法来手动关闭，一般情况下我们都是通过<code>try-catch-finally</code>语句来实现这个需求，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//读取文本文件的内容</span><br><span class="hljs-type">Scanner</span> <span class="hljs-variable">scanner</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br><span class="hljs-keyword">try</span> &#123;<br>    scanner = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;D://read.txt&quot;</span>));<br>    <span class="hljs-keyword">while</span> (scanner.hasNext()) &#123;<br>        System.out.println(scanner.nextLine());<br>    &#125;<br>&#125; <span class="hljs-keyword">catch</span> (FileNotFoundException e) &#123;<br>    e.printStackTrace();<br>&#125; <span class="hljs-keyword">finally</span> &#123;<br>    <span class="hljs-keyword">if</span> (scanner != <span class="hljs-literal">null</span>) &#123;<br>        scanner.close();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>使用 Java 7 之后的 <code>try-with-resources</code>
+语句改造上面的代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">try</span> (<span class="hljs-type">Scanner</span> <span class="hljs-variable">scanner</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Scanner</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">File</span>(<span class="hljs-string">&quot;test.txt&quot;</span>))) &#123;<br>    <span class="hljs-keyword">while</span> (scanner.hasNext()) &#123;<br>        System.out.println(scanner.nextLine());<br>    &#125;<br>&#125; <span class="hljs-keyword">catch</span> (FileNotFoundException fnfe) &#123;<br>    fnfe.printStackTrace();<br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="反射">反射</h3>
 <p>赋予了我们在运行时分析类以及执行类中方法的能力。通过反射可以获取任意一个类的所有属性和方法，还可以调用这些方法和属性。可以让我们的代码更加灵活、为各种框架提供开箱即用的功能提供了便利。</p>
 
@@ -587,7 +571,7 @@ id="try和final中都有return怎么执行">try和final中都有return，怎么�
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年4月15日</div>
+          <div>2024年5月27日</div>
         </div>
       
       

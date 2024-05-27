@@ -23,15 +23,16 @@
 <meta property="og:site_name" content="Chen&#39;s Blog">
 <meta property="og:description" content="Redis学习">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/2fedbc9cd4cb7236c302d695686dd478.png">
 <meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/e84b052381e240eeb8cc97d6b729968b.png">
 <meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/98987d9417b2bab43087f45fc959d32a.png">
 <meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/2b7231b6aabb9a9a2e2390ab3a280b2d-20230309232920063.png">
 <meta property="og:image" content="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240513154413.png">
 <meta property="article:published_time" content="2024-05-02T12:54:54.000Z">
-<meta property="article:modified_time" content="2024-05-13T08:16:17.418Z">
+<meta property="article:modified_time" content="2024-05-27T10:43:22.725Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.xiaolincoding.com//mysql/other/e84b052381e240eeb8cc97d6b729968b.png">
+<meta name="twitter:image" content="https://cdn.xiaolincoding.com//mysql/other/2fedbc9cd4cb7236c302d695686dd478.png">
   
   
   
@@ -217,7 +218,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          15k 字
+          16k 字
         
       </span>
     
@@ -228,7 +229,7 @@
         
         
         
-          124 分钟
+          132 分钟
         
       </span>
     
@@ -271,7 +272,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年5月13日 下午
+                    本文最后更新于：2024年5月27日 晚上
                   
                 
               </p>
@@ -291,12 +292,25 @@ long），并将字符串对象的编码设置为<code>int</code>。</p></li>
 <li><p>如果字符串对象保存的是一个字符串，并且这个字符申的长度小于等于 32
 字节（redis
 2.+版本），那么字符串对象将使用一个简单动态字符串（SDS）来保存这个字符串，并将对象的编码设置为<code>embstr</code>，
-<code>embstr</code>编码是专门用于保存短字符串的一种优化编码方式</p></li>
-<li><p>如果字符串对象保存的是一个字符串，并且这个字符串的长度大于 32
-字节（redis
-2.+版本），那么字符串对象将使用一个简单动态字符串（SDS）来保存这个字符串，并将对象的编码设置为<code>raw</code></p></li>
+embstr会通过一次内存分配函数来分配一块连续的内存空间来保存redisObject和SDS。</p></li>
 </ol>
-<p>embstr和raw编码都会使用SDS来保存值，但不同之处在于embstr会通过一次内存分配函数来分配一块连续的内存空间来保存redisObject和SDS，而raw编码会通过调用两次内存分配函数来分别分配两块空间来保存redisObject和SDS</p>
+<figure>
+<img
+src="https://cdn.xiaolincoding.com/gh/xiaolincoder/redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/embstr.png" srcset="/img/loading.gif" lazyload
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
+<ol type="1">
+<li>如果字符串对象保存的是一个字符串，并且这个字符串的长度大于 32
+字节（redis
+2.+版本），那么字符串对象将使用一个简单动态字符串（SDS）来保存这个字符串，并将对象的编码设置为<code>raw</code>，raw编码会通过调用两次内存分配函数来分别分配两块空间来保存redisObject和SDS</li>
+</ol>
+<figure>
+<img
+src="https://cdn.xiaolincoding.com/gh/xiaolincoder/redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/raw.png" srcset="/img/loading.gif" lazyload
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
 <h4 id="分布式锁">分布式锁</h4>
 <p>SET 命令有个 NX
 参数可以实现「key不存在才插入」，可以用它来实现分布式锁：</p>
@@ -304,6 +318,7 @@ long），并将字符串对象的编码设置为<code>int</code>。</p></li>
 <li>如果 key 不存在，则显示插入成功，可以用来表示加锁成功；</li>
 <li>如果 key 存在，则会显示插入失败，可以用来表示加锁失败。</li>
 </ul>
+<p>其中key为分布式锁的名称，value为客户端进程id</p>
 <p>而解锁的过程就是将 lock_key
 键删除，但不能乱删，要保证执行操作的客户端就是加锁的客户端。所以，解锁的时候，我们要先判断锁的
 unique_value 是否为加锁客户端，是的话，才将 lock_key 键删除。</p>
@@ -369,6 +384,7 @@ List）留存</strong>。这样一来，如果消费者程序读了消息但没�
 <p><strong>在 Redis 7.0 中，压缩列表数据结构已经废弃了，交由 listpack
 数据结构来实现了</strong>。</p>
 <h3 id="set">Set</h3>
+<h4 id="底层实现-2">底层实现</h4>
 <p>Set
 类型是一个无序并唯一的键值集合，它的存储顺序不会按照插入的先后顺序进行存储。</p>
 <p>Set
@@ -380,6 +396,19 @@ List）留存</strong>。这样一来，如果消费者程序读了消息但没�
 <li>如果集合中的元素不满足上面条件，则 Redis
 使用<strong>哈希表</strong>作为 Set 类型的底层数据结构。</li>
 </ul>
+<h4 id="应用场景">应用场景</h4>
+<p><strong>Set
+的差集、并集和交集的计算复杂度较高，在数据量较大的情况下，如果直接执行这些计算，会导致
+Redis 实例阻塞</strong>。</p>
+<p>在主从集群中，为了避免主库因为 Set
+做聚合计算（交集、差集、并集）时导致主库被阻塞，我们可以选择一个从库完成聚合统计，或者把数据返回给客户端，由客户端来完成聚合统计。</p>
+<ol type="1">
+<li><p>点赞</p>
+<p>Set 类型可以保证一个用户只能点一个赞</p></li>
+<li><p>共同关注</p>
+<p>Set
+类型支持交集运算，所以可以用来计算共同关注的好友、公众号等。</p></li>
+</ol>
 <h3 id="zset">Zset</h3>
 <p>Zset 类型（有序集合类型）相比于 Set 类型多了一个排序属性
 score（分值），对于有序集合 ZSet
@@ -396,6 +425,7 @@ score（分值），对于有序集合 ZSet
 <p><strong>在 Redis 7.0 中，压缩列表数据结构已经废弃了，交由 listpack
 数据结构来实现了。</strong></p>
 <h3 id="bitmap">Bitmap</h3>
+<h4 id="底层实现-3">底层实现</h4>
 <p>Bitmap，即位图，是一串连续的二进制数组（0和1），可以通过偏移量（offset）定位元素。BitMap通过最小的单位bit来进行<code>0|1</code>的设置，表示某个元素的值或者状态，时间复杂度为O(1)。由于
 bit
 是计算机中最小的单位，使用它进行储存将非常节省空间，特别适合一些数据量大且使用<strong>二值统计的场景</strong>。</p>
@@ -404,6 +434,14 @@ bit
 类型是会保存为二进制的字节数组，所以，Redis 就把字节数组的每个 bit
 位利用起来，用来表示一个元素的二值状态，你可以把 Bitmap 看作是一个 bit
 数组。</p>
+<h4 id="应用场景-1">应用场景</h4>
+<ol type="1">
+<li><p>签到</p>
+<p>在签到打卡的场景中，我们只用记录签到（1）或未签到（0），所以它就是非常典型的二值状态。</p>
+<p>签到统计时，每个用户一天的签到用 1 个 bit 位就能表示，一个月（假设是
+31 天）的签到情况用 31 个 bit 位就可以，而一年的签到也只需要用 365 个
+bit 位，根本不用太复杂的集合类型。</p></li>
+</ol>
 <h2 id="数据结构">数据结构</h2>
 <figure>
 <img
@@ -452,6 +490,41 @@ O(N) 了，因此压缩列表不适合保存过多的元素</strong>。</p>
 <p>压缩列表新增某个元素或修改某个元素时，如果空间不不够，压缩列表占用的内存空间就需要重新分配。而当新插入的元素较大时，可能会导致后续元素的
 prevlen
 占用空间都发生变化，从而引起「连锁更新」问题，导致每个元素的空间都要重新分配，造成访问压缩列表性能的下降。</p>
+<h3 id="哈希表">哈希表</h3>
+<p><img src="https://cdn.xiaolincoding.com//mysql/other/2fedbc9cd4cb7236c302d695686dd478.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:50%;" /></p>
+<p>在正常服务请求阶段，插入的数据，都会写入到「哈希表
+1」，此时的「哈希表 2 」 并没有被分配空间。</p>
+<p>随着数据逐步增多，触发了 rehash 操作，这个过程分为三步：</p>
+<ul>
+<li>给「哈希表 2」 分配空间，一般会比「哈希表 1」
+大一倍（两倍的意思）；</li>
+<li>将「哈希表 1 」的数据迁移到「哈希表 2」 中；</li>
+<li>迁移完成后，「哈希表 1 」的空间会被释放，并把「哈希表 2」
+设置为「哈希表 1」，然后在「哈希表 2」 新创建一个空白的哈希表，为下次
+rehash 做准备。</li>
+</ul>
+<p>为了避免 rehash 在数据迁移过程中，因拷贝数据的耗时，影响 Redis
+性能的情况，所以 Redis 采用了<strong>渐进式
+rehash</strong>，也就是将数据的迁移的工作不再是一次性迁移完成，而是分多次迁移。</p>
+<p>渐进式 rehash 步骤如下：</p>
+<ul>
+<li>给「哈希表 2」 分配空间；</li>
+<li><strong>在 rehash
+进行期间，每次哈希表元素进行新增、删除、查找或者更新操作时，Redis
+除了会执行对应的操作之外，还会顺序将「哈希表 1 」中索引位置上的所有
+key-value 迁移到「哈希表 2」 上</strong>；</li>
+<li>随着处理客户端发起的哈希表操作请求数量越多，最终在某个时间点会把「哈希表
+1 」的所有 key-value 迁移到「哈希表 2」，从而完成 rehash 操作。</li>
+</ul>
+<p>触发 rehash 操作的条件，主要有两个：</p>
+<ul>
+<li><strong>当负载因子大于等于 1 ，并且 Redis 没有在执行 bgsave 命令或者
+bgrewiteaof 命令，也就是没有执行 RDB 快照或没有进行 AOF
+重写的时候，就会进行 rehash 操作。</strong></li>
+<li><strong>当负载因子大于等于 5
+时，此时说明哈希冲突非常严重了，不管有没有有在执行 RDB 快照或 AOF
+重写，都会强制进行 rehash 操作。</strong></li>
+</ul>
 <h3 id="整数集合">整数集合</h3>
 <p>整数集合本质上是一块连续内存空间，保存元素的容器是一个 contents
 数组，虽然 contents 被声明为 int8_t 类型的数组，但是实际上 contents
@@ -1006,7 +1079,7 @@ key过期后产生的问题，也就是“物理”不过期。从功能层面�
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年5月13日</div>
+          <div>2024年5月27日</div>
         </div>
       
       
