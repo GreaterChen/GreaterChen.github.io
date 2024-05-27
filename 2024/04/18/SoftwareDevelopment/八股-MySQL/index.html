@@ -23,15 +23,20 @@
 <meta property="og:site_name" content="Chen&#39;s Blog">
 <meta property="og:description" content="MySQL学习">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/mysql/row_format/%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%BB%93%E6%9E%84.drawio.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/557d17e05ce90f18591c2305871af665.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/261011d237bec993821aa198b97ae8ce.png">
 <meta property="og:image" content="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240418214602.png">
 <meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/f5b4f8f0c0adcf044b34c1f300a95abf.png">
 <meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/d19a1019dc35dfe8cfe7fbff8cd97e31.png">
 <meta property="og:image" content="https://cdn.xiaolincoding.com//mysql/other/3af285a8e70f4d4198318057eb955520.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/mysql/how_update/innodb_flush_log_at_trx_commit2.drawio.png?image_process=watermark,text_5YWs5LyX5Y-377ya5bCP5p6XY29kaW5n,type_ZnpsdHpoaw,x_10,y_10,g_se,size_20,color_0000CD,t_70,fill_0">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/mysql/how_update/%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E5%B4%A9%E6%BA%83%E7%82%B9.drawio.png?image_process=watermark,text_5YWs5LyX5Y-377ya5bCP5p6XY29kaW5n,type_ZnpsdHpoaw,x_10,y_10,g_se,size_20,color_0000CD,t_70,fill_0">
 <meta property="article:published_time" content="2024-04-18T07:21:52.000Z">
-<meta property="article:modified_time" content="2024-04-19T08:32:57.661Z">
+<meta property="article:modified_time" content="2024-05-27T09:00:19.573Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240418214602.png">
+<meta name="twitter:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/mysql/row_format/%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%BB%93%E6%9E%84.drawio.png">
   
   
   
@@ -217,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          13k 字
+          16k 字
         
       </span>
     
@@ -228,7 +233,7 @@
         
         
         
-          111 分钟
+          133 分钟
         
       </span>
     
@@ -271,7 +276,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年4月19日 下午
+                    本文最后更新于：2024年5月27日 下午
                   
                 
               </p>
@@ -299,14 +304,14 @@ B+ 树索引。</li>
 <h3 id="连接器">连接器</h3>
 <ul>
 <li>与客户端进行 TCP 三次握手建立连接；</li>
-<li>校验客户端的用户名和密码，如果用户名或密码不对，则会报错；</li>
 <li>如果用户名和密码都对了，会读取该用户的权限，然后后面的权限逻辑判断都基于此时读取到的权限；</li>
 </ul>
 <h3 id="查询缓存">查询缓存</h3>
 <p>如果 SQL 是查询语句（select 语句），MySQL 就会先去查询缓存（ Query
 Cache ）里查找缓存数据，看看之前有没有执行过这一条命令，这个查询缓存是以
 key-value 形式保存在内存中的，key 为 SQL 查询语句，value 为 SQL
-语句查询的结果。只要一个表有更新操作，那么这个表的查询缓存就会被清空。</p>
+语句查询的结果。只要一个表有更新操作，那么这个表的查询缓存就会被清空，效率不高，所以MySQL
+8.0 版本直接将查询缓存删掉了</p>
 <h3 id="解析sql">解析SQL</h3>
 <ul>
 <li>词法分析，根据输入的字符串识别出关键字出来</li>
@@ -376,9 +381,32 @@ Server 层。</p></li>
 </ul></li>
 </ul>
 <h2 id="mysql一行记录存储">MySQL一行记录存储</h2>
+<h3 id="表空间文件的结构">表空间文件的结构</h3>
+<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/mysql/row_format/%E8%A1%A8%E7%A9%BA%E9%97%B4%E7%BB%93%E6%9E%84.drawio.png" srcset="/img/loading.gif" lazyload alt="img" style="zoom:50%;" /></p>
+<p><strong>InnoDB
+的数据是按「页」为单位来读写的</strong>，也就是说，当需要读一条记录的时候，并不是将这个行记录从磁盘读出来，而是以页为单位，将其整体读入内存。</p>
+<p>InnoDB 存储引擎是用 B+ 树来组织数据的。B+
+树中每一层都是通过双向链表连接起来的，如果是以页为单位来分配存储空间，那么链表中相邻的两个页之间的物理位置并不是连续的，可能离得非常远，那么磁盘查询时就会有大量的随机I/O，随机
+I/O
+是非常慢的。解决这个问题也很简单，就是让链表中相邻的页的物理位置也相邻，这样就可以使用顺序
+I/O 了，那么在范围查询（扫描叶子节点）的时候性能就会很高。</p>
+<p><strong>在表中数据量大的时候，为某个索引分配空间的时候就不再按照页为单位分配了，而是按照区（extent）为单位分配。每个区的大小为
+1MB，对于 16KB 的页来说，连续的 64
+个页会被划为一个区，这样就使得链表中相邻的页的物理位置也相邻，就能使用顺序
+I/O 了</strong>。</p>
+<h3 id="innodb的页格式">InnoDB的页格式</h3>
+<p>在 File Header
+中有两个指针，分别指向上一个数据页和下一个数据页，连接起来的页相当于一个双向的链表</p>
+<p><img src="https://cdn.xiaolincoding.com//mysql/other/557d17e05ce90f18591c2305871af665.png" srcset="/img/loading.gif" lazyload alt="图片" style="zoom:50%;" /></p>
+<p>从图可以看到，<strong>页目录就是由多个槽组成的，槽相当于分组记录的索引</strong>。然后，因为记录是按照「主键值」从小到大排序的，所以<strong>我们通过槽查找记录时，可以使用二分法快速定位要查询的记录在哪个槽（哪个记录分组），定位到槽后，再遍历槽内的所有记录，找到对应的记录</strong>，无需从最小记录开始遍历整个页中的记录链表。</p>
+<p><img src="https://cdn.xiaolincoding.com//mysql/other/261011d237bec993821aa198b97ae8ce.png" srcset="/img/loading.gif" lazyload alt="图片" style="zoom:50%;" /></p>
 <h3 id="compact行格式">COMPACT行格式</h3>
-<p><img
-src="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240418162156.png" srcset="/img/loading.gif" lazyload /></p>
+<figure>
+<img
+src="https://cdn.xiaolincoding.com/gh/xiaolincoder/mysql/row_format/COMPACT.drawio.png" srcset="/img/loading.gif" lazyload
+alt="img" />
+<figcaption aria-hidden="true">img</figcaption>
+</figure>
 <ol type="1">
 <li><p>变长字段长度列表：对于varchar、TEXT、BLOB
 等数据格式是变长的，需要存储字段的长度。这些变长字段的真实数据占用的字节数会按照列的顺序<strong>逆序存放</strong>，这样可以<strong>使得位置靠前的记录的真实数据和数据对应的字段长度信息可以同时在一个
@@ -394,6 +422,7 @@ delete_mask 标记为 1。</li>
 <li>record_type：表示当前记录的类型，0表示普通记录，1表示B+树非叶子节点记录，2表示最小记录，3表示最大记录</li>
 </ul></li>
 <li><p>真实数据：</p>
+<p>除了每一列的数据还有下面三个额外属性：</p>
 <ol type="1">
 <li><p>row_id:如果我们建表的时候指定了主键或者唯一约束列，那么就没有
 row_id 隐藏字段了。如果既没有指定主键，又没有唯一约束，那么 InnoDB
@@ -416,6 +445,28 @@ trx_id是必需的，占用 6 个字节。</p></li>
 Dynamic采用完全的行溢出方式，记录的真实数据处不会存储该列的一部分数据，只存储
 20 个字节的指针来指向溢出页。而实际的数据都存储在溢出页中。</p>
 <h2 id="索引">索引</h2>
+<h3 id="为什么使用b树">为什么使用B+树？</h3>
+<p><strong><em>1、B+Tree vs B Tree</em></strong></p>
+<p>B+Tree 只在叶子节点存储数据，而 B 树 的非叶子节点也要存储数据，所以
+B+Tree 的单个节点的数据量更小，在相同的磁盘 I/O
+次数下，就能查询更多的节点。</p>
+<p>另外，B+Tree 叶子节点采用的是双链表连接，适合 MySQL
+中常见的基于范围的顺序查找，而 B 树无法做到这一点。</p>
+<p><strong><em>2、B+Tree vs 二叉树</em></strong></p>
+<p>对于有 N 个叶子节点的
+B+Tree，其搜索复杂度为<code>O(logdN)</code>，其中 d
+表示节点允许的最大子节点个数为 d 个。</p>
+<p>在实际的应用当中， d
+值是大于100的，这样就保证了，即使数据达到千万级别时，B+Tree
+的高度依然维持在 3~4 层左右，也就是说一次数据查询操作只需要做 3~4
+次的磁盘 I/O 操作就能查询到目标数据。</p>
+<p>而二叉树的每个父节点的儿子节点个数只能是 2 个，意味着其搜索复杂度为
+<code>O(logN)</code>，这已经比 B+Tree
+高出不少，因此二叉树检索到目标数据所经历的磁盘 I/O 次数要更多。</p>
+<p><strong><em>3、B+Tree vs Hash</em></strong></p>
+<p>Hash 在做等值查询的时候效率贼快，搜索复杂度为 O(1)。</p>
+<p>但是 Hash 表不适合做范围查询，它更适合做等值的查询，这也是 B+Tree
+索引要比 Hash 表索引有着更广泛的适用场景的原因</p>
 <p>### 创建索引逻辑</p>
 <ul>
 <li>如果有主键，默认会使用主键作为聚簇索引的索引键（key）；</li>
@@ -424,6 +475,10 @@ Dynamic采用完全的行溢出方式，记录的真实数据处不会存储该�
 <li>在上面两个都没有的情况下，InnoDB 将自动生成一个隐式自增 id
 列作为聚簇索引的索引键（key）；</li>
 </ul>
+<h3 id="联合索引的最左匹配">联合索引的最左匹配</h3>
+<p>联合索引的最左匹配原则，在遇到范围查询（如
+&gt;、&lt;）的时候，就会停止匹配，也就是范围查询的字段可以用到联合索引，但是在范围查询字段的后面的字段无法用到联合索引。注意，对于
+&gt;=、&lt;=、BETWEEN、like 前缀匹配的范围查询，并不会停止匹配。</p>
 <h3 id="优化索引">优化索引</h3>
 <ol type="1">
 <li><p>前缀索引优化</p>
@@ -569,7 +624,7 @@ MVCC
 等语句），是<strong>通过 next-key
 lock（记录锁+间隙锁）方式解决了幻读</strong>，因为当执行 select ... for
 update 语句的时候，会加上 next-key lock，如果有其他事务在 next-key lock
-锁范围内插入了一条记录，那么这个插入语句就会被阻塞，无法成功插入，所以就很好了避免幻读问题。</p>
+锁范围内插入了一条记录，那么这个插入语句就会被阻塞，无法成功插入，直到当前事务提交，所以就很好了避免幻读问题。</p>
 <p>事务 A 执行了这面这条锁定读语句后，就在对表中的记录加上 id 范围为 (2,
 +∞] 的 next-key lock（next-key lock 是间隙锁+记录锁的组合）。然后，事务
 B 在执行插入语句的时候，判断到插入的位置被事务 A 加了 next-key
@@ -580,15 +635,15 @@ lock，于是事物 B 会生成一个插入意向锁，同时进入等待状态�
 </ul>
 <p>发生幻读的情景：</p>
 <ol type="1">
-<li>事务 A 执行查询 id = 5
+<li><p>事务 A 先执行「快照读语句」：select * from t_test where id &gt;
+100 得到了 3 条记录。事务 B 往插入一个 id= 200 的记录并提交；事务 A
+再执行「当前读语句」 select * from t_test where id &gt; 100 for update
+就会得到 4 条记录，此时也发生了幻读现象。</p></li>
+<li><p>事务 A 执行查询 id = 5
 的记录，此时表中是没有该记录的，所以查询不出来。然后事务 B 插入一条 id =
 5 的记录，并且提交了事务。<strong>事务 A 更新 id = 5
 这条记录，然后再次查询 id = 5 的记录，事务 A 就能看到事务 B
-插入的纪录了</strong></li>
-<li>事务 A 先执行「快照读语句」：select * from t_test where id &gt; 100
-得到了 3 条记录。事务 B 往插入一个 id= 200 的记录并提交；事务 A
-再执行「当前读语句」 select * from t_test where id &gt; 100 for update
-就会得到 4 条记录，此时也发生了幻读现象。</li>
+插入的纪录了</strong></p></li>
 </ol>
 <h2 id="日志">日志</h2>
 <h3 id="undo-log">undo log</h3>
@@ -600,9 +655,16 @@ lock，于是事物 B 会生成一个插入意向锁，同时进入等待状态�
 是通过 ReadView + undo log 实现的。undo log
 为每条记录保存多份历史数据，MySQL 在执行快照读（普通 select
 语句）的时候，会根据事务的 Read View 里的信息，顺着 undo log
-的版本链找到满足其可见性的记录。</li>
+的版本链找到满足其可见性的记录。 undo log
+和数据页的刷盘策略是一样的，都需要通过 redo log 保证持久化。</li>
 </ul>
+<h3 id="buffer-pool">Buffer Pool</h3>
+<p>MySQL
+的数据都是存在磁盘中的，那么我们要更新一条记录的时候，得先要从磁盘读取该记录，然后在内存中修改这条记录。修改完这条记录后会把记录缓存起来，这样下次有查询语句命中了这条记录，直接读取缓存中的记录，就不需要从磁盘获取数据了。为此，Innodb
+存储引擎设计了一个<strong>缓冲池（Buffer
+Pool）</strong>，来提高数据库的读写性能。</p>
 <h3 id="redo-log">redo log</h3>
+<h4 id="redo-log作用">redo log作用</h4>
 <ul>
 <li><p><strong>实现事务的持久性，让 MySQL 有 crash-safe
 的能力</strong>，能够保证 MySQL
@@ -629,7 +691,7 @@ MySQL 重启后，可以根据 redo log 的内容，将所有数据恢复到最�
 <p>redo log 也有自己的缓存—— <strong>redo log
 buffer</strong>，每当产生一条 redo log 时，会先写入到 redo log
 buffer，后续再持久化到磁盘。</p>
-<p>持久化时机</p>
+<p>持久化时机：</p>
 <ul>
 <li><p>MySQL 正常关闭时；</p></li>
 <li><p>当 redo log buffer 中记录的写入量大于 redo log buffer
@@ -662,14 +724,13 @@ MySQL
 进程的崩溃并不会丢失数据，只有在操作系统崩溃或者系统断电的情况下，上一秒钟所有事务数据才可能丢失</strong>。</li>
 </ul></li>
 </ul>
+<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/mysql/how_update/innodb_flush_log_at_trx_commit2.drawio.png?image_process=watermark,text_5YWs5LyX5Y-377ya5bCP5p6XY29kaW5n,type_ZnpsdHpoaw,x_10,y_10,g_se,size_20,color_0000CD,t_70,fill_0" srcset="/img/loading.gif" lazyload alt="img" style="zoom:50%;" /></p>
 <h4 id="redo-log文件满了怎么办">redo log文件满了怎么办</h4>
 <p><strong>这时 MySQL 不能再执行新的更新操作，也就是说 MySQL
-会被阻塞</strong>（<em>因此所以针对并发量大的系统，适当设置 redo log
-的文件大小非常重要</em>），此时<strong>会停下来将 Buffer Pool
+会被阻塞</strong>，此时会停下来将 Buffer Pool
 中的脏页刷新到磁盘中，然后标记 redo log 哪些记录可以被擦除，接着对旧的
 redo log 记录进行擦除，等擦除完旧记录腾出了空间，checkpoint
-就会往后移动（图中顺时针）</strong>，然后 MySQL
-恢复正常运行，继续执行新的更新操作。</p>
+就会往后移动，然后 MySQL 恢复正常运行，继续执行新的更新操作。</p>
 <h3 id="binlog">binlog</h3>
 <p>MySQL 在完成一条更新操作后，Server 层还会生成一条
 binlog，等之后事务提交的时候，会将该事物执行过程中产生的所有 binlog
@@ -680,8 +741,8 @@ SELECT 和 SHOW 操作。</p>
 <ol type="1">
 <li><p>适用对象不同</p>
 <ul>
-<li>binlog 是 MySQL 的 Server
-层实现的日志，所有存储引擎都可以使用；</li>
+<li>binlog 是 MySQL 的 <strong>Server
+层实现的日志</strong>，所有存储引擎都可以使用；</li>
 <li>redo log 是 Innodb 存储引擎实现的日志；</li>
 </ul></li>
 <li><p>文件格式不同</p>
@@ -705,7 +766,7 @@ ROW 模式和 STATEMENT 模式；</p></li>
 <li><p>写入方式不同</p>
 <ul>
 <li>binlog
-是追加写，写满一个文件，就创建一个新的文件继续写，不会覆盖以前的日志，保存的是全量的日志。</li>
+是追加写，写满一个文件，就创建一个新的文件继续写，不会覆盖以前的日志，保存的是<strong>全量的日志。</strong></li>
 <li>redo log
 是循环写，日志空间大小是固定，全部写满就从头开始，保存未被刷入磁盘的脏页日志。</li>
 </ul></li>
@@ -717,8 +778,7 @@ ROW 模式和 STATEMENT 模式；</p></li>
 </ol>
 <h4 id="如果数据库数据被删了redo-log能恢复吗">如果数据库数据被删了，redo
 log能恢复吗</h4>
-<p>不可以使用 redo log 文件恢复，只能使用 binlog 文件恢复。</p>
-<p>因为 redo log
+<p>不可以使用 redo log 文件恢复，只能使用 binlog 文件恢复。因为 redo log
 文件是循环写，是会边写边擦除日志的，只记录未被刷入磁盘的数据的物理日志，已经刷入磁盘的数据都会从
 redo log 文件里擦除。</p>
 <p>binlog
@@ -797,6 +857,55 @@ cache，并没有刷新到硬盘上的 binlog
 文件，在事务提交时才会统一将该事务运行过程中的所有 binlog
 刷新到硬盘。</li>
 </ol>
+<h3 id="两阶段提交">两阶段提交</h3>
+<h5 id="为什么要两阶段提交">为什么要两阶段提交？</h5>
+<p>主要解决redo log和bin log的同步问题，因为bin log用于主从辅助。</p>
+<p>举个例子，假设 id = 1 这行数据的字段 name 的值原本是 'jay'，然后执行
+<code>UPDATE t_user SET name = 'xiaolin' WHERE id = 1;</code>
+如果在持久化 redo log 和 binlog
+两个日志的过程中，出现了半成功状态，那么就有两种情况：</p>
+<ul>
+<li><strong>如果在将 redo log 刷入到磁盘之后， MySQL 突然宕机了，而
+binlog 还没有来得及写入</strong>。MySQL 重启后，通过 redo log 能将
+Buffer Pool 中 id = 1 这行数据的 name 字段恢复到新值 xiaolin，但是
+binlog 里面没有记录这条更新语句，在主从架构中，binlog
+会被复制到从库，由于 binlog 丢失了这条更新语句，从库的这一行 name
+字段是旧值 jay，与主库的值不一致性；</li>
+<li><strong>如果在将 binlog 刷入到磁盘之后， MySQL 突然宕机了，而 redo
+log 还没有来得及写入</strong>。由于 redo log
+还没写，崩溃恢复以后这个事务无效，所以 id = 1 这行数据的 name
+字段还是旧值 jay，而 binlog 里面记录了这条更新语句，在主从架构中，binlog
+会被复制到从库，从库执行了这条更新语句，那么这一行 name 字段是新值
+xiaolin，与主库的值不一致性；</li>
+</ul>
+<h4 id="两阶段提交过程">两阶段提交过程</h4>
+<p><img src="https://cdn.xiaolincoding.com/gh/xiaolincoder/mysql/how_update/%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E5%B4%A9%E6%BA%83%E7%82%B9.drawio.png?image_process=watermark,text_5YWs5LyX5Y-377ya5bCP5p6XY29kaW5n,type_ZnpsdHpoaw,x_10,y_10,g_se,size_20,color_0000CD,t_70,fill_0" srcset="/img/loading.gif" lazyload alt="时刻 A 与时刻 B" style="zoom:50%;" /></p>
+<p>从图中可看出，事务的提交过程有两个阶段，就是<strong>将 redo log
+的写入拆成了两个步骤：prepare 和
+commit，中间再穿插写入binlog</strong>，具体如下：</p>
+<ul>
+<li><strong>prepare 阶段</strong>：将 XID（内部 XA 事务的 ID） 写入到
+redo log，同时将 redo log 对应的事务状态设置为 prepare，然后将 redo log
+持久化到磁盘（innodb_flush_log_at_trx_commit = 1 的作用）；</li>
+<li><strong>commit 阶段</strong>：把 XID 写入到 binlog，然后将 binlog
+持久化到磁盘（sync_binlog = 1 的作用），接着调用引擎的提交事务接口，将
+redo log 状态设置为 commit，此时该状态并不需要持久化到磁盘，只需要 write
+到文件系统的 page cache 中就够了，因为只要 binlog 写磁盘成功，就算 redo
+log 的状态还是 prepare 也没有关系，一样会被认为事务已经执行成功；</li>
+</ul>
+<p>不管是时刻 A（redo log 已经写入磁盘， binlog 还没写入磁盘），还是时刻
+B （redo log 和 binlog 都已经写入磁盘，还没写入 commit
+标识）崩溃，<strong>此时的 redo log 都处于 prepare 状态</strong>。</p>
+<p>在 MySQL 重启后会按顺序扫描 redo log 文件，碰到处于 prepare 状态的
+redo log，就拿着 redo log 中的 XID 去 binlog 查看是否存在此 XID：</p>
+<ul>
+<li><strong>如果 binlog 中没有当前内部 XA 事务的 XID，说明 redolog
+完成刷盘，但是 binlog 还没有刷盘，则回滚事务</strong>。对应时刻 A
+崩溃恢复的情况。</li>
+<li><strong>如果 binlog 中有当前内部 XA 事务的 XID，说明 redolog 和
+binlog 都已经完成了刷盘，则提交事务</strong>。对应时刻 B
+崩溃恢复的情况。</li>
+</ul>
 <h2 id="锁">锁</h2>
 <h3 id="全局锁">全局锁</h3>
 <p>全局锁主要应用于做<strong>全库逻辑备份</strong>，这样在备份数据库期间，不会因为数据或表结构的更新，而出现备份文件的数据与预期的不一样。</p>
@@ -937,7 +1046,7 @@ lock 也包含间隙锁）。</p>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年4月19日</div>
+          <div>2024年5月27日</div>
         </div>
       
       
