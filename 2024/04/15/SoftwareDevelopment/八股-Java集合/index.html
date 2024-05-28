@@ -24,7 +24,7 @@
 <meta property="og:description" content="Java集合学习">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-15T11:00:40.000Z">
-<meta property="article:modified_time" content="2024-04-15T14:19:05.351Z">
+<meta property="article:modified_time" content="2024-05-28T12:25:32.169Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.7k 字
+          7k 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          56 分钟
+          59 分钟
         
       </span>
     
@@ -266,7 +266,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年4月15日 晚上
+                    本文最后更新于：2024年5月28日 晚上
                   
                 
               </p>
@@ -308,12 +308,24 @@ Integer、Double 等）。<code>Array</code>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 根据给定的最小容量和当前数组元素来计算所需容量。</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">calculateCapacity</span><span class="hljs-params">(Object[] elementData, <span class="hljs-type">int</span> minCapacity)</span> &#123;<br>    <span class="hljs-comment">// 如果当前数组元素为空数组（初始情况），返回默认容量和最小容量中的较大值作为所需容量</span><br>    <span class="hljs-keyword">if</span> (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) &#123;<br>        <span class="hljs-keyword">return</span> Math.max(DEFAULT_CAPACITY, minCapacity);<br>    &#125;<br>    <span class="hljs-comment">// 否则直接返回最小容量</span><br>    <span class="hljs-keyword">return</span> minCapacity;<br>&#125;<br><br><span class="hljs-comment">// 确保内部容量达到指定的最小容量。</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">ensureCapacityInternal</span><span class="hljs-params">(<span class="hljs-type">int</span> minCapacity)</span> &#123;<br>    ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));<br>&#125;<br><br></code></pre></td></tr></table></figure>
 <p>如果当前容量小于最小需要的容量，就会进行扩容操作。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//判断是否需要扩容</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">ensureExplicitCapacity</span><span class="hljs-params">(<span class="hljs-type">int</span> minCapacity)</span> &#123;<br>    modCount++;<br>    <span class="hljs-comment">//判断当前数组容量是否足以存储minCapacity个元素</span><br>    <span class="hljs-keyword">if</span> (minCapacity - elementData.length &gt; <span class="hljs-number">0</span>)<br>        <span class="hljs-comment">//调用grow方法进行扩容</span><br>        grow(minCapacity);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>ArrayList 每次扩容之后容量都会变为原来的 1.5
+倍左右</strong>，如果仍然小于minCapacity，则newCapacity =
+minCapacity;</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 要分配的最大数组大小</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> <span class="hljs-variable">MAX_ARRAY_SIZE</span> <span class="hljs-operator">=</span> Integer.MAX_VALUE - <span class="hljs-number">8</span>;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * ArrayList扩容的核心方法。</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">grow</span><span class="hljs-params">(<span class="hljs-type">int</span> minCapacity)</span> &#123;<br>    <span class="hljs-comment">// oldCapacity为旧容量，newCapacity为新容量</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">oldCapacity</span> <span class="hljs-operator">=</span> elementData.length;<br>    <span class="hljs-comment">// 将oldCapacity 右移一位，其效果相当于oldCapacity /2，</span><br>    <span class="hljs-comment">// 我们知道位运算的速度远远快于整除运算，整句运算式的结果就是将新容量更新为旧容量的1.5倍，</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">newCapacity</span> <span class="hljs-operator">=</span> oldCapacity + (oldCapacity &gt;&gt; <span class="hljs-number">1</span>);<br><br>    <span class="hljs-comment">// 然后检查新容量是否大于最小需要容量，若还是小于最小需要容量，那么就把最小需要容量当作数组的新容量，</span><br>    <span class="hljs-keyword">if</span> (newCapacity - minCapacity &lt; <span class="hljs-number">0</span>)<br>        newCapacity = minCapacity;<br><br>    <span class="hljs-comment">// 如果新容量大于 MAX_ARRAY_SIZE,进入(执行) `hugeCapacity()` 方法来比较 minCapacity 和 MAX_ARRAY_SIZE，</span><br>    <span class="hljs-comment">// 如果minCapacity大于最大容量，则新容量则为`Integer.MAX_VALUE`，否则，新容量大小则为 MAX_ARRAY_SIZE 即为 `Integer.MAX_VALUE - 8`。</span><br>    <span class="hljs-keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="hljs-number">0</span>)<br>        newCapacity = hugeCapacity(minCapacity);<br><br>    <span class="hljs-comment">// minCapacity is usually close to size, so this is a win:</span><br>    elementData = Arrays.copyOf(elementData, newCapacity);<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>Arrays.copyOf()内部调用System.arraycopy，内部自动申请一个新的数组</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span>[] copyOf(<span class="hljs-type">int</span>[] original, <span class="hljs-type">int</span> newLength) &#123;<br>  <span class="hljs-comment">// 申请一个新的数组</span><br>    <span class="hljs-type">int</span>[] copy = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[newLength];<br><span class="hljs-comment">// 调用System.arraycopy,将源数组中的数据进行拷贝,并返回新的数组</span><br>    System.arraycopy(original, <span class="hljs-number">0</span>, copy, <span class="hljs-number">0</span>,<br>                     Math.min(original.length, newLength));<br>    <span class="hljs-keyword">return</span> copy;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h3 id="set">Set</h3>
+<h4 id="comparable和comparator的区别">Comparable和Comparator的区别</h4>
+<ul>
+<li><code>Comparable</code> 接口实际上是出自<code>java.lang</code>包
+它有一个
+<code>compareTo(Object obj)</code>方法用来排序，用于一个实体类实现Comparable接口，然后重写compareTo方法，即可进行排序。</li>
+<li><code>Comparator</code>接口实际上是出自 <code>java.util</code>
+包它有一个<code>compare(Object obj1, Object obj2)</code>方法用来排序，用于Collction.sort的时候临时自定义排序方式。</li>
+</ul>
 <h3 id="hashmap">HashMap</h3>
 <h4 id="扩容机制">扩容机制</h4>
-<p>jdk1.8之前采用数组+链表实现，即拉链法避免冲突</p>
+<p>jdk1.8之前采用<strong>数组+链表</strong>实现，即拉链法避免冲突</p>
 <p>jdk1.8之后，当链表长度大于阈值（默认为 8）时，会首先调用
 <code>treeifyBin()</code>方法。这个方法会根据 HashMap
 数组来决定是否转换为红黑树。只有当数组长度大于或者等于 64
@@ -331,7 +343,9 @@ Integer、Double 等）。<code>Array</code>
 <p>如果定位到的数组位置有元素就和要插入的 key 比较，如果存在 key
 相同就直接覆盖，如果 key 不相同，就判断 p
 是否是一个树节点，如果是就将元素添加进入红黑树。如果不是就遍历链表插入(插入的是链表尾部)。</p>
-<h4 id="hashmap和hashset">HashMap和Hashset</h4>
+<h4 id="头插还是尾插">头插还是尾插</h4>
+<p>JDK1.7之前是头插，在多线程下可能会导致链表成环，JDK1.8之后更改为尾插。</p>
+<h4 id="hashset如何实现">Hashset如何实现</h4>
 <p>在 <code>HashSet</code> 的实现中，每个插入到 <code>HashSet</code>
 中的元素实际上作为 <code>HashMap</code>
 的键存储，而与每个键关联的值（value）则是一个固定的对象，通常是一个预定义的静态的私有对象（通常是
@@ -364,12 +378,14 @@ O(log n)，这让 <code>TreeMap</code>
 <p><code>SortedMap</code>接口让 <code>TreeMap</code>
 有了对集合中的元素根据键排序的能力。默认是按 key 的升序排序，</p>
 <h4 id="hashmap为什么线程不安全">Hashmap为什么线程不安全</h4>
-<p>两个线程 1,2 同时进行 put
-操作，并且发生了哈希冲突。不同的线程可能在不同的时间片获得 CPU
-执行的机会，当前线程 1 执行完哈希冲突判断后，由于时间片耗尽挂起。线程 2
+<p>两个线程 1,2 同时进行 put 操作，并且发生了哈希冲突。当线程 1
+执行完哈希冲突判断后，认为没有冲突，但是由于时间片耗尽挂起。线程 2
 先完成了插入操作。随后，线程 1 获得时间片，由于之前已经进行过 hash
 碰撞的判断，所有此时会直接进行插入，这就导致线程 2 插入的数据被线程 1
 覆盖了。</p>
+<h4 id="hashtable">Hashtable</h4>
+<p><code>Hashtable</code> 内部的方法基本都经过<code>synchronized</code>
+修饰，加的是全局锁。</p>
 <h4 id="concurrenthashmap">ConcurrentHashMap</h4>
 <p>Java7 中 <code>ConcurrentHashMap</code> 使用的分段锁，也就是每一个
 Segment 上同时只有一个线程可以操作，每一个 <code>Segment</code>
@@ -500,7 +516,7 @@ key 封装成一个延迟的删除任务，并将其添加到 <code>DelayQueue</
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年4月15日</div>
+          <div>2024年5月28日</div>
         </div>
       
       

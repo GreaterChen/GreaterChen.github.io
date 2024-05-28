@@ -23,10 +23,12 @@
 <meta property="og:site_name" content="Chen&#39;s Blog">
 <meta property="og:description" content="Java并发编程学习">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://oss.javaguide.cn/github/javaguide/java/concurrent/jmm.png">
 <meta property="article:published_time" content="2024-04-16T04:24:40.000Z">
-<meta property="article:modified_time" content="2024-05-12T13:55:05.964Z">
+<meta property="article:modified_time" content="2024-05-28T13:58:37.236Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://oss.javaguide.cn/github/javaguide/java/concurrent/jmm.png">
   
   
   
@@ -212,7 +214,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.8k 字
+          8.8k 字
         
       </span>
     
@@ -223,7 +225,7 @@
         
         
         
-          65 分钟
+          74 分钟
         
       </span>
     
@@ -266,7 +268,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年5月12日 晚上
+                    本文最后更新于：2024年5月28日 晚上
                   
                 
               </p>
@@ -303,8 +305,11 @@ Java 方法 （也就是字节码）服务，而本地方法栈则为虚拟机�
 <p>NEW: 初始状态，线程被创建出来但没有被调用 <code>start()</code> 。</p>
 <p>RUNNABLE: 运行状态，线程被调用了
 <code>start()</code>等待运行的状态。</p>
-<p>BLOCKED：阻塞状态，需要等待锁释放。</p>
-<p>WAITING：等待状态，表示该线程需要等待其他线程做出一些特定动作（通知或中断）。</p>
+<p>BLOCKED：阻塞状态，当线程进入 <code>synchronized</code>
+方法，这个时候线程就会进入 <strong>BLOCKED（阻塞）</strong> 状态。</p>
+<p>WAITING：等待状态，当线程执行 <code>wait()</code>方法之后，线程进入
+<strong>WAITING（等待）</strong>
+状态。进入等待状态的线程需要依靠其他线程的通知才能够返回到运行状态。</p>
 <p>TIME_WAITING：超时等待状态，可以在指定的时间后自行返回而不是像
 WAITING 那样一直等待。</p>
 <p>TERMINATED：终止状态，表示该线程已经运行完毕。</p>
@@ -347,12 +352,19 @@ run 方法吗？</h4>
 <p><strong>总结：调用 <code>start()</code>
 方法方可启动线程并使线程进入就绪状态，直接执行 <code>run()</code>
 方法的话不会以多线程的方式执行。</strong></p>
-<h3 id="单例模式">单例模式</h3>
-<p>如果我们将一个变量使用 <code>volatile</code> 修饰，这就指示
-编译器，这个变量是共享且不稳定的，每次使用它都到主存中进行读取。</p>
+<h4 id="volatile">volatile</h4>
+<p><code>volatile</code>
+关键字可以保证变量的可见性，它最原始的意义就是禁用 CPU
+缓存。如果我们将变量声明为 <strong><code>volatile</code></strong>
+，这就指示
+JVM，这个变量是共享且不稳定的，每次使用它都到主存中进行读取。</p>
 <p><strong>在 Java 中，<code>volatile</code>
 关键字除了可以保证变量的可见性，还有一个重要的作用就是防止 JVM
-的指令重排序。</strong></p>
+的指令重排序。</strong> 如果我们将变量声明为
+<strong><code>volatile</code></strong>
+，在对这个变量进行读写操作的时候，会通过插入特定的
+<strong>内存屏障</strong> 的方式来禁止指令重排序。</p>
+<h4 id="单例模式">单例模式</h4>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton</span> &#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">static</span> Singleton uniqueInstance;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-title function_">Singleton</span><span class="hljs-params">()</span> &#123;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span>  <span class="hljs-keyword">static</span> Singleton <span class="hljs-title function_">getUniqueInstance</span><span class="hljs-params">()</span> &#123;<br>       <span class="hljs-comment">//先判断对象是否已经实例过，没有实例化过才进入加锁代码</span><br>        <span class="hljs-keyword">if</span> (uniqueInstance == <span class="hljs-literal">null</span>) &#123;<br>            <span class="hljs-comment">//类对象加锁</span><br>            <span class="hljs-keyword">synchronized</span> (Singleton.class) &#123;<br>                <span class="hljs-keyword">if</span> (uniqueInstance == <span class="hljs-literal">null</span>) &#123;<br>                    uniqueInstance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Singleton</span>();<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> uniqueInstance;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p><code>uniqueInstance</code> 采用 <code>volatile</code>
 关键字修饰也是很有必要的，
@@ -372,9 +384,27 @@ T1 执行了 1 和 3，此时 T2 调用 <code>getUniqueInstance</code>() 后发�
 <p><strong><code>volatile</code>
 关键字能保证变量的可见性，但不能保证对变量的操作是原子性的</strong></p>
 <h3 id="锁">锁</h3>
+<h4 id="cas乐观锁">CAS乐观锁</h4>
+<p>CAS
+的思想很简单，就是用一个预期值和要更新的变量值进行比较，两值相等才会进行更新。</p>
+<p>CAS 是一个原子操作，底层依赖于一条 CPU 的原子指令。</p>
+<blockquote>
+<p><strong>原子操作</strong>
+即最小不可拆分的操作，也就是说操作一旦开始，就不能被打断，直到操作完成。</p>
+</blockquote>
+<p>CAS 涉及到三个操作数：</p>
+<ul>
+<li><strong>V</strong>：要更新的变量值(Var)</li>
+<li><strong>E</strong>：预期值(Expected)</li>
+<li><strong>N</strong>：拟写入的新值(New)</li>
+</ul>
+<p>当且仅当 V 的值等于 E 时，CAS 通过原子方式用新值 N 来更新 V
+的值。如果不等，说明已经有其它线程更新了
+V，则当前线程放弃更新。当多个线程同时使用 CAS
+操作一个变量时，只有一个会胜出，并成功更新，其余均会失败，但失败的线程并不会被挂起，仅是被告知失败，并且允许再次尝试，当然也允许失败的线程放弃操作。</p>
 <h4 id="synchronized锁">synchronized锁</h4>
 <ol type="1">
-<li>修饰实例方法：锁定对象实例</li>
+<li>修饰实例方法：锁定对象实例，当前对象的其他被synchronized修饰的方法都不可进入，但是不被synchronized修饰的方法可以。</li>
 <li>修饰静态方法：锁定类</li>
 <li>修饰代码块：锁定括号里指定的对象/类</li>
 </ol>
@@ -382,11 +412,11 @@ T1 执行了 1 和 3，此时 T2 调用 <code>getUniqueInstance</code>() 后发�
 <p>在 Java 6 之后， <code>synchronized</code>
 引入了大量的优化如自旋锁、适应性自旋锁、锁消除、锁粗化、偏向锁、轻量级锁等技术来减少锁操作的开销，这些优化让
 <code>synchronized</code> 锁的效率提升了很多（JDK18
-中，偏向锁已经被彻底废弃，前面已经提到过了）。</p>
+中，偏向锁已经被彻底废弃）。</p>
 <p>锁主要存在四种状态，依次是：无锁状态、偏向锁状态、轻量级锁状态、重量级锁状态，他们会随着竞争的激烈而逐渐升级。注意锁可以升级不可降级，这种策略是为了提高获得锁和释放锁的效率。</p>
 <h4 id="reentrantlock">ReentrantLock</h4>
 <p><code>ReentrantLock</code>
-更灵活、更强大，增加了轮询、超时、中断、公平锁和非公平锁等高级功能</p>
+是一个可重入且独占式的锁。增加了轮询、超时、中断、公平锁和非公平锁等高级功能</p>
 <h4 id="公平锁和非公平锁">公平锁和非公平锁</h4>
 <p><strong>公平锁</strong> :
 锁被释放之后，先申请的线程先得到锁。性能较差一些，因为公平锁为了保证时间上的绝对顺序，上下文切换更频繁。</p>
@@ -394,7 +424,7 @@ T1 执行了 1 和 3，此时 T2 调用 <code>getUniqueInstance</code>() 后发�
 <h4
 id="synchronized和reentrantlock关系">Synchronized和ReentrantLock关系</h4>
 <ol type="1">
-<li>二者都是可重入锁</li>
+<li>二者都是可重入锁，线程可以再次获取自己的内部锁</li>
 <li><code>synchronized</code> 是依赖于 JVM
 实现的，<code>ReentrantLock</code> 是 JDK 层面实现的（也就是 API
 层面，需要 lock() 和 unlock() 方法配合 try/finally 语句块来完成）</li>
@@ -439,7 +469,7 @@ Entry。假如我们不做任何措施的话，value 永远无法被 GC
 <p><strong>降低资源消耗</strong>。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。</p>
 <p><strong>提高响应速度</strong>。当任务到达时，任务可以不需要等到线程创建就能立即执行。</p>
 <p><strong>提高线程的可管理性</strong>。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控。</p>
-<h4 id="为什么不用executors">为什么不用Executors</h4>
+<h4 id="executors">Executors</h4>
 <p>通过<code>Executors</code>工具类可以创建多种类型的线程池，包括：</p>
 <ul>
 <li><code>FixedThreadPool</code>：固定线程数量的线程池。该线程池中的线程数量始终不变。当有一个新的任务提交时，线程池中若有空闲线程，则立即执行。若没有，则新的任务会被暂存在一个任务队列中，待有线程空闲时，便处理在任务队列中的任务。</li>
@@ -464,7 +494,7 @@ OOM。</li>
 <code>SingleThreadScheduledExecutor</code>:使用的无界的延迟阻塞队列<code>DelayedWorkQueue</code>，任务队列最大长度为
 <code>Integer.MAX_VALUE</code>,可能堆积大量的请求，从而导致 OOM。</li>
 </ul>
-<h4 id="核心参数">核心参数</h4>
+<h4 id="threadpoolexecutor">ThreadPoolExecutor</h4>
 <ul>
 <li><p><strong>int
 corePoolSize</strong>：该线程池中<strong>核心线程数最大值</strong></p>
@@ -528,15 +558,28 @@ corePoolSize时，新来的线程任务会进入任务队列中等待，然后�
 <li>缓存队列满了，
 且总线程数达到了maximumPoolSize，则会采取上面提到的拒绝策略进行处理。</li>
 </ol>
-<p><img
-src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240416154159.png" srcset="/img/loading.gif" lazyload /></p>
+<figure>
+<img
+src="https://oss.javaguide.cn/github/javaguide/java/concurrent/thread-pool-principle.png" srcset="/img/loading.gif" lazyload
+alt="图解线程池实现原理" />
+<figcaption aria-hidden="true">图解线程池实现原理</figcaption>
+</figure>
 <h3 id="future">Future</h3>
 <p><code>Future</code>
-类是异步思想的典型运用，主要用在一些需要执行耗时任务的场景，避免程序一直原地等待耗时任务执行完成，执行效率太低。具体来说是这样的：当我们执行某一耗时的任务时，可以将这个耗时任务交给一个子线程去异步执行，同时我们可以干点其他事情，不用傻傻等待耗时任务执行完成。等我们的事情干完后，我们再通过
-<code>Future</code>
-类获取到耗时任务的执行结果。这样一来，程序的执行效率就明显提高了。</p>
-<h4 id="runable和callable">runable和callable</h4>
+类是<strong>异步思想</strong>的典型运用，主要用在一些需要执行耗时任务的场景，避免程序一直原地等待耗时任务执行完成。</p>
+<p>简单理解就是：我有一个任务，提交给了 <code>Future</code>
+来处理。任务执行期间我自己可以去做任何想做的事情。并且，在这期间我还可以取消任务以及获取任务的执行状态。一段时间之后，我就可以
+<code>Future</code> 那里直接取出任务执行结果。</p>
+<h4 id="runable和callable">Runable和Callable</h4>
 <p>runnable没有返回值，而实现callable接口的任务线程能返回执行结果</p>
+<h4 id="completablefuture">CompletableFuture</h4>
+<p><code>Future</code>
+在实际使用过程中存在一些局限性比如不支持异步任务的编排组合、获取计算结果的
+<code>get()</code> 方法为阻塞调用。</p>
+<p>Java 8 才被引入<code>CompletableFuture</code>
+类可以解决<code>Future</code> 的这些缺陷。<code>CompletableFuture</code>
+除了提供了更为好用和强大的 <code>Future</code>
+特性之外，还提供了函数式编程、异步任务编排组合（可以将多个异步任务串联起来，组成一个完整的链式调用）等能力。</p>
 <h3 id="aqs">AQS</h3>
 <p>抽象队列同步器,主要用来构建锁和同步器。</p>
 <p>AQS
@@ -574,6 +617,16 @@ count 为 6 的<code>CountDownLatch</code>对象
 。使用线程池处理读取任务，每一个线程处理完之后就将
 count-1，调用<code>CountDownLatch</code>对象的
 <code>await()</code>方法，直到所有文件读取完之后，才会接着执行后面的逻辑。</p>
+<h3 id="jmm-java内存模型">JMM java内存模型</h3>
+<p><strong>Java 内存模型（JMM）</strong>
+抽象了线程和主内存之间的关系</p>
+<p><strong>主内存</strong>：所有线程创建的实例对象都存放在主内存中，不管该实例对象是成员变量，还是局部变量，类信息、常量、静态变量都是放在主内存中。</p>
+<p><strong>本地内存</strong>：每个线程都有一个私有的本地内存，本地内存存储了该线程以读
+/
+写共享变量的副本。<strong>每个线程只能操作自己本地内存中的变量</strong>，无法直接访问其他线程的本地内存。如果线程间需要通信，必须通过主内存来进行。本地内存是
+JMM
+抽象出来的一个概念，并不真实存在，它涵盖了缓存、写缓冲区、寄存器以及其他的硬件和编译器优化。</p>
+<p><img src="https://oss.javaguide.cn/github/javaguide/java/concurrent/jmm.png" srcset="/img/loading.gif" lazyload alt="JMM(Java 内存模型)" style="zoom:50%;" /></p>
 
                 
               </div>
@@ -631,7 +684,7 @@ count-1，调用<code>CountDownLatch</code>对象的
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年5月12日</div>
+          <div>2024年5月28日</div>
         </div>
       
       
