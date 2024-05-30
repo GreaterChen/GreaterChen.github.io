@@ -23,12 +23,13 @@
 <meta property="og:site_name" content="Chen&#39;s Blog">
 <meta property="og:description" content="JVM学习">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240416213839.png">
+<meta property="og:image" content="https://oss.javaguide.cn/github/javaguide/java/jvm/java-runtime-data-areas-jdk1.7.png">
+<meta property="og:image" content="https://oss.javaguide.cn/github/javaguide/java/jvm/java-runtime-data-areas-jdk1.8.png">
 <meta property="article:published_time" content="2024-04-16T13:26:01.000Z">
-<meta property="article:modified_time" content="2024-04-17T07:23:33.803Z">
+<meta property="article:modified_time" content="2024-05-29T12:06:20.692Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240416213839.png">
+<meta name="twitter:image" content="https://oss.javaguide.cn/github/javaguide/java/jvm/java-runtime-data-areas-jdk1.7.png">
   
   
   
@@ -214,7 +215,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.9k 字
+          6.1k 字
         
       </span>
     
@@ -225,7 +226,7 @@
         
         
         
-          50 分钟
+          51 分钟
         
       </span>
     
@@ -268,7 +269,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年4月17日 下午
+                    本文最后更新于：2024年5月29日 晚上
                   
                 
               </p>
@@ -279,7 +280,8 @@
                 <p>JVM学习</p>
 <span id="more"></span>
 <h3 id="运行时数据区域">运行时数据区域</h3>
-<p><img src="http://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240416213839.png" srcset="/img/loading.gif" lazyload style="zoom: 80%;" /></p>
+<p><img src="https://oss.javaguide.cn/github/javaguide/java/jvm/java-runtime-data-areas-jdk1.7.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" /></p>
+<p><img src="https://oss.javaguide.cn/github/javaguide/java/jvm/java-runtime-data-areas-jdk1.8.png" srcset="/img/loading.gif" lazyload alt="Java 运行时数据区域（JDK1.8 ）" style="zoom:50%;" /></p>
 <p><strong>线程私有的：</strong></p>
 <ul>
 <li><p>程序计数器</p></li>
@@ -294,7 +296,14 @@
 <li><p>方法区</p>
 <p>当虚拟机要使用一个类时，它需要读取并解析 Class
 文件获取相关信息，再将信息存入到方法区。方法区会存储已被虚拟机加载的
-<strong>类信息、字段信息、方法信息、常量、静态变量、即时编译器编译后的代码缓存等数据</strong>。</p></li>
+<strong>类信息、字段信息、方法信息、常量、静态变量、即时编译器编译后的代码缓存等数据</strong>。</p>
+<figure>
+<img
+src="https://oss.javaguide.cn/github/javaguide/java/jvm/method-area-implementation.png" srcset="/img/loading.gif" lazyload
+alt="HotSpot 虚拟机方法区的两种实现" />
+<figcaption aria-hidden="true">HotSpot
+虚拟机方法区的两种实现</figcaption>
+</figure></li>
 <li><p>直接内存 (非运行时数据区的一部分)</p>
 <p>使用 Native 函数库直接分配堆外内存，然后通过一个存储在 Java 堆中的
 DirectByteBuffer
@@ -308,11 +317,24 @@ Java 堆和 Native 堆之间来回复制数据。</p></li>
 内存的限制），而元空间使用的是本地内存，受本机可用内存的限制，虽然元空间仍旧可能溢出，但是比原来出现的几率会更小。</li>
 <li>永久代会为 GC 带来不必要的复杂度，并且回收效率偏低。</li>
 </ol>
+<h4 id="对象的内存布局">对象的内存布局</h4>
+<p>在 Hotspot 虚拟机中，对象在内存中的布局可以分为 3
+块区域：<strong>对象头</strong>、<strong>实例数据</strong>和<strong>对齐填充</strong>。</p>
+<ol type="1">
+<li><p><strong>对象头包括两部分信息</strong>:</p>
+<ol type="1">
+<li>用于存储对象自身的运行时数据<strong>（哈希码、GC
+分代年龄、锁状态标志等等），</strong></li>
+<li>类型指针，即对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例。</li>
+</ol></li>
+<li><p><strong>实例数据部分是对象真正存储的有效信息</strong>，也是在程序中所定义的各种类型的字段内容。</p></li>
+<li><p><strong>对齐填充部分不是必然存在的，也没有什么特别的含义，仅仅起占位作用。</strong></p></li>
+</ol>
 <h4 id="java堆中创建对象的过程">Java堆中创建对象的过程</h4>
 <ol type="1">
 <li><p><strong>类加载检查</strong></p>
 <p>虚拟机遇到一条 new
-指令时，首先将去检查这个指令的参数是否能在方法区中的常量池中定位到这个类的符号引用，并且检查这个符号引用代表的类是否已被加载过、解析和初始化过。如果没有，那必须先执行相应的类加载过程。</p></li>
+指令时，首先将去检查这个指令的参数是否能在方法区中的常量池中定位到<strong>这个类的符号引用</strong>，并且检查这个符号引用代表的类是否已被加载过、解析和初始化过。如果没有，那必须先执行相应的类加载过程。</p></li>
 <li><p><strong>分配内存</strong></p>
 <p>在<strong>类加载检查</strong>通过后，接下来虚拟机将为新生对象<strong>分配内存</strong>。对象所需的内存大小在类加载完成后便可确定，为对象分配空间的任务等同于把一块确定大小的内存从
 Java 堆中划分出来。<strong>分配方式</strong>有
@@ -346,14 +368,6 @@ Java 程序的视角来看，对象创建才刚开始，<code>&lt;init&gt;</code
 指令之后会接着执行 <code>&lt;init&gt;</code>
 方法，把对象按照程序员的意愿进行初始化，这样一个真正可用的对象才算完全产生出来。</p></li>
 </ol>
-<h4 id="对象的内存布局">对象的内存布局</h4>
-<p>在 Hotspot 虚拟机中，对象在内存中的布局可以分为 3
-块区域：<strong>对象头</strong>、<strong>实例数据</strong>和<strong>对齐填充</strong>。</p>
-<p><strong>Hotspot
-虚拟机的对象头包括两部分信息</strong>，<strong>第一部分用于存储对象自身的运行时数据</strong>（哈希码、GC
-分代年龄、锁状态标志等等），<strong>另一部分是类型指针</strong>，即对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例。</p>
-<p><strong>实例数据部分是对象真正存储的有效信息</strong>，也是在程序中所定义的各种类型的字段内容。</p>
-<p><strong>对齐填充部分不是必然存在的，也没有什么特别的含义，仅仅起占位作用。</strong></p>
 <h3 id="java垃圾回收">Java垃圾回收</h3>
 <h4 id="堆的基本结构">堆的基本结构</h4>
 <p>在 JDK 7 版本及 JDK 7 版本之前，堆内存被通常分为下面三部分：</p>
@@ -386,11 +400,21 @@ s1）中，并将对象年龄设为 1(Eden 区-&gt;Survivor 区后对象的初�
 岁，当它的年龄增加到一定程度（默认为 15
 岁），就会被晋升到老年代中。</p></li>
 </ol>
+<h4 id="内存回收类型">内存回收类型</h4>
+<p>部分收集 (Partial GC)：</p>
+<ul>
+<li>新生代收集（Minor GC / Young GC）：只对新生代进行垃圾收集；</li>
+<li>老年代收集（Major GC / Old
+GC）：只对老年代进行垃圾收集。需要注意的是 Major GC
+在有的语境中也用于指代整堆收集；</li>
+<li>混合收集（Mixed GC）：对整个新生代和部分老年代进行垃圾收集。</li>
+</ul>
+<p>整堆收集 (Full GC)：收集整个 Java 堆和方法区。</p>
 <h4 id="空间分配担保">空间分配担保</h4>
 <p>在发生 Minor GC
 之前，虚拟机必须先检查老年代最大可用的连续空间是否大于新生代所有对象总空间，如果这个条件成立，那这一次
-Minor GC 可以确保是安全的。如果不成立，则虚拟机会先查看
-<code>-XX:HandlePromotionFailure</code>
+Minor GC 可以确保是安全的。</p>
+<p>如果不成立，则虚拟机会先查看 <code>-XX:HandlePromotionFailure</code>
 参数的设置值是否允许担保失败(Handle Promotion
 Failure);如果允许，那会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于，将尝试进行一次
 Minor GC，尽管这次 Minor GC 是有风险的;如果小于，或者
@@ -604,7 +628,7 @@ Java 的核心 API 不被篡改。</p>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年4月17日</div>
+          <div>2024年5月29日</div>
         </div>
       
       

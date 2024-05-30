@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240307182743.png">
 <meta property="article:published_time" content="2024-03-07T10:26:52.000Z">
-<meta property="article:modified_time" content="2024-03-23T11:31:39.879Z">
+<meta property="article:modified_time" content="2024-05-30T10:00:21.257Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240307182743.png">
@@ -214,7 +214,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.3k 字
+          9.1k 字
         
       </span>
     
@@ -225,7 +225,7 @@
         
         
         
-          69 分钟
+          76 分钟
         
       </span>
     
@@ -268,7 +268,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年3月23日 晚上
+                    本文最后更新于：2024年5月30日 晚上
                   
                 
               </p>
@@ -278,6 +278,46 @@
                 
                 <p>springBoot学习</p>
 <span id="more"></span>
+<h2 id="理论">理论</h2>
+<h3 id="spring-security">Spring Security</h3>
+<h4 id="简述">简述</h4>
+<p>Spring
+Security针对Web应用做了安全加固，本质上在应用的Servlet执行前后做了一系列拦截。可以把其理解为AOP的方式，在执行的前后做了额外的操作：依托于Servlet的Filter过滤器接口来实现的。</p>
+<h4 id="认证流程">认证流程</h4>
+<ol type="1">
+<li><p>先是一个请求带着身份信息进来，用户名和密码被过滤器获取到，封装成
+<code>Authentication</code>，通常情况下是
+<code>UsernamePasswordAuthenticationToken</code> 这个实现类。</p></li>
+<li><p>这个 <code>Authentication</code> 经过
+<code>AuthenticationManager</code>
+的认证（身份管理器负责验证）认证成功后，<code>AuthenticationManager</code>
+身份管理器返回一个被填充满了信息的（包括上面提到的权限信息，身份信息，细节信息，但密码通常会被移除）<code>Authentication</code>
+实例。</p>
+<p>具体认证过程：</p>
+<ol type="1">
+<li><code>DaoAuthenticationProvider</code> 是
+<code>AuthenticationProvider</code>的最常实现类，<code>DaoAuthenticationProvider</code>通过用户名到数据库去查找对应用户，把相关信息（用户名、密码、权限信息）存储到UserDetails类里面</li>
+<li>完成<code>UsernamePasswordAuthenticationToken</code>
+和<code>UserDetails</code> 密码的比对，这是交给
+<code>additionalAuthenticationChecks</code>方法完成的</li>
+</ol></li>
+<li><p>认证完成没有出现异常，使用 <code>SecurityContextHolder</code>
+获取 <code>SecurityContext</code> 之后，将认证完成之后的
+<code>Authentication</code> 对象，放入上下文对象。</p></li>
+<li><p>从 <code>Authentication</code> 对象中拿到我们的
+<code>UserDetails</code> 对象，认证后的 <code>Authentication</code>
+对象调用它的 <code>getPrincipal()</code>
+方法就可以拿到我们先前数据库查询后组装出来的 <code>UserDetails</code>
+对象。</p></li>
+<li><p>使用JWT对UserId进行加密，生成token</p>
+<figure>
+<img
+src="https://img-blog.csdnimg.cn/159e24ea11db4a89ac34b42bbcf328bb.png" srcset="/img/loading.gif" lazyload
+alt="在这里插入图片描述" />
+<figcaption aria-hidden="true">在这里插入图片描述</figcaption>
+</figure></li>
+</ol>
+<h2 id="实践">实践</h2>
 <h3 id="简单示例">简单示例</h3>
 <p>首先在新创建的Springboot的项目中新建controller文件夹，创建一个controller文件</p>
 <p><img src="https://cdn.jsdelivr.net/gh/GreaterChen/PhotoBedNew/20240307182743.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
@@ -439,7 +479,7 @@ alt="img" />
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年3月23日</div>
+          <div>2024年5月30日</div>
         </div>
       
       
