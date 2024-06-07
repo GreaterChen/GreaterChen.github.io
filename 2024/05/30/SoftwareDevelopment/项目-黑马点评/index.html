@@ -25,8 +25,9 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="c:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240530205355234.png">
 <meta property="og:image" content="c:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240530210034752.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/ed299ba20178d708459f32cf13af7873.png">
 <meta property="article:published_time" content="2024-05-30T12:52:32.000Z">
-<meta property="article:modified_time" content="2024-05-30T14:00:00.888Z">
+<meta property="article:modified_time" content="2024-06-02T15:23:09.852Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="c:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240530205355234.png">
@@ -215,7 +216,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          3.2k 字
         
       </span>
     
@@ -226,7 +227,7 @@
         
         
         
-          14 分钟
+          27 分钟
         
       </span>
     
@@ -269,7 +270,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年5月30日 晚上
+                    本文最后更新于：2024年6月2日 晚上
                   
                 
               </p>
@@ -323,6 +324,30 @@ redis的value中，不直接作用于redis。假设线程1去查询缓存，然�
 而线程1直接进行返回，假设现在线程3过来访问，由于线程线程2持有着锁，所以线程3无法获得锁，线程3也直接返回数据，只有等到新开的线程2把重建数据构建完后，其他线程才能走返回正确的数据。</p></li>
 </ol>
 <h3 id="优惠券秒杀">优惠券秒杀</h3>
+<h4 id="超卖问题">超卖问题</h4>
+<p>一般逻辑是先判断库存是否足够，如果足够下一步就进行购买，这就会产生原子性问题，可以采用加锁的方式解决，一般采取乐观锁。但是对于正常的CAS，会判断当前的数量和之前的数量是否一样，一样才更新，这样效率很低，因此改为原子性的判断库存是否大于0</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">boolean</span> <span class="hljs-variable">success</span> <span class="hljs-operator">=</span> seckillVoucherService.update()<br>            .setSql(<span class="hljs-string">&quot;stock= stock -1&quot;</span>)<br>            .eq(<span class="hljs-string">&quot;voucher_id&quot;</span>, voucherId).update().gt(<span class="hljs-string">&quot;stock&quot;</span>,<span class="hljs-number">0</span>); <span class="hljs-comment">//where id = ? and stock &gt; 0</span><br></code></pre></td></tr></table></figure>
+<h4 id="一人一单">一人一单</h4>
+<h5 id="单机模式">单机模式</h5>
+<p>单机模式下，采用悲观锁synchronized保证一人一单，synchronized锁用户id。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">synchronized</span> (userId.toString().intern()) &#123;<br>    <span class="hljs-comment">// 创建代理对象，使用代理对象调用第三方事务方法， 防止事务失效</span><br>    <span class="hljs-type">IVoucherOrderService</span> <span class="hljs-variable">proxy</span> <span class="hljs-operator">=</span> (IVoucherOrderService) AopContext.currentProxy();<br>    <span class="hljs-keyword">return</span> proxy.createVoucherOrder(userId, voucherId);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>同一个类中，A方法是非事务性方法，但是B方法是事务性方法，此时A调用B就会导致B的事务失效。事务的实现是基于AOP的，而AOP的实现又是基于动态代理的，而动态代理的本质就算对方法的增强，如果想要使用增强的方法（也就是想要使用事务方法），就必须是通过代理对象去触发目标对象的方法，因此需要通过<code>AopContext.currentProxy()</code>这个API获取当前类的代理对象</p>
+<h5 id="集群模式">集群模式</h5>
+<p>不同机器中JVM肯定是分开的，因此userId.toString().intern()在不同机器中指代并不相同，同样会出问题，需要采用分布式锁</p>
+<p>分布式锁的核心思想就是让大家都使用同一把锁，只要大家使用的是同一把锁，那么我们就能锁住线程，不让线程进行，让程序串行执行</p>
+<p>基础思路为使用setnx实现分布式锁。需要注意的是，key设置为前缀+用户标识，value设置为线程ID，在释放锁的时候需要先判断是否是自己的锁，如果是自己的锁再释放。但是这仍然有原子性问题，因此需要采用Lua脚本来进行原子性操作。</p>
+<p>Lua脚本中的Redis指令出错，会发生回滚以确保原子性，但Lua脚本本身出错就无法保障原子性</p>
+<h4 id="redission">redission</h4>
+<p>基于setnx实现的分布式锁存在下面的问题：</p>
+<p><strong>重入问题</strong>：重入问题是指
+获得锁的线程可以再次进入到相同的锁的代码块中，可重入锁的意义在于防止死锁，比如HashTable这样的代码中，他的方法都是使用synchronized修饰的，假如他在一个方法内，调用另一个方法，那么此时如果是不可重入的，不就死锁了吗？所以可重入锁他的主要意义是防止死锁，我们的synchronized和Lock锁都是可重入的。</p>
+<p><strong>不可重试</strong>：是指目前的分布式只能尝试一次，我们认为合理的情况是：当线程在获得锁失败后，他应该能再次尝试获得锁。</p>
+<p><strong>超时释放：</strong>我们在加锁时增加了过期时间，这样的我们可以防止死锁，但是如果卡顿的时间超长，虽然我们采用了lua表达式防止删锁的时候，误删别人的锁，但是毕竟没有锁住，有安全隐患</p>
+<p><strong>主从一致性：</strong>
+如果Redis提供了主从集群，当我们向集群写数据时，主机需要异步的将数据同步给从机，而万一在同步过去之前，主机宕机了，就会出现死锁问题。</p>
+<h5 id="可重入锁">可重入锁</h5>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/ed299ba20178d708459f32cf13af7873.png" srcset="/img/loading.gif" lazyload alt="image-20230714153945450" style="zoom: 67%;" /></p>
+<p>Redisson内部释放锁，并不是直接执行<code>del</code>命令将锁给删除，而是将锁以<code>hash</code>数据结构的形式存储在Redis中，每次获取锁，都将<code>value</code>的值+1，每次释放锁，都将value的值-1，只有锁的value值归0时才会真正的释放锁，从而确保锁的可重入性</p>
 
                 
               </div>
@@ -380,7 +405,7 @@ redis的value中，不直接作用于redis。假设线程1去查询缓存，然�
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年5月30日</div>
+          <div>2024年6月2日</div>
         </div>
       
       
