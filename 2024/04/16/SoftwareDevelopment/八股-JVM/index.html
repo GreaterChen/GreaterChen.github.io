@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://oss.javaguide.cn/github/javaguide/java/jvm/java-runtime-data-areas-jdk1.7.png">
 <meta property="og:image" content="https://oss.javaguide.cn/github/javaguide/java/jvm/java-runtime-data-areas-jdk1.8.png">
 <meta property="article:published_time" content="2024-04-16T13:26:01.000Z">
-<meta property="article:modified_time" content="2024-05-29T12:06:20.692Z">
+<meta property="article:modified_time" content="2024-06-09T07:01:33.696Z">
 <meta property="article:author" content="Chen">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://oss.javaguide.cn/github/javaguide/java/jvm/java-runtime-data-areas-jdk1.7.png">
@@ -269,7 +269,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2024年5月29日 晚上
+                    本文最后更新于：2024年6月9日 下午
                   
                 
               </p>
@@ -334,7 +334,7 @@ Java 堆和 Native 堆之间来回复制数据。</p></li>
 <ol type="1">
 <li><p><strong>类加载检查</strong></p>
 <p>虚拟机遇到一条 new
-指令时，首先将去检查这个指令的参数是否能在方法区中的常量池中定位到<strong>这个类的符号引用</strong>，并且检查这个符号引用代表的类是否已被加载过、解析和初始化过。如果没有，那必须先执行相应的类加载过程。</p></li>
+指令时，首先将去检查这个指令的参数是否能在<strong>方法区中的常量池</strong>中定位到<strong>这个类的符号引用</strong>，并且检查这个符号引用代表的类是否已被加载过、解析和初始化过。如果没有，那必须先执行相应的类加载过程。</p></li>
 <li><p><strong>分配内存</strong></p>
 <p>在<strong>类加载检查</strong>通过后，接下来虚拟机将为新生对象<strong>分配内存</strong>。对象所需的内存大小在类加载完成后便可确定，为对象分配空间的任务等同于把一块确定大小的内存从
 Java 堆中划分出来。<strong>分配方式</strong>有
@@ -628,7 +628,7 @@ Java 的核心 API 不被篡改。</p>
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年5月29日</div>
+          <div>2024年6月9日</div>
         </div>
       
       
