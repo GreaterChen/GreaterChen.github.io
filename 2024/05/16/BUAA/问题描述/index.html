@@ -1,0 +1,832 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Chen">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="基本情况 改进后分布（\(\sigma_1&#x3D;\sigma_2\)）(KL+CE) 3sigmas_32d &#x2F;mnt&#x2F;chenlb&#x2F;Six_Tumor_Classification&#x2F;Exp34&#x2F;results&#x2F;model_3sigmas_32d 123456789101112131415161718192024-05-16 14:23:53,020 - INFO: -------------">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chen&#39;s Blog">
+<meta property="og:url" content="http://example.com/2024/05/16/BUAA/%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0/index.html">
+<meta property="og:site_name" content="Chen&#39;s Blog">
+<meta property="og:description" content="基本情况 改进后分布（\(\sigma_1&#x3D;\sigma_2\)）(KL+CE) 3sigmas_32d &#x2F;mnt&#x2F;chenlb&#x2F;Six_Tumor_Classification&#x2F;Exp34&#x2F;results&#x2F;model_3sigmas_32d 123456789101112131415161718192024-05-16 14:23:53,020 - INFO: -------------">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240516195059942.png">
+<meta property="og:image" content="c:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240518145752955.png">
+<meta property="og:image" content="c:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240518150531083.png">
+<meta property="og:image" content="c:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240503144718803.png">
+<meta property="og:image" content="c:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240503144732302.png">
+<meta property="og:image" content="c:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240516202633896.png">
+<meta property="og:image" content="c:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240518151727210.png">
+<meta property="og:image" content="c:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240517114501918.png">
+<meta property="article:published_time" content="2024-05-16T11:43:25.720Z">
+<meta property="article:modified_time" content="2024-06-09T03:26:27.900Z">
+<meta property="article:author" content="Chen">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="c:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240516195059942.png">
+  
+  
+  
+  <title>Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Chen&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text=""></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Chen
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-05-16 19:43" pubdate>
+          2024年5月16日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          28k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          232 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2024年6月9日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="基本情况">基本情况</h2>
+<h3 id="改进后分布sigma_1sigma_2klce">改进后分布（<span
+class="math inline">\(\sigma_1=\sigma_2\)</span>）(KL+CE)</h3>
+<h4 id="sigmas_32d">3sigmas_32d</h4>
+<p>/mnt/chenlb/Six_Tumor_Classification/Exp34/results/model_3sigmas_32d</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">14</span>:<span class="hljs-number">23</span>:<span class="hljs-number">53</span>,020 - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">14</span>:<span class="hljs-number">23</span>:<span class="hljs-number">53</span>,020 - INFO: 验证集总体精度为: <span class="hljs-number">0.6367713212966919</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">14</span>:<span class="hljs-number">23</span>:<span class="hljs-number">53</span>,020 - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.8571</span>, <span class="hljs-number">0.8413</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">14</span>:<span class="hljs-number">23</span>:<span class="hljs-number">53</span>,021 - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">14</span>:<span class="hljs-number">23</span>:<span class="hljs-number">53</span>,044 - INFO: 先验分布KL散度矩阵:<br>tensor([[   <span class="hljs-number">0.0000</span>,  <span class="hljs-number">119.1124</span>,  <span class="hljs-number">230.2428</span>],<br>        [ <span class="hljs-number">236.9537</span>,    <span class="hljs-number">0.0000</span>,   <span class="hljs-number">59.9016</span>],<br>        [<span class="hljs-number">1217.2224</span>,  <span class="hljs-number">244.4084</span>,    <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">14</span>:<span class="hljs-number">23</span>:<span class="hljs-number">53</span>,045 - INFO: 后验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">0.0000</span>,  <span class="hljs-number">0.6462</span>, <span class="hljs-number">39.8160</span>],<br>        [ <span class="hljs-number">0.7577</span>,  <span class="hljs-number">0.0000</span>, <span class="hljs-number">32.6805</span>],<br>        [<span class="hljs-number">72.8971</span>, <span class="hljs-number">50.2652</span>,  <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">14</span>:<span class="hljs-number">23</span>:<span class="hljs-number">53</span>,046 - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">25.6441</span>, <span class="hljs-number">117.5962</span>, <span class="hljs-number">216.2999</span>],<br>        [ <span class="hljs-number">36.8577</span>, <span class="hljs-number">103.1570</span>, <span class="hljs-number">198.0281</span>],<br>        [<span class="hljs-number">343.6498</span>,  <span class="hljs-number">37.3701</span>,  <span class="hljs-number">52.5826</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">14</span>:<span class="hljs-number">23</span>:<span class="hljs-number">53</span>,046 - INFO: 混合类KL散度矩阵:<br>tensor([[ <span class="hljs-number">18.0833</span>,  <span class="hljs-number">11.8677</span>,  <span class="hljs-number">14.7421</span>],<br>        [ <span class="hljs-number">86.8271</span>,  <span class="hljs-number">33.7350</span>, <span class="hljs-number">119.0850</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<ol type="1">
+<li><p>先验分布中三个类别都有一定的区分度</p></li>
+<li><p>真实数据分布能看出来符合次序约束</p>
+<p><img src="C:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240516195059942.png" srcset="/img/loading.gif" lazyload alt="image-20240516195059942" style="zoom: 50%;" /></p></li>
+<li><p>后验分布相较于先验分布能看出来拟合效果不好</p></li>
+</ol>
+<p><img src="C:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240518145752955.png" srcset="/img/loading.gif" lazyload alt="image-20240518145752955" style="zoom:50%;" /></p>
+<figure>
+<img
+src="C:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240516195556695.png" srcset="/img/loading.gif" lazyload
+alt="image-20240516195556695" />
+<figcaption aria-hidden="true">image-20240516195556695</figcaption>
+</figure>
+<h2 id="仅kl">仅KL</h2>
+<h3 id="改进后分布sigma_1sigma_2">改进后分布（<span
+class="math inline">\(\sigma_1=\sigma_2\)</span>）</h3>
+<h4 id="sigmas_32d-1">3sigmas_32d</h4>
+<p>/mnt/chenlb/Six_Tumor_Classification/Exp34/results/model_3sigmas_32d_kl</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">14</span>:<span class="hljs-number">15</span>:<span class="hljs-number">46</span>,<span class="hljs-number">770</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">14</span>:<span class="hljs-number">15</span>:<span class="hljs-number">46</span>,<span class="hljs-number">771</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.5650224089622498</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">14</span>:<span class="hljs-number">15</span>:<span class="hljs-number">46</span>,<span class="hljs-number">772</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">14</span>:<span class="hljs-number">15</span>:<span class="hljs-number">46</span>,<span class="hljs-number">772</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">14</span>:<span class="hljs-number">15</span>:<span class="hljs-number">46</span>,<span class="hljs-number">795</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[  <span class="hljs-number">0.0000</span>, <span class="hljs-number">105.6981</span>, <span class="hljs-number">196.1740</span>],<br>        [<span class="hljs-number">210.1252</span>,   <span class="hljs-number">0.0000</span>,  <span class="hljs-number">43.9986</span>],<br>        [<span class="hljs-number">794.0599</span>, <span class="hljs-number">128.3555</span>,   <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">14</span>:<span class="hljs-number">15</span>:<span class="hljs-number">46</span>,<span class="hljs-number">796</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[  <span class="hljs-number">0.0000</span>,   <span class="hljs-number">2.2582</span>,  <span class="hljs-number">45.8844</span>],<br>        [  <span class="hljs-number">3.2480</span>,   <span class="hljs-number">0.0000</span>,  <span class="hljs-number">33.5982</span>],<br>        [<span class="hljs-number">108.1262</span>,  <span class="hljs-number">51.1045</span>,   <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">14</span>:<span class="hljs-number">15</span>:<span class="hljs-number">46</span>,<span class="hljs-number">796</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">10.9276</span>, <span class="hljs-number">117.2147</span>, <span class="hljs-number">202.3913</span>],<br>        [ <span class="hljs-number">26.3985</span>,  <span class="hljs-number">98.0496</span>, <span class="hljs-number">176.6510</span>],<br>        [<span class="hljs-number">270.5133</span>,  <span class="hljs-number">26.6114</span>,  <span class="hljs-number">40.1647</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">14</span>:<span class="hljs-number">15</span>:<span class="hljs-number">46</span>,<span class="hljs-number">797</span> - INFO: 混合类KL散度矩阵:<br>tensor([[ <span class="hljs-number">25.0501</span>,  <span class="hljs-number">11.9111</span>,  <span class="hljs-number">16.5483</span>],<br>        [ <span class="hljs-number">56.7255</span>,  <span class="hljs-number">34.6895</span>, <span class="hljs-number">104.0605</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p>情况完全相同</p>
+<h4 id="sigmas_32d-2">6sigmas_32d</h4>
+<p>/mnt/chenlb/Six_Tumor_Classification/Exp34/results/model_6sigmas_32d_kl</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">16</span>:01:<span class="hljs-number">11</span>,<span class="hljs-number">562</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">16</span>:01:<span class="hljs-number">11</span>,<span class="hljs-number">563</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.5650224089622498</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">16</span>:01:<span class="hljs-number">11</span>,<span class="hljs-number">563</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">16</span>:01:<span class="hljs-number">11</span>,<span class="hljs-number">563</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">16</span>:01:<span class="hljs-number">11</span>,<span class="hljs-number">586</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[    <span class="hljs-number">0.0000</span>,   <span class="hljs-number">385.9037</span>,   <span class="hljs-number">557.1141</span>],<br>        [  <span class="hljs-number">770.5362</span>,     <span class="hljs-number">0.0000</span>,   <span class="hljs-number">212.7720</span>],<br>        [<span class="hljs-number">27217.2305</span>, <span class="hljs-number">10737.3115</span>,     <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">16</span>:01:<span class="hljs-number">11</span>,<span class="hljs-number">587</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[  <span class="hljs-number">0.0000</span>,   <span class="hljs-number">1.5150</span>,  <span class="hljs-number">40.6348</span>],<br>        [  <span class="hljs-number">2.0867</span>,   <span class="hljs-number">0.0000</span>,  <span class="hljs-number">31.2550</span>],<br>        [<span class="hljs-number">109.4591</span>,  <span class="hljs-number">59.4697</span>,   <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">16</span>:01:<span class="hljs-number">11</span>,<span class="hljs-number">588</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">50.8937</span>, <span class="hljs-number">369.3052</span>, <span class="hljs-number">524.6594</span>],<br>        [<span class="hljs-number">100.8817</span>, <span class="hljs-number">338.9379</span>, <span class="hljs-number">487.3156</span>],<br>        [<span class="hljs-number">914.5201</span>, <span class="hljs-number">140.8511</span>, <span class="hljs-number">240.0404</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">16</span>:01:<span class="hljs-number">11</span>,<span class="hljs-number">588</span> - INFO: 混合类KL散度矩阵:<br>tensor([[ <span class="hljs-number">24.3777</span>,  <span class="hljs-number">12.3357</span>,  <span class="hljs-number">15.0670</span>],<br>        [<span class="hljs-number">237.6790</span>, <span class="hljs-number">137.0445</span>, <span class="hljs-number">346.1130</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<ol type="1">
+<li>先验分布中类间距确实增大了</li>
+<li>后验分布变化很小</li>
+</ol>
+<h3 id="全数据kl">全数据(KL)</h3>
+<p>/mnt/chenlb/Six_Tumor_Classification/Exp35/results/model_3deltas_32d_kl_all</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">15</span>:<span class="hljs-number">59</span>:<span class="hljs-number">45</span>,<span class="hljs-number">145</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">15</span>:<span class="hljs-number">59</span>:<span class="hljs-number">45</span>,<span class="hljs-number">146</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.5650224089622498</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">15</span>:<span class="hljs-number">59</span>:<span class="hljs-number">45</span>,<span class="hljs-number">147</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">15</span>:<span class="hljs-number">59</span>:<span class="hljs-number">45</span>,<span class="hljs-number">147</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">15</span>:<span class="hljs-number">59</span>:<span class="hljs-number">45</span>,<span class="hljs-number">170</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[   <span class="hljs-number">0.0000</span>,  <span class="hljs-number">135.5512</span>,  <span class="hljs-number">311.1958</span>],<br>        [ <span class="hljs-number">390.7813</span>,    <span class="hljs-number">0.0000</span>,   <span class="hljs-number">57.8827</span>],<br>        [<span class="hljs-number">1208.4690</span>,   <span class="hljs-number">77.8000</span>,    <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">15</span>:<span class="hljs-number">59</span>:<span class="hljs-number">45</span>,<span class="hljs-number">171</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">0.0000</span>,  <span class="hljs-number">2.4692</span>, <span class="hljs-number">46.5681</span>],<br>        [ <span class="hljs-number">3.3380</span>,  <span class="hljs-number">0.0000</span>, <span class="hljs-number">30.8526</span>],<br>        [<span class="hljs-number">81.5376</span>, <span class="hljs-number">38.8405</span>,  <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">15</span>:<span class="hljs-number">59</span>:<span class="hljs-number">45</span>,<span class="hljs-number">172</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[  <span class="hljs-number">2.4993</span>, <span class="hljs-number">135.1824</span>, <span class="hljs-number">311.1886</span>],<br>        [ <span class="hljs-number">10.2938</span>, <span class="hljs-number">108.3547</span>, <span class="hljs-number">274.9334</span>],<br>        [<span class="hljs-number">135.8775</span>,  <span class="hljs-number">23.8753</span>, <span class="hljs-number">139.2465</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">15</span>:<span class="hljs-number">59</span>:<span class="hljs-number">45</span>,<span class="hljs-number">173</span> - INFO: 混合类KL散度矩阵:<br>tensor([[ <span class="hljs-number">18.6348</span>,   <span class="hljs-number">8.4113</span>,  <span class="hljs-number">17.6999</span>],<br>        [ <span class="hljs-number">25.9541</span>,  <span class="hljs-number">75.6845</span>, <span class="hljs-number">227.3778</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h3 id="全数据klce">全数据(KL+CE)</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">20</span>:<span class="hljs-number">43</span>:<span class="hljs-number">14</span>,<span class="hljs-number">139</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">20</span>:<span class="hljs-number">43</span>:<span class="hljs-number">14</span>,<span class="hljs-number">140</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.6502242088317871</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">20</span>:<span class="hljs-number">43</span>:<span class="hljs-number">14</span>,<span class="hljs-number">140</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.4727</span>, <span class="hljs-number">0.3810</span>, <span class="hljs-number">0.8175</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">20</span>:<span class="hljs-number">43</span>:<span class="hljs-number">14</span>,<span class="hljs-number">140</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">20</span>:<span class="hljs-number">43</span>:<span class="hljs-number">14</span>,<span class="hljs-number">164</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[   <span class="hljs-number">0.0000</span>,  <span class="hljs-number">137.9016</span>,  <span class="hljs-number">312.4508</span>],<br>        [ <span class="hljs-number">411.2517</span>,    <span class="hljs-number">0.0000</span>,   <span class="hljs-number">56.4776</span>],<br>        [<span class="hljs-number">1244.7804</span>,   <span class="hljs-number">75.2528</span>,    <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">20</span>:<span class="hljs-number">43</span>:<span class="hljs-number">14</span>,<span class="hljs-number">164</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">0.0000</span>,  <span class="hljs-number">1.7104</span>, <span class="hljs-number">45.6986</span>],<br>        [ <span class="hljs-number">2.1531</span>,  <span class="hljs-number">0.0000</span>, <span class="hljs-number">32.1397</span>],<br>        [<span class="hljs-number">70.2883</span>, <span class="hljs-number">38.5202</span>,  <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">20</span>:<span class="hljs-number">43</span>:<span class="hljs-number">14</span>,<span class="hljs-number">165</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[  <span class="hljs-number">5.1066</span>, <span class="hljs-number">124.5901</span>, <span class="hljs-number">295.3791</span>],<br>        [ <span class="hljs-number">15.3946</span>, <span class="hljs-number">101.9502</span>, <span class="hljs-number">264.1716</span>],<br>        [<span class="hljs-number">164.5990</span>,  <span class="hljs-number">19.5029</span>, <span class="hljs-number">128.0492</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">20</span>:<span class="hljs-number">43</span>:<span class="hljs-number">14</span>,<span class="hljs-number">165</span> - INFO: 混合类KL散度矩阵:<br>tensor([[ <span class="hljs-number">16.1470</span>,   <span class="hljs-number">8.2812</span>,  <span class="hljs-number">17.3734</span>],<br>        [ <span class="hljs-number">36.4932</span>,  <span class="hljs-number">68.4556</span>, <span class="hljs-number">214.7057</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<figure>
+<img
+src="C:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240516162157278.png" srcset="/img/loading.gif" lazyload
+alt="image-20240516162157278" />
+<figcaption aria-hidden="true">image-20240516162157278</figcaption>
+</figure>
+<p><strong>现有的训练过程中计算KL散度的方法并不能有效的拟合两个分布</strong></p>
+<p><img src="C:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240518150531083.png" srcset="/img/loading.gif" lazyload alt="image-20240518150531083" style="zoom: 67%;" /></p>
+<h3 id="全数据ce">全数据(CE)</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">20</span>:<span class="hljs-number">40</span>:<span class="hljs-number">40</span>,<span class="hljs-number">556</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">20</span>:<span class="hljs-number">40</span>:<span class="hljs-number">40</span>,<span class="hljs-number">557</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.7354260087013245</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">20</span>:<span class="hljs-number">40</span>:<span class="hljs-number">40</span>,<span class="hljs-number">560</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.6727</span>, <span class="hljs-number">0.4286</span>, <span class="hljs-number">0.8651</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">20</span>:<span class="hljs-number">40</span>:<span class="hljs-number">40</span>,<span class="hljs-number">560</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">20</span>:<span class="hljs-number">40</span>:<span class="hljs-number">40</span>,<span class="hljs-number">585</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[   <span class="hljs-number">0.0000</span>,  <span class="hljs-number">300.7314</span>,  <span class="hljs-number">783.2631</span>],<br>        [ <span class="hljs-number">657.7589</span>,    <span class="hljs-number">0.0000</span>,  <span class="hljs-number">190.2540</span>],<br>        [<span class="hljs-number">2527.8254</span>,  <span class="hljs-number">287.3747</span>,    <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">20</span>:<span class="hljs-number">40</span>:<span class="hljs-number">40</span>,<span class="hljs-number">586</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">0.0000</span>,  <span class="hljs-number">5.1478</span>, <span class="hljs-number">22.3570</span>],<br>        [ <span class="hljs-number">4.5641</span>,  <span class="hljs-number">0.0000</span>, <span class="hljs-number">24.0716</span>],<br>        [<span class="hljs-number">32.4316</span>, <span class="hljs-number">27.1986</span>,  <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">20</span>:<span class="hljs-number">40</span>:<span class="hljs-number">40</span>,<span class="hljs-number">586</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">275.2747</span>,  <span class="hljs-number">806.8140</span>, <span class="hljs-number">1373.0902</span>],<br>        [ <span class="hljs-number">289.0464</span>,  <span class="hljs-number">821.3883</span>, <span class="hljs-number">1388.6962</span>],<br>        [ <span class="hljs-number">237.1945</span>,  <span class="hljs-number">763.7601</span>, <span class="hljs-number">1325.9968</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">20</span>:<span class="hljs-number">40</span>:<span class="hljs-number">40</span>,<span class="hljs-number">587</span> - INFO: 混合类KL散度矩阵:<br>tensor([[   <span class="hljs-number">9.5112</span>,   <span class="hljs-number">11.5490</span>,    <span class="hljs-number">9.4548</span>],<br>        [ <span class="hljs-number">247.0998</span>,  <span class="hljs-number">781.9989</span>, <span class="hljs-number">1347.6392</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p>即使采用全类别数据，也会出现：</p>
+<ol type="1">
+<li>真实分布的第一类和第二类分布很接近，即使先验分布里距离很远</li>
+<li>真实分布和先验分布拟合的非常不好</li>
+</ol>
+<h2 id="理论回顾">理论回顾</h2>
+<h3 id="论文中的理论部分">论文中的理论部分</h3>
+<p>通过论文可以得知，<span
+class="math inline">\(\hat\mu_1\)</span>和<span
+class="math inline">\(\hat\sigma_1，\hat\sigma_2，\hat\sigma_3\)</span>这四个变量是从网络学习到的；然后第二类均值是由<span
+class="math inline">\(\hat\mu _1\)</span>偏移<span
+class="math inline">\(\Delta_2\)</span>得到的，<span
+class="math inline">\(\Delta _2\)</span>是由网络学习得到的<span
+class="math inline">\(\hat\sigma_2\)</span>得到，具体为<span
+class="math inline">\(\Delta_2 &gt; 3 \times
+\hat\sigma_2\)</span>（这个和上次通话确认的有区别，上次通话说的是<span
+class="math inline">\(\Delta\)</span>由真实分布的方差得到，但是论文中是由期望方差得到，有待确认）</p>
+<p><img src="C:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240503144718803.png" srcset="/img/loading.gif" lazyload alt="image-20240503144718803" style="zoom:50%;" /></p>
+<p><img src="C:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240503144732302.png" srcset="/img/loading.gif" lazyload alt="image-20240503144732302" style="zoom:50%;" /></p>
+<h3 id="现有的实现方式">现有的实现方式</h3>
+<p><img src="C:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240516202633896.png" srcset="/img/loading.gif" lazyload alt="image-20240516202633896" style="zoom:67%;" /></p>
+<p>首先定义了三个可学习的矩阵，并进行初始化。可以看出<code>self.mus</code>即为上述<span
+class="math inline">\(\mu_1\)</span>,共128维（可调整），<code>self.sigmas</code>为<span
+class="math inline">\(\hat\sigma_1，\hat\sigma_2，\hat\sigma_3\)</span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">self.mus = nn.Parameter(torch.rand((<span class="hljs-number">1</span>, <span class="hljs-number">128</span>)), requires_grad=<span class="hljs-literal">True</span>)<br>self.deltas = nn.Parameter(torch.rand((<span class="hljs-number">3</span>, <span class="hljs-number">128</span>)), requires_grad=<span class="hljs-literal">True</span>)<br>self.sigmas = nn.Parameter(torch.rand((<span class="hljs-number">3</span>, <span class="hljs-number">128</span>)), requires_grad=<span class="hljs-literal">True</span>)<br><br>nn.init.kaiming_uniform_(self.mus, a=math.sqrt(<span class="hljs-number">5</span>))  <span class="hljs-comment"># He initialization</span><br>nn.init.kaiming_uniform_(self.deltas, a=math.sqrt(<span class="hljs-number">5</span>))<br>nn.init.kaiming_uniform_(self.sigmas, a=math.sqrt(<span class="hljs-number">5</span>))<br></code></pre></td></tr></table></figure>
+<p>随后获得先验分布的代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_joint_priors</span>(<span class="hljs-params">mus, deltas, sigmas, num_classes</span>):<br>    <span class="hljs-comment"># 得到先验分布的 mu 和 covariance matrix</span><br>    <span class="hljs-comment"># 得到上三角部分为 1 的矩阵</span><br>    <span class="hljs-comment"># 通过矩阵相乘来得到 joint distribution 中的 mu 和 sigma</span><br>    <span class="hljs-comment"># 将 nablas 和 sigmas 转换为有效的值</span><br>    <br>    <span class="hljs-comment"># [clb] 将nalbas转化为正值</span><br>    deltas = torch.exp(deltas)<br>    <span class="hljs-comment"># [clb] 将sigmas缩放到（0，1）同时保持方差与类别间偏移量的比例关系</span><br>    sigmas = (torch.sigmoid(sigmas) * deltas / <span class="hljs-number">3</span>) ** <span class="hljs-number">2</span><br>    <span class="hljs-comment"># [clb] 最终triu是一个下三角矩阵</span><br>    triu = torch.triu(torch.ones(num_classes, num_classes)).T.cuda()<br>    <span class="hljs-comment"># [clb] 假设nablas表示为[[n1],[n2],[n3]],操作后为[[n1],[n1+n2],[n1+n2+n3]]</span><br>    joint_nablas = torch.matmul(triu, deltas) <span class="hljs-comment"># (K, d)</span><br>    <span class="hljs-comment"># [clb] 得到论文中的均值分布，即为[[u1+n1],[u1+n1+n2],[u1+n1+n2+n3]]</span><br>    joint_mus = mus + joint_nablas  <span class="hljs-comment"># (K, d)</span><br>    <br>    mat = torch.zeros(num_classes, num_classes, num_classes).cuda()<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_classes):<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_classes):<br>            mat[i, j][:<span class="hljs-built_in">min</span>(i,j)+<span class="hljs-number">1</span>] = <span class="hljs-number">1</span><br>            <br>    <span class="hljs-comment"># [clb] 循环之后的mat:</span><br>    <span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">        tensor([[[1., 0., 0.],</span><br><span class="hljs-string">                [1., 0., 0.],</span><br><span class="hljs-string">                [1., 0., 0.]],</span><br><span class="hljs-string"></span><br><span class="hljs-string">                [[1., 0., 0.],</span><br><span class="hljs-string">                [1., 1., 0.],</span><br><span class="hljs-string">                [1., 1., 0.]],</span><br><span class="hljs-string"></span><br><span class="hljs-string">                [[1., 0., 0.],</span><br><span class="hljs-string">                [1., 1., 0.],</span><br><span class="hljs-string">                [1., 1., 1.]]])</span><br><span class="hljs-string">    &#x27;&#x27;&#x27;</span><br>    <br>    <span class="hljs-comment"># [clb] 得到论文中的协方差分布</span><br>    joint_sigmas = torch.matmul(mat, sigmas)<br><br>    <span class="hljs-keyword">return</span> joint_mus.<span class="hljs-built_in">type</span>(torch.cuda.FloatTensor), joint_sigmas.<span class="hljs-built_in">type</span>(torch.cuda.FloatTensor)<br><br></code></pre></td></tr></table></figure>
+<p>先验分布: <span class="math display">\[
+\mathcal{N}\left(\begin{bmatrix}\hat{\mu}_1\\\hat{\mu}_1+\Delta_2\\\hat{\mu}_1+\Delta_2+\Delta_3\end{bmatrix},\begin{bmatrix}\hat{\sigma}_1^2&amp;\hat{\sigma}_1^2&amp;\hat{\sigma}_1^2\\\hat{\sigma}_1^2&amp;\hat{\sigma}_1^2+\hat{\sigma}_2^2&amp;\hat{\sigma}_1^2+\hat{\sigma}_2^2\\\hat{\sigma}_1^2&amp;\hat{\sigma}_1^2+\hat{\sigma}_2^2&amp;\hat{\sigma}_1^2+\hat{\sigma}_2^2+\hat{\sigma}_3^2\end{bmatrix}\right),
+\]</span> 后验分布:</p>
+<p><span class="math display">\[
+\mathcal{N}\left(\begin{bmatrix}\mu_1\\\mu_2\\\mu_3\end{bmatrix},\begin{bmatrix}\sigma_1^2&amp;0&amp;0\\0&amp;\sigma_2^2&amp;0\\0&amp;0&amp;\sigma_3^2\end{bmatrix}\right),
+\]</span>
+似乎将这两个分布进行拟合并不合理，尝试采用Normal分三个KL散度计算</p>
+<h2 id="改进后情况">改进后情况</h2>
+<h3 id="原分布全样本kl">原分布、全样本、KL：</h3>
+<p>/mnt/chenlb/Six_Tumor_Classification/Exp37/results/model_3deltas_32d_all</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">23</span>:<span class="hljs-number">30</span>:<span class="hljs-number">38</span>,<span class="hljs-number">611</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">23</span>:<span class="hljs-number">30</span>:<span class="hljs-number">38</span>,<span class="hljs-number">611</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.5650224089622498</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">23</span>:<span class="hljs-number">30</span>:<span class="hljs-number">38</span>,<span class="hljs-number">612</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">23</span>:<span class="hljs-number">30</span>:<span class="hljs-number">38</span>,<span class="hljs-number">612</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">23</span>:<span class="hljs-number">30</span>:<span class="hljs-number">38</span>,<span class="hljs-number">639</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">0.0000</span>, <span class="hljs-number">13.3532</span>, <span class="hljs-number">66.1137</span>],<br>        [<span class="hljs-number">13.7833</span>,  <span class="hljs-number">0.0000</span>, <span class="hljs-number">20.8047</span>],<br>        [<span class="hljs-number">71.2934</span>, <span class="hljs-number">21.7507</span>,  <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">23</span>:<span class="hljs-number">30</span>:<span class="hljs-number">38</span>,<span class="hljs-number">639</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">0.0000</span>,  <span class="hljs-number">1.9351</span>, <span class="hljs-number">31.9998</span>],<br>        [ <span class="hljs-number">2.4101</span>,  <span class="hljs-number">0.0000</span>, <span class="hljs-number">19.6424</span>],<br>        [<span class="hljs-number">46.1147</span>, <span class="hljs-number">22.4444</span>,  <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">23</span>:<span class="hljs-number">30</span>:<span class="hljs-number">38</span>,<span class="hljs-number">640</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">1.6579</span>,  <span class="hljs-number">6.6793</span>, <span class="hljs-number">49.6588</span>],<br>        [ <span class="hljs-number">5.8834</span>,  <span class="hljs-number">1.6310</span>, <span class="hljs-number">33.6489</span>],<br>        [<span class="hljs-number">52.5145</span>, <span class="hljs-number">12.1990</span>,  <span class="hljs-number">1.4529</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">16</span> <span class="hljs-number">23</span>:<span class="hljs-number">30</span>:<span class="hljs-number">38</span>,<span class="hljs-number">641</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">10.5228</span>,  <span class="hljs-number">4.0938</span>, <span class="hljs-number">11.0211</span>],<br>        [<span class="hljs-number">17.6744</span>,  <span class="hljs-number">1.6430</span>, <span class="hljs-number">19.7515</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p><strong>合理的分布情况！</strong></p>
+<h3 id="sigma_1sigma_2全样本kl"><span
+class="math inline">\(\sigma_1=\sigma_2\)</span>​、全样本、KL</h3>
+<p>/mnt/chenlb/Six_Tumor_Classification/Exp38/results/model_3sigmas_32d_kl</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">17</span> <span class="hljs-number">00</span>:<span class="hljs-number">42</span>:<span class="hljs-number">16</span>,<span class="hljs-number">307</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">17</span> <span class="hljs-number">00</span>:<span class="hljs-number">42</span>:<span class="hljs-number">16</span>,<span class="hljs-number">307</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.5650224089622498</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">17</span> <span class="hljs-number">00</span>:<span class="hljs-number">42</span>:<span class="hljs-number">16</span>,<span class="hljs-number">308</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">17</span> <span class="hljs-number">00</span>:<span class="hljs-number">42</span>:<span class="hljs-number">16</span>,<span class="hljs-number">308</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">17</span> <span class="hljs-number">00</span>:<span class="hljs-number">42</span>:<span class="hljs-number">16</span>,<span class="hljs-number">330</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[  <span class="hljs-number">0.0000</span>, <span class="hljs-number">113.8020</span>, <span class="hljs-number">186.5514</span>],<br>        [<span class="hljs-number">226.3330</span>,   <span class="hljs-number">0.0000</span>,   <span class="hljs-number">9.7336</span>],<br>        [<span class="hljs-number">378.9963</span>,   <span class="hljs-number">9.9251</span>,   <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">17</span> <span class="hljs-number">00</span>:<span class="hljs-number">42</span>:<span class="hljs-number">16</span>,<span class="hljs-number">331</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">0.0000</span>,  <span class="hljs-number">3.6247</span>, <span class="hljs-number">30.3788</span>],<br>        [ <span class="hljs-number">5.7156</span>,  <span class="hljs-number">0.0000</span>, <span class="hljs-number">17.2604</span>],<br>        [<span class="hljs-number">88.6521</span>, <span class="hljs-number">30.5168</span>,  <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">17</span> <span class="hljs-number">00</span>:<span class="hljs-number">42</span>:<span class="hljs-number">16</span>,<span class="hljs-number">332</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">34.1595</span>,  <span class="hljs-number">45.0543</span>,  <span class="hljs-number">93.6794</span>],<br>        [ <span class="hljs-number">56.2025</span>,  <span class="hljs-number">28.6504</span>,  <span class="hljs-number">70.6779</span>],<br>        [<span class="hljs-number">203.9038</span>,   <span class="hljs-number">1.5658</span>,  <span class="hljs-number">15.6994</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">17</span> <span class="hljs-number">00</span>:<span class="hljs-number">42</span>:<span class="hljs-number">16</span>,<span class="hljs-number">333</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">18.1251</span>,  <span class="hljs-number">5.7314</span>, <span class="hljs-number">12.7729</span>],<br>        [<span class="hljs-number">96.8231</span>, <span class="hljs-number">16.4908</span>, <span class="hljs-number">48.1649</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h3 id="原分布一三类kl">原分布、一三类、KL：</h3>
+<h4 id="sigmas_64d">6sigmas_64d</h4>
+<p>/mnt/chenlb/Six_Tumor_Classification/Exp39/results/model_6sigmas_64d_kl</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">54</span>,<span class="hljs-number">980</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">54</span>,<span class="hljs-number">980</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.23766815662384033</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">54</span>,<span class="hljs-number">981</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.9636</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0000</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">54</span>,<span class="hljs-number">981</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">55</span>,004 - INFO: 先验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">1.5258</span>, <span class="hljs-number">5.9365</span>],<br>        [<span class="hljs-number">1.5697</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">1.4873</span>],<br>        [<span class="hljs-number">6.2767</span>, <span class="hljs-number">1.5293</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">55</span>,005 - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0975</span>, <span class="hljs-number">1.7020</span>],<br>        [<span class="hljs-number">0.1415</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">1.0807</span>],<br>        [<span class="hljs-number">2.1316</span>, <span class="hljs-number">0.8853</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">55</span>,005 - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.1065</span>, <span class="hljs-number">1.1745</span>, <span class="hljs-number">5.1524</span>],<br>        [<span class="hljs-number">0.6081</span>, <span class="hljs-number">0.7324</span>, <span class="hljs-number">3.8158</span>],<br>        [<span class="hljs-number">4.3318</span>, <span class="hljs-number">0.7583</span>, <span class="hljs-number">0.3409</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">55</span>,006 - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.5979</span>, <span class="hljs-number">0.3041</span>, <span class="hljs-number">0.5467</span>],<br>        [<span class="hljs-number">1.2400</span>, <span class="hljs-number">0.0239</span>, <span class="hljs-number">1.8391</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p>之前提出一个观点是一二类很像可能是因为先验分布中第二类方差没有得到训练，导致一二类的先验很接近，进而导致一二类的真实分布很接近。但是目前来看可以看到先验分布中方差其实还是有一定的区别的，是后验拟合的不好</p>
+<p><img src="C:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240518151727210.png" srcset="/img/loading.gif" lazyload alt="image-20240518151727210" style="zoom:50%;" /></p>
+<h4 id="sigmas_32d-3">6sigmas_32d</h4>
+<p>/mnt/chenlb/Six_Tumor_Classification/Exp39/results/model_6sigmas_32d_kl</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">38</span>:<span class="hljs-number">23</span>,<span class="hljs-number">312</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">38</span>:<span class="hljs-number">23</span>,<span class="hljs-number">313</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.39751553535461426</span><br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">38</span>:<span class="hljs-number">23</span>,<span class="hljs-number">313</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>])<br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">38</span>:<span class="hljs-number">23</span>,<span class="hljs-number">313</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">38</span>:<span class="hljs-number">23</span>,<span class="hljs-number">336</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.6765</span>, <span class="hljs-number">2.5768</span>],<br>        [<span class="hljs-number">0.6859</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.6240</span>],<br>        [<span class="hljs-number">2.6426</span>, <span class="hljs-number">0.6314</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">38</span>:<span class="hljs-number">23</span>,<span class="hljs-number">337</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0371</span>, <span class="hljs-number">1.4147</span>],<br>        [<span class="hljs-number">0.0469</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">1.0820</span>],<br>        [<span class="hljs-number">1.7969</span>, <span class="hljs-number">1.0472</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">38</span>:<span class="hljs-number">23</span>,<span class="hljs-number">338</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0088</span>, <span class="hljs-number">0.5483</span>, <span class="hljs-number">2.3199</span>],<br>        [<span class="hljs-number">0.0978</span>, <span class="hljs-number">0.3596</span>, <span class="hljs-number">1.8697</span>],<br>        [<span class="hljs-number">2.1856</span>, <span class="hljs-number">0.4345</span>, <span class="hljs-number">0.0478</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">38</span>:<span class="hljs-number">23</span>,<span class="hljs-number">338</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.5122</span>, <span class="hljs-number">0.3298</span>, <span class="hljs-number">0.4766</span>],<br>        [<span class="hljs-number">0.6539</span>, <span class="hljs-number">0.0586</span>, <span class="hljs-number">0.7601</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">32</span>:09,<span class="hljs-number">805</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">32</span>:09,<span class="hljs-number">806</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.4409937858581543</span><br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">32</span>:09,<span class="hljs-number">806</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.4909</span>, <span class="hljs-number">0.1905</span>, <span class="hljs-number">0.5625</span>])<br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">32</span>:09,<span class="hljs-number">806</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">32</span>:09,<span class="hljs-number">839</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0573</span>, <span class="hljs-number">0.2288</span>],<br>        [<span class="hljs-number">0.0574</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0572</span>],<br>        [<span class="hljs-number">0.2293</span>, <span class="hljs-number">0.0572</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">32</span>:09,<span class="hljs-number">839</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0889</span>, <span class="hljs-number">0.3920</span>],<br>        [<span class="hljs-number">0.1060</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.1093</span>],<br>        [<span class="hljs-number">0.4369</span>, <span class="hljs-number">0.1016</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">32</span>:09,<span class="hljs-number">840</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0071</span>, <span class="hljs-number">0.0727</span>, <span class="hljs-number">0.2525</span>],<br>        [<span class="hljs-number">0.0727</span>, <span class="hljs-number">0.0009</span>, <span class="hljs-number">0.0438</span>],<br>        [<span class="hljs-number">0.3466</span>, <span class="hljs-number">0.1222</span>, <span class="hljs-number">0.0129</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">32</span>:09,<span class="hljs-number">841</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.1915</span>, <span class="hljs-number">0.1301</span>, <span class="hljs-number">0.2074</span>],<br>        [<span class="hljs-number">0.2081</span>, <span class="hljs-number">0.1290</span>, <span class="hljs-number">0.1645</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h4 id="sigmas_16d">6sigmas_16d</h4>
+<p>/mnt/chenlb/Six_Tumor_Classification/Exp39/results/model_6sigmas_16d_kl</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">21</span>:<span class="hljs-number">20</span>,<span class="hljs-number">876</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">21</span>:<span class="hljs-number">20</span>,<span class="hljs-number">876</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.18834081292152405</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">21</span>:<span class="hljs-number">20</span>,<span class="hljs-number">877</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">0.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">21</span>:<span class="hljs-number">20</span>,<span class="hljs-number">877</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">21</span>:<span class="hljs-number">20</span>,<span class="hljs-number">901</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.3387</span>, <span class="hljs-number">1.2581</span>],<br>        [<span class="hljs-number">0.3414</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.2978</span>],<br>        [<span class="hljs-number">1.2755</span>, <span class="hljs-number">0.2997</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">21</span>:<span class="hljs-number">20</span>,<span class="hljs-number">901</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0642</span>, <span class="hljs-number">0.7351</span>],<br>        [<span class="hljs-number">0.0719</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.3961</span>],<br>        [<span class="hljs-number">1.0095</span>, <span class="hljs-number">0.4858</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">21</span>:<span class="hljs-number">20</span>,<span class="hljs-number">902</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0048</span>, <span class="hljs-number">0.3036</span>, <span class="hljs-number">1.1855</span>],<br>        [<span class="hljs-number">0.0804</span>, <span class="hljs-number">0.0925</span>, <span class="hljs-number">0.7085</span>],<br>        [<span class="hljs-number">0.9556</span>, <span class="hljs-number">0.1641</span>, <span class="hljs-number">0.0351</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">21</span>:<span class="hljs-number">20</span>,<span class="hljs-number">902</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.3024</span>, <span class="hljs-number">0.1310</span>, <span class="hljs-number">0.3139</span>],<br>        [<span class="hljs-number">0.3350</span>, <span class="hljs-number">0.0924</span>, <span class="hljs-number">0.4718</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h3 id="sigma_1sigma_2一三类kl"><span
+class="math inline">\(\sigma_1=\sigma_2\)</span>​​、一三类、KL</h3>
+<h4 id="sigmas">3sigmas</h4>
+<p>/mnt/chenlb/Six_Tumor_Classification/Exp38/results/model_3sigmas_32d_kl_13</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">34</span>:<span class="hljs-number">53</span>,<span class="hljs-number">266</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">34</span>:<span class="hljs-number">53</span>,<span class="hljs-number">266</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.5650224089622498</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">34</span>:<span class="hljs-number">53</span>,<span class="hljs-number">267</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">34</span>:<span class="hljs-number">53</span>,<span class="hljs-number">267</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">34</span>:<span class="hljs-number">53</span>,<span class="hljs-number">290</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">0.0000</span>,  <span class="hljs-number">4.0059</span>,  <span class="hljs-number">6.1636</span>],<br>        [ <span class="hljs-number">7.9721</span>,  <span class="hljs-number">0.0000</span>,  <span class="hljs-number">0.2515</span>],<br>        [<span class="hljs-number">12.4871</span>,  <span class="hljs-number">0.2557</span>,  <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">34</span>:<span class="hljs-number">53</span>,<span class="hljs-number">290</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0403</span>, <span class="hljs-number">1.1791</span>],<br>        [<span class="hljs-number">0.0529</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.9209</span>],<br>        [<span class="hljs-number">2.8587</span>, <span class="hljs-number">1.6144</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">34</span>:<span class="hljs-number">53</span>,<span class="hljs-number">291</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.4083</span>, <span class="hljs-number">2.4020</span>, <span class="hljs-number">4.1445</span>],<br>        [<span class="hljs-number">0.7179</span>, <span class="hljs-number">2.0362</span>, <span class="hljs-number">3.6728</span>],<br>        [<span class="hljs-number">6.4565</span>, <span class="hljs-number">0.1324</span>, <span class="hljs-number">0.6311</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">34</span>:<span class="hljs-number">53</span>,<span class="hljs-number">292</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.6447</span>, <span class="hljs-number">0.3596</span>, <span class="hljs-number">0.4552</span>],<br>        [<span class="hljs-number">2.3451</span>, <span class="hljs-number">0.8712</span>, <span class="hljs-number">2.0029</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<p><img src="C:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240517114501918.png" srcset="/img/loading.gif" lazyload alt="image-20240517114501918" style="zoom:50%;" /></p>
+<h3 id="删除模糊类别">删除模糊类别</h3>
+<p>训练集分布： {0: 206, 1: 53, 2: 244, 3: 0, 4: 0, 5: 0} 测试集分布：
+{0: 40, 1: 9, 2: 83, 3: 0, 4: 0, 5: 0} 验证集分布： {0: 54, 1: 15, 2:
+126, 3: 0, 4: 0, 5: 0}</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">10</span>:<span class="hljs-number">50</span>:07,<span class="hljs-number">954</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">10</span>:<span class="hljs-number">50</span>:07,<span class="hljs-number">955</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.07692307978868484</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">10</span>:<span class="hljs-number">50</span>:07,<span class="hljs-number">956</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">0.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">10</span>:<span class="hljs-number">50</span>:07,<span class="hljs-number">956</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">10</span>:<span class="hljs-number">50</span>:07,<span class="hljs-number">980</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.2763</span>, <span class="hljs-number">1.2608</span>],<br>        [<span class="hljs-number">0.2828</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.3669</span>],<br>        [<span class="hljs-number">1.3228</span>, <span class="hljs-number">0.3765</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">10</span>:<span class="hljs-number">50</span>:07,<span class="hljs-number">981</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0615</span>, <span class="hljs-number">0.4477</span>],<br>        [<span class="hljs-number">0.0662</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.2141</span>],<br>        [<span class="hljs-number">0.6737</span>, <span class="hljs-number">0.2951</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">10</span>:<span class="hljs-number">50</span>:07,<span class="hljs-number">981</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0990</span>, <span class="hljs-number">0.0762</span>, <span class="hljs-number">0.7291</span>],<br>        [<span class="hljs-number">0.2676</span>, <span class="hljs-number">0.0086</span>, <span class="hljs-number">0.3990</span>],<br>        [<span class="hljs-number">0.9887</span>, <span class="hljs-number">0.2141</span>, <span class="hljs-number">0.0307</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">10</span>:<span class="hljs-number">50</span>:07,<span class="hljs-number">982</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.2013</span>, <span class="hljs-number">0.0821</span>, <span class="hljs-number">0.2486</span>],<br>        [<span class="hljs-number">0.5040</span>, <span class="hljs-number">0.1137</span>, <span class="hljs-number">0.3576</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h2 id="mixup结果">mixup结果</h2>
+<h3 id="sigmas_16d-1">6sigmas_16d</h3>
+<p>/mnt/chenlb/Six_Tumor_Classification/Exp39/results/model_6sigmas_16d_kl</p>
+<h4 id="kl">KL</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">21</span>:<span class="hljs-number">20</span>,<span class="hljs-number">876</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">21</span>:<span class="hljs-number">20</span>,<span class="hljs-number">876</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.18834081292152405</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">21</span>:<span class="hljs-number">20</span>,<span class="hljs-number">877</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">0.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">21</span>:<span class="hljs-number">20</span>,<span class="hljs-number">877</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">21</span>:<span class="hljs-number">20</span>,<span class="hljs-number">901</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.3387</span>, <span class="hljs-number">1.2581</span>],<br>        [<span class="hljs-number">0.3414</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.2978</span>],<br>        [<span class="hljs-number">1.2755</span>, <span class="hljs-number">0.2997</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">21</span>:<span class="hljs-number">20</span>,<span class="hljs-number">901</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0642</span>, <span class="hljs-number">0.7351</span>],<br>        [<span class="hljs-number">0.0719</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.3961</span>],<br>        [<span class="hljs-number">1.0095</span>, <span class="hljs-number">0.4858</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">21</span>:<span class="hljs-number">20</span>,<span class="hljs-number">902</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0048</span>, <span class="hljs-number">0.3036</span>, <span class="hljs-number">1.1855</span>],<br>        [<span class="hljs-number">0.0804</span>, <span class="hljs-number">0.0925</span>, <span class="hljs-number">0.7085</span>],<br>        [<span class="hljs-number">0.9556</span>, <span class="hljs-number">0.1641</span>, <span class="hljs-number">0.0351</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">21</span>:<span class="hljs-number">20</span>,<span class="hljs-number">902</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.3024</span>, <span class="hljs-number">0.1310</span>, <span class="hljs-number">0.3139</span>],<br>        [<span class="hljs-number">0.3350</span>, <span class="hljs-number">0.0924</span>, <span class="hljs-number">0.4718</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h4 id="kl后ce不固定前面参数">KL后CE（不固定前面参数）</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">46</span>:<span class="hljs-number">30</span>,<span class="hljs-number">963</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">46</span>:<span class="hljs-number">30</span>,<span class="hljs-number">963</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.5874439477920532</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">46</span>:<span class="hljs-number">30</span>,<span class="hljs-number">964</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.3818</span>, <span class="hljs-number">0.6905</span>, <span class="hljs-number">0.6429</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">46</span>:<span class="hljs-number">30</span>,<span class="hljs-number">964</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">46</span>:<span class="hljs-number">30</span>,<span class="hljs-number">989</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.3387</span>, <span class="hljs-number">1.2581</span>],<br>        [<span class="hljs-number">0.3414</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.2978</span>],<br>        [<span class="hljs-number">1.2755</span>, <span class="hljs-number">0.2997</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">46</span>:<span class="hljs-number">30</span>,<span class="hljs-number">990</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0447</span>, <span class="hljs-number">0.8289</span>],<br>        [<span class="hljs-number">0.0509</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.5993</span>],<br>        [<span class="hljs-number">1.0993</span>, <span class="hljs-number">0.6740</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">46</span>:<span class="hljs-number">30</span>,<span class="hljs-number">990</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.2471</span>, <span class="hljs-number">0.8537</span>, <span class="hljs-number">2.0403</span>],<br>        [<span class="hljs-number">0.1937</span>, <span class="hljs-number">0.6783</span>, <span class="hljs-number">1.7436</span>],<br>        [<span class="hljs-number">0.3290</span>, <span class="hljs-number">0.0790</span>, <span class="hljs-number">0.4404</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">46</span>:<span class="hljs-number">30</span>,<span class="hljs-number">991</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.3353</span>, <span class="hljs-number">0.2165</span>, <span class="hljs-number">0.3286</span>],<br>        [<span class="hljs-number">0.2832</span>, <span class="hljs-number">0.4640</span>, <span class="hljs-number">1.2401</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h4 id="kl后klce不固定前面参数">KL后KL+CE（不固定前面参数）</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">38</span>:<span class="hljs-number">50</span>,<span class="hljs-number">859</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">38</span>:<span class="hljs-number">50</span>,<span class="hljs-number">859</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.4304932653903961</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">38</span>:<span class="hljs-number">50</span>,<span class="hljs-number">860</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.4000</span>, <span class="hljs-number">0.6667</span>, <span class="hljs-number">0.3651</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">38</span>:<span class="hljs-number">50</span>,<span class="hljs-number">860</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">38</span>:<span class="hljs-number">50</span>,<span class="hljs-number">884</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.2663</span>, <span class="hljs-number">1.0168</span>],<br>        [<span class="hljs-number">0.2680</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.2458</span>],<br>        [<span class="hljs-number">1.0280</span>, <span class="hljs-number">0.2470</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">38</span>:<span class="hljs-number">50</span>,<span class="hljs-number">885</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0657</span>, <span class="hljs-number">0.7211</span>],<br>        [<span class="hljs-number">0.0733</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.3941</span>],<br>        [<span class="hljs-number">1.0432</span>, <span class="hljs-number">0.5079</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">38</span>:<span class="hljs-number">50</span>,<span class="hljs-number">886</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0560</span>, <span class="hljs-number">0.4890</span>, <span class="hljs-number">1.4010</span>],<br>        [<span class="hljs-number">0.0281</span>, <span class="hljs-number">0.2171</span>, <span class="hljs-number">0.8968</span>],<br>        [<span class="hljs-number">0.5847</span>, <span class="hljs-number">0.0750</span>, <span class="hljs-number">0.0885</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">38</span>:<span class="hljs-number">50</span>,<span class="hljs-number">886</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.3046</span>, <span class="hljs-number">0.1257</span>, <span class="hljs-number">0.3124</span>],<br>        [<span class="hljs-number">0.1913</span>, <span class="hljs-number">0.1557</span>, <span class="hljs-number">0.6207</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h3 id="kl三类ce">KL（三类）+CE</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">32</span>:09,<span class="hljs-number">805</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">32</span>:09,<span class="hljs-number">806</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.4409937858581543</span><br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">32</span>:09,<span class="hljs-number">806</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.4909</span>, <span class="hljs-number">0.1905</span>, <span class="hljs-number">0.5625</span>])<br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">32</span>:09,<span class="hljs-number">806</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">32</span>:09,<span class="hljs-number">839</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0573</span>, <span class="hljs-number">0.2288</span>],<br>        [<span class="hljs-number">0.0574</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0572</span>],<br>        [<span class="hljs-number">0.2293</span>, <span class="hljs-number">0.0572</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">32</span>:09,<span class="hljs-number">839</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0889</span>, <span class="hljs-number">0.3920</span>],<br>        [<span class="hljs-number">0.1060</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.1093</span>],<br>        [<span class="hljs-number">0.4369</span>, <span class="hljs-number">0.1016</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">32</span>:09,<span class="hljs-number">840</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0071</span>, <span class="hljs-number">0.0727</span>, <span class="hljs-number">0.2525</span>],<br>        [<span class="hljs-number">0.0727</span>, <span class="hljs-number">0.0009</span>, <span class="hljs-number">0.0438</span>],<br>        [<span class="hljs-number">0.3466</span>, <span class="hljs-number">0.1222</span>, <span class="hljs-number">0.0129</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-06-08 <span class="hljs-number">16</span>:<span class="hljs-number">32</span>:09,<span class="hljs-number">841</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.1915</span>, <span class="hljs-number">0.1301</span>, <span class="hljs-number">0.2074</span>],<br>        [<span class="hljs-number">0.2081</span>, <span class="hljs-number">0.1290</span>, <span class="hljs-number">0.1645</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-06-09 <span class="hljs-number">11</span>:<span class="hljs-number">25</span>:<span class="hljs-number">47</span>,<span class="hljs-number">570</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-06-09 <span class="hljs-number">11</span>:<span class="hljs-number">25</span>:<span class="hljs-number">47</span>,<span class="hljs-number">571</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.44720497727394104</span><br><span class="hljs-number">2024</span>-06-09 <span class="hljs-number">11</span>:<span class="hljs-number">25</span>:<span class="hljs-number">47</span>,<span class="hljs-number">573</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.5091</span>, <span class="hljs-number">0.2381</span>, <span class="hljs-number">0.5312</span>])<br><span class="hljs-number">2024</span>-06-09 <span class="hljs-number">11</span>:<span class="hljs-number">25</span>:<span class="hljs-number">47</span>,<span class="hljs-number">573</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-06-09 <span class="hljs-number">11</span>:<span class="hljs-number">25</span>:<span class="hljs-number">47</span>,<span class="hljs-number">627</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0684</span>, <span class="hljs-number">0.2801</span>],<br>        [<span class="hljs-number">0.0685</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0717</span>],<br>        [<span class="hljs-number">0.2808</span>, <span class="hljs-number">0.0718</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-06-09 <span class="hljs-number">11</span>:<span class="hljs-number">25</span>:<span class="hljs-number">47</span>,<span class="hljs-number">629</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0573</span>, <span class="hljs-number">0.3616</span>],<br>        [<span class="hljs-number">0.0610</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.1255</span>],<br>        [<span class="hljs-number">0.3421</span>, <span class="hljs-number">0.1118</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-06-09 <span class="hljs-number">11</span>:<span class="hljs-number">25</span>:<span class="hljs-number">47</span>,<span class="hljs-number">630</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0013</span>, <span class="hljs-number">0.0687</span>, <span class="hljs-number">0.2794</span>],<br>        [<span class="hljs-number">0.0567</span>, <span class="hljs-number">0.0006</span>, <span class="hljs-number">0.0851</span>],<br>        [<span class="hljs-number">0.3238</span>, <span class="hljs-number">0.0962</span>, <span class="hljs-number">0.0053</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-06-09 <span class="hljs-number">11</span>:<span class="hljs-number">25</span>:<span class="hljs-number">47</span>,<span class="hljs-number">631</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.2408</span>, <span class="hljs-number">0.1336</span>, <span class="hljs-number">0.1353</span>],<br>        [<span class="hljs-number">0.2514</span>, <span class="hljs-number">0.1310</span>, <span class="hljs-number">0.1496</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h2 id="有问题部分">有问题部分</h2>
+<h4 id="sigmas-1">3sigmas</h4>
+<p>/mnt/chenlb/Six_Tumor_Classification/Exp39/results/model_3sigmas_32d_kl</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">55</span>:<span class="hljs-number">36</span>,<span class="hljs-number">236</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">55</span>:<span class="hljs-number">36</span>,<span class="hljs-number">237</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.5650224089622498</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">55</span>:<span class="hljs-number">36</span>,<span class="hljs-number">237</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">55</span>:<span class="hljs-number">36</span>,<span class="hljs-number">237</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">55</span>:<span class="hljs-number">36</span>,<span class="hljs-number">260</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.6677</span>, <span class="hljs-number">2.4525</span>],<br>        [<span class="hljs-number">0.7038</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.5912</span>],<br>        [<span class="hljs-number">2.6935</span>, <span class="hljs-number">0.6175</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">55</span>:<span class="hljs-number">36</span>,<span class="hljs-number">261</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0350</span>, <span class="hljs-number">1.1423</span>],<br>        [<span class="hljs-number">0.0418</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.8241</span>],<br>        [<span class="hljs-number">1.5488</span>, <span class="hljs-number">0.9215</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">55</span>:<span class="hljs-number">36</span>,<span class="hljs-number">261</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0164</span>, <span class="hljs-number">0.4833</span>, <span class="hljs-number">2.0915</span>],<br>        [<span class="hljs-number">0.1110</span>, <span class="hljs-number">0.2785</span>, <span class="hljs-number">1.6242</span>],<br>        [<span class="hljs-number">1.9690</span>, <span class="hljs-number">0.3205</span>, <span class="hljs-number">0.0761</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">55</span>:<span class="hljs-number">36</span>,<span class="hljs-number">262</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.4396</span>, <span class="hljs-number">0.2629</span>, <span class="hljs-number">0.4146</span>],<br>        [<span class="hljs-number">0.6232</span>, <span class="hljs-number">0.0678</span>, <span class="hljs-number">0.7778</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h4 id="sigmas-2">6sigmas</h4>
+<p>/mnt/chenlb/Six_Tumor_Classification/Exp39/results/model_6sigmas_32d_kl</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">25</span>:<span class="hljs-number">17</span>,<span class="hljs-number">410</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">25</span>:<span class="hljs-number">17</span>,<span class="hljs-number">410</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.5650224089622498</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">25</span>:<span class="hljs-number">17</span>,<span class="hljs-number">411</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">25</span>:<span class="hljs-number">17</span>,<span class="hljs-number">411</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">25</span>:<span class="hljs-number">17</span>,<span class="hljs-number">434</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.6765</span>, <span class="hljs-number">2.5768</span>],<br>        [<span class="hljs-number">0.6859</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.6240</span>],<br>        [<span class="hljs-number">2.6426</span>, <span class="hljs-number">0.6314</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">25</span>:<span class="hljs-number">17</span>,<span class="hljs-number">434</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0371</span>, <span class="hljs-number">1.3433</span>],<br>        [<span class="hljs-number">0.0469</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">1.0230</span>],<br>        [<span class="hljs-number">1.8677</span>, <span class="hljs-number">1.0851</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">25</span>:<span class="hljs-number">17</span>,<span class="hljs-number">435</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0088</span>, <span class="hljs-number">0.5483</span>, <span class="hljs-number">2.3199</span>],<br>        [<span class="hljs-number">0.0978</span>, <span class="hljs-number">0.3596</span>, <span class="hljs-number">1.8697</span>],<br>        [<span class="hljs-number">2.2689</span>, <span class="hljs-number">0.4812</span>, <span class="hljs-number">0.0601</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">25</span>:<span class="hljs-number">17</span>,<span class="hljs-number">436</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.5152</span>, <span class="hljs-number">0.3232</span>, <span class="hljs-number">0.4669</span>],<br>        [<span class="hljs-number">0.6609</span>, <span class="hljs-number">0.0477</span>, <span class="hljs-number">0.7323</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h4 id="sigmas-3">10sigmas</h4>
+<p>/mnt/chenlb/Six_Tumor_Classification/Exp39/results/model_10sigmas_32d_kl</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">10</span>,<span class="hljs-number">575</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">10</span>,<span class="hljs-number">575</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.5650224089622498</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">10</span>,<span class="hljs-number">576</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">10</span>,<span class="hljs-number">576</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">10</span>,<span class="hljs-number">599</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.5731</span>, <span class="hljs-number">2.2032</span>],<br>        [<span class="hljs-number">0.5758</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.5340</span>],<br>        [<span class="hljs-number">2.2217</span>, <span class="hljs-number">0.5361</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">10</span>,<span class="hljs-number">600</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0668</span>, <span class="hljs-number">0.7586</span>],<br>        [<span class="hljs-number">0.0771</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.4145</span>],<br>        [<span class="hljs-number">1.1163</span>, <span class="hljs-number">0.5305</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">10</span>,<span class="hljs-number">600</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0261</span>, <span class="hljs-number">0.3652</span>, <span class="hljs-number">1.7701</span>],<br>        [<span class="hljs-number">0.1805</span>, <span class="hljs-number">0.1243</span>, <span class="hljs-number">1.1494</span>],<br>        [<span class="hljs-number">1.4162</span>, <span class="hljs-number">0.2120</span>, <span class="hljs-number">0.1365</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">15</span>:<span class="hljs-number">27</span>:<span class="hljs-number">10</span>,<span class="hljs-number">601</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.3171</span>, <span class="hljs-number">0.1348</span>, <span class="hljs-number">0.3257</span>],<br>        [<span class="hljs-number">0.4990</span>, <span class="hljs-number">0.0689</span>, <span class="hljs-number">0.7358</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h4 id="sigmas_2deltas">6sigmas_2deltas</h4>
+<p>/mnt/chenlb/Six_Tumor_Classification/Exp39/results/model_2deltas_16d_kl</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">17</span>:<span class="hljs-number">41</span>:<span class="hljs-number">12</span>,<span class="hljs-number">819</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">17</span>:<span class="hljs-number">41</span>:<span class="hljs-number">12</span>,<span class="hljs-number">819</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.18834081292152405</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">17</span>:<span class="hljs-number">41</span>:<span class="hljs-number">12</span>,<span class="hljs-number">820</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">0.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">17</span>:<span class="hljs-number">41</span>:<span class="hljs-number">12</span>,<span class="hljs-number">820</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">17</span>:<span class="hljs-number">41</span>:<span class="hljs-number">12</span>,<span class="hljs-number">845</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.2708</span>, <span class="hljs-number">1.3820</span>],<br>        [<span class="hljs-number">0.2733</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.4361</span>],<br>        [<span class="hljs-number">1.4083</span>, <span class="hljs-number">0.4406</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">17</span>:<span class="hljs-number">41</span>:<span class="hljs-number">12</span>,<span class="hljs-number">845</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0530</span>, <span class="hljs-number">0.8760</span>],<br>        [<span class="hljs-number">0.0599</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.5261</span>],<br>        [<span class="hljs-number">1.1574</span>, <span class="hljs-number">0.6134</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">17</span>:<span class="hljs-number">41</span>:<span class="hljs-number">12</span>,<span class="hljs-number">846</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0241</span>, <span class="hljs-number">0.1936</span>, <span class="hljs-number">1.1804</span>],<br>        [<span class="hljs-number">0.0977</span>, <span class="hljs-number">0.0503</span>, <span class="hljs-number">0.7657</span>],<br>        [<span class="hljs-number">1.0834</span>, <span class="hljs-number">0.2685</span>, <span class="hljs-number">0.0219</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">17</span>:<span class="hljs-number">41</span>:<span class="hljs-number">12</span>,<span class="hljs-number">846</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.3460</span>, <span class="hljs-number">0.1688</span>, <span class="hljs-number">0.3456</span>],<br>        [<span class="hljs-number">0.4460</span>, <span class="hljs-number">0.1272</span>, <span class="hljs-number">0.5018</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h4 id="sigmas_0.5deltas">6sigmas_0.5deltas</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">18</span>:<span class="hljs-number">56</span>:<span class="hljs-number">21</span>,<span class="hljs-number">752</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">18</span>:<span class="hljs-number">56</span>:<span class="hljs-number">21</span>,<span class="hljs-number">752</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.18834081292152405</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">18</span>:<span class="hljs-number">56</span>:<span class="hljs-number">21</span>,<span class="hljs-number">754</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">0.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">18</span>:<span class="hljs-number">56</span>:<span class="hljs-number">21</span>,<span class="hljs-number">754</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">18</span>:<span class="hljs-number">56</span>:<span class="hljs-number">21</span>,<span class="hljs-number">777</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.2419</span>, <span class="hljs-number">1.2212</span>],<br>        [<span class="hljs-number">0.2431</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.3790</span>],<br>        [<span class="hljs-number">1.2344</span>, <span class="hljs-number">0.3814</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">18</span>:<span class="hljs-number">56</span>:<span class="hljs-number">21</span>,<span class="hljs-number">777</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0648</span>, <span class="hljs-number">0.8512</span>],<br>        [<span class="hljs-number">0.0699</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.5070</span>],<br>        [<span class="hljs-number">1.2476</span>, <span class="hljs-number">0.7149</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">18</span>:<span class="hljs-number">56</span>:<span class="hljs-number">21</span>,<span class="hljs-number">778</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0466</span>, <span class="hljs-number">0.1948</span>, <span class="hljs-number">1.0583</span>],<br>        [<span class="hljs-number">0.1226</span>, <span class="hljs-number">0.0680</span>, <span class="hljs-number">0.6804</span>],<br>        [<span class="hljs-number">0.9786</span>, <span class="hljs-number">0.2469</span>, <span class="hljs-number">0.0171</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">18</span>:<span class="hljs-number">56</span>:<span class="hljs-number">21</span>,<span class="hljs-number">779</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.3503</span>, <span class="hljs-number">0.1498</span>, <span class="hljs-number">0.3480</span>],<br>        [<span class="hljs-number">0.4449</span>, <span class="hljs-number">0.1551</span>, <span class="hljs-number">0.4744</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h4 id="delta">2delta</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">20</span>:<span class="hljs-number">42</span>:<span class="hljs-number">57</span>,<span class="hljs-number">957</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">20</span>:<span class="hljs-number">42</span>:<span class="hljs-number">57</span>,<span class="hljs-number">957</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.18834081292152405</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">20</span>:<span class="hljs-number">42</span>:<span class="hljs-number">57</span>,<span class="hljs-number">958</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">0.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">20</span>:<span class="hljs-number">42</span>:<span class="hljs-number">57</span>,<span class="hljs-number">958</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">20</span>:<span class="hljs-number">42</span>:<span class="hljs-number">57</span>,<span class="hljs-number">985</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.5918</span>, <span class="hljs-number">1.9982</span>],<br>        [<span class="hljs-number">0.6060</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.4564</span>],<br>        [<span class="hljs-number">2.0647</span>, <span class="hljs-number">0.4641</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">20</span>:<span class="hljs-number">42</span>:<span class="hljs-number">57</span>,<span class="hljs-number">986</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0693</span>, <span class="hljs-number">1.3903</span>],<br>        [<span class="hljs-number">0.0964</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.9519</span>],<br>        [<span class="hljs-number">1.9164</span>, <span class="hljs-number">0.8877</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">20</span>:<span class="hljs-number">42</span>:<span class="hljs-number">57</span>,<span class="hljs-number">986</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0027</span>, <span class="hljs-number">0.5976</span>, <span class="hljs-number">2.0077</span>],<br>        [<span class="hljs-number">0.0705</span>, <span class="hljs-number">0.3353</span>, <span class="hljs-number">1.4631</span>],<br>        [<span class="hljs-number">1.7196</span>, <span class="hljs-number">0.3197</span>, <span class="hljs-number">0.0272</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">18</span> <span class="hljs-number">20</span>:<span class="hljs-number">42</span>:<span class="hljs-number">57</span>,<span class="hljs-number">987</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.5289</span>, <span class="hljs-number">0.2986</span>, <span class="hljs-number">0.4780</span>],<br>        [<span class="hljs-number">0.5042</span>, <span class="hljs-number">0.1152</span>, <span class="hljs-number">0.6829</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h4 id="自实现3sigmas">自实现3sigmas</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">12</span>:09:<span class="hljs-number">33</span>,<span class="hljs-number">395</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">12</span>:09:<span class="hljs-number">33</span>,<span class="hljs-number">396</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.18834081292152405</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">12</span>:09:<span class="hljs-number">33</span>,<span class="hljs-number">398</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">0.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">12</span>:09:<span class="hljs-number">33</span>,<span class="hljs-number">398</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">12</span>:09:<span class="hljs-number">33</span>,<span class="hljs-number">430</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">0.0000</span>,  <span class="hljs-number">2.3466</span>,  <span class="hljs-number">5.4760</span>],<br>        [ <span class="hljs-number">4.6534</span>,  <span class="hljs-number">0.0000</span>,  <span class="hljs-number">1.0370</span>],<br>        [<span class="hljs-number">14.5220</span>,  <span class="hljs-number">1.4446</span>,  <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">12</span>:09:<span class="hljs-number">33</span>,<span class="hljs-number">431</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0483</span>, <span class="hljs-number">1.0680</span>],<br>        [<span class="hljs-number">0.0633</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.7878</span>],<br>        [<span class="hljs-number">3.1680</span>, <span class="hljs-number">1.7479</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">12</span>:09:<span class="hljs-number">33</span>,<span class="hljs-number">431</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.3395</span>, <span class="hljs-number">1.4037</span>, <span class="hljs-number">3.4232</span>],<br>        [<span class="hljs-number">0.5201</span>, <span class="hljs-number">1.0773</span>, <span class="hljs-number">2.9596</span>],<br>        [<span class="hljs-number">4.0475</span>, <span class="hljs-number">0.0211</span>, <span class="hljs-number">0.7556</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">12</span>:09:<span class="hljs-number">33</span>,<span class="hljs-number">432</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.6637</span>, <span class="hljs-number">0.3037</span>, <span class="hljs-number">0.4288</span>],<br>        [<span class="hljs-number">1.5965</span>, <span class="hljs-number">0.5473</span>, <span class="hljs-number">1.9794</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h4 id="自实现6sigmas">自实现6sigmas</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">13</span>:<span class="hljs-number">18</span>:<span class="hljs-number">43</span>,<span class="hljs-number">761</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">13</span>:<span class="hljs-number">18</span>:<span class="hljs-number">43</span>,<span class="hljs-number">762</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.18834081292152405</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">13</span>:<span class="hljs-number">18</span>:<span class="hljs-number">43</span>,<span class="hljs-number">765</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">0.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">13</span>:<span class="hljs-number">18</span>:<span class="hljs-number">43</span>,<span class="hljs-number">765</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">13</span>:<span class="hljs-number">18</span>:<span class="hljs-number">43</span>,<span class="hljs-number">797</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">0.0000</span>,  <span class="hljs-number">9.0966</span>, <span class="hljs-number">17.8626</span>],<br>        [<span class="hljs-number">18.1534</span>,  <span class="hljs-number">0.0000</span>,  <span class="hljs-number">3.0291</span>],<br>        [<span class="hljs-number">47.4098</span>,  <span class="hljs-number">4.4731</span>,  <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">13</span>:<span class="hljs-number">18</span>:<span class="hljs-number">43</span>,<span class="hljs-number">798</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0515</span>, <span class="hljs-number">1.1501</span>],<br>        [<span class="hljs-number">0.0668</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.8324</span>],<br>        [<span class="hljs-number">2.8963</span>, <span class="hljs-number">1.5915</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">13</span>:<span class="hljs-number">18</span>:<span class="hljs-number">43</span>,<span class="hljs-number">799</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">1.9369</span>, <span class="hljs-number">4.1442</span>, <span class="hljs-number">5.9740</span>],<br>        [<span class="hljs-number">2.6208</span>, <span class="hljs-number">3.4994</span>, <span class="hljs-number">5.2066</span>],<br>        [<span class="hljs-number">9.7777</span>, <span class="hljs-number">0.7345</span>, <span class="hljs-number">1.6030</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">13</span>:<span class="hljs-number">18</span>:<span class="hljs-number">43</span>,<span class="hljs-number">799</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.6438</span>, <span class="hljs-number">0.2972</span>, <span class="hljs-number">0.4486</span>],<br>        [<span class="hljs-number">4.9561</span>, <span class="hljs-number">2.1339</span>, <span class="hljs-number">3.4890</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h4 id="自实现10sigmas">自实现10sigmas</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">15</span>:<span class="hljs-number">50</span>:<span class="hljs-number">51</span>,<span class="hljs-number">893</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">15</span>:<span class="hljs-number">50</span>:<span class="hljs-number">51</span>,<span class="hljs-number">894</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.18834081292152405</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">15</span>:<span class="hljs-number">50</span>:<span class="hljs-number">51</span>,<span class="hljs-number">895</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">0.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">15</span>:<span class="hljs-number">50</span>:<span class="hljs-number">51</span>,<span class="hljs-number">895</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">15</span>:<span class="hljs-number">50</span>:<span class="hljs-number">51</span>,<span class="hljs-number">919</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[  <span class="hljs-number">0.0000</span>,  <span class="hljs-number">25.0966</span>,  <span class="hljs-number">47.0659</span>],<br>        [ <span class="hljs-number">50.1534</span>,   <span class="hljs-number">0.0000</span>,   <span class="hljs-number">8.1720</span>],<br>        [<span class="hljs-number">126.3276</span>,  <span class="hljs-number">12.1709</span>,   <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">15</span>:<span class="hljs-number">50</span>:<span class="hljs-number">51</span>,<span class="hljs-number">920</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0514</span>, <span class="hljs-number">1.2257</span>],<br>        [<span class="hljs-number">0.0687</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.9138</span>],<br>        [<span class="hljs-number">3.2759</span>, <span class="hljs-number">1.7643</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">15</span>:<span class="hljs-number">50</span>:<span class="hljs-number">51</span>,<span class="hljs-number">920</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">3.8568</span>, <span class="hljs-number">13.1958</span>, <span class="hljs-number">15.1707</span>],<br>        [ <span class="hljs-number">5.0922</span>, <span class="hljs-number">11.9641</span>, <span class="hljs-number">13.8473</span>],<br>        [<span class="hljs-number">19.1877</span>,  <span class="hljs-number">4.3346</span>,  <span class="hljs-number">5.4597</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">15</span>:<span class="hljs-number">50</span>:<span class="hljs-number">51</span>,<span class="hljs-number">921</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">0.7233</span>, <span class="hljs-number">0.3478</span>, <span class="hljs-number">0.4682</span>],<br>        [<span class="hljs-number">9.6102</span>, <span class="hljs-number">7.9507</span>, <span class="hljs-number">9.5023</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">21</span>:<span class="hljs-number">29</span>:<span class="hljs-number">51</span>,<span class="hljs-number">493</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">21</span>:<span class="hljs-number">29</span>:<span class="hljs-number">51</span>,<span class="hljs-number">494</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.18834081292152405</span><br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">21</span>:<span class="hljs-number">29</span>:<span class="hljs-number">51</span>,<span class="hljs-number">498</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">0.</span>])<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">21</span>:<span class="hljs-number">29</span>:<span class="hljs-number">51</span>,<span class="hljs-number">498</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">21</span>:<span class="hljs-number">29</span>:<span class="hljs-number">51</span>,<span class="hljs-number">531</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[  <span class="hljs-number">0.0000</span>,  <span class="hljs-number">25.0966</span>,  <span class="hljs-number">47.0283</span>],<br>        [ <span class="hljs-number">50.1534</span>,   <span class="hljs-number">0.0000</span>,   <span class="hljs-number">8.1705</span>],<br>        [<span class="hljs-number">126.2516</span>,  <span class="hljs-number">12.1694</span>,   <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">21</span>:<span class="hljs-number">29</span>:<span class="hljs-number">51</span>,<span class="hljs-number">532</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.0385</span>, <span class="hljs-number">1.2887</span>],<br>        [<span class="hljs-number">0.0496</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">1.0118</span>],<br>        [<span class="hljs-number">3.0610</span>, <span class="hljs-number">1.7937</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">21</span>:<span class="hljs-number">29</span>:<span class="hljs-number">51</span>,<span class="hljs-number">532</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[ <span class="hljs-number">3.7921</span>, <span class="hljs-number">13.9223</span>, <span class="hljs-number">15.8855</span>],<br>        [ <span class="hljs-number">5.2695</span>, <span class="hljs-number">12.6750</span>, <span class="hljs-number">14.5414</span>],<br>        [<span class="hljs-number">25.4116</span>,  <span class="hljs-number">3.3705</span>,  <span class="hljs-number">4.2591</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-05-<span class="hljs-number">19</span> <span class="hljs-number">21</span>:<span class="hljs-number">29</span>:<span class="hljs-number">51</span>,<span class="hljs-number">533</span> - INFO: 混合类KL散度矩阵:<br>tensor([[ <span class="hljs-number">0.7013</span>,  <span class="hljs-number">0.3880</span>,  <span class="hljs-number">0.4822</span>],<br>        [<span class="hljs-number">11.2793</span>,  <span class="hljs-number">7.1341</span>,  <span class="hljs-number">8.5624</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div></div>
+      <div>http://example.com/2024/05/16/BUAA/问题描述/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Chen</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年5月16日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年6月9日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/05/23/SoftwareDevelopment/%E5%85%AB%E8%82%A1-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="八股-操作系统">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">八股-操作系统</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/05/15/BUAA/%E5%88%86%E5%B8%83/" title="">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

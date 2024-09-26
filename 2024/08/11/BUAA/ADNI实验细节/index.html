@@ -1,0 +1,789 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Chen">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="ADNI处理细节">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ADNI处理细节">
+<meta property="og:url" content="http://example.com/2024/08/11/BUAA/ADNI%E5%AE%9E%E9%AA%8C%E7%BB%86%E8%8A%82/index.html">
+<meta property="og:site_name" content="Chen&#39;s Blog">
+<meta property="og:description" content="ADNI处理细节">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-08-11T06:30:40.000Z">
+<meta property="article:modified_time" content="2024-09-26T02:30:44.935Z">
+<meta property="article:author" content="Chen">
+<meta property="article:tag" content="BUAA">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>ADNI处理细节 - Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Chen&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="ADNI处理细节"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Chen
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-11 14:30" pubdate>
+          2024年8月11日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ADNI处理细节</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2024年9月26日 上午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>ADNI处理细节</p>
+<span id="more"></span>
+<h3 id="生成训练数据">生成训练数据</h3>
+<p>我把从dcm转nii文件的功能以及reshape到指定大小的功能封装了一下放到了<a
+target="_blank" rel="noopener" href="https://github.com/GreaterChen/dcm2niiTools">GreaterChen/dcm2niiTools
+(github.com)</a>。以后可以直接复用我的代码做。</p>
+<h4 id="dcm转nii">DCM转NII</h4>
+<p>dcm转nii是使用dcm2niix库做的，这个过程首先将dcm文件转化为两个nii文件：imaginary.nii和real.nii，然后通过取模的方式得到magnitude.nii，这就是最终的nii文件。</p>
+<h4 id="统一nii文件大小">统一NII文件大小</h4>
+<p>我收集的ADNI数据的原始大小分布如下</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">原始大小</th>
+<th style="text-align: center;">出现频次</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">（256，256，52）</td>
+<td style="text-align: center;">535</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">（192，192，52）</td>
+<td style="text-align: center;">113</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">（288，288，52）</td>
+<td style="text-align: center;">4</td>
+</tr>
+</tbody>
+</table>
+<p>可以发现大多数的数据都是（256，256，52）的，因此这里考虑将数据统一为（128，128，26）。这样大部分数据都能够保证立体信息不被破坏，当然也会有部分数据的立体信息改变。</p>
+<p>具体在实现来说，首先可以使用平均池化做降采样，但是这只适用于（256，256，52）到（128，128，26），当遇到（192，192，52）时会因为无法整除而无法正确的降采样到（128，128，26）</p>
+<p>因此我使用的是三线性插值（trilinear
+interpolation）。三线性插值（Trilinear
+Interpolation）是一种扩展的一维线性插值方法，用于在三维空间中对数据进行插值。它基于<strong>八个相邻点</strong>的加权平均值，能够在三维空间中平滑地缩放图像或体数据。具体的（192，192，52）转（128，128，26）实现方式如下</p>
+<figure>
+<img
+src="C:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240724120133064.png" srcset="/img/loading.gif" lazyload
+alt="image-20240724120133064" />
+<figcaption aria-hidden="true">image-20240724120133064</figcaption>
+</figure>
+<figure>
+<img
+src="C:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240724120153145.png" srcset="/img/loading.gif" lazyload
+alt="image-20240724120153145" />
+<figcaption aria-hidden="true">image-20240724120153145</figcaption>
+</figure>
+<p>转化的效果如下图所示</p>
+<ol type="1">
+<li><p>原始（256，256，52）图像</p>
+<figure>
+<img
+src="C:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240724120319744.png" srcset="/img/loading.gif" lazyload
+alt="image-20240724120319744" />
+<figcaption aria-hidden="true">image-20240724120319744</figcaption>
+</figure></li>
+<li><p>采用平均池化转化的（128，128，26）图像</p>
+<figure>
+<img
+src="C:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240724120357343.png" srcset="/img/loading.gif" lazyload
+alt="image-20240724120357343" />
+<figcaption aria-hidden="true">image-20240724120357343</figcaption>
+</figure></li>
+<li><p>采用三线性插值转化的（128，128，26）图像</p>
+<figure>
+<img
+src="C:/Users/chenl/AppData/Roaming/Typora/typora-user-images/image-20240724120430304.png" srcset="/img/loading.gif" lazyload
+alt="image-20240724120430304" />
+<figcaption aria-hidden="true">image-20240724120430304</figcaption>
+</figure></li>
+</ol>
+<p>可以看到三线性插值和平均池化效果基本相同，由于三线性插值具有从任意shape转到目标shape的功能，因此最终选择三线性插值的方式进行reshape</p>
+<h3 id="特征提取">特征提取</h3>
+<h4 id="输入数据">输入数据</h4>
+<ul>
+<li>输入数据的形状是
+<code>(32, 1, 128, 128, 26)</code>，表示有32个样本，每个样本是1个通道的3D图像，尺寸为
+<code>(128, 128, 26)</code>。</li>
+</ul>
+<h4 id="编码器层">编码器层</h4>
+<ul>
+<li>第一层：
+<ul>
+<li><code>ConvBlock(1, 16)</code>：将输入的通道数从1变为16。</li>
+<li><code>nn.MaxPool3d(2, 2)</code>：对每个维度进行2倍的下采样。</li>
+<li>输出形状为 <code>(32, 16, 64, 64, 13)</code>。</li>
+</ul></li>
+<li>第二层：
+<ul>
+<li><code>ConvBlock(16, 32)</code>：将输入的通道数从16变为32。</li>
+<li><code>nn.MaxPool3d(2, 2)</code>：对每个维度再次进行2倍的下采样。</li>
+<li>输出形状为 <code>(32, 32, 32, 32, 6)</code>。</li>
+</ul></li>
+<li>第三层：
+<ul>
+<li><code>ConvBlock(32, 32)</code>：通道数保持不变，仍为32。</li>
+<li><code>nn.AdaptiveAvgPool3d(1)</code>：将所有维度池化为1，输出形状为
+<code>(32, 32, 1, 1, 1)</code>。</li>
+</ul></li>
+</ul>
+<h3 id="结果">结果</h3>
+<h4 id="train_features">train_features</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-number">2024</span>-07-<span class="hljs-number">24</span> <span class="hljs-number">23</span>:<span class="hljs-number">00</span>:<span class="hljs-number">41</span>,<span class="hljs-number">637</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-07-<span class="hljs-number">24</span> <span class="hljs-number">23</span>:<span class="hljs-number">00</span>:<span class="hljs-number">41</span>,<span class="hljs-number">638</span> - INFO: 验证集总体精度为: <span class="hljs-number">0.7597402334213257</span><br><span class="hljs-number">2024</span>-07-<span class="hljs-number">24</span> <span class="hljs-number">23</span>:<span class="hljs-number">00</span>:<span class="hljs-number">41</span>,<span class="hljs-number">639</span> - INFO: 验证集各类精度为: tensor([<span class="hljs-number">0.9079</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">0.9600</span>])<br><span class="hljs-number">2024</span>-07-<span class="hljs-number">24</span> <span class="hljs-number">23</span>:<span class="hljs-number">00</span>:<span class="hljs-number">41</span>,<span class="hljs-number">639</span> - INFO: ---------------------<br><span class="hljs-number">2024</span>-07-<span class="hljs-number">24</span> <span class="hljs-number">23</span>:<span class="hljs-number">00</span>:<span class="hljs-number">41</span>,<span class="hljs-number">970</span> - INFO: 先验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">1.3936</span>, <span class="hljs-number">5.0489</span>],<br>        [<span class="hljs-number">1.5568</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">1.2711</span>],<br>        [<span class="hljs-number">6.2048</span>, <span class="hljs-number">1.4063</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-07-<span class="hljs-number">24</span> <span class="hljs-number">23</span>:<span class="hljs-number">00</span>:<span class="hljs-number">41</span>,<span class="hljs-number">971</span> - INFO: 后验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.0000</span>, <span class="hljs-number">0.1733</span>, <span class="hljs-number">2.5138</span>],<br>        [<span class="hljs-number">0.2044</span>, <span class="hljs-number">0.0000</span>, <span class="hljs-number">1.4667</span>],<br>        [<span class="hljs-number">3.6257</span>, <span class="hljs-number">1.7814</span>, <span class="hljs-number">0.0000</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-07-<span class="hljs-number">24</span> <span class="hljs-number">23</span>:<span class="hljs-number">00</span>:<span class="hljs-number">41</span>,<span class="hljs-number">972</span> - INFO: 后验分布相对于先验验分布KL散度矩阵:<br>tensor([[<span class="hljs-number">0.1105</span>, <span class="hljs-number">0.7867</span>, <span class="hljs-number">3.8495</span>],<br>        [<span class="hljs-number">0.6768</span>, <span class="hljs-number">0.2145</span>, <span class="hljs-number">2.3405</span>],<br>        [<span class="hljs-number">5.7369</span>, <span class="hljs-number">1.2173</span>, <span class="hljs-number">0.0410</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br><span class="hljs-number">2024</span>-07-<span class="hljs-number">24</span> <span class="hljs-number">23</span>:<span class="hljs-number">00</span>:<span class="hljs-number">41</span>,<span class="hljs-number">973</span> - INFO: 混合类KL散度矩阵:<br>tensor([[<span class="hljs-number">1.0907</span>, <span class="hljs-number">0.3963</span>, <span class="hljs-number">0.7351</span>],<br>        [<span class="hljs-number">2.0257</span>, <span class="hljs-number">0.1038</span>, <span class="hljs-number">1.0466</span>]], device=<span class="hljs-string">&#x27;cuda:0&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h4 id="train_classification">train_classification</h4>
+<ol type="1">
+<li>no_diskl</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/BUAA/">#BUAA</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>ADNI处理细节</div>
+      <div>http://example.com/2024/08/11/BUAA/ADNI实验细节/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Chen</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年8月11日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2024年9月26日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/08/11/KNQ/SoccerNet%E9%97%AE%E9%A2%98%E5%88%97%E8%A1%A8/" title="SoccerNet问题列表">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SoccerNet问题列表</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/08/11/BUAA/%E5%A4%8D%E7%8E%B0/" title="GZSL实验复现">
+                        <span class="hidden-mobile">GZSL实验复现</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
