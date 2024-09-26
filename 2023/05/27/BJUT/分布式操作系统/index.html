@@ -1,0 +1,1073 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Chen">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="分布式操作系统期末复习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式操作系统">
+<meta property="og:url" content="http://example.com/2023/05/27/BJUT/%E5%88%86%E5%B8%83%E5%BC%8F%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="Chen&#39;s Blog">
+<meta property="og:description" content="分布式操作系统期末复习">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230606232439.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607005703.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607010738.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607101629.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607104453.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607104716.png">
+<meta property="og:image" content="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607153228.png">
+<meta property="article:published_time" content="2023-05-27T09:26:22.000Z">
+<meta property="article:modified_time" content="2023-06-11T09:11:34.728Z">
+<meta property="article:author" content="Chen">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230606232439.png">
+  
+  
+  
+  <title>分布式操作系统 - Chen&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Chen&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="分布式操作系统"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Chen
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-27 17:26" pubdate>
+          2023年5月27日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          58 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">分布式操作系统</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    本文最后更新于：2023年6月11日 下午
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <p>分布式操作系统期末复习 <span id="more"></span></p>
+<h3 id="名词">名词</h3>
+<ol type="1">
+<li>autonomous 自治的，自己管理自己</li>
+<li>Concurrency 并发</li>
+<li>Coordination 协调</li>
+<li>Transparency 透明</li>
+<li>Trade-off 权衡</li>
+<li>latency 延迟</li>
+<li>Homogeneous 同构</li>
+<li>Heterogeneous 异构</li>
+<li>Tightly-coupled 紧耦合</li>
+<li>Paradigm 范式</li>
+<li>Tiered Architecture 分层架构</li>
+<li>synchronous 同步</li>
+<li>asynchronous 异步</li>
+<li>Transient Communication 暂时通信</li>
+<li>Persistent Communication 持久通信</li>
+<li>router 路由</li>
+<li>relay 中继</li>
+<li>Primitives 原语</li>
+<li>Message Brokers 消息代理</li>
+<li>Decoupling 解耦</li>
+<li>Processor allocation 处理器分配</li>
+<li>Deterministic Algorithm 确定性算法</li>
+<li>Heuristic Algorithm 启发式算法</li>
+<li>replica 副本</li>
+<li>Mounting 挂载</li>
+<li>recursive name resolution 递归名称解析</li>
+<li>clock skew 时钟偏移</li>
+<li>concurrent 并发</li>
+<li>Mutual Exclusion 互斥</li>
+<li>critical region 临界区</li>
+<li>Transaction 事务</li>
+<li>cascaded aborts 级联终止</li>
+</ol>
+<h3 id="第一章">第一章</h3>
+<ol type="1">
+<li><p>分布式操作系统定义</p>
+<p>分布式系统是独立计算机的集合，在其用户看来是一个单一的连贯系统。</p>
+<p>由位于<strong>联网</strong>计算机上的<strong>硬件或软件</strong>组件组成的任何系统，这些组件通过<strong>消息传递</strong>来通信和协调它们的操作。</p></li>
+<li><p>特性</p>
+<ol type="1">
+<li>Hidden ：Hide the difference and the communication among all kinds
+of computers</li>
+<li>Consistent and Uniform<br />
+</li>
+<li>Scalability
+：伸缩性，即使坏了一部分整个系统也不会瘫痪（允许某些功能不可用了）</li>
+<li>Concurrency ：Coordination among different concurrently executing
+programs that share resource</li>
+<li>No Global Clock ：</li>
+</ol></li>
+<li><p>目标</p>
+<ol type="1">
+<li><p>Making Resources Accessible</p></li>
+<li><p>Distribution Transparency 看起来只有一个电脑</p></li>
+<li><p>Openness</p>
+<p>Mechanism : (How to do it)It need cache</p>
+<p>Policy : (What will be done)Size? • Consistency? • Always or only one
+session? • Can user control?</p></li>
+<li><p>Scalability</p></li>
+</ol></li>
+</ol>
+<h3 id="第二章-communication">第二章 Communication</h3>
+<ol type="1">
+<li><p>UDP offers no guarantee of delivery 不可靠的传输 No setup costs
+不需要建立连接，额外花销小</p></li>
+<li><p>RPC(Remote Procedure Call)</p>
+<p>Problems:</p>
+<ol type="1">
+<li>Call by Value：异构的计算机对于相同的字符串的解读不同</li>
+<li>Call by Reference：
+<ol type="1">
+<li>For array: copy/restore
+把整个数组发过去，搞完之后再发回本机修改</li>
+<li>For ordinary pointer 接收机器拿着指针回来找</li>
+</ol></li>
+<li>How to Create Stub：Interface Definition Language
+(IDL)使用统一接口</li>
+</ol></li>
+<li><p>RMI（Remote Method Invocation）</p>
+<p>Client:Proxy</p>
+<p>Server:Skleton</p>
+<p>RMI and RPC are same theoretically.</p></li>
+<li><p>同步通信收发都是堵塞的，异步通信发是非堵塞的收都可以</p></li>
+<li><p>Transient communication:A message is not stored in communication
+system 瞬时通信不存储信息</p>
+<ol type="1">
+<li>Sockets Interface
+<ol type="1">
+<li>TCP/UDP</li>
+<li>IP Multicast: IP multicast is available only via UDP</li>
+</ol></li>
+<li>MPI(Message Passing Interface standard)</li>
+</ol></li>
+<li><p>Persistent Communication:A message is stored in communication
+system until it is sent to receiver 持久通信</p>
+<ol type="1">
+<li>Message Queue Model 保证一定送达但是不保证时间长短
+<ol type="1">
+<li>router：进行接收转发</li>
+<li>relay：接收之后进行处理 Relay can build a scalable message-queuing
+system</li>
+<li>Application of Message Queue System
+<ol type="1">
+<li>Asynchronization 异步</li>
+<li>Decoupling of application 解耦</li>
+<li>Flow Cutting 流切割</li>
+</ol></li>
+</ol></li>
+</ol></li>
+<li><p>Stream Oriented Communication</p>
+<ol type="1">
+<li><p>Continuous representation media: Temporal relationship between
+data items is IMPORTANT to explain the meaning of data.</p></li>
+<li><p>Discrete representation media: Temporal relationship between data
+items is NOT IMPORTANT to explain the meaning of data</p></li>
+<li><p>Transmission types</p>
+<ol type="1">
+<li><p>Asynchronous transmission mode</p>
+<p>Data items are transmitted one by one. No time restriction on
+transmission.</p></li>
+<li><p>Synchronous transmission mode</p>
+<p>Every data item has a maximum end-to-end delay defined for each unit
+in a data stream.</p></li>
+<li><p>Isochronous transmission mode</p>
+<p>Data item must be transmitted on time.</p></li>
+</ol></li>
+<li><p>Interleaving frames 交错帧，减小数据包丢失的影响</p></li>
+<li><p>QoS
+Negotiation是一种网络协议，用于协商和确定网络中各种流量的优先级、带宽、延迟等服务质量参数。</p></li>
+</ol></li>
+</ol>
+<h3 id="第三章">第三章</h3>
+<ol type="1">
+<li><p>Server Classification</p>
+<ol type="1">
+<li>Iterative Server：Server is responsible for dealing with request and
+return the result to client</li>
+<li>Concurrent Server：Server doesn’t deal with request from client. It
+sends the request to a thread or a process,then wait for next
+request</li>
+</ol></li>
+<li><p><strong>Out-of-band</strong> data ： data that is to be processed
+by the server before any other data from that
+client.优先级很高，需要及时处理</p></li>
+<li><p>Stateless Server：Don’t save any information about client</p>
+<p>Server with state：Maintain information about client</p></li>
+<li><p><img src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230606232439.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p></li>
+<li><p>Code Migration</p>
+<ol type="1">
+<li><p>Process migration ：An entire process was moved from one machine
+to another.</p>
+<ol type="1">
+<li><p>Weak Mobility: Only migrate code segment and some initialization
+data</p></li>
+<li><p>Strong Mobility: Migrate the code segment and the executing
+segment</p></li>
+</ol></li>
+<li><p>Resource Migration:</p>
+<ol type="1">
+<li>Process-Resource Binding: ID,Value,Type</li>
+<li>Resource-Machine Binding: Unattached Resource,Fastened
+Resource,Fixed Resource</li>
+</ol></li>
+</ol></li>
+<li><p><img src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607005703.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p></li>
+<li><p>Processor Allocation Algorithm</p>
+<ol type="1">
+<li>Deterministic Algorithm：Know all information about all
+processes</li>
+<li>Heuristic Algorithm：The load of a system is unpredictable.</li>
+</ol></li>
+</ol>
+<p><img src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607010738.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<h3 id="第四章">第四章</h3>
+<ol type="1">
+<li>Flat Naming</li>
+<li>Struct Naming
+<ol type="1">
+<li>Iterative Name
+Resolution:迭代名称解析：每一层都给服务器发，然后服务器返回下一层地址</li>
+<li>Recursive Name
+Resolution：递归名称解析：主机只发一次，服务器之间进行通讯完成工作</li>
+</ol></li>
+<li>Attribute-Based Naming：To describe an entity in terms of
+(attribute,value) pairs</li>
+</ol>
+<h3 id="第五章">第五章</h3>
+<ol type="1">
+<li><p>物理时钟</p>
+<ol type="1">
+<li>Cristian Algorithm
+<ol type="1">
+<li>如果有一个有WWV接收器的机器，其他机器都可以向这个机器请求时间</li>
+<li>Time is not allowed to run
+backward.如果一个机器的时间在同步时钟之后，时间回溯是不被允许的</li>
+</ol></li>
+<li>Berkeley Algorithm
+<ol type="1">
+<li>Time server polls the time of every machine</li>
+<li>Average the results and tell the time to other machine</li>
+</ol></li>
+<li>Averaging Algorithm
+<ol type="1">
+<li>Every machine broadcast its time to others in every time
+interval</li>
+<li>After broadcasting,machine collect time response from other machines
+in an interval S</li>
+<li>Average all the time values，Discard m highest and m lowest</li>
+<li>Try to add an estimated time delay to correct the time</li>
+</ol></li>
+<li>应用: Network Time Protoc ol (NTP)</li>
+</ol></li>
+<li><p>逻辑时钟</p>
+<ol type="1">
+<li><p>为什么不用物理时钟</p>
+<p><img src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607101629.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;" /></p></li>
+<li><p>Lamport’s Logical Clocks</p>
+<pre><code class="hljs">1. If a and b are two events in a **same process**,and a happens before b,then a→b is true
+    2. If a is a **sending** event of a message in a process,b is receiving event of this message in another process,then a→b is true
+    3. If a→b is not true,b→ a is not true,a and b is concurrent 并发</code></pre>
+<p><img src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607104453.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p></li>
+</ol></li>
+<li><p>Vector Clocks</p></li>
+</ol>
+<p><img src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607104716.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<ol start="4" type="1">
+<li><p>Election Algorithm</p>
+<ol type="1">
+<li>Bully Algorithm</li>
+</ol>
+<p>进程P发现协调员(coordinator)无法工作，发起一个选举，给所有比自己PID大的进程Q发消息，要是应答了则P放弃，Q继续上述过程，直到只剩一个，成为新的协调员</p>
+<ol start="2" type="1">
+<li><p>Ring Algorithm</p>
+<p>逻辑上的环，每个进程知道自己的后继进程。转一圈之后选PID最大的当新协调员。</p></li>
+</ol></li>
+<li><p>Mutual Exclusion</p>
+<ol type="1">
+<li><p>Centralized Algorithm</p>
+<p>P是协调者，Q想进去要问P，能进就可以，不能进Q就进等待队列。里面的进程出来之后授权队列头进程</p></li>
+<li><p>Distributed Algorithm</p>
+<p>P想进去，发请求给所有进程Q，要是Q不想进去就发ok回来，要是Q就在里面就不回应，要是Q也想进去就比较时间戳，要是比自己早就回ok</p></li>
+<li><p>Token Ring Algorithm</p>
+<p>一个令牌在环里绕，拿到令牌的可以进去。</p>
+<p>这个算法不是一个fair algorithm，前面俩都是fair algorithm</p></li>
+</ol></li>
+<li><p>Distributed Transaction</p>
+<p>A transaction can • Protect shared resource from concurrent accesses
+• Permit a process read and write several data items as if it is read
+and written by a single atomic operation</p>
+<ol type="1">
+<li><p>Characteristics</p>
+<ol type="1">
+<li><p>Atomic • A transaction cannot be separated.</p></li>
+<li><p>Consistent • A transaction cannot spoil the consistent item of
+system.</p></li>
+<li><p>Isolated • Concurrent transaction cannot affect each
+other.</p></li>
+<li><p>Durable • Once a transaction is committed,the change will be
+permanent.</p></li>
+<li><p>RollBack</p></li>
+<li><p>Private Workspace: Give a private workspace to a transaction when
+it begins</p>
+<p>All data are read and written in the private workspace until the
+transaction is committed or failed</p></li>
+</ol></li>
+<li><p>Writeahead Log</p>
+<ol type="1">
+<li><p>Before a file is updated,a record is written in a log</p></li>
+<li><p>Only after write the log successfully,the change can be committed
+to the file</p>
+<ol start="2" type="1">
+<li>Serial Equivalence</li>
+</ol></li>
+</ol></li>
+<li><p>Several transactions can be executed at the same time but the
+final result is the same as the situation that all transactions are
+executed one by one</p></li>
+<li><p>Two Concurrent Control Methods</p>
+<ol type="1">
+<li><p>Pessimistic approaches 不允许可能出现的问题</p>
+<p>Timestamp Ordering</p>
+<ol type="1">
+<li>A transaction’s request to <strong>write</strong> an object is valid
+only if that object was last read and written by earlier
+transactions</li>
+<li>A transaction’s request to <strong>read</strong> an object is valid
+only if that object was last written by earlier transactions</li>
+</ol>
+<p><img src="https://gcore.jsdelivr.net/gh/GreaterChen/PhotoBed/20230607153228.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p></li>
+<li><p>Optimistic approaches 可以有问题，回滚就行了</p></li>
+</ol></li>
+</ol></li>
+</ol>
+<h3 id="第六章">第六章</h3>
+<ol type="1">
+<li><p>Replication 副本</p>
+<ol type="1">
+<li><p>为什么需要副本</p>
+<p>• Reliability</p>
+<p>• Performance</p>
+<p>• Fault tolerance</p></li>
+<li><p>CAP</p>
+<ol type="1">
+<li>Partition Tolerance 分区容错性
+<ol type="1">
+<li>Every subnetwork is called a partition</li>
+<li>The system still work when communication fail</li>
+</ol></li>
+<li>Consistency 一致性
+<ol type="1">
+<li>All replica in the system should be consist</li>
+</ol></li>
+<li>Availability 可用性
+<ol type="1">
+<li>All nodes in the system can be used when user need it</li>
+</ol></li>
+<li>上述三个不能bingcun
+<ol type="1">
+<li>如果想有P，那肯定得有预留的副本，那么一致性和全可用性就不可能实现</li>
+<li>如果想有CA,那P肯定不能实现</li>
+</ol></li>
+</ol></li>
+<li><p>一致性</p>
+<ol type="1">
+<li>Strict Consistency
+<ol type="1">
+<li>Any read operation on data item x can return back the result of last
+write on x.</li>
+<li>Depend on absolute global time</li>
+</ol></li>
+<li>Sequential Consistency
+<ol type="1">
+<li>The result of all process’s read and write operation are the same as
+if they are executed according to a specific order.</li>
+<li>一个进程内部执行顺序一致就行，俩进程谁先谁后无所谓？</li>
+</ol></li>
+<li>Linearizability
+<ol type="1">
+<li>every operation has a timestamp,and satisfies following
+condition</li>
+<li>时间在前的先发生</li>
+</ol></li>
+<li>Causal Consistency
+<ol type="1">
+<li>Writes that are potentially causally related must be seen by all
+processes in the same order.</li>
+<li>得分析前面的潜在因果关系，要是俩写操作判断不出来谁前谁后，那读的时候谁前谁后都可以</li>
+</ol></li>
+</ol></li>
+<li><p>修改的传播方法</p>
+<ol type="1">
+<li><p>Only propagate a notification of an update</p>
+<p>告诉别人我已经改了，别再用那个旧的了</p></li>
+<li><p>Transfer data from one copy to another</p>
+<p>把改了的数据发给别人</p></li>
+<li><p>Propagate the update to other copies</p>
+<p>告诉别人我怎么改的</p></li>
+</ol></li>
+<li><p>传染病模型</p>
+<ol type="1">
+<li><p>传统的方法是P一个人告诉其他所有人更新消息，传染病模型是P告诉Q之后，PQ一起告诉别人</p></li>
+<li><p>Anti-Entropy Model 反熵模型</p>
+<p>A server P select another server Q randomly and exchange
+updates</p></li>
+<li><p>Gossiping Model 八卦模型</p>
+<p>P拿到更新之后随机再告诉别人要更新</p></li>
+</ol></li>
+</ol></li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AF%BE%E5%86%85/" class="category-chain-item">课内</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>分布式操作系统</div>
+      <div>http://example.com/2023/05/27/BJUT/分布式操作系统/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Chen</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年5月27日</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>更新于</div>
+          <div>2023年6月11日</div>
+        </div>
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/06/07/BJUT/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" title="软件工程导论">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">软件工程导论</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/17/BJUT/%E9%AB%98%E6%95%B0%E4%B8%8B%E4%B8%B2%E8%AE%B2/" title="高数下串讲">
+                        <span class="hidden-mobile">高数下串讲</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
